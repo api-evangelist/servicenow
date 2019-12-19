@@ -1,0 +1,12 @@
+{
+    "id": "00ea99a063699e4f9a53e3c30e34e705",
+    "name": "ServiceNow",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": []
+}
