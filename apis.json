@@ -1,0 +1,72 @@
+{
+    "name": "ServiceNow",
+    "description": "<p>ServiceNow's cloud platform streamlines how work gets done. Our enterprise automation solutions create great employee and customer experiences. Everyone deserves great experiences at work. Now routine tasks happen in a snap, and complex projects flow smoothly. With the Now Platform&reg;, anyone can work effortlessly across teams, silos, and systems. When people work better, business works better.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28402-developer-servicenow-com.jpg",
+    "tags": [
+        "have api",
+        "projects"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/servicenow\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "ServiceNow",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28402-developer-servicenow-com.jpg",
+            "humanURL": "https:\/\/www.servicenow.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/servicenow-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Blog",
+            "url": "http:\/\/servicematters.servicenow.com\/"
+        },
+        {
+            "type": "Blog",
+            "url": "https:\/\/developer.servicenow.com\/blog.do"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "https:\/\/developer.servicenow.com\/blog.do?p=\/index.xml"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/service-now-com"
+        },
+        {
+            "type": "Email",
+            "url": "info@servicenow.com"
+        },
+        {
+            "type": "FAQ",
+            "url": "https:\/\/developer.servicenow.com\/app.do#!\/program\/faq"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/ServiceNow"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/servicenow"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/developer.servicenow.com"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.servicenow.com\/"
+        }
+    ]
+}
