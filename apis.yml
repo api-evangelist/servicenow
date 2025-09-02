@@ -8,9 +8,11 @@ apis:
       - Automation
       - Workflows
       - Processes
-    humanURL: https://www.servicenow.com
+    humanURL: >-
+      https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/build/applications/concept/api-rest.html
     properties:
-      - url: https://www.servicenow.com
+      - url: >-
+          https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/build/applications/concept/api-rest.html
         type: Documentation
     description: >-
       The Discovery API plugin provides APIs for scoped applications and is
