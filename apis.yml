@@ -22,11 +22,12 @@ tags:
   - Automation
   - Workflows
   - Processes
+  - T1
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-01-08'
-modified: '2025-09-01'
+modified: '2025-09-05'
 position: Consuming
 description: >-
   ServiceNow is a cloud-based platform that helps organizations manage digital
