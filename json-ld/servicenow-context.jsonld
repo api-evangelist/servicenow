@@ -1,0 +1,277 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "snow": "https://www.servicenow.com/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "itsm": "https://www.servicenow.com/ns/itsm/",
+
+    "Incident": {
+      "@id": "itsm:Incident",
+      "@context": {
+        "number": "itsm:ticketNumber",
+        "short_description": "schema:name",
+        "description": "schema:description",
+        "state": "itsm:state",
+        "priority": "itsm:priority",
+        "severity": "itsm:severity",
+        "impact": "itsm:impact",
+        "urgency": "itsm:urgency",
+        "category": "schema:category",
+        "subcategory": "itsm:subcategory",
+        "caller_id": {
+          "@id": "schema:creator",
+          "@type": "@id"
+        },
+        "assigned_to": {
+          "@id": "itsm:assignedTo",
+          "@type": "@id"
+        },
+        "assignment_group": {
+          "@id": "itsm:assignmentGroup",
+          "@type": "@id"
+        },
+        "cmdb_ci": {
+          "@id": "itsm:affectedItem",
+          "@type": "@id"
+        },
+        "business_service": {
+          "@id": "itsm:businessService",
+          "@type": "@id"
+        },
+        "opened_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "resolved_at": {
+          "@id": "itsm:resolvedAt",
+          "@type": "xsd:dateTime"
+        },
+        "closed_at": {
+          "@id": "itsm:closedAt",
+          "@type": "xsd:dateTime"
+        },
+        "active": "snow:isActive",
+        "made_sla": "itsm:metSla"
+      }
+    },
+
+    "ChangeRequest": {
+      "@id": "itsm:ChangeRequest",
+      "@context": {
+        "number": "itsm:ticketNumber",
+        "short_description": "schema:name",
+        "description": "schema:description",
+        "type": "itsm:changeType",
+        "state": "itsm:state",
+        "priority": "itsm:priority",
+        "risk": "itsm:riskLevel",
+        "impact": "itsm:impact",
+        "category": "schema:category",
+        "assigned_to": {
+          "@id": "itsm:assignedTo",
+          "@type": "@id"
+        },
+        "assignment_group": {
+          "@id": "itsm:assignmentGroup",
+          "@type": "@id"
+        },
+        "requested_by": {
+          "@id": "itsm:requestedBy",
+          "@type": "@id"
+        },
+        "cmdb_ci": {
+          "@id": "itsm:affectedItem",
+          "@type": "@id"
+        },
+        "start_date": {
+          "@id": "itsm:plannedStart",
+          "@type": "xsd:dateTime"
+        },
+        "end_date": {
+          "@id": "itsm:plannedEnd",
+          "@type": "xsd:dateTime"
+        },
+        "opened_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "closed_at": {
+          "@id": "itsm:closedAt",
+          "@type": "xsd:dateTime"
+        },
+        "approval": "itsm:approvalStatus",
+        "justification": "itsm:justification",
+        "implementation_plan": "itsm:implementationPlan",
+        "backout_plan": "itsm:backoutPlan",
+        "test_plan": "itsm:testPlan"
+      }
+    },
+
+    "ConfigurationItem": {
+      "@id": "itsm:ConfigurationItem",
+      "@context": {
+        "name": "schema:name",
+        "short_description": "schema:description",
+        "sys_class_name": "itsm:ciClass",
+        "category": "schema:category",
+        "operational_status": "itsm:operationalStatus",
+        "install_status": "itsm:installStatus",
+        "serial_number": "schema:serialNumber",
+        "ip_address": "snow:ipAddress",
+        "fqdn": "snow:fqdn",
+        "os": "snow:operatingSystem",
+        "os_version": "snow:operatingSystemVersion",
+        "manufacturer": {
+          "@id": "schema:manufacturer",
+          "@type": "@id"
+        },
+        "model_id": {
+          "@id": "schema:model",
+          "@type": "@id"
+        },
+        "location": {
+          "@id": "schema:location",
+          "@type": "@id"
+        },
+        "company": {
+          "@id": "schema:provider",
+          "@type": "@id"
+        },
+        "assigned_to": {
+          "@id": "itsm:assignedTo",
+          "@type": "@id"
+        },
+        "managed_by": {
+          "@id": "itsm:managedBy",
+          "@type": "@id"
+        },
+        "owned_by": {
+          "@id": "schema:owns",
+          "@type": "@id"
+        },
+        "discovery_source": "itsm:discoverySource",
+        "first_discovered": {
+          "@id": "itsm:firstDiscovered",
+          "@type": "xsd:dateTime"
+        },
+        "last_discovered": {
+          "@id": "itsm:lastDiscovered",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "schema:Person",
+      "@context": {
+        "user_name": "snow:userName",
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "name": "schema:name",
+        "email": "schema:email",
+        "phone": "schema:telephone",
+        "mobile_phone": "schema:telephone",
+        "title": "schema:jobTitle",
+        "employee_number": "schema:identifier",
+        "department": {
+          "@id": "schema:department",
+          "@type": "@id"
+        },
+        "company": {
+          "@id": "schema:worksFor",
+          "@type": "@id"
+        },
+        "manager": {
+          "@id": "snow:reportsTo",
+          "@type": "@id"
+        },
+        "location": {
+          "@id": "schema:workLocation",
+          "@type": "@id"
+        },
+        "time_zone": "snow:timeZone",
+        "active": "snow:isActive",
+        "vip": "snow:isVip",
+        "photo": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "last_login_time": {
+          "@id": "snow:lastLoginTime",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "CatalogRequest": {
+      "@id": "itsm:CatalogRequest",
+      "@context": {
+        "number": "itsm:ticketNumber",
+        "request_state": "itsm:state",
+        "requested_for": {
+          "@id": "itsm:requestedFor",
+          "@type": "@id"
+        },
+        "opened_by": {
+          "@id": "schema:creator",
+          "@type": "@id"
+        },
+        "opened_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "price": "schema:price",
+        "approval": "itsm:approvalStatus",
+        "requested_items": {
+          "@id": "itsm:requestedItems",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "KnowledgeArticle": {
+      "@id": "schema:Article",
+      "@context": {
+        "short_description": "schema:headline",
+        "text": "schema:articleBody",
+        "topic": "schema:about",
+        "category": "schema:articleSection",
+        "author": {
+          "@id": "schema:author",
+          "@type": "@id"
+        },
+        "kb_knowledge_base": {
+          "@id": "schema:isPartOf",
+          "@type": "@id"
+        },
+        "published": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "sys_updated_on": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "view_count": "schema:interactionCount"
+      }
+    },
+
+    "sys_id": "schema:identifier",
+    "sys_created_on": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "sys_updated_on": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+    "sys_created_by": "dcterms:creator",
+    "sys_updated_by": "snow:modifiedBy",
+    "sys_mod_count": "snow:modificationCount",
+    "sys_class_name": "snow:className",
+    "sys_domain": "snow:domain",
+    "active": "snow:isActive"
+  }
+}

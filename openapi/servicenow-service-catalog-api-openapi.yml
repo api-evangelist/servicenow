@@ -1,0 +1,583 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Service Catalog API
+  description: >-
+    The ServiceNow Service Catalog API provides REST endpoints for browsing
+    catalog categories and items, retrieving catalog item details and variables,
+    and submitting catalog requests. It enables external applications and
+    portals to integrate with ServiceNow's self-service request capabilities
+    including catalog browsing, cart management, and order submission.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Service Catalog API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ServiceCatalogAPI.html
+servers:
+  - url: https://{instance}.service-now.com/api/sn_sc
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Catalogs
+    description: >-
+      Operations for browsing and retrieving service catalogs.
+  - name: Categories
+    description: >-
+      Operations for browsing catalog categories.
+  - name: Catalog Items
+    description: >-
+      Operations for retrieving catalog item details and variables.
+  - name: Cart
+    description: >-
+      Operations for managing the shopping cart and submitting orders.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /servicecatalog/catalogs:
+    get:
+      operationId: listCatalogs
+      summary: List service catalogs
+      description: >-
+        Retrieves a list of all available service catalogs on the instance.
+      tags:
+        - Catalogs
+      parameters:
+        - name: sysparm_limit
+          in: query
+          required: false
+          description: Maximum number of catalogs to return.
+          schema:
+            type: integer
+            minimum: 1
+        - name: sysparm_offset
+          in: query
+          required: false
+          description: Starting index for pagination.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Successful response returning available catalogs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Catalog'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/catalogs/{sys_id}:
+    get:
+      operationId: getCatalog
+      summary: Retrieve a specific catalog
+      description: >-
+        Retrieves details for a specific service catalog including its
+        categories.
+      tags:
+        - Catalogs
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning the catalog details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Catalog'
+        '404':
+          description: Catalog not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/categories/{sys_id}:
+    get:
+      operationId: getCategory
+      summary: Retrieve a catalog category
+      description: >-
+        Retrieves details for a specific catalog category including its
+        child categories and items.
+      tags:
+        - Categories
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning category details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Category'
+        '404':
+          description: Category not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/items:
+    get:
+      operationId: listCatalogItems
+      summary: List catalog items
+      description: >-
+        Retrieves a list of catalog items. Supports filtering by catalog
+        and category.
+      tags:
+        - Catalog Items
+      parameters:
+        - name: sysparm_catalog
+          in: query
+          required: false
+          description: The sys_id of the catalog to filter items by.
+          schema:
+            type: string
+        - name: sysparm_category
+          in: query
+          required: false
+          description: The sys_id of the category to filter items by.
+          schema:
+            type: string
+        - name: sysparm_limit
+          in: query
+          required: false
+          description: Maximum number of items to return.
+          schema:
+            type: integer
+            minimum: 1
+        - name: sysparm_offset
+          in: query
+          required: false
+          description: Starting index for pagination.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Successful response returning catalog items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CatalogItem'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/items/{sys_id}:
+    get:
+      operationId: getCatalogItem
+      summary: Retrieve a catalog item
+      description: >-
+        Retrieves details for a specific catalog item including its
+        variables and pricing information.
+      tags:
+        - Catalog Items
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning item details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/CatalogItemDetail'
+        '404':
+          description: Catalog item not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/items/{sys_id}/add_to_cart:
+    post:
+      operationId: addItemToCart
+      summary: Add a catalog item to the cart
+      description: >-
+        Adds the specified catalog item to the shopping cart with the
+        given quantity and variable values.
+      tags:
+        - Cart
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+      responses:
+        '200':
+          description: Item successfully added to the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/CartItem'
+        '400':
+          description: Bad request. Required variables are missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/items/{sys_id}/order_now:
+    post:
+      operationId: orderItemNow
+      summary: Order a catalog item immediately
+      description: >-
+        Orders the specified catalog item without going through the cart.
+        Creates a request directly with the given quantity and variable values.
+      tags:
+        - Cart
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+      responses:
+        '200':
+          description: Order successfully submitted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/OrderResult'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/cart:
+    get:
+      operationId: getCart
+      summary: Retrieve the current cart
+      description: >-
+        Retrieves the contents of the current user's shopping cart.
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: Successful response returning cart contents.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Cart'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: emptyCart
+      summary: Empty the cart
+      description: >-
+        Removes all items from the current user's shopping cart.
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: Cart successfully emptied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /servicecatalog/cart/submit_order:
+    post:
+      operationId: submitCartOrder
+      summary: Submit the cart as an order
+      description: >-
+        Submits all items in the current user's shopping cart as a service
+        catalog request. Returns the request number and details.
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: Order successfully submitted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/OrderResult'
+        '400':
+          description: Cart is empty or contains invalid items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
+  schemas:
+    Catalog:
+      type: object
+      description: A ServiceNow service catalog.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog.
+        title:
+          type: string
+          description: The display title of the catalog.
+        description:
+          type: string
+          description: A description of the catalog.
+        has_categories:
+          type: boolean
+          description: Whether the catalog has categories.
+        has_items:
+          type: boolean
+          description: Whether the catalog has items.
+    Category:
+      type: object
+      description: A catalog category.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the category.
+        title:
+          type: string
+          description: The display title of the category.
+        description:
+          type: string
+          description: A description of the category.
+        full_description:
+          type: string
+          description: The full description of the category.
+        subcategories:
+          type: array
+          description: Child categories.
+          items:
+            type: object
+            properties:
+              sys_id:
+                type: string
+              title:
+                type: string
+    CatalogItem:
+      type: object
+      description: A catalog item summary.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog item.
+        name:
+          type: string
+          description: The display name of the item.
+        short_description:
+          type: string
+          description: A brief description of the item.
+        category:
+          type: string
+          description: The category sys_id.
+        price:
+          type: string
+          description: The displayed price of the item.
+        picture:
+          type: string
+          description: URL to the item picture.
+    CatalogItemDetail:
+      type: object
+      description: Full details of a catalog item including its variables.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog item.
+        name:
+          type: string
+          description: The display name of the item.
+        short_description:
+          type: string
+          description: A brief description of the item.
+        description:
+          type: string
+          description: The full description of the item.
+        category:
+          type: string
+          description: The category sys_id.
+        price:
+          type: string
+          description: The displayed price.
+        picture:
+          type: string
+          description: URL to the item picture.
+        mandatory_attachment:
+          type: boolean
+          description: Whether a file attachment is required to order the item.
+        request_method:
+          type: string
+          description: The method used to fulfill the request.
+        variables:
+          type: array
+          description: >-
+            The list of variables (form fields) that must be filled in when
+            ordering the item.
+          items:
+            $ref: '#/components/schemas/CatalogVariable'
+    CatalogVariable:
+      type: object
+      description: A variable on a catalog item form.
+      properties:
+        name:
+          type: string
+          description: The internal name of the variable.
+        label:
+          type: string
+          description: The display label.
+        type:
+          type: string
+          description: The variable type.
+        mandatory:
+          type: boolean
+          description: Whether the variable is required.
+        default_value:
+          type: string
+          description: The default value.
+        choices:
+          type: array
+          description: Available choices for select-type variables.
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              value:
+                type: string
+    CartItemInput:
+      type: object
+      description: Input for adding a catalog item to the cart or ordering directly.
+      required:
+        - sysparm_quantity
+      properties:
+        sysparm_quantity:
+          type: integer
+          minimum: 1
+          description: The quantity of items to order.
+        variables:
+          type: object
+          description: >-
+            Name-value pairs for the catalog item variables. Keys are variable
+            names and values are the user-provided entries.
+          additionalProperties:
+            type: string
+    CartItem:
+      type: object
+      description: An item in the shopping cart.
+      properties:
+        cart_item_id:
+          type: string
+          description: Unique identifier for the cart item.
+        catalog_item_id:
+          type: string
+          description: The sys_id of the catalog item.
+        quantity:
+          type: integer
+          description: The quantity ordered.
+        subtotal:
+          type: string
+          description: The subtotal for this cart item.
+    Cart:
+      type: object
+      description: The shopping cart contents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+        subtotal:
+          type: string
+          description: The cart subtotal.
+    OrderResult:
+      type: object
+      description: The result of a submitted catalog order.
+      properties:
+        request_number:
+          type: string
+          description: The generated request number.
+        request_id:
+          type: string
+          description: The sys_id of the request record.
+        table:
+          type: string
+          description: The table name where the request is stored.
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

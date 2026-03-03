@@ -1,0 +1,383 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Attachment API
+  description: >-
+    The ServiceNow Attachment API enables uploading, retrieving, and deleting
+    file attachments associated with records in ServiceNow tables. It supports
+    uploading files via multipart form-data or binary streams and allows file
+    sizes up to 1024 MB by default. Attachments can be queried by table name,
+    record sys_id, or file metadata.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Attachment API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_AttachmentAPI.html
+servers:
+  - url: https://{instance}.service-now.com/api/now
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Attachments
+    description: >-
+      Operations for uploading, retrieving, listing, and deleting file
+      attachments on ServiceNow records.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /attachment:
+    get:
+      operationId: listAttachments
+      summary: List attachments
+      description: >-
+        Retrieves metadata for file attachments. Supports query filtering by
+        table name, record sys_id, file name, and other attachment attributes.
+      tags:
+        - Attachments
+      parameters:
+        - name: sysparm_query
+          in: query
+          required: false
+          description: >-
+            Encoded query string to filter attachments. Common fields include
+            table_name, table_sys_id, file_name, and content_type.
+          schema:
+            type: string
+          example: 'table_name=incident^table_sys_id=abc123def456'
+        - name: sysparm_limit
+          in: query
+          required: false
+          description: Maximum number of attachment records to return.
+          schema:
+            type: integer
+            minimum: 1
+            default: 10000
+        - name: sysparm_offset
+          in: query
+          required: false
+          description: Starting record index for pagination.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: >-
+            Successful response returning attachment metadata records.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attachment'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /attachment/{sys_id}:
+    get:
+      operationId: getAttachment
+      summary: Retrieve attachment metadata
+      description: >-
+        Retrieves metadata for a single attachment by its sys_id. Does not
+        return the binary file content; use the file download endpoint instead.
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning attachment metadata.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Attachment'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Attachment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteAttachment
+      summary: Delete an attachment
+      description: >-
+        Deletes an attachment and its associated file content from the
+        ServiceNow instance.
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '204':
+          description: Attachment successfully deleted. No content returned.
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Attachment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /attachment/{sys_id}/file:
+    get:
+      operationId: downloadAttachmentFile
+      summary: Download attachment file content
+      description: >-
+        Downloads the binary file content of an attachment. The response
+        Content-Type header reflects the original file type.
+      tags:
+        - Attachments
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning the binary file content.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Attachment not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /attachment/file:
+    post:
+      operationId: uploadAttachmentBinary
+      summary: Upload a file attachment via binary stream
+      description: >-
+        Uploads a file as a binary stream and attaches it to the specified
+        table record. The Content-Type header should match the actual file
+        type being uploaded.
+      tags:
+        - Attachments
+      parameters:
+        - name: table_name
+          in: query
+          required: true
+          description: >-
+            The name of the table to which the file is attached.
+          schema:
+            type: string
+          example: incident
+        - name: table_sys_id
+          in: query
+          required: true
+          description: The sys_id of the record to which the file is attached.
+          schema:
+            type: string
+        - name: file_name
+          in: query
+          required: true
+          description: The name of the file including its extension.
+          schema:
+            type: string
+          example: screenshot.png
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: File successfully uploaded and attached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Attachment'
+        '400':
+          description: Bad request. Required parameters are missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /attachment/upload:
+    post:
+      operationId: uploadAttachmentMultipart
+      summary: Upload a file attachment via multipart form data
+      description: >-
+        Uploads a file using multipart form-data encoding and attaches it to
+        the specified table record. This method is suitable for web browser
+        and form-based uploads.
+      tags:
+        - Attachments
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - table_name
+                - table_sys_id
+                - uploadFile
+              properties:
+                table_name:
+                  type: string
+                  description: The name of the table to which the file is attached.
+                table_sys_id:
+                  type: string
+                  description: >-
+                    The sys_id of the record to which the file is attached.
+                uploadFile:
+                  type: string
+                  format: binary
+                  description: The file to upload.
+      responses:
+        '201':
+          description: File successfully uploaded and attached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Attachment'
+        '400':
+          description: Bad request. Required fields are missing from the form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. The user must have
+        appropriate attachment permissions.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the attachment record.
+      schema:
+        type: string
+        pattern: '^[a-f0-9]{32}$'
+  schemas:
+    Attachment:
+      type: object
+      description: Metadata about a file attachment stored in ServiceNow.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the attachment record.
+        file_name:
+          type: string
+          description: The name of the attached file.
+        table_name:
+          type: string
+          description: The table to which the attachment belongs.
+        table_sys_id:
+          type: string
+          description: The sys_id of the record to which the file is attached.
+        content_type:
+          type: string
+          description: The MIME type of the attached file.
+        size_bytes:
+          type: integer
+          description: The size of the attached file in bytes.
+        size_compressed:
+          type: integer
+          description: The compressed size of the attached file in bytes.
+        download_link:
+          type: string
+          format: uri
+          description: The URL to download the attachment file content.
+        image_height:
+          type: integer
+          description: The height in pixels if the attachment is an image.
+        image_width:
+          type: integer
+          description: The width in pixels if the attachment is an image.
+        hash:
+          type: string
+          description: The MD5 hash of the file content.
+        state:
+          type: string
+          description: The state of the attachment processing.
+        sys_created_on:
+          type: string
+          format: date-time
+          description: The date and time the attachment was created.
+        sys_created_by:
+          type: string
+          description: The user who uploaded the attachment.
+        sys_updated_on:
+          type: string
+          format: date-time
+          description: The date and time the attachment was last modified.
+        sys_updated_by:
+          type: string
+          description: The user who last modified the attachment record.
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

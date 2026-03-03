@@ -1,0 +1,280 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow CMDB Instance API
+  description: >-
+    The ServiceNow CMDB Instance API provides REST endpoints for retrieving
+    configuration item (CI) records from the Configuration Management Database
+    by class name and sys_id. It is used to query and access infrastructure
+    and application CI data stored in the ServiceNow CMDB for integration
+    with discovery tools and reporting systems.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow CMDB Instance API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/cmdb-instance-api.html
+servers:
+  - url: https://{instance}.service-now.com/api/now/cmdb
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: CMDB Instances
+    description: >-
+      Operations for retrieving configuration item instances from the CMDB
+      by class name.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /instance/{className}:
+    get:
+      operationId: listCmdbInstances
+      summary: List configuration items by class
+      description: >-
+        Retrieves a list of configuration item instances for the specified
+        CMDB class. Returns sys_id and name for each CI by default.
+      tags:
+        - CMDB Instances
+      parameters:
+        - name: className
+          in: path
+          required: true
+          description: >-
+            The CMDB class name to query, such as cmdb_ci_server,
+            cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server.
+          schema:
+            type: string
+          example: cmdb_ci_linux_server
+        - name: sysparm_query
+          in: query
+          required: false
+          description: >-
+            An encoded query string to filter CI records.
+          schema:
+            type: string
+        - name: sysparm_limit
+          in: query
+          required: false
+          description: Maximum number of records to return. Default is 1000.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1000
+        - name: sysparm_offset
+          in: query
+          required: false
+          description: Starting record index for pagination.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: >-
+            Successful response returning a list of CI instances.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CmdbInstanceSummary'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The specified CMDB class does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /instance/{className}/{sys_id}:
+    get:
+      operationId: getCmdbInstance
+      summary: Retrieve a specific configuration item
+      description: >-
+        Retrieves the full details of a specific configuration item by its
+        class name and sys_id. Returns all attributes of the CI record.
+      tags:
+        - CMDB Instances
+      parameters:
+        - name: className
+          in: path
+          required: true
+          description: The CMDB class name.
+          schema:
+            type: string
+          example: cmdb_ci_linux_server
+        - name: sys_id
+          in: path
+          required: true
+          description: The unique sys_id of the configuration item.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response returning the CI details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/CmdbInstance'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Configuration item not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. Requires CMDB
+        read access.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  schemas:
+    CmdbInstanceSummary:
+      type: object
+      description: >-
+        A summary of a CMDB configuration item containing its identifier
+        and display name.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the configuration item.
+        name:
+          type: string
+          description: The display name of the configuration item.
+    CmdbInstance:
+      type: object
+      description: >-
+        A full CMDB configuration item record. Fields vary by CI class but
+        common attributes are included below.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the configuration item.
+        name:
+          type: string
+          description: The display name of the configuration item.
+        sys_class_name:
+          type: string
+          description: The CMDB class name for this CI.
+        category:
+          type: string
+          description: The category of the CI.
+        subcategory:
+          type: string
+          description: The subcategory of the CI.
+        operational_status:
+          type: string
+          description: >-
+            The operational status of the CI.
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+        install_status:
+          type: string
+          description: The installation status of the CI.
+        serial_number:
+          type: string
+          description: The serial number of the hardware asset.
+        asset_tag:
+          type: string
+          description: The asset tag identifier.
+        ip_address:
+          type: string
+          description: The IP address of the CI.
+        mac_address:
+          type: string
+          description: The MAC address of the CI.
+        dns_domain:
+          type: string
+          description: The DNS domain of the CI.
+        fqdn:
+          type: string
+          description: The fully qualified domain name.
+        os:
+          type: string
+          description: The operating system.
+        os_version:
+          type: string
+          description: The operating system version.
+        manufacturer:
+          type: string
+          description: The sys_id of the manufacturer.
+        model_id:
+          type: string
+          description: The sys_id of the model.
+        location:
+          type: string
+          description: The sys_id of the CI location.
+        department:
+          type: string
+          description: The sys_id of the department.
+        company:
+          type: string
+          description: The sys_id of the owning company.
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+        managed_by:
+          type: string
+          description: The sys_id of the managing user.
+        owned_by:
+          type: string
+          description: The sys_id of the owner.
+        support_group:
+          type: string
+          description: The sys_id of the support group.
+        sys_created_on:
+          type: string
+          format: date-time
+          description: The date and time when the CI was created.
+        sys_updated_on:
+          type: string
+          format: date-time
+          description: The date and time when the CI was last updated.
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

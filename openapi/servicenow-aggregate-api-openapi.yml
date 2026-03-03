@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Aggregate API
+  description: >-
+    The ServiceNow Aggregate API provides endpoints to compute aggregate
+    statistics against records in any ServiceNow table. It supports count,
+    average, minimum, maximum, and sum operations with optional grouping and
+    filtering, making it useful for reporting dashboards and analytics
+    integrations.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Aggregate API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_AggregateAPI.html
+servers:
+  - url: https://{instance}.service-now.com/api/now
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Aggregate Statistics
+    description: >-
+      Operations for computing aggregate statistics on ServiceNow table records
+      including count, sum, average, minimum, and maximum values.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /stats/{tableName}:
+    get:
+      operationId: getAggregateStats
+      summary: Retrieve aggregate statistics for a table
+      description: >-
+        Computes aggregate statistics for records in the specified table.
+        Supports count, sum, average, minimum, and maximum calculations with
+        optional query filtering and group-by fields. Multiple aggregate types
+        can be requested in a single call.
+      tags:
+        - Aggregate Statistics
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - name: sysparm_query
+          in: query
+          required: false
+          description: >-
+            An encoded query string to filter records before aggregation.
+            Uses the same syntax as the Table API sysparm_query parameter.
+          schema:
+            type: string
+          example: 'active=true^priority=1'
+        - name: sysparm_count
+          in: query
+          required: false
+          description: >-
+            When set to true, returns the count of records matching the query.
+          schema:
+            type: boolean
+            default: false
+        - name: sysparm_sum_fields
+          in: query
+          required: false
+          description: >-
+            A comma-separated list of numeric fields for which to calculate
+            the sum.
+          schema:
+            type: string
+          example: 'reassignment_count,reopen_count'
+        - name: sysparm_avg_fields
+          in: query
+          required: false
+          description: >-
+            A comma-separated list of numeric fields for which to calculate
+            the average.
+          schema:
+            type: string
+        - name: sysparm_min_fields
+          in: query
+          required: false
+          description: >-
+            A comma-separated list of fields for which to find the minimum
+            value.
+          schema:
+            type: string
+        - name: sysparm_max_fields
+          in: query
+          required: false
+          description: >-
+            A comma-separated list of fields for which to find the maximum
+            value.
+          schema:
+            type: string
+        - name: sysparm_group_by
+          in: query
+          required: false
+          description: >-
+            A comma-separated list of fields by which to group the aggregated
+            results. Each unique combination of group-by field values produces
+            a separate result entry.
+          schema:
+            type: string
+          example: 'priority,state'
+        - name: sysparm_order_by
+          in: query
+          required: false
+          description: >-
+            The field by which to order the grouped results.
+          schema:
+            type: string
+        - name: sysparm_having
+          in: query
+          required: false
+          description: >-
+            An additional filter applied after aggregation to restrict which
+            groups are returned based on aggregate values.
+          schema:
+            type: string
+        - name: sysparm_display_value
+          in: query
+          required: false
+          description: >-
+            Controls whether display values or actual values are returned for
+            group-by fields.
+          schema:
+            type: string
+            enum:
+              - 'true'
+              - 'false'
+              - all
+            default: 'false'
+      responses:
+        '200':
+          description: >-
+            Successful response containing the computed aggregate statistics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/AggregateResult'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: >-
+            Not found. The specified table does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. The user must have
+        appropriate table read access.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  parameters:
+    tableName:
+      name: tableName
+      in: path
+      required: true
+      description: >-
+        The name of the ServiceNow table on which to compute aggregate
+        statistics.
+      schema:
+        type: string
+      example: incident
+  schemas:
+    AggregateResult:
+      type: object
+      description: >-
+        The aggregate statistics result. Structure varies based on the
+        requested aggregate types and group-by fields.
+      properties:
+        stats:
+          type: object
+          description: >-
+            Contains the computed aggregate values organized by field name
+            and aggregate type.
+          properties:
+            count:
+              type: string
+              description: The total count of records matching the query.
+          additionalProperties: true
+        group_by:
+          type: array
+          description: >-
+            When group-by fields are specified, contains an entry for each
+            unique group with its aggregate values.
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

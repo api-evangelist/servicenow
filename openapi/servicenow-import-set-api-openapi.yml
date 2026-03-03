@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Import Set API
+  description: >-
+    The ServiceNow Import Set API allows external systems to push data into
+    ServiceNow import set staging tables, which can then be synchronously or
+    asynchronously transformed and loaded into target tables using transform
+    maps. It is commonly used for integrating external data sources with
+    ServiceNow for bulk data loading and ETL workflows.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Import Set API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ImportSetAPI.html
+servers:
+  - url: https://{instance}.service-now.com/api/now
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Import Sets
+    description: >-
+      Operations for inserting records into import set staging tables and
+      triggering transform map processing.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /import/{stagingTableName}:
+    post:
+      operationId: insertImportSetRecord
+      summary: Insert a record into an import set staging table
+      description: >-
+        Inserts a single record into the specified import set staging table.
+        If an active transform map exists for the staging table, the record
+        is synchronously transformed and loaded into the target table. The
+        response includes the transformation result indicating whether the
+        record was inserted, updated, or encountered an error.
+      tags:
+        - Import Sets
+      parameters:
+        - name: stagingTableName
+          in: path
+          required: true
+          description: >-
+            The name of the import set staging table. This table must extend
+            sys_import_set_row and have an associated transform map configured.
+          schema:
+            type: string
+          example: u_import_incidents
+      requestBody:
+        required: true
+        description: >-
+          The field name-value pairs to insert into the staging table. Field
+          names must match the column names defined on the staging table.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportSetInput'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ImportSetInput'
+      responses:
+        '201':
+          description: >-
+            Record successfully inserted into the staging table and
+            transformation completed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImportSetResult'
+        '400':
+          description: >-
+            Bad request. The staging table name is invalid or the request body
+            contains malformed data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: >-
+            Forbidden. The user does not have the import_transformer role or
+            ACL access to the staging table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /import/{stagingTableName}/insertMultiple:
+    post:
+      operationId: insertMultipleImportSetRecords
+      summary: Insert multiple records into an import set staging table
+      description: >-
+        Inserts multiple records into the specified import set staging table
+        in a single request. Each record is individually transformed if an
+        active transform map exists.
+      tags:
+        - Import Sets
+      parameters:
+        - name: stagingTableName
+          in: path
+          required: true
+          description: >-
+            The name of the import set staging table.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  description: An array of records to insert into the staging table.
+                  items:
+                    $ref: '#/components/schemas/ImportSetInput'
+      responses:
+        '201':
+          description: Records successfully inserted and transformed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImportSetResult'
+        '400':
+          description: Bad request. The request body is malformed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. The user must have
+        the import_transformer role or appropriate staging table ACLs.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  schemas:
+    ImportSetInput:
+      type: object
+      description: >-
+        The field name-value pairs corresponding to columns in the import set
+        staging table.
+      additionalProperties:
+        type: string
+    ImportSetResult:
+      type: object
+      description: >-
+        The result of processing an import set record including the
+        transformation outcome.
+      properties:
+        transform_map:
+          type: string
+          description: The name of the transform map used to process the record.
+        table:
+          type: string
+          description: The target table into which the record was transformed.
+        display_name:
+          type: string
+          description: The display name of the transform map.
+        display_value:
+          type: string
+          description: The display value of the target record created or updated.
+        record_link:
+          type: string
+          format: uri
+          description: A link to the target record in ServiceNow.
+        status:
+          type: string
+          description: >-
+            The transformation status. Common values include inserted, updated,
+            error, and ignored.
+          enum:
+            - inserted
+            - updated
+            - error
+            - ignored
+        status_message:
+          type: string
+          description: >-
+            A descriptive message about the transformation result, especially
+            useful when the status is error.
+        sys_id:
+          type: string
+          description: >-
+            The sys_id of the import set row record in the staging table.
+        target_sys_id:
+          type: string
+          description: >-
+            The sys_id of the record created or updated in the target table.
+        import_set:
+          type: string
+          description: The sys_id of the parent import set.
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

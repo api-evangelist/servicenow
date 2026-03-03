@@ -1,0 +1,661 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Change Management API
+  description: >-
+    The ServiceNow Change Management API provides REST endpoints for creating,
+    retrieving, updating, and managing change requests and their associated
+    tasks and approvals. It supports the full change lifecycle including
+    normal, standard, and emergency change types within the ITSM Change
+    Management application.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Change Management API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/change-management-api.html
+servers:
+  - url: https://{instance}.service-now.com/api/sn_chg_rest/v1
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Normal Changes
+    description: >-
+      Operations for managing normal change requests that require full review
+      and approval before implementation.
+  - name: Standard Changes
+    description: >-
+      Operations for managing standard change requests based on pre-approved
+      templates.
+  - name: Emergency Changes
+    description: >-
+      Operations for managing emergency change requests that require expedited
+      processing.
+  - name: Change Tasks
+    description: >-
+      Operations for managing tasks associated with change requests.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /change/normal:
+    get:
+      operationId: listNormalChanges
+      summary: List normal change requests
+      description: >-
+        Retrieves a list of normal change requests. Supports query filtering,
+        field selection, and pagination.
+      tags:
+        - Normal Changes
+      parameters:
+        - $ref: '#/components/parameters/sysparmQuery'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmLimit'
+        - $ref: '#/components/parameters/sysparmOffset'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      responses:
+        '200':
+          description: Successful response returning normal change requests.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeRequest'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createNormalChange
+      summary: Create a normal change request
+      description: >-
+        Creates a new normal change request. Normal changes require full
+        assessment and approval before implementation.
+      tags:
+        - Normal Changes
+      parameters:
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRequestInput'
+      responses:
+        '201':
+          description: Normal change request successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          description: Bad request. The request body contains invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /change/normal/{sys_id}:
+    get:
+      operationId: getNormalChange
+      summary: Retrieve a normal change request
+      description: >-
+        Retrieves a specific normal change request by its sys_id.
+      tags:
+        - Normal Changes
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      responses:
+        '200':
+          description: Successful response returning the change request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeRequest'
+        '404':
+          description: Change request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: updateNormalChange
+      summary: Update a normal change request
+      description: >-
+        Updates fields on an existing normal change request.
+      tags:
+        - Normal Changes
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRequestInput'
+      responses:
+        '200':
+          description: Change request successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Change request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /change/standard:
+    get:
+      operationId: listStandardChanges
+      summary: List standard change requests
+      description: >-
+        Retrieves a list of standard change requests. Standard changes are
+        created from pre-approved templates.
+      tags:
+        - Standard Changes
+      parameters:
+        - $ref: '#/components/parameters/sysparmQuery'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmLimit'
+        - $ref: '#/components/parameters/sysparmOffset'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      responses:
+        '200':
+          description: Successful response returning standard change requests.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeRequest'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /change/standard/{standard_change_template_id}:
+    post:
+      operationId: createStandardChange
+      summary: Create a standard change from a template
+      description: >-
+        Creates a new standard change request based on a pre-approved standard
+        change template. The template sys_id determines the default values
+        and pre-configured approvals.
+      tags:
+        - Standard Changes
+      parameters:
+        - name: standard_change_template_id
+          in: path
+          required: true
+          description: >-
+            The sys_id of the standard change template to use for creating the
+            change request.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRequestInput'
+      responses:
+        '201':
+          description: Standard change request successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /change/emergency:
+    get:
+      operationId: listEmergencyChanges
+      summary: List emergency change requests
+      description: >-
+        Retrieves a list of emergency change requests. Emergency changes
+        bypass normal approval processes for urgent situations.
+      tags:
+        - Emergency Changes
+      parameters:
+        - $ref: '#/components/parameters/sysparmQuery'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmLimit'
+        - $ref: '#/components/parameters/sysparmOffset'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+      responses:
+        '200':
+          description: Successful response returning emergency change requests.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeRequest'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createEmergencyChange
+      summary: Create an emergency change request
+      description: >-
+        Creates a new emergency change request for urgent changes that cannot
+        wait for standard approval processes.
+      tags:
+        - Emergency Changes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRequestInput'
+      responses:
+        '201':
+          description: Emergency change request successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /change/{sys_id}/task:
+    get:
+      operationId: listChangeTasks
+      summary: List tasks for a change request
+      description: >-
+        Retrieves all tasks associated with the specified change request.
+      tags:
+        - Change Tasks
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmLimit'
+        - $ref: '#/components/parameters/sysparmOffset'
+      responses:
+        '200':
+          description: Successful response returning change tasks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeTask'
+        '404':
+          description: Change request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createChangeTask
+      summary: Create a task for a change request
+      description: >-
+        Creates a new task associated with the specified change request.
+      tags:
+        - Change Tasks
+      parameters:
+        - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeTaskInput'
+      responses:
+        '201':
+          description: Change task successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeTask'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. The user must have
+        the change_manager, change_admin, or itil role.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: >-
+        An encoded query string to filter results.
+      schema:
+        type: string
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: >-
+        A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: >-
+        Controls the format of field values in the response.
+      schema:
+        type: string
+        enum:
+          - 'true'
+          - 'false'
+          - all
+        default: 'false'
+  schemas:
+    ChangeRequest:
+      type: object
+      description: A ServiceNow change request record.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the change request.
+        number:
+          type: string
+          description: The human-readable change request number.
+        short_description:
+          type: string
+          description: A brief summary of the change.
+        description:
+          type: string
+          description: A detailed description of the change and its purpose.
+        type:
+          type: string
+          description: >-
+            The change type: normal, standard, or emergency.
+          enum:
+            - normal
+            - standard
+            - emergency
+        state:
+          type: string
+          description: >-
+            The current state of the change request in its lifecycle.
+        priority:
+          type: string
+          description: >-
+            The priority level of the change request.
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+        risk:
+          type: string
+          description: The risk level assessed for this change.
+        impact:
+          type: string
+          description: The impact level of this change.
+        category:
+          type: string
+          description: The category of the change.
+        assigned_to:
+          type: string
+          description: The sys_id of the user assigned to implement the change.
+        assignment_group:
+          type: string
+          description: The sys_id of the group responsible for the change.
+        requested_by:
+          type: string
+          description: The sys_id of the user who requested the change.
+        start_date:
+          type: string
+          format: date-time
+          description: The planned start date and time for the change.
+        end_date:
+          type: string
+          format: date-time
+          description: The planned end date and time for the change.
+        cmdb_ci:
+          type: string
+          description: >-
+            The sys_id of the configuration item affected by this change.
+        close_code:
+          type: string
+          description: The close code indicating how the change was resolved.
+        close_notes:
+          type: string
+          description: Notes recorded when closing the change request.
+        approval:
+          type: string
+          description: The current approval status.
+        sys_created_on:
+          type: string
+          format: date-time
+          description: The date and time the change request was created.
+        sys_updated_on:
+          type: string
+          format: date-time
+          description: The date and time the change request was last updated.
+    ChangeRequestInput:
+      type: object
+      description: Fields for creating or updating a change request.
+      properties:
+        short_description:
+          type: string
+          description: A brief summary of the change.
+        description:
+          type: string
+          description: A detailed description of the change.
+        priority:
+          type: string
+          description: The priority level.
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+        risk:
+          type: string
+          description: The risk level.
+        impact:
+          type: string
+          description: The impact level.
+        category:
+          type: string
+          description: The category of the change.
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+        assignment_group:
+          type: string
+          description: The sys_id of the assignment group.
+        requested_by:
+          type: string
+          description: The sys_id of the requesting user.
+        start_date:
+          type: string
+          format: date-time
+          description: The planned start date and time.
+        end_date:
+          type: string
+          format: date-time
+          description: The planned end date and time.
+        cmdb_ci:
+          type: string
+          description: The sys_id of the affected configuration item.
+        justification:
+          type: string
+          description: The business justification for the change.
+        implementation_plan:
+          type: string
+          description: The plan for implementing the change.
+        backout_plan:
+          type: string
+          description: The plan for reverting the change if needed.
+        test_plan:
+          type: string
+          description: The plan for testing the change.
+    ChangeTask:
+      type: object
+      description: A task associated with a change request.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the change task.
+        number:
+          type: string
+          description: The human-readable task number.
+        short_description:
+          type: string
+          description: A brief summary of the task.
+        state:
+          type: string
+          description: The current state of the task.
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+        change_request:
+          type: string
+          description: The sys_id of the parent change request.
+        planned_start_date:
+          type: string
+          format: date-time
+          description: The planned start date for the task.
+        planned_end_date:
+          type: string
+          format: date-time
+          description: The planned end date for the task.
+    ChangeTaskInput:
+      type: object
+      description: Fields for creating a change task.
+      properties:
+        short_description:
+          type: string
+          description: A brief summary of the task.
+        description:
+          type: string
+          description: A detailed description of the task.
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+        assignment_group:
+          type: string
+          description: The sys_id of the assignment group.
+        planned_start_date:
+          type: string
+          format: date-time
+          description: The planned start date.
+        planned_end_date:
+          type: string
+          format: date-time
+          description: The planned end date.
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

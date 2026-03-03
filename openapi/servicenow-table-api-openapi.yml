@@ -1,0 +1,518 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Table API
+  description: >-
+    The ServiceNow Table API provides endpoints to perform create, read, update,
+    and delete (CRUD) operations on records within any ServiceNow table. It is
+    the primary REST interface for interacting with ServiceNow platform data
+    such as incidents, problems, changes, and custom tables. All operations
+    support query filtering, field selection, pagination, and display value
+    control.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
+externalDocs:
+  description: ServiceNow Table API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
+servers:
+  - url: https://{instance}.service-now.com/api/now
+    description: ServiceNow Instance
+    variables:
+      instance:
+        default: instance
+        description: Your ServiceNow instance name
+tags:
+  - name: Table Records
+    description: >-
+      Operations for creating, reading, updating, and deleting records in
+      ServiceNow tables.
+security:
+  - basicAuth: []
+  - oauth2: []
+paths:
+  /table/{tableName}:
+    get:
+      operationId: listRecords
+      summary: List records from a table
+      description: >-
+        Retrieves multiple records from the specified ServiceNow table. Supports
+        encoded query filtering, field selection, pagination via limit and
+        offset, and control over display values and link formatting.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysparmQuery'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmLimit'
+        - $ref: '#/components/parameters/sysparmOffset'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+        - $ref: '#/components/parameters/sysparmSuppressPaginationHeader'
+        - $ref: '#/components/parameters/sysparmView'
+        - $ref: '#/components/parameters/sysparmQueryCategory'
+        - $ref: '#/components/parameters/sysparmQueryNoDomain'
+        - $ref: '#/components/parameters/sysparmNoCount'
+      responses:
+        '200':
+          description: >-
+            Successful response returning an array of records matching the query
+            criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Record'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: >-
+            Forbidden. The authenticated user does not have access to the
+            specified table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createRecord
+      summary: Create a record in a table
+      description: >-
+        Creates a new record in the specified ServiceNow table. The request body
+        should contain field name-value pairs for the new record. Fields not
+        included in the request body use their default values.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+        - $ref: '#/components/parameters/sysparmView'
+        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordInput'
+      responses:
+        '201':
+          description: Record successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Record'
+        '400':
+          description: Bad request. The request body contains invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /table/{tableName}/{sys_id}:
+    get:
+      operationId: getRecord
+      summary: Retrieve a single record
+      description: >-
+        Retrieves a single record from the specified table by its unique sys_id
+        identifier. Supports field selection and display value formatting.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+        - $ref: '#/components/parameters/sysparmView'
+      responses:
+        '200':
+          description: Successful response returning the requested record.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Record'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: >-
+            Not found. The specified record does not exist or the user does not
+            have access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateRecord
+      summary: Update a record
+      description: >-
+        Updates an existing record in the specified table. The request body
+        should contain the fields to be updated. Fields not included in the
+        request body are not modified.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+        - $ref: '#/components/parameters/sysparmView'
+        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordInput'
+      responses:
+        '200':
+          description: Record successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Record'
+        '400':
+          description: Bad request. The request body contains invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found. The specified record does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: patchRecord
+      summary: Patch a record
+      description: >-
+        Partially updates an existing record in the specified table. Only the
+        fields included in the request body are modified. This is functionally
+        similar to PUT but follows the PATCH semantics for partial updates.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysId'
+        - $ref: '#/components/parameters/sysparmFields'
+        - $ref: '#/components/parameters/sysparmDisplayValue'
+        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+        - $ref: '#/components/parameters/sysparmView'
+        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordInput'
+      responses:
+        '200':
+          description: Record successfully patched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Record'
+        '400':
+          description: Bad request. The request body contains invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found. The specified record does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteRecord
+      summary: Delete a record
+      description: >-
+        Deletes a record from the specified table by its sys_id. This operation
+        is permanent and cannot be undone through the API.
+      tags:
+        - Table Records
+      parameters:
+        - $ref: '#/components/parameters/tableName'
+        - $ref: '#/components/parameters/sysId'
+      responses:
+        '204':
+          description: Record successfully deleted. No content returned.
+        '401':
+          description: Unauthorized. Authentication credentials are missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found. The specified record does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication with ServiceNow credentials. The user must have
+        the rest_service role or appropriate table-level ACL permissions.
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 authentication using ServiceNow's OAuth provider. Requires
+        a registered OAuth application on the instance.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{instance}.service-now.com/oauth_auth.do
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+  parameters:
+    tableName:
+      name: tableName
+      in: path
+      required: true
+      description: >-
+        The name of the ServiceNow table to operate on, such as incident,
+        change_request, cmdb_ci, or any custom table.
+      schema:
+        type: string
+      example: incident
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: >-
+        The unique 32-character system identifier for a record in ServiceNow.
+      schema:
+        type: string
+        pattern: '^[a-f0-9]{32}$'
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: >-
+        An encoded query string used to filter the result set. Supports
+        operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean
+        operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
+      schema:
+        type: string
+      example: 'active=true^priority=1^ORDERBYDESCsys_created_on'
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: >-
+        A comma-separated list of field names to include in the response.
+        When specified, only these fields are returned, improving response
+        performance.
+      schema:
+        type: string
+      example: 'sys_id,number,short_description,state,priority'
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: >-
+        The maximum number of records to return in a single request. The
+        default is determined by the instance configuration, typically 10000.
+      schema:
+        type: integer
+        minimum: 1
+        default: 10000
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: >-
+        The starting record index for pagination. Use with sysparm_limit to
+        page through large result sets.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: >-
+        Controls the format of field values in the response. Set to true to
+        return display values, false to return actual values, or all to return
+        both in a display_value and value object.
+      schema:
+        type: string
+        enum:
+          - 'true'
+          - 'false'
+          - all
+        default: 'false'
+    sysparmExcludeReferenceLink:
+      name: sysparm_exclude_reference_link
+      in: query
+      required: false
+      description: >-
+        When set to true, reference fields do not include a link attribute in
+        the response, reducing payload size.
+      schema:
+        type: boolean
+        default: false
+    sysparmSuppressPaginationHeader:
+      name: sysparm_suppress_pagination_header
+      in: query
+      required: false
+      description: >-
+        When set to true, the Link header for pagination is not included in
+        the response.
+      schema:
+        type: boolean
+        default: false
+    sysparmView:
+      name: sysparm_view
+      in: query
+      required: false
+      description: >-
+        The UI view to use for determining which fields to return. When
+        specified, only fields visible in the named view are included.
+      schema:
+        type: string
+    sysparmInputDisplayValue:
+      name: sysparm_input_display_value
+      in: query
+      required: false
+      description: >-
+        When set to true, input values are treated as display values rather
+        than actual values. This allows setting fields using their display
+        labels instead of internal values.
+      schema:
+        type: boolean
+        default: false
+    sysparmQueryCategory:
+      name: sysparm_query_category
+      in: query
+      required: false
+      description: >-
+        The name of the query category used to filter the query.
+      schema:
+        type: string
+    sysparmQueryNoDomain:
+      name: sysparm_query_no_domain
+      in: query
+      required: false
+      description: >-
+        When set to true, the query ignores domain separation and returns
+        records from all domains.
+      schema:
+        type: boolean
+        default: false
+    sysparmNoCount:
+      name: sysparm_no_count
+      in: query
+      required: false
+      description: >-
+        When set to true, the response does not include the X-Total-Count
+        header, which can improve performance for large tables.
+      schema:
+        type: boolean
+        default: false
+  schemas:
+    Record:
+      type: object
+      description: >-
+        A generic ServiceNow record. The actual fields depend on the table
+        being queried. Common system fields are included in every record.
+      properties:
+        sys_id:
+          type: string
+          description: The unique 32-character system identifier for the record.
+        sys_created_on:
+          type: string
+          format: date-time
+          description: The date and time when the record was created.
+        sys_created_by:
+          type: string
+          description: The user who created the record.
+        sys_updated_on:
+          type: string
+          format: date-time
+          description: The date and time when the record was last updated.
+        sys_updated_by:
+          type: string
+          description: The user who last updated the record.
+        sys_mod_count:
+          type: integer
+          description: The number of times the record has been modified.
+        sys_tags:
+          type: string
+          description: System tags associated with the record.
+        sys_class_name:
+          type: string
+          description: The table class name for the record.
+      additionalProperties: true
+    RecordInput:
+      type: object
+      description: >-
+        A set of field name-value pairs to create or update a record. The
+        accepted fields depend on the target table and the user's ACL
+        permissions.
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.

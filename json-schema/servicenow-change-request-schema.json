@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://servicenow.com/schemas/servicenow/change-request.json",
+  "title": "ServiceNow Change Request",
+  "description": "A ServiceNow change request record used for managing planned changes to IT services and infrastructure within the ITSM Change Management process.",
+  "type": "object",
+  "required": ["sys_id", "number", "short_description", "type"],
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$",
+      "description": "The unique 32-character system identifier for the change request."
+    },
+    "number": {
+      "type": "string",
+      "pattern": "^CHG[0-9]+$",
+      "description": "The human-readable change request number, prefixed with CHG."
+    },
+    "short_description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "A brief summary of the change."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "A detailed description of the change and its purpose."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["normal", "standard", "emergency"],
+      "description": "The change type: normal requires approval, standard uses pre-approved templates, emergency bypasses normal approval."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["-5", "-4", "-3", "-2", "-1", "0", "3", "4"],
+      "description": "The change lifecycle state: -5=New, -4=Assess, -3=Authorize, -2=Scheduled, -1=Implement, 0=Review, 3=Closed, 4=Canceled."
+    },
+    "phase": {
+      "type": ["string", "null"],
+      "description": "The current phase of the change request."
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["1", "2", "3", "4"],
+      "description": "The priority level: 1=Critical, 2=High, 3=Moderate, 4=Low."
+    },
+    "risk": {
+      "type": ["string", "null"],
+      "description": "The assessed risk level of the change."
+    },
+    "impact": {
+      "type": "string",
+      "enum": ["1", "2", "3"],
+      "description": "The impact level: 1=High, 2=Medium, 3=Low."
+    },
+    "category": {
+      "type": ["string", "null"],
+      "description": "The category of the change."
+    },
+    "assigned_to": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The user assigned to implement the change."
+    },
+    "assignment_group": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The group responsible for the change."
+    },
+    "requested_by": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The user who requested the change."
+    },
+    "opened_by": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The user who created the change request."
+    },
+    "start_date": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The planned start date and time for implementing the change."
+    },
+    "end_date": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The planned end date and time for the change implementation."
+    },
+    "cmdb_ci": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The configuration item affected by the change."
+    },
+    "business_service": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The business service impacted by the change."
+    },
+    "justification": {
+      "type": ["string", "null"],
+      "description": "The business justification for the change."
+    },
+    "implementation_plan": {
+      "type": ["string", "null"],
+      "description": "The plan for implementing the change."
+    },
+    "backout_plan": {
+      "type": ["string", "null"],
+      "description": "The plan for reverting the change if problems occur."
+    },
+    "test_plan": {
+      "type": ["string", "null"],
+      "description": "The plan for testing the change."
+    },
+    "risk_impact_analysis": {
+      "type": ["string", "null"],
+      "description": "Analysis of the potential risks and impact of the change."
+    },
+    "approval": {
+      "type": ["string", "null"],
+      "description": "The current approval status of the change."
+    },
+    "cab_required": {
+      "type": "boolean",
+      "description": "Whether the change requires a Change Advisory Board review."
+    },
+    "close_code": {
+      "type": ["string", "null"],
+      "description": "The code indicating how the change was resolved."
+    },
+    "close_notes": {
+      "type": ["string", "null"],
+      "description": "Notes recorded when closing the change request."
+    },
+    "conflict_status": {
+      "type": ["string", "null"],
+      "description": "The conflict checking status."
+    },
+    "on_hold": {
+      "type": "boolean",
+      "description": "Whether the change is currently on hold."
+    },
+    "on_hold_reason": {
+      "type": ["string", "null"],
+      "description": "The reason the change is on hold."
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the change request is active."
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the change was opened."
+    },
+    "closed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the change was closed."
+    },
+    "sys_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the record was created."
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who created the record."
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the record was last updated."
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last updated the record."
+    },
+    "sys_mod_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The number of times the record has been modified."
+    }
+  },
+  "$defs": {
+    "ReferenceField": {
+      "type": ["object", "string", "null"],
+      "description": "A ServiceNow reference field that can be a sys_id string or an object containing a link and value.",
+      "properties": {
+        "link": {
+          "type": "string",
+          "format": "uri",
+          "description": "The API URL to the referenced record."
+        },
+        "value": {
+          "type": "string",
+          "description": "The sys_id of the referenced record."
+        },
+        "display_value": {
+          "type": "string",
+          "description": "The display value of the referenced record."
+        }
+      }
+    }
+  }
+}

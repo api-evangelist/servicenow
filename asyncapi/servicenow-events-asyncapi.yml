@@ -1,0 +1,418 @@
+asyncapi: 2.6.0
+info:
+  title: ServiceNow Events and Notifications
+  description: >-
+    ServiceNow supports outbound event-driven integrations through business
+    rules, event management, and outbound REST messages. When records are
+    created, updated, or deleted in ServiceNow tables, business rules can
+    trigger outbound HTTP POST notifications to external webhook receivers.
+    This specification documents the event payloads and notification patterns
+    used by ServiceNow's outbound integration capabilities for incident,
+    change, and problem management workflows.
+  version: 'Yokohama'
+  contact:
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  license:
+    name: ServiceNow Terms of Use
+    url: https://www.servicenow.com/terms-of-use.html
+  externalDocs:
+    description: ServiceNow Business Rules Documentation
+    url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
+servers:
+  webhookReceiver:
+    url: '{webhookUrl}'
+    protocol: https
+    description: >-
+      Your webhook receiver endpoint. ServiceNow sends POST requests to this
+      URL when configured business rules or event actions are triggered.
+    variables:
+      webhookUrl:
+        description: The URL configured to receive webhook deliveries.
+    security:
+      - basicAuth: []
+channels:
+  /webhook/incident:
+    description: >-
+      Receives notifications when incident records are created, updated, or
+      resolved in ServiceNow. Triggered by business rules configured on the
+      incident table.
+    publish:
+      operationId: receiveIncidentEvent
+      summary: Receive an incident event notification
+      description: >-
+        ServiceNow delivers incident event notifications as HTTP POST requests
+        with JSON payloads. Events are triggered by after or async business
+        rules configured on the incident table.
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                default: application/json
+                description: The content type of the payload.
+              X-ServiceNow-Instance:
+                type: string
+                description: The ServiceNow instance name that sent the event.
+              X-ServiceNow-Event-Type:
+                type: string
+                description: The type of event that triggered the notification.
+                enum:
+                  - incident.created
+                  - incident.updated
+                  - incident.resolved
+                  - incident.closed
+      message:
+        oneOf:
+          - $ref: '#/components/messages/IncidentCreated'
+          - $ref: '#/components/messages/IncidentUpdated'
+          - $ref: '#/components/messages/IncidentResolved'
+  /webhook/change:
+    description: >-
+      Receives notifications when change request records are created, approved,
+      implemented, or closed. Triggered by business rules or workflow
+      activities on the change_request table.
+    publish:
+      operationId: receiveChangeEvent
+      summary: Receive a change request event notification
+      description: >-
+        ServiceNow delivers change request event notifications as HTTP POST
+        requests when change lifecycle events occur.
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                default: application/json
+              X-ServiceNow-Instance:
+                type: string
+                description: The ServiceNow instance that sent the event.
+              X-ServiceNow-Event-Type:
+                type: string
+                enum:
+                  - change.created
+                  - change.approved
+                  - change.implemented
+                  - change.closed
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChangeCreated'
+          - $ref: '#/components/messages/ChangeUpdated'
+  /webhook/event-management:
+    description: >-
+      Receives event management alerts from ServiceNow IT Operations
+      Management. Events are published to external monitoring systems when
+      alerts are triggered, acknowledged, or resolved.
+    publish:
+      operationId: receiveEventManagementAlert
+      summary: Receive an event management alert
+      description: >-
+        ServiceNow Event Management publishes alert notifications to external
+        systems through configured notification channels. Alerts contain
+        details about the monitoring event, severity, affected CI, and
+        resolution state.
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                default: application/json
+              X-ServiceNow-Instance:
+                type: string
+                description: The ServiceNow instance that sent the alert.
+      message:
+        $ref: '#/components/messages/EventManagementAlert'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication for webhook endpoints receiving ServiceNow
+        notifications. Configure credentials in the ServiceNow outbound
+        REST message.
+  messages:
+    IncidentCreated:
+      name: IncidentCreated
+      title: Incident Created
+      summary: Notification sent when a new incident is created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentEvent'
+    IncidentUpdated:
+      name: IncidentUpdated
+      title: Incident Updated
+      summary: Notification sent when an incident is updated.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentEvent'
+    IncidentResolved:
+      name: IncidentResolved
+      title: Incident Resolved
+      summary: Notification sent when an incident is resolved or closed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentEvent'
+    ChangeCreated:
+      name: ChangeCreated
+      title: Change Request Created
+      summary: Notification sent when a change request is created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChangeEvent'
+    ChangeUpdated:
+      name: ChangeUpdated
+      title: Change Request Updated
+      summary: Notification sent when a change request is approved, implemented, or closed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChangeEvent'
+    EventManagementAlert:
+      name: EventManagementAlert
+      title: Event Management Alert
+      summary: Alert notification from ServiceNow Event Management.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AlertEvent'
+  schemas:
+    IncidentEvent:
+      type: object
+      description: >-
+        The payload for an incident event notification containing the
+        incident record details and event metadata.
+      properties:
+        event_type:
+          type: string
+          description: The type of incident event.
+          enum:
+            - incident.created
+            - incident.updated
+            - incident.resolved
+            - incident.closed
+        instance:
+          type: string
+          description: The ServiceNow instance name.
+        timestamp:
+          type: string
+          format: date-time
+          description: The time the event was triggered.
+        record:
+          type: object
+          description: The incident record data.
+          properties:
+            sys_id:
+              type: string
+              description: Unique identifier for the incident.
+            number:
+              type: string
+              description: The incident number.
+            short_description:
+              type: string
+              description: A brief summary of the incident.
+            description:
+              type: string
+              description: Detailed description of the incident.
+            state:
+              type: string
+              description: The current state of the incident.
+            priority:
+              type: string
+              description: The priority level.
+            severity:
+              type: string
+              description: The severity level.
+            impact:
+              type: string
+              description: The impact level.
+            urgency:
+              type: string
+              description: The urgency level.
+            category:
+              type: string
+              description: The category of the incident.
+            assigned_to:
+              type: string
+              description: The display name of the assigned user.
+            assignment_group:
+              type: string
+              description: The display name of the assignment group.
+            caller_id:
+              type: string
+              description: The display name of the caller.
+            cmdb_ci:
+              type: string
+              description: The affected configuration item name.
+            opened_at:
+              type: string
+              format: date-time
+              description: When the incident was opened.
+            resolved_at:
+              type: string
+              format: date-time
+              description: When the incident was resolved.
+            closed_at:
+              type: string
+              format: date-time
+              description: When the incident was closed.
+            sys_updated_on:
+              type: string
+              format: date-time
+              description: When the record was last updated.
+    ChangeEvent:
+      type: object
+      description: >-
+        The payload for a change request event notification.
+      properties:
+        event_type:
+          type: string
+          description: The type of change event.
+          enum:
+            - change.created
+            - change.approved
+            - change.implemented
+            - change.closed
+        instance:
+          type: string
+          description: The ServiceNow instance name.
+        timestamp:
+          type: string
+          format: date-time
+          description: The time the event was triggered.
+        record:
+          type: object
+          description: The change request record data.
+          properties:
+            sys_id:
+              type: string
+              description: Unique identifier for the change request.
+            number:
+              type: string
+              description: The change request number.
+            short_description:
+              type: string
+              description: A brief summary of the change.
+            type:
+              type: string
+              description: The change type.
+              enum:
+                - normal
+                - standard
+                - emergency
+            state:
+              type: string
+              description: The current state of the change.
+            priority:
+              type: string
+              description: The priority level.
+            risk:
+              type: string
+              description: The risk level.
+            impact:
+              type: string
+              description: The impact level.
+            assigned_to:
+              type: string
+              description: The assigned user display name.
+            assignment_group:
+              type: string
+              description: The assignment group display name.
+            cmdb_ci:
+              type: string
+              description: The affected configuration item.
+            start_date:
+              type: string
+              format: date-time
+              description: Planned start date.
+            end_date:
+              type: string
+              format: date-time
+              description: Planned end date.
+            approval:
+              type: string
+              description: The approval status.
+            sys_updated_on:
+              type: string
+              format: date-time
+              description: When the record was last updated.
+    AlertEvent:
+      type: object
+      description: >-
+        The payload for an event management alert notification from
+        ServiceNow ITOM.
+      properties:
+        event_type:
+          type: string
+          description: The type of alert event.
+          enum:
+            - alert.triggered
+            - alert.acknowledged
+            - alert.resolved
+        instance:
+          type: string
+          description: The ServiceNow instance name.
+        timestamp:
+          type: string
+          format: date-time
+          description: The time the alert was triggered.
+        alert:
+          type: object
+          description: The alert record data.
+          properties:
+            sys_id:
+              type: string
+              description: Unique identifier for the alert.
+            number:
+              type: string
+              description: The alert number.
+            description:
+              type: string
+              description: Description of the alert.
+            severity:
+              type: string
+              description: The severity level.
+              enum:
+                - '1'
+                - '2'
+                - '3'
+                - '4'
+                - '5'
+            state:
+              type: string
+              description: The alert state.
+            type:
+              type: string
+              description: The type of event that triggered the alert.
+            source:
+              type: string
+              description: The monitoring source.
+            node:
+              type: string
+              description: The affected node or host.
+            resource:
+              type: string
+              description: The affected resource.
+            cmdb_ci:
+              type: string
+              description: The associated configuration item.
+            metric_name:
+              type: string
+              description: The metric that triggered the alert.
+            additional_info:
+              type: string
+              description: Additional context information.
+            created_at:
+              type: string
+              format: date-time
+              description: When the alert was created.

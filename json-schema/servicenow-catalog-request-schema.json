@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://servicenow.com/schemas/servicenow/catalog-request.json",
+  "title": "ServiceNow Catalog Request",
+  "description": "A ServiceNow service catalog request record representing a user's request for one or more catalog items through the self-service portal.",
+  "type": "object",
+  "required": ["sys_id", "number", "request_state"],
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$",
+      "description": "The unique 32-character system identifier for the request."
+    },
+    "number": {
+      "type": "string",
+      "pattern": "^REQ[0-9]+$",
+      "description": "The human-readable request number, prefixed with REQ."
+    },
+    "request_state": {
+      "type": "string",
+      "description": "The current state of the request."
+    },
+    "stage": {
+      "type": ["string", "null"],
+      "description": "The current stage of the request in the fulfillment workflow."
+    },
+    "requested_for": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The user for whom the catalog items were requested."
+    },
+    "opened_by": {
+      "$ref": "#/$defs/ReferenceField",
+      "description": "The user who submitted the request."
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the request was submitted."
+    },
+    "delivery_address": {
+      "type": ["string", "null"],
+      "description": "The delivery address for physical items."
+    },
+    "special_instructions": {
+      "type": ["string", "null"],
+      "description": "Special instructions provided by the requester."
+    },
+    "price": {
+      "type": ["string", "null"],
+      "description": "The total price for all requested items."
+    },
+    "approval": {
+      "type": ["string", "null"],
+      "description": "The current approval status of the request."
+    },
+    "requested_items": {
+      "type": "array",
+      "description": "The line items in this request.",
+      "items": {
+        "$ref": "#/$defs/RequestedItem"
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the request is still active."
+    },
+    "sys_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the record was created."
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who created the record."
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the record was last updated."
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last updated the record."
+    }
+  },
+  "$defs": {
+    "ReferenceField": {
+      "type": ["object", "string", "null"],
+      "description": "A ServiceNow reference field that can be a sys_id string or an object containing a link and value.",
+      "properties": {
+        "link": {
+          "type": "string",
+          "format": "uri",
+          "description": "The API URL to the referenced record."
+        },
+        "value": {
+          "type": "string",
+          "description": "The sys_id of the referenced record."
+        },
+        "display_value": {
+          "type": "string",
+          "description": "The display value of the referenced record."
+        }
+      }
+    },
+    "RequestedItem": {
+      "type": "object",
+      "description": "A requested catalog item within a service catalog request.",
+      "properties": {
+        "sys_id": {
+          "type": "string",
+          "description": "Unique identifier for the requested item."
+        },
+        "number": {
+          "type": "string",
+          "pattern": "^RITM[0-9]+$",
+          "description": "The requested item number, prefixed with RITM."
+        },
+        "cat_item": {
+          "$ref": "#/$defs/ReferenceField",
+          "description": "The catalog item that was requested."
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The quantity of items requested."
+        },
+        "price": {
+          "type": ["string", "null"],
+          "description": "The price per item."
+        },
+        "stage": {
+          "type": ["string", "null"],
+          "description": "The current fulfillment stage."
+        },
+        "state": {
+          "type": ["string", "null"],
+          "description": "The current state of the requested item."
+        },
+        "assigned_to": {
+          "$ref": "#/$defs/ReferenceField",
+          "description": "The user assigned to fulfill the item."
+        },
+        "configuration_item": {
+          "$ref": "#/$defs/ReferenceField",
+          "description": "The configuration item associated with the request."
+        }
+      }
+    }
+  }
+}
