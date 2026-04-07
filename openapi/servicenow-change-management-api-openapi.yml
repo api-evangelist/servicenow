@@ -23,6 +23,13 @@ servers:
         default: instance
         description: Your ServiceNow instance name
 tags:
+  - name: Change Tasks
+    description: >-
+      Operations for managing tasks associated with change requests.
+  - name: Emergency Changes
+    description: >-
+      Operations for managing emergency change requests that require expedited
+      processing.
   - name: Normal Changes
     description: >-
       Operations for managing normal change requests that require full review
@@ -31,13 +38,6 @@ tags:
     description: >-
       Operations for managing standard change requests based on pre-approved
       templates.
-  - name: Emergency Changes
-    description: >-
-      Operations for managing emergency change requests that require expedited
-      processing.
-  - name: Change Tasks
-    description: >-
-      Operations for managing tasks associated with change requests.
 security:
   - basicAuth: []
   - oauth2: []

@@ -23,18 +23,18 @@ servers:
         default: instance
         description: Your ServiceNow instance name
 tags:
+  - name: Cart
+    description: >-
+      Operations for managing the shopping cart and submitting orders.
+  - name: Catalog Items
+    description: >-
+      Operations for retrieving catalog item details and variables.
   - name: Catalogs
     description: >-
       Operations for browsing and retrieving service catalogs.
   - name: Categories
     description: >-
       Operations for browsing catalog categories.
-  - name: Catalog Items
-    description: >-
-      Operations for retrieving catalog item details and variables.
-  - name: Cart
-    description: >-
-      Operations for managing the shopping cart and submitting orders.
 security:
   - basicAuth: []
   - oauth2: []
