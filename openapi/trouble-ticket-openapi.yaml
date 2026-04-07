@@ -1,15 +1,15 @@
 openapi: 3.1.0
 info:
-  title: Trouble Ticket Open API
+  title: ServiceNow Trouble Ticket Open API
   description: |
     The Trouble Ticket Open API provides endpoints to create, update, and retrieve data from the Case [sn_customerservice_case], 
     Incident [incident], and Service Problem Case [sn_sprb_mgmt_case] tables.
-    
+
     Use this API to manage ticket information between external ticketing systems and the ServiceNow AI Platform.
-    
+
     This API is a ServiceNow implementation of the TM Forum Trouble Ticket Management API REST specification, 
     based on TMF621 Trouble Ticket Management API User Guide v5.0.0, September 2024.
-    
+
     **Authentication**: The calling user must have the `ticket_integrator` role.
   version: Zurich
   contact:
@@ -37,7 +37,7 @@ paths:
     get:
       tags:
         - Trouble Ticket
-      summary: Retrieve all trouble tickets
+      summary: ServiceNow Retrieve all trouble tickets
       description: Retrieves a list of all trouble ticket records from the Case, Incident, and Service Problem Case tables.
       operationId: getTroubleTickets
       parameters:
@@ -153,7 +153,7 @@ paths:
     post:
       tags:
         - Trouble Ticket
-      summary: Create a trouble ticket
+      summary: ServiceNow Create a trouble ticket
       description: Creates a record in the Case, Incident, or Service Problem Case table.
       operationId: createTroubleTicket
       requestBody:
@@ -180,7 +180,7 @@ paths:
     get:
       tags:
         - Trouble Ticket
-      summary: Retrieve a specific trouble ticket
+      summary: ServiceNow Retrieve a specific trouble ticket
       description: Retrieves a specified record from the Case, Incident, or Service Problem Case table.
       operationId: getTroubleTicketById
       parameters:
@@ -219,7 +219,7 @@ paths:
     patch:
       tags:
         - Trouble Ticket
-      summary: Update a trouble ticket
+      summary: ServiceNow Update a trouble ticket
       description: Updates a specified record in the Case, Incident, or Service Problem Case table.
       operationId: updateTroubleTicket
       parameters:

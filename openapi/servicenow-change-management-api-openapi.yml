@@ -45,7 +45,7 @@ paths:
   /change/normal:
     get:
       operationId: listNormalChanges
-      summary: List normal change requests
+      summary: ServiceNow List normal change requests
       description: >-
         Retrieves a list of normal change requests. Supports query filtering,
         field selection, and pagination.
@@ -77,7 +77,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createNormalChange
-      summary: Create a normal change request
+      summary: ServiceNow Create a normal change request
       description: >-
         Creates a new normal change request. Normal changes require full
         assessment and approval before implementation.
@@ -117,7 +117,7 @@ paths:
   /change/normal/{sys_id}:
     get:
       operationId: getNormalChange
-      summary: Retrieve a normal change request
+      summary: ServiceNow Retrieve a normal change request
       description: >-
         Retrieves a specific normal change request by its sys_id.
       tags:
@@ -144,7 +144,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     patch:
       operationId: updateNormalChange
-      summary: Update a normal change request
+      summary: ServiceNow Update a normal change request
       description: >-
         Updates fields on an existing normal change request.
       tags:
@@ -184,7 +184,7 @@ paths:
   /change/standard:
     get:
       operationId: listStandardChanges
-      summary: List standard change requests
+      summary: ServiceNow List standard change requests
       description: >-
         Retrieves a list of standard change requests. Standard changes are
         created from pre-approved templates.
@@ -217,7 +217,7 @@ paths:
   /change/standard/{standard_change_template_id}:
     post:
       operationId: createStandardChange
-      summary: Create a standard change from a template
+      summary: ServiceNow Create a standard change from a template
       description: >-
         Creates a new standard change request based on a pre-approved standard
         change template. The template sys_id determines the default values
@@ -258,7 +258,7 @@ paths:
   /change/emergency:
     get:
       operationId: listEmergencyChanges
-      summary: List emergency change requests
+      summary: ServiceNow List emergency change requests
       description: >-
         Retrieves a list of emergency change requests. Emergency changes
         bypass normal approval processes for urgent situations.
@@ -290,7 +290,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createEmergencyChange
-      summary: Create an emergency change request
+      summary: ServiceNow Create an emergency change request
       description: >-
         Creates a new emergency change request for urgent changes that cannot
         wait for standard approval processes.
@@ -321,7 +321,7 @@ paths:
   /change/{sys_id}/task:
     get:
       operationId: listChangeTasks
-      summary: List tasks for a change request
+      summary: ServiceNow List tasks for a change request
       description: >-
         Retrieves all tasks associated with the specified change request.
       tags:
@@ -351,7 +351,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createChangeTask
-      summary: Create a task for a change request
+      summary: ServiceNow Create a task for a change request
       description: >-
         Creates a new task associated with the specified change request.
       tags:

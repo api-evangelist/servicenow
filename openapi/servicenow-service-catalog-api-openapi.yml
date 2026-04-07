@@ -42,7 +42,7 @@ paths:
   /servicecatalog/catalogs:
     get:
       operationId: listCatalogs
-      summary: List service catalogs
+      summary: ServiceNow List service catalogs
       description: >-
         Retrieves a list of all available service catalogs on the instance.
       tags:
@@ -84,7 +84,7 @@ paths:
   /servicecatalog/catalogs/{sys_id}:
     get:
       operationId: getCatalog
-      summary: Retrieve a specific catalog
+      summary: ServiceNow Retrieve a specific catalog
       description: >-
         Retrieves details for a specific service catalog including its
         categories.
@@ -111,7 +111,7 @@ paths:
   /servicecatalog/categories/{sys_id}:
     get:
       operationId: getCategory
-      summary: Retrieve a catalog category
+      summary: ServiceNow Retrieve a catalog category
       description: >-
         Retrieves details for a specific catalog category including its
         child categories and items.
@@ -138,7 +138,7 @@ paths:
   /servicecatalog/items:
     get:
       operationId: listCatalogItems
-      summary: List catalog items
+      summary: ServiceNow List catalog items
       description: >-
         Retrieves a list of catalog items. Supports filtering by catalog
         and category.
@@ -193,7 +193,7 @@ paths:
   /servicecatalog/items/{sys_id}:
     get:
       operationId: getCatalogItem
-      summary: Retrieve a catalog item
+      summary: ServiceNow Retrieve a catalog item
       description: >-
         Retrieves details for a specific catalog item including its
         variables and pricing information.
@@ -220,7 +220,7 @@ paths:
   /servicecatalog/items/{sys_id}/add_to_cart:
     post:
       operationId: addItemToCart
-      summary: Add a catalog item to the cart
+      summary: ServiceNow Add a catalog item to the cart
       description: >-
         Adds the specified catalog item to the shopping cart with the
         given quantity and variable values.
@@ -253,7 +253,7 @@ paths:
   /servicecatalog/items/{sys_id}/order_now:
     post:
       operationId: orderItemNow
-      summary: Order a catalog item immediately
+      summary: ServiceNow Order a catalog item immediately
       description: >-
         Orders the specified catalog item without going through the cart.
         Creates a request directly with the given quantity and variable values.
@@ -286,7 +286,7 @@ paths:
   /servicecatalog/cart:
     get:
       operationId: getCart
-      summary: Retrieve the current cart
+      summary: ServiceNow Retrieve the current cart
       description: >-
         Retrieves the contents of the current user's shopping cart.
       tags:
@@ -309,7 +309,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: emptyCart
-      summary: Empty the cart
+      summary: ServiceNow Empty the cart
       description: >-
         Removes all items from the current user's shopping cart.
       tags:
@@ -333,7 +333,7 @@ paths:
   /servicecatalog/cart/submit_order:
     post:
       operationId: submitCartOrder
-      summary: Submit the cart as an order
+      summary: ServiceNow Submit the cart as an order
       description: >-
         Submits all items in the current user's shopping cart as a service
         catalog request. Returns the request number and details.

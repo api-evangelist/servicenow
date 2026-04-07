@@ -34,7 +34,7 @@ paths:
   /attachment:
     get:
       operationId: listAttachments
-      summary: List attachments
+      summary: ServiceNow List attachments
       description: >-
         Retrieves metadata for file attachments. Supports query filtering by
         table name, record sys_id, file name, and other attachment attributes.
@@ -88,7 +88,7 @@ paths:
   /attachment/{sys_id}:
     get:
       operationId: getAttachment
-      summary: Retrieve attachment metadata
+      summary: ServiceNow Retrieve attachment metadata
       description: >-
         Retrieves metadata for a single attachment by its sys_id. Does not
         return the binary file content; use the file download endpoint instead.
@@ -120,7 +120,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: deleteAttachment
-      summary: Delete an attachment
+      summary: ServiceNow Delete an attachment
       description: >-
         Deletes an attachment and its associated file content from the
         ServiceNow instance.
@@ -146,7 +146,7 @@ paths:
   /attachment/{sys_id}/file:
     get:
       operationId: downloadAttachmentFile
-      summary: Download attachment file content
+      summary: ServiceNow Download attachment file content
       description: >-
         Downloads the binary file content of an attachment. The response
         Content-Type header reflects the original file type.
@@ -177,7 +177,7 @@ paths:
   /attachment/file:
     post:
       operationId: uploadAttachmentBinary
-      summary: Upload a file attachment via binary stream
+      summary: ServiceNow Upload a file attachment via binary stream
       description: >-
         Uploads a file as a binary stream and attaches it to the specified
         table record. The Content-Type header should match the actual file
@@ -238,7 +238,7 @@ paths:
   /attachment/upload:
     post:
       operationId: uploadAttachmentMultipart
-      summary: Upload a file attachment via multipart form data
+      summary: ServiceNow Upload a file attachment via multipart form data
       description: >-
         Uploads a file using multipart form-data encoding and attaches it to
         the specified table record. This method is suitable for web browser

@@ -35,7 +35,7 @@ paths:
   /table/{tableName}:
     get:
       operationId: listRecords
-      summary: List records from a table
+      summary: ServiceNow List records from a table
       description: >-
         Retrieves multiple records from the specified ServiceNow table. Supports
         encoded query filtering, field selection, pagination via limit and
@@ -85,7 +85,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createRecord
-      summary: Create a record in a table
+      summary: ServiceNow Create a record in a table
       description: >-
         Creates a new record in the specified ServiceNow table. The request body
         should contain field name-value pairs for the new record. Fields not
@@ -130,7 +130,7 @@ paths:
   /table/{tableName}/{sys_id}:
     get:
       operationId: getRecord
-      summary: Retrieve a single record
+      summary: ServiceNow Retrieve a single record
       description: >-
         Retrieves a single record from the specified table by its unique sys_id
         identifier. Supports field selection and display value formatting.
@@ -169,7 +169,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: updateRecord
-      summary: Update a record
+      summary: ServiceNow Update a record
       description: >-
         Updates an existing record in the specified table. The request body
         should contain the fields to be updated. Fields not included in the
@@ -220,7 +220,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     patch:
       operationId: patchRecord
-      summary: Patch a record
+      summary: ServiceNow Patch a record
       description: >-
         Partially updates an existing record in the specified table. Only the
         fields included in the request body are modified. This is functionally
@@ -271,7 +271,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: deleteRecord
-      summary: Delete a record
+      summary: ServiceNow Delete a record
       description: >-
         Deletes a record from the specified table by its sys_id. This operation
         is permanent and cannot be undone through the API.

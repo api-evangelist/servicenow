@@ -34,7 +34,7 @@ paths:
   /import/{stagingTableName}:
     post:
       operationId: insertImportSetRecord
-      summary: Insert a record into an import set staging table
+      summary: ServiceNow Insert a record into an import set staging table
       description: >-
         Inserts a single record into the specified import set staging table.
         If an active transform map exists for the staging table, the record
@@ -104,7 +104,7 @@ paths:
   /import/{stagingTableName}/insertMultiple:
     post:
       operationId: insertMultipleImportSetRecords
-      summary: Insert multiple records into an import set staging table
+      summary: ServiceNow Insert multiple records into an import set staging table
       description: >-
         Inserts multiple records into the specified import set staging table
         in a single request. Each record is individually transformed if an

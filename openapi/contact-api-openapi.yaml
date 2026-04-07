@@ -1,13 +1,13 @@
 openapi: 3.1.0
 info:
-  title: Contact API
+  title: ServiceNow Contact API
   description: |
     The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
-    
+
     In addition, you can generate new social media profile records when creating a contact.
-    
+
     The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
-    
+
     **Authentication**: Users need the `csm_ws_integration` role for full API access.
   version: Zurich
   contact:
@@ -35,7 +35,7 @@ paths:
     get:
       tags:
         - Contact
-      summary: Retrieve contacts
+      summary: ServiceNow Retrieve contacts
       description: Retrieves a specified set of Customer Service Management (CSM) contacts.
       operationId: getContacts
       parameters:
@@ -92,15 +92,15 @@ paths:
     post:
       tags:
         - Contact
-      summary: Create a contact
+      summary: ServiceNow Create a contact
       description: |
         Creates a new Customer Service Management (CSM) contact.
-        
+
         You can also create a social media profile for the contact by specifying:
         - social_channel
         - social_handle
         - social_handle_url
-        
+
         **Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.
       operationId: createContact
       requestBody:
@@ -143,7 +143,7 @@ paths:
     get:
       tags:
         - Contact
-      summary: Retrieve a specific contact
+      summary: ServiceNow Retrieve a specific contact
       description: Retrieves the specified Customer Service Management (CSM) contact.
       operationId: getContactById
       parameters:
