@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "description": "The shopping cart contents.",
+  "name": "Cart",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "An item in the shopping cart.",
+        "properties": {
+          "cart_item_id": {
+            "type": "string",
+            "description": "Unique identifier for the cart item."
+          },
+          "catalog_item_id": {
+            "type": "string",
+            "description": "The sys_id of the catalog item."
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity ordered."
+          },
+          "subtotal": {
+            "type": "string",
+            "description": "The subtotal for this cart item."
+          }
+        }
+      }
+    },
+    "subtotal": {
+      "type": "string",
+      "description": "The cart subtotal."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

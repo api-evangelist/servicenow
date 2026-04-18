@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "name": "TroubleTicketCreate",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the trouble ticket, typically a short description of the issue"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the issue"
+    },
+    "severity": {
+      "type": "string",
+      "description": "The severity of the issue (must provide choice value only):\n- 1: Critical\n- 2: High\n- 3: Moderate\n- 4: Low\n- 5: Planning (Incident only)\n",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the trouble ticket (can provide choice label or value)"
+    },
+    "ticketType": {
+      "type": "string",
+      "description": "The type of ticket to create",
+      "enum": [
+        "Case",
+        "Incident",
+        "Service Problem Case"
+      ]
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')"
+        }
+      }
+    },
+    "note": {
+      "type": "array",
+      "description": "List of work notes and comments to add to the ticket",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Note text"
+          },
+          "@type": {
+            "type": "string",
+            "description": "Type of note (determines whether recorded in Work notes or Additional comments field)",
+            "enum": [
+              "comments",
+              "work_notes"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "@type"
+        ]
+      }
+    },
+    "relatedEntity": {
+      "type": "array",
+      "description": "List of impacted assets, products, sold products, configuration items, or services",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the impacted item or service"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of item or service",
+            "enum": [
+              "asset",
+              "product",
+              "product_inventory",
+              "cmdb_ci",
+              "cmdb_ci_service"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "@referredType"
+        ]
+      }
+    },
+    "relatedParty": {
+      "type": "array",
+      "description": "Details about contacts for the ticket",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the related party"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of related party:\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+            "enum": [
+              "customer",
+              "customer_contact"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "@referredType"
+        ]
+      }
+    }
+  },
+  "required": [
+    "description",
+    "severity",
+    "status"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

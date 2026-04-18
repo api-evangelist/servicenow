@@ -1,0 +1,507 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "Contact": {
+      "@id": "ns:Contact",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "first_name": {
+          "@id": "ns:first_name",
+          "@type": "xsd:string"
+        },
+        "middle_name": {
+          "@id": "ns:middle_name",
+          "@type": "xsd:string"
+        },
+        "last_name": {
+          "@id": "ns:last_name",
+          "@type": "xsd:string"
+        },
+        "user_name": {
+          "@id": "ns:user_name",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "ns:email",
+          "@type": "xsd:string"
+        },
+        "phone": {
+          "@id": "ns:phone",
+          "@type": "xsd:string"
+        },
+        "mobile_phone": {
+          "@id": "ns:mobile_phone",
+          "@type": "xsd:string"
+        },
+        "home_phone": {
+          "@id": "ns:home_phone",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "employee_number": {
+          "@id": "ns:employee_number",
+          "@type": "xsd:string"
+        },
+        "company": {
+          "@id": "ns:company",
+          "@type": "xsd:string"
+        },
+        "account": {
+          "@id": "ns:account",
+          "@type": "xsd:string"
+        },
+        "department": {
+          "@id": "ns:department",
+          "@type": "xsd:string"
+        },
+        "manager": {
+          "@id": "ns:manager",
+          "@type": "xsd:string"
+        },
+        "location": {
+          "@id": "ns:location",
+          "@type": "xsd:string"
+        },
+        "building": {
+          "@id": "ns:building",
+          "@type": "xsd:string"
+        },
+        "street": {
+          "@id": "ns:street",
+          "@type": "xsd:string"
+        },
+        "city": {
+          "@id": "ns:city",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "ns:state",
+          "@type": "xsd:string"
+        },
+        "zip": {
+          "@id": "ns:zip",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "ns:country",
+          "@type": "xsd:string"
+        },
+        "active": {
+          "@id": "ns:active",
+          "@type": "xsd:boolean"
+        },
+        "vip": {
+          "@id": "ns:vip",
+          "@type": "xsd:boolean"
+        },
+        "locked_out": {
+          "@id": "ns:locked_out",
+          "@type": "xsd:boolean"
+        },
+        "web_service_access_only": {
+          "@id": "ns:web_service_access_only",
+          "@type": "xsd:boolean"
+        },
+        "internal_integration_user": {
+          "@id": "ns:internal_integration_user",
+          "@type": "xsd:boolean"
+        },
+        "enable_multifactor_authn": {
+          "@id": "ns:enable_multifactor_authn",
+          "@type": "xsd:boolean"
+        },
+        "geolocation_tracked": {
+          "@id": "ns:geolocation_tracked",
+          "@type": "xsd:boolean"
+        },
+        "notification": {
+          "@id": "ns:notification",
+          "@type": "xsd:integer"
+        },
+        "calendar_integration": {
+          "@id": "ns:calendar_integration",
+          "@type": "xsd:integer"
+        },
+        "failed_attempts": {
+          "@id": "ns:failed_attempts",
+          "@type": "xsd:integer"
+        },
+        "latitude": {
+          "@id": "ns:latitude",
+          "@type": "xsd:decimal"
+        },
+        "longitude": {
+          "@id": "ns:longitude",
+          "@type": "xsd:decimal"
+        },
+        "time_zone": {
+          "@id": "ns:time_zone",
+          "@type": "xsd:string"
+        },
+        "date_format": {
+          "@id": "ns:date_format",
+          "@type": "xsd:string"
+        },
+        "time_format": {
+          "@id": "ns:time_format",
+          "@type": "xsd:string"
+        },
+        "preferred_language": {
+          "@id": "ns:preferred_language",
+          "@type": "xsd:string"
+        },
+        "gender": {
+          "@id": "ns:gender",
+          "@type": "xsd:string"
+        },
+        "photo": {
+          "@id": "ns:photo",
+          "@type": "xsd:string"
+        },
+        "introduction": {
+          "@id": "ns:introduction",
+          "@type": "xsd:string"
+        },
+        "source": {
+          "@id": "ns:source",
+          "@type": "xsd:string"
+        },
+        "roles": {
+          "@id": "ns:roles",
+          "@type": "xsd:string"
+        },
+        "cost_center": {
+          "@id": "ns:cost_center",
+          "@type": "xsd:string"
+        },
+        "schedule": {
+          "@id": "ns:schedule",
+          "@type": "xsd:string"
+        },
+        "time_sheet_policy": {
+          "@id": "ns:time_sheet_policy",
+          "@type": "xsd:string"
+        },
+        "default_perspective": {
+          "@id": "ns:default_perspective",
+          "@type": "xsd:string"
+        },
+        "ldap_server": {
+          "@id": "ns:ldap_server",
+          "@type": "xsd:string"
+        },
+        "agent_status": {
+          "@id": "ns:agent_status",
+          "@type": "xsd:string"
+        },
+        "on_schedule": {
+          "@id": "ns:on_schedule",
+          "@type": "xsd:string"
+        },
+        "edu_status": {
+          "@id": "ns:edu_status",
+          "@type": "xsd:string"
+        },
+        "last_login": {
+          "@id": "ns:last_login",
+          "@type": "xsd:string"
+        },
+        "last_login_time": {
+          "@id": "ns:last_login_time",
+          "@type": "xsd:string"
+        },
+        "last_login_device": {
+          "@id": "ns:last_login_device",
+          "@type": "xsd:string"
+        },
+        "last_position_update": {
+          "@id": "ns:last_position_update",
+          "@type": "xsd:string"
+        },
+        "sys_class_name": {
+          "@id": "ns:sys_class_name",
+          "@type": "xsd:string"
+        },
+        "sys_created_by": {
+          "@id": "ns:sys_created_by",
+          "@type": "xsd:string"
+        },
+        "sys_created_on": {
+          "@id": "ns:sys_created_on",
+          "@type": "xsd:string"
+        },
+        "sys_updated_by": {
+          "@id": "ns:sys_updated_by",
+          "@type": "xsd:string"
+        },
+        "sys_updated_on": {
+          "@id": "ns:sys_updated_on",
+          "@type": "xsd:string"
+        },
+        "sys_mod_count": {
+          "@id": "ns:sys_mod_count",
+          "@type": "xsd:integer"
+        },
+        "sys_domain": {
+          "@id": "ns:sys_domain",
+          "@type": "xsd:string"
+        },
+        "sys_domain_path": {
+          "@id": "ns:sys_domain_path",
+          "@type": "xsd:string"
+        },
+        "sys_tags": {
+          "@id": "ns:sys_tags",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ContactCreate": {
+      "@id": "ns:ContactCreate",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "first_name": {
+          "@id": "ns:first_name",
+          "@type": "xsd:string"
+        },
+        "middle_name": {
+          "@id": "ns:middle_name",
+          "@type": "xsd:string"
+        },
+        "last_name": {
+          "@id": "ns:last_name",
+          "@type": "xsd:string"
+        },
+        "user_name": {
+          "@id": "ns:user_name",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "ns:email",
+          "@type": "xsd:string"
+        },
+        "phone": {
+          "@id": "ns:phone",
+          "@type": "xsd:string"
+        },
+        "mobile_phone": {
+          "@id": "ns:mobile_phone",
+          "@type": "xsd:string"
+        },
+        "home_phone": {
+          "@id": "ns:home_phone",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "employee_number": {
+          "@id": "ns:employee_number",
+          "@type": "xsd:string"
+        },
+        "company": {
+          "@id": "ns:company",
+          "@type": "xsd:string"
+        },
+        "account": {
+          "@id": "ns:account",
+          "@type": "xsd:string"
+        },
+        "department": {
+          "@id": "ns:department",
+          "@type": "xsd:string"
+        },
+        "manager": {
+          "@id": "ns:manager",
+          "@type": "xsd:string"
+        },
+        "location": {
+          "@id": "ns:location",
+          "@type": "xsd:string"
+        },
+        "building": {
+          "@id": "ns:building",
+          "@type": "xsd:string"
+        },
+        "street": {
+          "@id": "ns:street",
+          "@type": "xsd:string"
+        },
+        "city": {
+          "@id": "ns:city",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "ns:state",
+          "@type": "xsd:string"
+        },
+        "zip": {
+          "@id": "ns:zip",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "ns:country",
+          "@type": "xsd:string"
+        },
+        "active": {
+          "@id": "ns:active",
+          "@type": "xsd:boolean"
+        },
+        "vip": {
+          "@id": "ns:vip",
+          "@type": "xsd:boolean"
+        },
+        "locked_out": {
+          "@id": "ns:locked_out",
+          "@type": "xsd:boolean"
+        },
+        "web_service_access_only": {
+          "@id": "ns:web_service_access_only",
+          "@type": "xsd:boolean"
+        },
+        "internal_integration_user": {
+          "@id": "ns:internal_integration_user",
+          "@type": "xsd:boolean"
+        },
+        "enable_multifactor_authn": {
+          "@id": "ns:enable_multifactor_authn",
+          "@type": "xsd:boolean"
+        },
+        "geolocation_tracked": {
+          "@id": "ns:geolocation_tracked",
+          "@type": "xsd:boolean"
+        },
+        "notification": {
+          "@id": "ns:notification",
+          "@type": "xsd:integer"
+        },
+        "calendar_integration": {
+          "@id": "ns:calendar_integration",
+          "@type": "xsd:integer"
+        },
+        "failed_attempts": {
+          "@id": "ns:failed_attempts",
+          "@type": "xsd:integer"
+        },
+        "latitude": {
+          "@id": "ns:latitude",
+          "@type": "xsd:decimal"
+        },
+        "longitude": {
+          "@id": "ns:longitude",
+          "@type": "xsd:decimal"
+        },
+        "time_zone": {
+          "@id": "ns:time_zone",
+          "@type": "xsd:string"
+        },
+        "date_format": {
+          "@id": "ns:date_format",
+          "@type": "xsd:string"
+        },
+        "time_format": {
+          "@id": "ns:time_format",
+          "@type": "xsd:string"
+        },
+        "preferred_language": {
+          "@id": "ns:preferred_language",
+          "@type": "xsd:string"
+        },
+        "gender": {
+          "@id": "ns:gender",
+          "@type": "xsd:string"
+        },
+        "photo": {
+          "@id": "ns:photo",
+          "@type": "xsd:string"
+        },
+        "introduction": {
+          "@id": "ns:introduction",
+          "@type": "xsd:string"
+        },
+        "source": {
+          "@id": "ns:source",
+          "@type": "xsd:string"
+        },
+        "roles": {
+          "@id": "ns:roles",
+          "@type": "xsd:string"
+        },
+        "cost_center": {
+          "@id": "ns:cost_center",
+          "@type": "xsd:string"
+        },
+        "schedule": {
+          "@id": "ns:schedule",
+          "@type": "xsd:string"
+        },
+        "time_sheet_policy": {
+          "@id": "ns:time_sheet_policy",
+          "@type": "xsd:string"
+        },
+        "default_perspective": {
+          "@id": "ns:default_perspective",
+          "@type": "xsd:string"
+        },
+        "ldap_server": {
+          "@id": "ns:ldap_server",
+          "@type": "xsd:string"
+        },
+        "agent_status": {
+          "@id": "ns:agent_status",
+          "@type": "xsd:string"
+        },
+        "on_schedule": {
+          "@id": "ns:on_schedule",
+          "@type": "xsd:string"
+        },
+        "edu_status": {
+          "@id": "ns:edu_status",
+          "@type": "xsd:string"
+        },
+        "last_login_time": {
+          "@id": "ns:last_login_time",
+          "@type": "xsd:string"
+        },
+        "last_login_device": {
+          "@id": "ns:last_login_device",
+          "@type": "xsd:string"
+        },
+        "social_channel": {
+          "@id": "ns:social_channel",
+          "@type": "xsd:string"
+        },
+        "social_handle": {
+          "@id": "ns:social_handle",
+          "@type": "xsd:string"
+        },
+        "social_handle_url": {
+          "@id": "ns:social_handle_url",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "description": "Input for adding a catalog item to the cart or ordering directly.",
+  "name": "CartItemInput",
+  "properties": {
+    "sysparm_quantity": {
+      "type": "integer",
+      "description": "The quantity of items to order."
+    },
+    "variables": {
+      "type": "object",
+      "description": "Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries."
+    }
+  },
+  "required": [
+    "sysparm_quantity"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "name": "NoteInput",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Note text"
+    },
+    "@type": {
+      "type": "string",
+      "description": "Type of note (determines whether recorded in Work notes or Additional comments field)",
+      "enum": [
+        "comments",
+        "work_notes"
+      ]
+    }
+  },
+  "required": [
+    "text",
+    "@type"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

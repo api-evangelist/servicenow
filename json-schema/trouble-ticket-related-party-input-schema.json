@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Sys_id of the related party",
+      "example": "abc123"
+    },
+    "@referredType": {
+      "type": "string",
+      "description": "Type of related party:\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+      "example": "customer",
+      "enum": [
+        "customer",
+        "customer_contact"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "@referredType"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RelatedPartyInput"
+}

@@ -16,47 +16,47 @@ externalDocs:
   description: ServiceNow Change Management API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/change-management-api.html
 servers:
-  - url: https://{instance}.service-now.com/api/sn_chg_rest/v1
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/sn_chg_rest/v1
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Change Tasks
-    description: >-
-      Operations for managing tasks associated with change requests.
-  - name: Emergency Changes
-    description: >-
-      Operations for managing emergency change requests that require expedited
-      processing.
-  - name: Normal Changes
-    description: >-
-      Operations for managing normal change requests that require full review
-      and approval before implementation.
-  - name: Standard Changes
-    description: >-
-      Operations for managing standard change requests based on pre-approved
-      templates.
+- name: Change Tasks
+  description: >-
+    Operations for managing tasks associated with change requests.
+- name: Emergency Changes
+  description: >-
+    Operations for managing emergency change requests that require expedited
+    processing.
+- name: Normal Changes
+  description: >-
+    Operations for managing normal change requests that require full review
+    and approval before implementation.
+- name: Standard Changes
+  description: >-
+    Operations for managing standard change requests based on pre-approved
+    templates.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /change/normal:
     get:
       operationId: listNormalChanges
-      summary: ServiceNow List normal change requests
+      summary: Servicenow List Normal Change Requests
       description: >-
         Retrieves a list of normal change requests. Supports query filtering,
         field selection, and pagination.
       tags:
-        - Normal Changes
+      - Normal Changes
       parameters:
-        - $ref: '#/components/parameters/sysparmQuery'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmLimit'
-        - $ref: '#/components/parameters/sysparmOffset'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmQuery'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       responses:
         '200':
           description: Successful response returning normal change requests.
@@ -69,29 +69,88 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Listnormalchanges200Example:
+                  summary: Default listNormalChanges 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listnormalchanges401Example:
+                  summary: Default listNormalChanges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createNormalChange
-      summary: ServiceNow Create a normal change request
+      summary: Servicenow Create a Normal Change Request
       description: >-
         Creates a new normal change request. Normal changes require full
         assessment and approval before implementation.
       tags:
-        - Normal Changes
+      - Normal Changes
       parameters:
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangeRequestInput'
+            examples:
+              CreatenormalchangeRequestExample:
+                summary: Default createNormalChange request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  priority: '1'
+                  risk: example_value
+                  impact: example_value
+                  category: example_value
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  requested_by: example_value
+                  start_date: '2026-01-15T10:30:00Z'
+                  end_date: '2026-01-15T10:30:00Z'
+                  cmdb_ci: example_value
+                  justification: example_value
+                  implementation_plan: example_value
+                  backout_plan: example_value
+                  test_plan: example_value
       responses:
         '201':
           description: Normal change request successfully created.
@@ -102,30 +161,76 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Createnormalchange201Example:
+                  summary: Default createNormalChange 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '400':
           description: Bad request. The request body contains invalid data.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createnormalchange400Example:
+                  summary: Default createNormalChange 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createnormalchange401Example:
+                  summary: Default createNormalChange 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /change/normal/{sys_id}:
     get:
       operationId: getNormalChange
-      summary: ServiceNow Retrieve a normal change request
+      summary: Servicenow Retrieve a Normal Change Request
       description: >-
         Retrieves a specific normal change request by its sys_id.
       tags:
-        - Normal Changes
+      - Normal Changes
       parameters:
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       responses:
         '200':
           description: Successful response returning the change request.
@@ -136,29 +241,88 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Getnormalchange200Example:
+                  summary: Default getNormalChange 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '404':
           description: Change request not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getnormalchange404Example:
+                  summary: Default getNormalChange 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateNormalChange
-      summary: ServiceNow Update a normal change request
+      summary: Servicenow Update a Normal Change Request
       description: >-
         Updates fields on an existing normal change request.
       tags:
-        - Normal Changes
+      - Normal Changes
       parameters:
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangeRequestInput'
+            examples:
+              UpdatenormalchangeRequestExample:
+                summary: Default updateNormalChange request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  priority: '1'
+                  risk: example_value
+                  impact: example_value
+                  category: example_value
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  requested_by: example_value
+                  start_date: '2026-01-15T10:30:00Z'
+                  end_date: '2026-01-15T10:30:00Z'
+                  cmdb_ci: example_value
+                  justification: example_value
+                  implementation_plan: example_value
+                  backout_plan: example_value
+                  test_plan: example_value
       responses:
         '200':
           description: Change request successfully updated.
@@ -169,33 +333,79 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Updatenormalchange200Example:
+                  summary: Default updateNormalChange 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '400':
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updatenormalchange400Example:
+                  summary: Default updateNormalChange 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Change request not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updatenormalchange404Example:
+                  summary: Default updateNormalChange 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /change/standard:
     get:
       operationId: listStandardChanges
-      summary: ServiceNow List standard change requests
+      summary: Servicenow List Standard Change Requests
       description: >-
         Retrieves a list of standard change requests. Standard changes are
         created from pre-approved templates.
       tags:
-        - Standard Changes
+      - Standard Changes
       parameters:
-        - $ref: '#/components/parameters/sysparmQuery'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmLimit'
-        - $ref: '#/components/parameters/sysparmOffset'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmQuery'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       responses:
         '200':
           description: Successful response returning standard change requests.
@@ -208,37 +418,97 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Liststandardchanges200Example:
+                  summary: Default listStandardChanges 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Liststandardchanges401Example:
+                  summary: Default listStandardChanges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /change/standard/{standard_change_template_id}:
     post:
       operationId: createStandardChange
-      summary: ServiceNow Create a standard change from a template
+      summary: Servicenow Create a Standard Change From a Template
       description: >-
         Creates a new standard change request based on a pre-approved standard
         change template. The template sys_id determines the default values
         and pre-configured approvals.
       tags:
-        - Standard Changes
+      - Standard Changes
       parameters:
-        - name: standard_change_template_id
-          in: path
-          required: true
-          description: >-
-            The sys_id of the standard change template to use for creating the
-            change request.
-          schema:
-            type: string
+      - name: standard_change_template_id
+        in: path
+        required: true
+        description: >-
+          The sys_id of the standard change template to use for creating the
+          change request.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: false
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangeRequestInput'
+            examples:
+              CreatestandardchangeRequestExample:
+                summary: Default createStandardChange request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  priority: '1'
+                  risk: example_value
+                  impact: example_value
+                  category: example_value
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  requested_by: example_value
+                  start_date: '2026-01-15T10:30:00Z'
+                  end_date: '2026-01-15T10:30:00Z'
+                  cmdb_ci: example_value
+                  justification: example_value
+                  implementation_plan: example_value
+                  backout_plan: example_value
+                  test_plan: example_value
       responses:
         '201':
           description: Standard change request successfully created.
@@ -249,27 +519,65 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Createstandardchange201Example:
+                  summary: Default createStandardChange 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '400':
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createstandardchange400Example:
+                  summary: Default createStandardChange 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /change/emergency:
     get:
       operationId: listEmergencyChanges
-      summary: ServiceNow List emergency change requests
+      summary: Servicenow List Emergency Change Requests
       description: >-
         Retrieves a list of emergency change requests. Emergency changes
         bypass normal approval processes for urgent situations.
       tags:
-        - Emergency Changes
+      - Emergency Changes
       parameters:
-        - $ref: '#/components/parameters/sysparmQuery'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmLimit'
-        - $ref: '#/components/parameters/sysparmOffset'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmQuery'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
       responses:
         '200':
           description: Successful response returning emergency change requests.
@@ -282,26 +590,85 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Listemergencychanges200Example:
+                  summary: Default listEmergencyChanges 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listemergencychanges401Example:
+                  summary: Default listEmergencyChanges 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createEmergencyChange
-      summary: ServiceNow Create an emergency change request
+      summary: Servicenow Create an Emergency Change Request
       description: >-
         Creates a new emergency change request for urgent changes that cannot
         wait for standard approval processes.
       tags:
-        - Emergency Changes
+      - Emergency Changes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangeRequestInput'
+            examples:
+              CreateemergencychangeRequestExample:
+                summary: Default createEmergencyChange request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  priority: '1'
+                  risk: example_value
+                  impact: example_value
+                  category: example_value
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  requested_by: example_value
+                  start_date: '2026-01-15T10:30:00Z'
+                  end_date: '2026-01-15T10:30:00Z'
+                  cmdb_ci: example_value
+                  justification: example_value
+                  implementation_plan: example_value
+                  backout_plan: example_value
+                  test_plan: example_value
       responses:
         '201':
           description: Emergency change request successfully created.
@@ -312,25 +679,63 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeRequest'
+              examples:
+                Createemergencychange201Example:
+                  summary: Default createEmergencyChange 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      description: A sample description.
+                      type: normal
+                      state: example_value
+                      priority: '1'
+                      risk: example_value
+                      impact: example_value
+                      category: example_value
+                      assigned_to: example_value
+                      assignment_group: example_value
+                      requested_by: example_value
+                      start_date: '2026-01-15T10:30:00Z'
+                      end_date: '2026-01-15T10:30:00Z'
+                      cmdb_ci: example_value
+                      close_code: example_value
+                      close_notes: example_value
+                      approval: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_on: '2026-01-15T10:30:00Z'
         '400':
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createemergencychange400Example:
+                  summary: Default createEmergencyChange 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /change/{sys_id}/task:
     get:
       operationId: listChangeTasks
-      summary: ServiceNow List tasks for a change request
+      summary: Servicenow List Tasks for a Change Request
       description: >-
         Retrieves all tasks associated with the specified change request.
       tags:
-        - Change Tasks
+      - Change Tasks
       parameters:
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmLimit'
-        - $ref: '#/components/parameters/sysparmOffset'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
       responses:
         '200':
           description: Successful response returning change tasks.
@@ -343,27 +748,63 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ChangeTask'
+              examples:
+                Listchangetasks200Example:
+                  summary: Default listChangeTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      state: example_value
+                      assigned_to: example_value
+                      change_request: example_value
+                      planned_start_date: '2026-01-15T10:30:00Z'
+                      planned_end_date: '2026-01-15T10:30:00Z'
         '404':
           description: Change request not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listchangetasks404Example:
+                  summary: Default listChangeTasks 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createChangeTask
-      summary: ServiceNow Create a task for a change request
+      summary: Servicenow Create a Task for a Change Request
       description: >-
         Creates a new task associated with the specified change request.
       tags:
-        - Change Tasks
+      - Change Tasks
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangeTaskInput'
+            examples:
+              CreatechangetaskRequestExample:
+                summary: Default createChangeTask request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  planned_start_date: '2026-01-15T10:30:00Z'
+                  planned_end_date: '2026-01-15T10:30:00Z'
       responses:
         '201':
           description: Change task successfully created.
@@ -374,12 +815,37 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/ChangeTask'
+              examples:
+                Createchangetask201Example:
+                  summary: Default createChangeTask 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      state: example_value
+                      assigned_to: example_value
+                      change_request: example_value
+                      planned_start_date: '2026-01-15T10:30:00Z'
+                      planned_end_date: '2026-01-15T10:30:00Z'
         '400':
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createchangetask400Example:
+                  summary: Default createChangeTask 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -445,9 +911,9 @@ components:
       schema:
         type: string
         enum:
-          - 'true'
-          - 'false'
-          - all
+        - 'true'
+        - 'false'
+        - all
         default: 'false'
   schemas:
     ChangeRequest:
@@ -457,83 +923,104 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the change request.
+          example: '500123'
         number:
           type: string
           description: The human-readable change request number.
+          example: example_value
         short_description:
           type: string
           description: A brief summary of the change.
+          example: example_value
         description:
           type: string
           description: A detailed description of the change and its purpose.
+          example: A sample description.
         type:
           type: string
           description: >-
             The change type: normal, standard, or emergency.
           enum:
-            - normal
-            - standard
-            - emergency
+          - normal
+          - standard
+          - emergency
+          example: normal
         state:
           type: string
           description: >-
             The current state of the change request in its lifecycle.
+          example: example_value
         priority:
           type: string
           description: >-
             The priority level of the change request.
           enum:
-            - '1'
-            - '2'
-            - '3'
-            - '4'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: '1'
         risk:
           type: string
           description: The risk level assessed for this change.
+          example: example_value
         impact:
           type: string
           description: The impact level of this change.
+          example: example_value
         category:
           type: string
           description: The category of the change.
+          example: example_value
         assigned_to:
           type: string
           description: The sys_id of the user assigned to implement the change.
+          example: example_value
         assignment_group:
           type: string
           description: The sys_id of the group responsible for the change.
+          example: example_value
         requested_by:
           type: string
           description: The sys_id of the user who requested the change.
+          example: example_value
         start_date:
           type: string
           format: date-time
           description: The planned start date and time for the change.
+          example: '2026-01-15T10:30:00Z'
         end_date:
           type: string
           format: date-time
           description: The planned end date and time for the change.
+          example: '2026-01-15T10:30:00Z'
         cmdb_ci:
           type: string
           description: >-
             The sys_id of the configuration item affected by this change.
+          example: example_value
         close_code:
           type: string
           description: The close code indicating how the change was resolved.
+          example: example_value
         close_notes:
           type: string
           description: Notes recorded when closing the change request.
+          example: example_value
         approval:
           type: string
           description: The current approval status.
+          example: example_value
         sys_created_on:
           type: string
           format: date-time
           description: The date and time the change request was created.
+          example: '2026-01-15T10:30:00Z'
         sys_updated_on:
           type: string
           format: date-time
           description: The date and time the change request was last updated.
+          example: '2026-01-15T10:30:00Z'
     ChangeRequestInput:
       type: object
       description: Fields for creating or updating a change request.
@@ -541,58 +1028,74 @@ components:
         short_description:
           type: string
           description: A brief summary of the change.
+          example: example_value
         description:
           type: string
           description: A detailed description of the change.
+          example: A sample description.
         priority:
           type: string
           description: The priority level.
           enum:
-            - '1'
-            - '2'
-            - '3'
-            - '4'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: '1'
         risk:
           type: string
           description: The risk level.
+          example: example_value
         impact:
           type: string
           description: The impact level.
+          example: example_value
         category:
           type: string
           description: The category of the change.
+          example: example_value
         assigned_to:
           type: string
           description: The sys_id of the assigned user.
+          example: example_value
         assignment_group:
           type: string
           description: The sys_id of the assignment group.
+          example: example_value
         requested_by:
           type: string
           description: The sys_id of the requesting user.
+          example: example_value
         start_date:
           type: string
           format: date-time
           description: The planned start date and time.
+          example: '2026-01-15T10:30:00Z'
         end_date:
           type: string
           format: date-time
           description: The planned end date and time.
+          example: '2026-01-15T10:30:00Z'
         cmdb_ci:
           type: string
           description: The sys_id of the affected configuration item.
+          example: example_value
         justification:
           type: string
           description: The business justification for the change.
+          example: example_value
         implementation_plan:
           type: string
           description: The plan for implementing the change.
+          example: example_value
         backout_plan:
           type: string
           description: The plan for reverting the change if needed.
+          example: example_value
         test_plan:
           type: string
           description: The plan for testing the change.
+          example: example_value
     ChangeTask:
       type: object
       description: A task associated with a change request.
@@ -600,29 +1103,37 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the change task.
+          example: '500123'
         number:
           type: string
           description: The human-readable task number.
+          example: example_value
         short_description:
           type: string
           description: A brief summary of the task.
+          example: example_value
         state:
           type: string
           description: The current state of the task.
+          example: example_value
         assigned_to:
           type: string
           description: The sys_id of the assigned user.
+          example: example_value
         change_request:
           type: string
           description: The sys_id of the parent change request.
+          example: example_value
         planned_start_date:
           type: string
           format: date-time
           description: The planned start date for the task.
+          example: '2026-01-15T10:30:00Z'
         planned_end_date:
           type: string
           format: date-time
           description: The planned end date for the task.
+          example: '2026-01-15T10:30:00Z'
     ChangeTaskInput:
       type: object
       description: Fields for creating a change task.
@@ -630,23 +1141,29 @@ components:
         short_description:
           type: string
           description: A brief summary of the task.
+          example: example_value
         description:
           type: string
           description: A detailed description of the task.
+          example: A sample description.
         assigned_to:
           type: string
           description: The sys_id of the assigned user.
+          example: example_value
         assignment_group:
           type: string
           description: The sys_id of the assignment group.
+          example: example_value
         planned_start_date:
           type: string
           format: date-time
           description: The planned start date.
+          example: '2026-01-15T10:30:00Z'
         planned_end_date:
           type: string
           format: date-time
           description: The planned end date.
+          example: '2026-01-15T10:30:00Z'
     Error:
       type: object
       properties:
@@ -659,3 +1176,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

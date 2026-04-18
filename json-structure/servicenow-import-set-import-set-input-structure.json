@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "description": "The field name-value pairs corresponding to columns in the import set staging table.",
+  "name": "ImportSetInput",
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

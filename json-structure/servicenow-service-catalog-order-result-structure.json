@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "The result of a submitted catalog order.",
+  "name": "OrderResult",
+  "properties": {
+    "request_number": {
+      "type": "string",
+      "description": "The generated request number."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "The sys_id of the request record."
+    },
+    "table": {
+      "type": "string",
+      "description": "The table name where the request is stored."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

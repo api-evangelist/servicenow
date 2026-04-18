@@ -16,56 +16,58 @@ externalDocs:
   description: ServiceNow Attachment API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_AttachmentAPI.html
 servers:
-  - url: https://{instance}.service-now.com/api/now
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/now
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Attachments
-    description: >-
-      Operations for uploading, retrieving, listing, and deleting file
-      attachments on ServiceNow records.
+- name: Attachments
+  description: >-
+    Operations for uploading, retrieving, listing, and deleting file
+    attachments on ServiceNow records.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /attachment:
     get:
       operationId: listAttachments
-      summary: ServiceNow List attachments
+      summary: Servicenow List Attachments
       description: >-
         Retrieves metadata for file attachments. Supports query filtering by
         table name, record sys_id, file name, and other attachment attributes.
       tags:
-        - Attachments
+      - Attachments
       parameters:
-        - name: sysparm_query
-          in: query
-          required: false
-          description: >-
-            Encoded query string to filter attachments. Common fields include
-            table_name, table_sys_id, file_name, and content_type.
-          schema:
-            type: string
-          example: 'table_name=incident^table_sys_id=abc123def456'
-        - name: sysparm_limit
-          in: query
-          required: false
-          description: Maximum number of attachment records to return.
-          schema:
-            type: integer
-            minimum: 1
-            default: 10000
-        - name: sysparm_offset
-          in: query
-          required: false
-          description: Starting record index for pagination.
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
+      - name: sysparm_query
+        in: query
+        required: false
+        description: >-
+          Encoded query string to filter attachments. Common fields include
+          table_name, table_sys_id, file_name, and content_type.
+        schema:
+          type: string
+        example: 'table_name=incident^table_sys_id=abc123def456'
+      - name: sysparm_limit
+        in: query
+        required: false
+        description: Maximum number of attachment records to return.
+        schema:
+          type: integer
+          minimum: 1
+          default: 10000
+        example: 10
+      - name: sysparm_offset
+        in: query
+        required: false
+        description: Starting record index for pagination.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
       responses:
         '200':
           description: >-
@@ -79,23 +81,56 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Attachment'
+              examples:
+                Listattachments200Example:
+                  summary: Default listAttachments 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      file_name: example_value
+                      table_name: example_value
+                      table_sys_id: '500123'
+                      content_type: example_value
+                      size_bytes: 10
+                      size_compressed: 10
+                      download_link: https://www.example.com
+                      image_height: 10
+                      image_width: 10
+                      hash: example_value
+                      state: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listattachments401Example:
+                  summary: Default listAttachments 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /attachment/{sys_id}:
     get:
       operationId: getAttachment
-      summary: ServiceNow Retrieve attachment metadata
+      summary: Servicenow Retrieve Attachment Metadata
       description: >-
         Retrieves metadata for a single attachment by its sys_id. Does not
         return the binary file content; use the file download endpoint instead.
       tags:
-        - Attachments
+      - Attachments
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '200':
           description: Successful response returning attachment metadata.
@@ -106,28 +141,69 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Attachment'
+              examples:
+                Getattachment200Example:
+                  summary: Default getAttachment 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      file_name: example_value
+                      table_name: example_value
+                      table_sys_id: '500123'
+                      content_type: example_value
+                      size_bytes: 10
+                      size_compressed: 10
+                      download_link: https://www.example.com
+                      image_height: 10
+                      image_width: 10
+                      hash: example_value
+                      state: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getattachment401Example:
+                  summary: Default getAttachment 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Attachment not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getattachment404Example:
+                  summary: Default getAttachment 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAttachment
-      summary: ServiceNow Delete an attachment
+      summary: Servicenow Delete an Attachment
       description: >-
         Deletes an attachment and its associated file content from the
         ServiceNow instance.
       tags:
-        - Attachments
+      - Attachments
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '204':
           description: Attachment successfully deleted. No content returned.
@@ -137,23 +213,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Deleteattachment401Example:
+                  summary: Default deleteAttachment 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Attachment not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Deleteattachment404Example:
+                  summary: Default deleteAttachment 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /attachment/{sys_id}/file:
     get:
       operationId: downloadAttachmentFile
-      summary: ServiceNow Download attachment file content
+      summary: Servicenow Download Attachment File Content
       description: >-
         Downloads the binary file content of an attachment. The response
         Content-Type header reflects the original file type.
       tags:
-        - Attachments
+      - Attachments
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '200':
           description: Successful response returning the binary file content.
@@ -162,50 +257,75 @@ paths:
               schema:
                 type: string
                 format: binary
+              examples:
+                Downloadattachmentfile200Example:
+                  summary: Default downloadAttachmentFile 200 response
+                  x-microcks-default: true
+                  value: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Downloadattachmentfile401Example:
+                  summary: Default downloadAttachmentFile 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Attachment not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Downloadattachmentfile404Example:
+                  summary: Default downloadAttachmentFile 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /attachment/file:
     post:
       operationId: uploadAttachmentBinary
-      summary: ServiceNow Upload a file attachment via binary stream
+      summary: Servicenow Upload a File Attachment via Binary Stream
       description: >-
         Uploads a file as a binary stream and attaches it to the specified
         table record. The Content-Type header should match the actual file
         type being uploaded.
       tags:
-        - Attachments
+      - Attachments
       parameters:
-        - name: table_name
-          in: query
-          required: true
-          description: >-
-            The name of the table to which the file is attached.
-          schema:
-            type: string
-          example: incident
-        - name: table_sys_id
-          in: query
-          required: true
-          description: The sys_id of the record to which the file is attached.
-          schema:
-            type: string
-        - name: file_name
-          in: query
-          required: true
-          description: The name of the file including its extension.
-          schema:
-            type: string
-          example: screenshot.png
+      - name: table_name
+        in: query
+        required: true
+        description: >-
+          The name of the table to which the file is attached.
+        schema:
+          type: string
+        example: incident
+      - name: table_sys_id
+        in: query
+        required: true
+        description: The sys_id of the record to which the file is attached.
+        schema:
+          type: string
+        example: '500123'
+      - name: file_name
+        in: query
+        required: true
+        description: The name of the file including its extension.
+        schema:
+          type: string
+        example: screenshot.png
       requestBody:
         required: true
         content:
@@ -213,6 +333,11 @@ paths:
             schema:
               type: string
               format: binary
+            examples:
+              UploadattachmentbinaryRequestExample:
+                summary: Default uploadAttachmentBinary request
+                x-microcks-default: true
+                value: example_value
       responses:
         '201':
           description: File successfully uploaded and attached.
@@ -223,28 +348,69 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Attachment'
+              examples:
+                Uploadattachmentbinary201Example:
+                  summary: Default uploadAttachmentBinary 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      file_name: example_value
+                      table_name: example_value
+                      table_sys_id: '500123'
+                      content_type: example_value
+                      size_bytes: 10
+                      size_compressed: 10
+                      download_link: https://www.example.com
+                      image_height: 10
+                      image_width: 10
+                      hash: example_value
+                      state: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
         '400':
           description: Bad request. Required parameters are missing.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Uploadattachmentbinary400Example:
+                  summary: Default uploadAttachmentBinary 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Uploadattachmentbinary401Example:
+                  summary: Default uploadAttachmentBinary 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /attachment/upload:
     post:
       operationId: uploadAttachmentMultipart
-      summary: ServiceNow Upload a file attachment via multipart form data
+      summary: Servicenow Upload a File Attachment via Multipart Form Data
       description: >-
         Uploads a file using multipart form-data encoding and attaches it to
         the specified table record. This method is suitable for web browser
         and form-based uploads.
       tags:
-        - Attachments
+      - Attachments
       requestBody:
         required: true
         content:
@@ -252,9 +418,9 @@ paths:
             schema:
               type: object
               required:
-                - table_name
-                - table_sys_id
-                - uploadFile
+              - table_name
+              - table_sys_id
+              - uploadFile
               properties:
                 table_name:
                   type: string
@@ -267,6 +433,14 @@ paths:
                   type: string
                   format: binary
                   description: The file to upload.
+            examples:
+              UploadattachmentmultipartRequestExample:
+                summary: Default uploadAttachmentMultipart request
+                x-microcks-default: true
+                value:
+                  table_name: example_value
+                  table_sys_id: '500123'
+                  uploadFile: example_value
       responses:
         '201':
           description: File successfully uploaded and attached.
@@ -277,18 +451,59 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Attachment'
+              examples:
+                Uploadattachmentmultipart201Example:
+                  summary: Default uploadAttachmentMultipart 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      file_name: example_value
+                      table_name: example_value
+                      table_sys_id: '500123'
+                      content_type: example_value
+                      size_bytes: 10
+                      size_compressed: 10
+                      download_link: https://www.example.com
+                      image_height: 10
+                      image_width: 10
+                      hash: example_value
+                      state: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
         '400':
           description: Bad request. Required fields are missing from the form.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Uploadattachmentmultipart400Example:
+                  summary: Default uploadAttachmentMultipart 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Uploadattachmentmultipart401Example:
+                  summary: Default uploadAttachmentMultipart 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -321,54 +536,70 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the attachment record.
+          example: '500123'
         file_name:
           type: string
           description: The name of the attached file.
+          example: example_value
         table_name:
           type: string
           description: The table to which the attachment belongs.
+          example: example_value
         table_sys_id:
           type: string
           description: The sys_id of the record to which the file is attached.
+          example: '500123'
         content_type:
           type: string
           description: The MIME type of the attached file.
+          example: example_value
         size_bytes:
           type: integer
           description: The size of the attached file in bytes.
+          example: 10
         size_compressed:
           type: integer
           description: The compressed size of the attached file in bytes.
+          example: 10
         download_link:
           type: string
           format: uri
           description: The URL to download the attachment file content.
+          example: https://www.example.com
         image_height:
           type: integer
           description: The height in pixels if the attachment is an image.
+          example: 10
         image_width:
           type: integer
           description: The width in pixels if the attachment is an image.
+          example: 10
         hash:
           type: string
           description: The MD5 hash of the file content.
+          example: example_value
         state:
           type: string
           description: The state of the attachment processing.
+          example: example_value
         sys_created_on:
           type: string
           format: date-time
           description: The date and time the attachment was created.
+          example: '2026-01-15T10:30:00Z'
         sys_created_by:
           type: string
           description: The user who uploaded the attachment.
+          example: example_value
         sys_updated_on:
           type: string
           format: date-time
           description: The date and time the attachment was last modified.
+          example: '2026-01-15T10:30:00Z'
         sys_updated_by:
           type: string
           description: The user who last modified the attachment record.
+          example: example_value
     Error:
       type: object
       properties:
@@ -381,3 +612,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

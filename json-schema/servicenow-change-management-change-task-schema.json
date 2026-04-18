@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "description": "A task associated with a change request.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the change task.",
+      "example": "500123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The human-readable task number.",
+      "example": "example_value"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task.",
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the task.",
+      "example": "example_value"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user.",
+      "example": "example_value"
+    },
+    "change_request": {
+      "type": "string",
+      "description": "The sys_id of the parent change request.",
+      "example": "example_value"
+    },
+    "planned_start_date": {
+      "type": "string",
+      "description": "The planned start date for the task.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "planned_end_date": {
+      "type": "string",
+      "description": "The planned end date for the task.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeTask"
+}

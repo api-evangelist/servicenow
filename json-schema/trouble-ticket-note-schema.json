@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "The type of note (always 'comments' in responses)",
+      "example": "example_value"
+    },
+    "text": {
+      "type": "string",
+      "description": "The comment text",
+      "example": "example_value"
+    },
+    "date": {
+      "type": "string",
+      "description": "The date the comment was created",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "author": {
+      "type": "string",
+      "description": "The name of the user who wrote the comment",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Note"
+}

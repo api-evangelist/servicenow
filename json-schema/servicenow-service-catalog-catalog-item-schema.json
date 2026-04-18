@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "A catalog item summary.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog item.",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the item.",
+      "example": "Example Title"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the item.",
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "The category sys_id.",
+      "example": "example_value"
+    },
+    "price": {
+      "type": "string",
+      "description": "The displayed price of the item.",
+      "example": "example_value"
+    },
+    "picture": {
+      "type": "string",
+      "description": "URL to the item picture.",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CatalogItem"
+}

@@ -1,0 +1,8 @@
+{
+  "short_description": "example_value",
+  "description": "A sample description.",
+  "assigned_to": "example_value",
+  "assignment_group": "example_value",
+  "planned_start_date": "2026-01-15T10:30:00Z",
+  "planned_end_date": "2026-01-15T10:30:00Z"
+}

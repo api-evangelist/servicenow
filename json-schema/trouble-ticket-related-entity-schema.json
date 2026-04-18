@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "This value is always relatedEntity",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "Sys_id of the impacted item or service",
+      "example": "abc123"
+    },
+    "href": {
+      "type": "string",
+      "description": "Returns an empty string",
+      "example": "example_value"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the impacted item or service",
+      "example": "Example Title"
+    },
+    "role": {
+      "type": "string",
+      "description": "Description of the impacted item or service",
+      "example": "example_value"
+    },
+    "@referredType": {
+      "type": "string",
+      "description": "Type of item or service",
+      "example": "asset",
+      "enum": [
+        "asset",
+        "product",
+        "product_inventory",
+        "cmdb_ci",
+        "cmdb_ci_service"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RelatedEntity"
+}

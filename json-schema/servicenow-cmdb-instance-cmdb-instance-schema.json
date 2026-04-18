@@ -1,0 +1,148 @@
+{
+  "type": "object",
+  "description": "A full CMDB configuration item record. Fields vary by CI class but common attributes are included below.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the configuration item.",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the configuration item.",
+      "example": "Example Title"
+    },
+    "sys_class_name": {
+      "type": "string",
+      "description": "The CMDB class name for this CI.",
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the CI.",
+      "example": "example_value"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "The subcategory of the CI.",
+      "example": "example_value"
+    },
+    "operational_status": {
+      "type": "string",
+      "description": "The operational status of the CI.",
+      "example": "1",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "install_status": {
+      "type": "string",
+      "description": "The installation status of the CI.",
+      "example": "example_value"
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "The serial number of the hardware asset.",
+      "example": "example_value"
+    },
+    "asset_tag": {
+      "type": "string",
+      "description": "The asset tag identifier.",
+      "example": "example_value"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address of the CI.",
+      "example": "example_value"
+    },
+    "mac_address": {
+      "type": "string",
+      "description": "The MAC address of the CI.",
+      "example": "example_value"
+    },
+    "dns_domain": {
+      "type": "string",
+      "description": "The DNS domain of the CI.",
+      "example": "example_value"
+    },
+    "fqdn": {
+      "type": "string",
+      "description": "The fully qualified domain name.",
+      "example": "example_value"
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system.",
+      "example": "example_value"
+    },
+    "os_version": {
+      "type": "string",
+      "description": "The operating system version.",
+      "example": "example_value"
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "The sys_id of the manufacturer.",
+      "example": "example_value"
+    },
+    "model_id": {
+      "type": "string",
+      "description": "The sys_id of the model.",
+      "example": "500123"
+    },
+    "location": {
+      "type": "string",
+      "description": "The sys_id of the CI location.",
+      "example": "example_value"
+    },
+    "department": {
+      "type": "string",
+      "description": "The sys_id of the department.",
+      "example": "example_value"
+    },
+    "company": {
+      "type": "string",
+      "description": "The sys_id of the owning company.",
+      "example": "example_value"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user.",
+      "example": "example_value"
+    },
+    "managed_by": {
+      "type": "string",
+      "description": "The sys_id of the managing user.",
+      "example": "example_value"
+    },
+    "owned_by": {
+      "type": "string",
+      "description": "The sys_id of the owner.",
+      "example": "example_value"
+    },
+    "support_group": {
+      "type": "string",
+      "description": "The sys_id of the support group.",
+      "example": "example_value"
+    },
+    "sys_created_on": {
+      "type": "string",
+      "description": "The date and time when the CI was created.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "description": "The date and time when the CI was last updated.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CmdbInstance"
+}

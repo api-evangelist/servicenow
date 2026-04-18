@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "description": "The result of processing an import set record including the transformation outcome.",
+  "properties": {
+    "transform_map": {
+      "type": "string",
+      "description": "The name of the transform map used to process the record.",
+      "example": "example_value"
+    },
+    "table": {
+      "type": "string",
+      "description": "The target table into which the record was transformed.",
+      "example": "example_value"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the transform map.",
+      "example": "example_value"
+    },
+    "display_value": {
+      "type": "string",
+      "description": "The display value of the target record created or updated.",
+      "example": "example_value"
+    },
+    "record_link": {
+      "type": "string",
+      "description": "A link to the target record in ServiceNow.",
+      "format": "uri",
+      "example": "https://www.example.com"
+    },
+    "status": {
+      "type": "string",
+      "description": "The transformation status. Common values include inserted, updated, error, and ignored.",
+      "example": "inserted",
+      "enum": [
+        "inserted",
+        "updated",
+        "error",
+        "ignored"
+      ]
+    },
+    "status_message": {
+      "type": "string",
+      "description": "A descriptive message about the transformation result, especially useful when the status is error.",
+      "example": "example_value"
+    },
+    "sys_id": {
+      "type": "string",
+      "description": "The sys_id of the import set row record in the staging table.",
+      "example": "500123"
+    },
+    "target_sys_id": {
+      "type": "string",
+      "description": "The sys_id of the record created or updated in the target table.",
+      "example": "500123"
+    },
+    "import_set": {
+      "type": "string",
+      "description": "The sys_id of the parent import set.",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ImportSetResult"
+}

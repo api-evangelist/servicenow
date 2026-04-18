@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "ImportSetResult": {
+      "@id": "ns:ImportSetResult",
+      "@context": {
+        "transform_map": {
+          "@id": "ns:transform_map",
+          "@type": "xsd:string"
+        },
+        "table": {
+          "@id": "ns:table",
+          "@type": "xsd:string"
+        },
+        "display_name": {
+          "@id": "ns:display_name",
+          "@type": "xsd:string"
+        },
+        "display_value": {
+          "@id": "ns:display_value",
+          "@type": "xsd:string"
+        },
+        "record_link": {
+          "@id": "ns:record_link",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "ns:status",
+          "@type": "xsd:string"
+        },
+        "status_message": {
+          "@id": "ns:status_message",
+          "@type": "xsd:string"
+        },
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "target_sys_id": {
+          "@id": "ns:target_sys_id",
+          "@type": "xsd:string"
+        },
+        "import_set": {
+          "@id": "ns:import_set",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

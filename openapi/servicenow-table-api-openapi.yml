@@ -17,44 +17,44 @@ externalDocs:
   description: ServiceNow Table API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
 servers:
-  - url: https://{instance}.service-now.com/api/now
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/now
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Table Records
-    description: >-
-      Operations for creating, reading, updating, and deleting records in
-      ServiceNow tables.
+- name: Table Records
+  description: >-
+    Operations for creating, reading, updating, and deleting records in
+    ServiceNow tables.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /table/{tableName}:
     get:
       operationId: listRecords
-      summary: ServiceNow List records from a table
+      summary: Servicenow List Records From a Table
       description: >-
         Retrieves multiple records from the specified ServiceNow table. Supports
         encoded query filtering, field selection, pagination via limit and
         offset, and control over display values and link formatting.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysparmQuery'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmLimit'
-        - $ref: '#/components/parameters/sysparmOffset'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
-        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
-        - $ref: '#/components/parameters/sysparmSuppressPaginationHeader'
-        - $ref: '#/components/parameters/sysparmView'
-        - $ref: '#/components/parameters/sysparmQueryCategory'
-        - $ref: '#/components/parameters/sysparmQueryNoDomain'
-        - $ref: '#/components/parameters/sysparmNoCount'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysparmQuery'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+      - $ref: '#/components/parameters/sysparmSuppressPaginationHeader'
+      - $ref: '#/components/parameters/sysparmView'
+      - $ref: '#/components/parameters/sysparmQueryCategory'
+      - $ref: '#/components/parameters/sysparmQueryNoDomain'
+      - $ref: '#/components/parameters/sysparmNoCount'
       responses:
         '200':
           description: >-
@@ -69,12 +69,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Record'
+              examples:
+                Listrecords200Example:
+                  summary: Default listRecords 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_mod_count: 42
+                      sys_tags: example_value
+                      sys_class_name: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listrecords401Example:
+                  summary: Default listRecords 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '403':
           description: >-
             Forbidden. The authenticated user does not have access to the
@@ -83,28 +105,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listrecords403Example:
+                  summary: Default listRecords 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createRecord
-      summary: ServiceNow Create a record in a table
+      summary: Servicenow Create a Record in a Table
       description: >-
         Creates a new record in the specified ServiceNow table. The request body
         should contain field name-value pairs for the new record. Fields not
         included in the request body use their default values.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
-        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
-        - $ref: '#/components/parameters/sysparmView'
-        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+      - $ref: '#/components/parameters/sysparmView'
+      - $ref: '#/components/parameters/sysparmInputDisplayValue'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RecordInput'
+            examples:
+              CreaterecordRequestExample:
+                summary: Default createRecord request
+                x-microcks-default: true
+                value: {}
       responses:
         '201':
           description: Record successfully created.
@@ -115,34 +153,67 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Record'
+              examples:
+                Createrecord201Example:
+                  summary: Default createRecord 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_mod_count: 42
+                      sys_tags: example_value
+                      sys_class_name: example_value
         '400':
           description: Bad request. The request body contains invalid data.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createrecord400Example:
+                  summary: Default createRecord 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createrecord401Example:
+                  summary: Default createRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /table/{tableName}/{sys_id}:
     get:
       operationId: getRecord
-      summary: ServiceNow Retrieve a single record
+      summary: Servicenow Retrieve a Single Record
       description: >-
         Retrieves a single record from the specified table by its unique sys_id
         identifier. Supports field selection and display value formatting.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
-        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
-        - $ref: '#/components/parameters/sysparmView'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+      - $ref: '#/components/parameters/sysparmView'
       responses:
         '200':
           description: Successful response returning the requested record.
@@ -153,12 +224,34 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Record'
+              examples:
+                Getrecord200Example:
+                  summary: Default getRecord 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_mod_count: 42
+                      sys_tags: example_value
+                      sys_class_name: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getrecord401Example:
+                  summary: Default getRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: >-
             Not found. The specified record does not exist or the user does not
@@ -167,29 +260,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getrecord404Example:
+                  summary: Default getRecord 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateRecord
-      summary: ServiceNow Update a record
+      summary: Servicenow Update a Record
       description: >-
         Updates an existing record in the specified table. The request body
         should contain the fields to be updated. Fields not included in the
         request body are not modified.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
-        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
-        - $ref: '#/components/parameters/sysparmView'
-        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+      - $ref: '#/components/parameters/sysparmView'
+      - $ref: '#/components/parameters/sysparmInputDisplayValue'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RecordInput'
+            examples:
+              UpdaterecordRequestExample:
+                summary: Default updateRecord request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: Record successfully updated.
@@ -200,47 +309,93 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Record'
+              examples:
+                Updaterecord200Example:
+                  summary: Default updateRecord 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_mod_count: 42
+                      sys_tags: example_value
+                      sys_class_name: example_value
         '400':
           description: Bad request. The request body contains invalid data.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updaterecord400Example:
+                  summary: Default updateRecord 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updaterecord401Example:
+                  summary: Default updateRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Not found. The specified record does not exist.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updaterecord404Example:
+                  summary: Default updateRecord 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: patchRecord
-      summary: ServiceNow Patch a record
+      summary: Servicenow Patch a Record
       description: >-
         Partially updates an existing record in the specified table. Only the
         fields included in the request body are modified. This is functionally
         similar to PUT but follows the PATCH semantics for partial updates.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysId'
-        - $ref: '#/components/parameters/sysparmFields'
-        - $ref: '#/components/parameters/sysparmDisplayValue'
-        - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
-        - $ref: '#/components/parameters/sysparmView'
-        - $ref: '#/components/parameters/sysparmInputDisplayValue'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmDisplayValue'
+      - $ref: '#/components/parameters/sysparmExcludeReferenceLink'
+      - $ref: '#/components/parameters/sysparmView'
+      - $ref: '#/components/parameters/sysparmInputDisplayValue'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RecordInput'
+            examples:
+              PatchrecordRequestExample:
+                summary: Default patchRecord request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: Record successfully patched.
@@ -251,35 +406,76 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Record'
+              examples:
+                Patchrecord200Example:
+                  summary: Default patchRecord 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_created_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_mod_count: 42
+                      sys_tags: example_value
+                      sys_class_name: example_value
         '400':
           description: Bad request. The request body contains invalid data.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Patchrecord400Example:
+                  summary: Default patchRecord 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Patchrecord401Example:
+                  summary: Default patchRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Not found. The specified record does not exist.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Patchrecord404Example:
+                  summary: Default patchRecord 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteRecord
-      summary: ServiceNow Delete a record
+      summary: Servicenow Delete a Record
       description: >-
         Deletes a record from the specified table by its sys_id. This operation
         is permanent and cannot be undone through the API.
       tags:
-        - Table Records
+      - Table Records
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/tableName'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '204':
           description: Record successfully deleted. No content returned.
@@ -289,12 +485,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Deleterecord401Example:
+                  summary: Default deleteRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Not found. The specified record does not exist.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Deleterecord404Example:
+                  summary: Default deleteRecord 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -391,9 +606,9 @@ components:
       schema:
         type: string
         enum:
-          - 'true'
-          - 'false'
-          - all
+        - 'true'
+        - 'false'
+        - all
         default: 'false'
     sysparmExcludeReferenceLink:
       name: sysparm_exclude_reference_link
@@ -473,29 +688,37 @@ components:
         sys_id:
           type: string
           description: The unique 32-character system identifier for the record.
+          example: '500123'
         sys_created_on:
           type: string
           format: date-time
           description: The date and time when the record was created.
+          example: '2026-01-15T10:30:00Z'
         sys_created_by:
           type: string
           description: The user who created the record.
+          example: example_value
         sys_updated_on:
           type: string
           format: date-time
           description: The date and time when the record was last updated.
+          example: '2026-01-15T10:30:00Z'
         sys_updated_by:
           type: string
           description: The user who last updated the record.
+          example: example_value
         sys_mod_count:
           type: integer
           description: The number of times the record has been modified.
+          example: 42
         sys_tags:
           type: string
           description: System tags associated with the record.
+          example: example_value
         sys_class_name:
           type: string
           description: The table class name for the record.
+          example: example_value
       additionalProperties: true
     RecordInput:
       type: object
@@ -516,3 +739,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

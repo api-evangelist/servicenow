@@ -1,0 +1,135 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "CmdbInstanceSummary": {
+      "@id": "ns:CmdbInstanceSummary",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "CmdbInstance": {
+      "@id": "ns:CmdbInstance",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "sys_class_name": {
+          "@id": "ns:sys_class_name",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "subcategory": {
+          "@id": "ns:subcategory",
+          "@type": "xsd:string"
+        },
+        "operational_status": {
+          "@id": "ns:operational_status",
+          "@type": "xsd:string"
+        },
+        "install_status": {
+          "@id": "ns:install_status",
+          "@type": "xsd:string"
+        },
+        "serial_number": {
+          "@id": "ns:serial_number",
+          "@type": "xsd:string"
+        },
+        "asset_tag": {
+          "@id": "ns:asset_tag",
+          "@type": "xsd:string"
+        },
+        "ip_address": {
+          "@id": "ns:ip_address",
+          "@type": "xsd:string"
+        },
+        "mac_address": {
+          "@id": "ns:mac_address",
+          "@type": "xsd:string"
+        },
+        "dns_domain": {
+          "@id": "ns:dns_domain",
+          "@type": "xsd:string"
+        },
+        "fqdn": {
+          "@id": "ns:fqdn",
+          "@type": "xsd:string"
+        },
+        "os": {
+          "@id": "ns:os",
+          "@type": "xsd:string"
+        },
+        "os_version": {
+          "@id": "ns:os_version",
+          "@type": "xsd:string"
+        },
+        "manufacturer": {
+          "@id": "ns:manufacturer",
+          "@type": "xsd:string"
+        },
+        "model_id": {
+          "@id": "ns:model_id",
+          "@type": "xsd:string"
+        },
+        "location": {
+          "@id": "ns:location",
+          "@type": "xsd:string"
+        },
+        "department": {
+          "@id": "ns:department",
+          "@type": "xsd:string"
+        },
+        "company": {
+          "@id": "ns:company",
+          "@type": "xsd:string"
+        },
+        "assigned_to": {
+          "@id": "ns:assigned_to",
+          "@type": "xsd:string"
+        },
+        "managed_by": {
+          "@id": "ns:managed_by",
+          "@type": "xsd:string"
+        },
+        "owned_by": {
+          "@id": "ns:owned_by",
+          "@type": "xsd:string"
+        },
+        "support_group": {
+          "@id": "ns:support_group",
+          "@type": "xsd:string"
+        },
+        "sys_created_on": {
+          "@id": "ns:sys_created_on",
+          "@type": "xsd:string"
+        },
+        "sys_updated_on": {
+          "@id": "ns:sys_updated_on",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

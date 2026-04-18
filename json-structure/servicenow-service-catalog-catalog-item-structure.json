@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "A catalog item summary.",
+  "name": "CatalogItem",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog item."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the item."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the item."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category sys_id."
+    },
+    "price": {
+      "type": "string",
+      "description": "The displayed price of the item."
+    },
+    "picture": {
+      "type": "string",
+      "description": "URL to the item picture."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

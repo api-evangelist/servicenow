@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "object",
+      "example": "example_value",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "detail": {
+          "type": "string",
+          "description": "Detailed error information"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error"
+}

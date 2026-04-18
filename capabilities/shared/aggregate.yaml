@@ -1,0 +1,150 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Aggregate API"
+  description: "Computes aggregate statistics (count, sum, average, min, max) against records in any ServiceNow table with optional grouping and filtering."
+  tags:
+    - ServiceNow
+    - Aggregate
+    - Analytics
+    - Reporting
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-aggregate
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/now"
+      description: "ServiceNow Aggregate API for computing statistics on table records."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: aggregate-statistics
+          path: /stats
+          description: "Aggregate statistics operations on ServiceNow tables."
+          operations:
+            - name: get-aggregate-stats
+              method: GET
+              path: /{tableName}
+              description: "Computes aggregate statistics for records in the specified table."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table to compute statistics on."
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter records before aggregation."
+                - name: sysparm_count
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "When true, returns the count of matching records."
+                - name: sysparm_sum_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of numeric fields for sum calculation."
+                - name: sysparm_avg_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of numeric fields for average calculation."
+                - name: sysparm_min_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields for minimum value."
+                - name: sysparm_max_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields for maximum value."
+                - name: sysparm_group_by
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields to group results by."
+                - name: sysparm_order_by
+                  in: query
+                  type: string
+                  required: false
+                  description: "Field by which to order grouped results."
+                - name: sysparm_having
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter applied after aggregation to restrict groups."
+                - name: sysparm_display_value
+                  in: query
+                  type: string
+                  required: false
+                  description: "Controls whether display values or actual values are returned."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: servicenow-aggregate-api
+      resources:
+        - path: /v1/aggregate-stats/{tableName}
+          name: aggregate-statistics
+          description: "Compute aggregate statistics on ServiceNow table records."
+          operations:
+            - method: GET
+              name: get-aggregate-stats
+              description: "Retrieve aggregate statistics for a table."
+              call: "servicenow-aggregate.get-aggregate-stats"
+              with:
+                tableName: "rest.tableName"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_count: "rest.sysparm_count"
+                sysparm_sum_fields: "rest.sysparm_sum_fields"
+                sysparm_avg_fields: "rest.sysparm_avg_fields"
+                sysparm_min_fields: "rest.sysparm_min_fields"
+                sysparm_max_fields: "rest.sysparm_max_fields"
+                sysparm_group_by: "rest.sysparm_group_by"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9100
+      namespace: servicenow-aggregate-mcp
+      transport: http
+      tools:
+        - name: get-aggregate-stats
+          description: "Compute aggregate statistics (count, sum, avg, min, max) for records in a ServiceNow table."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-aggregate.get-aggregate-stats"
+          with:
+            tableName: "tools.tableName"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_count: "tools.sysparm_count"
+            sysparm_sum_fields: "tools.sysparm_sum_fields"
+            sysparm_avg_fields: "tools.sysparm_avg_fields"
+            sysparm_min_fields: "tools.sysparm_min_fields"
+            sysparm_max_fields: "tools.sysparm_max_fields"
+            sysparm_group_by: "tools.sysparm_group_by"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

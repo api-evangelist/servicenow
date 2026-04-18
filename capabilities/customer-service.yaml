@@ -1,0 +1,373 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Customer Service"
+  description: "Unified workflow for customer service operations combining contact management, service catalog browsing and ordering, and trouble ticket handling. Used by customer service agents and self-service portal integrations."
+  tags:
+    - ServiceNow
+    - Customer Service
+    - Service Catalog
+    - Contacts
+    - Self Service
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+      SERVICENOW_INSTANCE: SERVICENOW_INSTANCE
+
+capability:
+  consumes:
+    - import: servicenow-contact
+      location: ./shared/contact.yaml
+    - import: servicenow-service-catalog
+      location: ./shared/service-catalog.yaml
+    - import: servicenow-trouble-ticket
+      location: ./shared/trouble-ticket.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: servicenow-customer-service-api
+      description: "Unified REST API for ServiceNow customer service operations."
+      resources:
+        - path: /v1/contacts
+          name: contacts
+          description: "CSM contact management."
+          operations:
+            - method: GET
+              name: list-contacts
+              description: "List CSM contacts."
+              call: "servicenow-contact.list-contacts"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-contact
+              description: "Create a CSM contact."
+              call: "servicenow-contact.create-contact"
+              with:
+                first_name: "rest.first_name"
+                last_name: "rest.last_name"
+                email: "rest.email"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/contacts/{id}
+          name: contact-detail
+          description: "Single contact operations."
+          operations:
+            - method: GET
+              name: get-contact
+              description: "Get a specific contact."
+              call: "servicenow-contact.get-contact"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalogs
+          name: catalogs
+          description: "Service catalog browsing."
+          operations:
+            - method: GET
+              name: list-catalogs
+              description: "List service catalogs."
+              call: "servicenow-service-catalog.list-catalogs"
+              with:
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalog-items
+          name: catalog-items
+          description: "Catalog item browsing."
+          operations:
+            - method: GET
+              name: list-catalog-items
+              description: "List catalog items."
+              call: "servicenow-service-catalog.list-catalog-items"
+              with:
+                sysparm_catalog: "rest.sysparm_catalog"
+                sysparm_category: "rest.sysparm_category"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalog-items/{sys_id}
+          name: catalog-item-detail
+          description: "Single catalog item."
+          operations:
+            - method: GET
+              name: get-catalog-item
+              description: "Get catalog item details."
+              call: "servicenow-service-catalog.get-catalog-item"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/cart
+          name: cart
+          description: "Shopping cart."
+          operations:
+            - method: GET
+              name: get-cart
+              description: "Get cart contents."
+              call: "servicenow-service-catalog.get-cart"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: empty-cart
+              description: "Empty the cart."
+              call: "servicenow-service-catalog.empty-cart"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/trouble-tickets
+          name: trouble-tickets
+          description: "Trouble ticket operations."
+          operations:
+            - method: GET
+              name: list-trouble-tickets
+              description: "List trouble tickets."
+              call: "servicenow-trouble-ticket.list-trouble-tickets"
+              with:
+                limit: "rest.limit"
+                severity: "rest.severity"
+                status: "rest.status"
+                ticketType: "rest.ticketType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-trouble-ticket
+              description: "Create a trouble ticket."
+              call: "servicenow-trouble-ticket.create-trouble-ticket"
+              with:
+                name: "rest.name"
+                description: "rest.description"
+                severity: "rest.severity"
+                status: "rest.status"
+                ticketType: "rest.ticketType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: servicenow-customer-service-mcp
+      transport: http
+      description: "MCP server for AI-assisted ServiceNow customer service workflows."
+      tools:
+        - name: list-contacts
+          description: "List CSM contacts with optional filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-contact.list-contacts"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-contact
+          description: "Create a new CSM contact."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-contact.create-contact"
+          with:
+            first_name: "tools.first_name"
+            last_name: "tools.last_name"
+            email: "tools.email"
+            phone: "tools.phone"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-contact
+          description: "Retrieve a specific CSM contact."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-contact.get-contact"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-catalogs
+          description: "List available service catalogs."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-service-catalog.list-catalogs"
+          with:
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-catalog
+          description: "Retrieve a specific service catalog."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-catalog"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-category
+          description: "Retrieve a catalog category with subcategories."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-category"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-catalog-items
+          description: "List catalog items with optional filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-service-catalog.list-catalog-items"
+          with:
+            sysparm_catalog: "tools.sysparm_catalog"
+            sysparm_category: "tools.sysparm_category"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-catalog-item
+          description: "Retrieve catalog item details with variables."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-catalog-item"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: add-item-to-cart
+          description: "Add a catalog item to the shopping cart."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.add-item-to-cart"
+          with:
+            sys_id: "tools.sys_id"
+            quantity: "tools.quantity"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: order-item-now
+          description: "Order a catalog item immediately."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.order-item-now"
+          with:
+            sys_id: "tools.sys_id"
+            quantity: "tools.quantity"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-cart
+          description: "Retrieve shopping cart contents."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-cart"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: empty-cart
+          description: "Remove all items from the shopping cart."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-service-catalog.empty-cart"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: submit-cart-order
+          description: "Submit cart as a service catalog request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.submit-cart-order"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-trouble-tickets
+          description: "List trouble tickets."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-trouble-ticket.list-trouble-tickets"
+          with:
+            limit: "tools.limit"
+            severity: "tools.severity"
+            status: "tools.status"
+            ticketType: "tools.ticketType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-trouble-ticket
+          description: "Create a trouble ticket."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-trouble-ticket.create-trouble-ticket"
+          with:
+            name: "tools.name"
+            description: "tools.description"
+            severity: "tools.severity"
+            status: "tools.status"
+            ticketType: "tools.ticketType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-trouble-ticket
+          description: "Retrieve a specific trouble ticket."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-trouble-ticket.get-trouble-ticket"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-trouble-ticket
+          description: "Update an existing trouble ticket."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-trouble-ticket.update-trouble-ticket"
+          with:
+            id: "tools.id"
+            name: "tools.name"
+            severity: "tools.severity"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,91 @@
+{
+  "type": "object",
+  "description": "Metadata about a file attachment stored in ServiceNow.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the attachment record.",
+      "example": "500123"
+    },
+    "file_name": {
+      "type": "string",
+      "description": "The name of the attached file.",
+      "example": "example_value"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "The table to which the attachment belongs.",
+      "example": "example_value"
+    },
+    "table_sys_id": {
+      "type": "string",
+      "description": "The sys_id of the record to which the file is attached.",
+      "example": "500123"
+    },
+    "content_type": {
+      "type": "string",
+      "description": "The MIME type of the attached file.",
+      "example": "example_value"
+    },
+    "size_bytes": {
+      "type": "integer",
+      "description": "The size of the attached file in bytes.",
+      "example": 10
+    },
+    "size_compressed": {
+      "type": "integer",
+      "description": "The compressed size of the attached file in bytes.",
+      "example": 10
+    },
+    "download_link": {
+      "type": "string",
+      "description": "The URL to download the attachment file content.",
+      "format": "uri",
+      "example": "https://www.example.com"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "The height in pixels if the attachment is an image.",
+      "example": 10
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "The width in pixels if the attachment is an image.",
+      "example": 10
+    },
+    "hash": {
+      "type": "string",
+      "description": "The MD5 hash of the file content.",
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the attachment processing.",
+      "example": "example_value"
+    },
+    "sys_created_on": {
+      "type": "string",
+      "description": "The date and time the attachment was created.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who uploaded the attachment.",
+      "example": "example_value"
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "description": "The date and time the attachment was last modified.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last modified the attachment record.",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Attachment"
+}

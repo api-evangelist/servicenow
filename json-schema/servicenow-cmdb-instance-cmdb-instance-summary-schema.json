@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "description": "A summary of a CMDB configuration item containing its identifier and display name.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the configuration item.",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the configuration item.",
+      "example": "Example Title"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CmdbInstanceSummary"
+}

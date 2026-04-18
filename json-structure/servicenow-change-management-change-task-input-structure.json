@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "Fields for creating a change task.",
+  "name": "ChangeTaskInput",
+  "properties": {
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the task."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the assignment group."
+    },
+    "planned_start_date": {
+      "type": "datetime",
+      "description": "The planned start date."
+    },
+    "planned_end_date": {
+      "type": "datetime",
+      "description": "The planned end date."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

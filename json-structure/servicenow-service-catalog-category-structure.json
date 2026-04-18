@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "A catalog category.",
+  "name": "Category",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the category."
+    },
+    "title": {
+      "type": "string",
+      "description": "The display title of the category."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the category."
+    },
+    "full_description": {
+      "type": "string",
+      "description": "The full description of the category."
+    },
+    "subcategories": {
+      "type": "array",
+      "description": "Child categories.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sys_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

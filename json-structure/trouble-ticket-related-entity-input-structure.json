@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "name": "RelatedEntityInput",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Sys_id of the impacted item or service"
+    },
+    "@referredType": {
+      "type": "string",
+      "description": "Type of item or service",
+      "enum": [
+        "asset",
+        "product",
+        "product_inventory",
+        "cmdb_ci",
+        "cmdb_ci_service"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "@referredType"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

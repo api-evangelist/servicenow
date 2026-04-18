@@ -1,0 +1,183 @@
+{
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "This value is always TroubleTicket",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "The sys_id of the case or incident record",
+      "example": "abc123"
+    },
+    "href": {
+      "type": "string",
+      "description": "Relative link to the case or incident record",
+      "example": "example_value"
+    },
+    "creationDate": {
+      "type": "string",
+      "description": "The date that the case or incident record was created",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "lastUpdate": {
+      "type": "string",
+      "description": "The date the record was last updated",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the trouble ticket, typically a short description of the issue",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the issue from the ticket",
+      "example": "A sample description."
+    },
+    "severity": {
+      "type": "string",
+      "description": "The severity of the issue described by the trouble ticket",
+      "example": "2 - High"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the trouble ticket",
+      "example": "example_value"
+    },
+    "ticketType": {
+      "type": "string",
+      "description": "The type of ticket",
+      "example": "Case",
+      "enum": [
+        "Case",
+        "Incident",
+        "Service Problem Case"
+      ]
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the contact method",
+          "example": "Example Title"
+        }
+      }
+    },
+    "note": {
+      "type": "array",
+      "description": "A list of all comments on the ticket (excludes work notes)",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of note (always 'comments' in responses)",
+            "example": "example_value"
+          },
+          "text": {
+            "type": "string",
+            "description": "The comment text",
+            "example": "example_value"
+          },
+          "date": {
+            "type": "string",
+            "description": "The date the comment was created",
+            "format": "date-time",
+            "example": "2026-01-15T10:30:00Z"
+          },
+          "author": {
+            "type": "string",
+            "description": "The name of the user who wrote the comment",
+            "example": "example_value"
+          }
+        }
+      }
+    },
+    "relatedEntity": {
+      "type": "array",
+      "description": "List of impacted assets, products, sold products, configuration items, or services",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "This value is always relatedEntity",
+            "example": "example_value"
+          },
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the impacted item or service",
+            "example": "abc123"
+          },
+          "href": {
+            "type": "string",
+            "description": "Returns an empty string",
+            "example": "example_value"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the impacted item or service",
+            "example": "Example Title"
+          },
+          "role": {
+            "type": "string",
+            "description": "Description of the impacted item or service",
+            "example": "example_value"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of item or service",
+            "example": "asset",
+            "enum": [
+              "asset",
+              "product",
+              "product_inventory",
+              "cmdb_ci",
+              "cmdb_ci_service"
+            ]
+          }
+        }
+      }
+    },
+    "relatedParty": {
+      "type": "array",
+      "description": "Details about contacts for the ticket",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the related party",
+            "example": "abc123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related party",
+            "example": "Example Title"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of related party:\n- assigned_to: User assigned to work on the ticket\n- assignment_group: Group assigned to work on the ticket\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+            "example": "assigned_to",
+            "enum": [
+              "assigned_to",
+              "assignment_group",
+              "customer",
+              "customer_contact"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TroubleTicket"
+}

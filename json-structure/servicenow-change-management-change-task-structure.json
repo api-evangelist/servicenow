@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "description": "A task associated with a change request.",
+  "name": "ChangeTask",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the change task."
+    },
+    "number": {
+      "type": "string",
+      "description": "The human-readable task number."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task."
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the task."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "change_request": {
+      "type": "string",
+      "description": "The sys_id of the parent change request."
+    },
+    "planned_start_date": {
+      "type": "datetime",
+      "description": "The planned start date for the task."
+    },
+    "planned_end_date": {
+      "type": "datetime",
+      "description": "The planned end date for the task."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

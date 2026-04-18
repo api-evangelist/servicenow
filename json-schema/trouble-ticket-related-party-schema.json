@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Sys_id of the related party",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the related party",
+      "example": "Example Title"
+    },
+    "@referredType": {
+      "type": "string",
+      "description": "Type of related party:\n- assigned_to: User assigned to work on the ticket\n- assignment_group: Group assigned to work on the ticket\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+      "example": "assigned_to",
+      "enum": [
+        "assigned_to",
+        "assignment_group",
+        "customer",
+        "customer_contact"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RelatedParty"
+}

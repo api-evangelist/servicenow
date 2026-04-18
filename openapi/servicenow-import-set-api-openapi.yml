@@ -16,25 +16,25 @@ externalDocs:
   description: ServiceNow Import Set API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ImportSetAPI.html
 servers:
-  - url: https://{instance}.service-now.com/api/now
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/now
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Import Sets
-    description: >-
-      Operations for inserting records into import set staging tables and
-      triggering transform map processing.
+- name: Import Sets
+  description: >-
+    Operations for inserting records into import set staging tables and
+    triggering transform map processing.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /import/{stagingTableName}:
     post:
       operationId: insertImportSetRecord
-      summary: ServiceNow Insert a record into an import set staging table
+      summary: Servicenow Insert a Record Into an Import Set Staging Table
       description: >-
         Inserts a single record into the specified import set staging table.
         If an active transform map exists for the staging table, the record
@@ -42,17 +42,17 @@ paths:
         response includes the transformation result indicating whether the
         record was inserted, updated, or encountered an error.
       tags:
-        - Import Sets
+      - Import Sets
       parameters:
-        - name: stagingTableName
-          in: path
-          required: true
-          description: >-
-            The name of the import set staging table. This table must extend
-            sys_import_set_row and have an associated transform map configured.
-          schema:
-            type: string
-          example: u_import_incidents
+      - name: stagingTableName
+        in: path
+        required: true
+        description: >-
+          The name of the import set staging table. This table must extend
+          sys_import_set_row and have an associated transform map configured.
+        schema:
+          type: string
+        example: u_import_incidents
       requestBody:
         required: true
         description: >-
@@ -62,9 +62,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ImportSetInput'
+            examples:
+              InsertimportsetrecordRequestExample:
+                summary: Default insertImportSetRecord request
+                x-microcks-default: true
+                value: {}
           application/xml:
             schema:
               $ref: '#/components/schemas/ImportSetInput'
+            examples:
+              InsertimportsetrecordRequestExample:
+                summary: Default insertImportSetRecord request
+                x-microcks-default: true
+                value: {}
       responses:
         '201':
           description: >-
@@ -79,6 +89,22 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ImportSetResult'
+              examples:
+                Insertimportsetrecord201Example:
+                  summary: Default insertImportSetRecord 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - transform_map: example_value
+                      table: example_value
+                      display_name: example_value
+                      display_value: example_value
+                      record_link: https://www.example.com
+                      status: inserted
+                      status_message: example_value
+                      sys_id: '500123'
+                      target_sys_id: '500123'
+                      import_set: example_value
         '400':
           description: >-
             Bad request. The staging table name is invalid or the request body
@@ -87,12 +113,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Insertimportsetrecord400Example:
+                  summary: Default insertImportSetRecord 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Insertimportsetrecord401Example:
+                  summary: Default insertImportSetRecord 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '403':
           description: >-
             Forbidden. The user does not have the import_transformer role or
@@ -101,24 +143,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Insertimportsetrecord403Example:
+                  summary: Default insertImportSetRecord 403 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /import/{stagingTableName}/insertMultiple:
     post:
       operationId: insertMultipleImportSetRecords
-      summary: ServiceNow Insert multiple records into an import set staging table
+      summary: Servicenow Insert Multiple Records Into an Import Set Staging Table
       description: >-
         Inserts multiple records into the specified import set staging table
         in a single request. Each record is individually transformed if an
         active transform map exists.
       tags:
-        - Import Sets
+      - Import Sets
       parameters:
-        - name: stagingTableName
-          in: path
-          required: true
-          description: >-
-            The name of the import set staging table.
-          schema:
-            type: string
+      - name: stagingTableName
+        in: path
+        required: true
+        description: >-
+          The name of the import set staging table.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
@@ -131,6 +185,13 @@ paths:
                   description: An array of records to insert into the staging table.
                   items:
                     $ref: '#/components/schemas/ImportSetInput'
+            examples:
+              InsertmultipleimportsetrecordsRequestExample:
+                summary: Default insertMultipleImportSetRecords request
+                x-microcks-default: true
+                value:
+                  records:
+                  - {}
       responses:
         '201':
           description: Records successfully inserted and transformed.
@@ -143,18 +204,53 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ImportSetResult'
+              examples:
+                Insertmultipleimportsetrecords201Example:
+                  summary: Default insertMultipleImportSetRecords 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - transform_map: example_value
+                      table: example_value
+                      display_name: example_value
+                      display_value: example_value
+                      record_link: https://www.example.com
+                      status: inserted
+                      status_message: example_value
+                      sys_id: '500123'
+                      target_sys_id: '500123'
+                      import_set: example_value
         '400':
           description: Bad request. The request body is malformed.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Insertmultipleimportsetrecords400Example:
+                  summary: Default insertMultipleImportSetRecords 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Insertmultipleimportsetrecords401Example:
+                  summary: Default insertMultipleImportSetRecords 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -187,45 +283,55 @@ components:
         transform_map:
           type: string
           description: The name of the transform map used to process the record.
+          example: example_value
         table:
           type: string
           description: The target table into which the record was transformed.
+          example: example_value
         display_name:
           type: string
           description: The display name of the transform map.
+          example: example_value
         display_value:
           type: string
           description: The display value of the target record created or updated.
+          example: example_value
         record_link:
           type: string
           format: uri
           description: A link to the target record in ServiceNow.
+          example: https://www.example.com
         status:
           type: string
           description: >-
             The transformation status. Common values include inserted, updated,
             error, and ignored.
           enum:
-            - inserted
-            - updated
-            - error
-            - ignored
+          - inserted
+          - updated
+          - error
+          - ignored
+          example: inserted
         status_message:
           type: string
           description: >-
             A descriptive message about the transformation result, especially
             useful when the status is error.
+          example: example_value
         sys_id:
           type: string
           description: >-
             The sys_id of the import set row record in the staging table.
+          example: '500123'
         target_sys_id:
           type: string
           description: >-
             The sys_id of the record created or updated in the target table.
+          example: '500123'
         import_set:
           type: string
           description: The sys_id of the parent import set.
+          example: example_value
     Error:
       type: object
       properties:
@@ -238,3 +344,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

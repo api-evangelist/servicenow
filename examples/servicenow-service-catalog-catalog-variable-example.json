@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "label": "Example Title",
+  "type": "example_value",
+  "mandatory": true,
+  "default_value": "example_value",
+  "choices": []
+}

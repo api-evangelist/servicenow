@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "description": "A catalog category.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the category.",
+      "example": "500123"
+    },
+    "title": {
+      "type": "string",
+      "description": "The display title of the category.",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the category.",
+      "example": "A sample description."
+    },
+    "full_description": {
+      "type": "string",
+      "description": "The full description of the category.",
+      "example": "example_value"
+    },
+    "subcategories": {
+      "type": "array",
+      "description": "Child categories.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "sys_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Category"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Example Title",
+  "description": "A sample description.",
+  "severity": "1",
+  "status": "example_value",
+  "ticketType": "Case",
+  "channel": {
+    "name": "Example Title"
+  },
+  "note": [],
+  "relatedEntity": [],
+  "relatedParty": []
+}

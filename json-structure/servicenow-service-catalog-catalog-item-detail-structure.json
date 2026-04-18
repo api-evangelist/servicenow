@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "description": "Full details of a catalog item including its variables.",
+  "name": "CatalogItemDetail",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog item."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the item."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the item."
+    },
+    "description": {
+      "type": "string",
+      "description": "The full description of the item."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category sys_id."
+    },
+    "price": {
+      "type": "string",
+      "description": "The displayed price."
+    },
+    "picture": {
+      "type": "string",
+      "description": "URL to the item picture."
+    },
+    "mandatory_attachment": {
+      "type": "boolean",
+      "description": "Whether a file attachment is required to order the item."
+    },
+    "request_method": {
+      "type": "string",
+      "description": "The method used to fulfill the request."
+    },
+    "variables": {
+      "type": "array",
+      "description": "The list of variables (form fields) that must be filled in when ordering the item.",
+      "items": {
+        "type": "object",
+        "description": "A variable on a catalog item form.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The internal name of the variable."
+          },
+          "label": {
+            "type": "string",
+            "description": "The display label."
+          },
+          "type": {
+            "type": "string",
+            "description": "The variable type."
+          },
+          "mandatory": {
+            "type": "boolean",
+            "description": "Whether the variable is required."
+          },
+          "default_value": {
+            "type": "string",
+            "description": "The default value."
+          },
+          "choices": {
+            "type": "array",
+            "description": "Available choices for select-type variables.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "description": "The result of processing an import set record including the transformation outcome.",
+  "name": "ImportSetResult",
+  "properties": {
+    "transform_map": {
+      "type": "string",
+      "description": "The name of the transform map used to process the record."
+    },
+    "table": {
+      "type": "string",
+      "description": "The target table into which the record was transformed."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the transform map."
+    },
+    "display_value": {
+      "type": "string",
+      "description": "The display value of the target record created or updated."
+    },
+    "record_link": {
+      "type": "uri",
+      "description": "A link to the target record in ServiceNow."
+    },
+    "status": {
+      "type": "string",
+      "description": "The transformation status. Common values include inserted, updated, error, and ignored.",
+      "enum": [
+        "inserted",
+        "updated",
+        "error",
+        "ignored"
+      ]
+    },
+    "status_message": {
+      "type": "string",
+      "description": "A descriptive message about the transformation result, especially useful when the status is error."
+    },
+    "sys_id": {
+      "type": "string",
+      "description": "The sys_id of the import set row record in the staging table."
+    },
+    "target_sys_id": {
+      "type": "string",
+      "description": "The sys_id of the record created or updated in the target table."
+    },
+    "import_set": {
+      "type": "string",
+      "description": "The sys_id of the parent import set."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

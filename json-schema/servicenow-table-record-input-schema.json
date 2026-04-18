@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "description": "A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RecordInput"
+}

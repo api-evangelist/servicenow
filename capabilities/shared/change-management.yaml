@@ -1,0 +1,504 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Change Management API"
+  description: "Create, retrieve, update, and manage change requests (normal, standard, emergency) and their associated tasks within ServiceNow ITSM."
+  tags:
+    - ServiceNow
+    - Change Management
+    - ITSM
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-change-management
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/sn_chg_rest/v1"
+      description: "ServiceNow Change Management API for managing change requests and tasks."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: normal-changes
+          path: /change/normal
+          description: "Normal change request operations."
+          operations:
+            - name: list-normal-changes
+              method: GET
+              description: "List normal change requests with optional filtering."
+              inputParameters:
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter results."
+                - name: sysparm_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields to return."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-normal-change
+              method: POST
+              description: "Create a new normal change request."
+              inputParameters:
+                - name: sysparm_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields to return."
+              body:
+                type: json
+                data:
+                  short_description: "{{tools.short_description}}"
+                  description: "{{tools.description}}"
+                  priority: "{{tools.priority}}"
+                  risk: "{{tools.risk}}"
+                  impact: "{{tools.impact}}"
+                  category: "{{tools.category}}"
+                  assigned_to: "{{tools.assigned_to}}"
+                  assignment_group: "{{tools.assignment_group}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-normal-change
+              method: GET
+              path: /{sys_id}
+              description: "Retrieve a specific normal change request."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the change request."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: update-normal-change
+              method: PATCH
+              path: /{sys_id}
+              description: "Update fields on a normal change request."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the change request."
+              body:
+                type: json
+                data:
+                  short_description: "{{tools.short_description}}"
+                  description: "{{tools.description}}"
+                  priority: "{{tools.priority}}"
+                  state: "{{tools.state}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: standard-changes
+          path: /change/standard
+          description: "Standard change request operations."
+          operations:
+            - name: list-standard-changes
+              method: GET
+              description: "List standard change requests."
+              inputParameters:
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter results."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-standard-change
+              method: POST
+              path: /{standard_change_template_id}
+              description: "Create a standard change from a pre-approved template."
+              inputParameters:
+                - name: standard_change_template_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the standard change template."
+              body:
+                type: json
+                data:
+                  short_description: "{{tools.short_description}}"
+                  description: "{{tools.description}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: emergency-changes
+          path: /change/emergency
+          description: "Emergency change request operations."
+          operations:
+            - name: list-emergency-changes
+              method: GET
+              description: "List emergency change requests."
+              inputParameters:
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter results."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-emergency-change
+              method: POST
+              description: "Create an emergency change request."
+              body:
+                type: json
+                data:
+                  short_description: "{{tools.short_description}}"
+                  description: "{{tools.description}}"
+                  priority: "{{tools.priority}}"
+                  justification: "{{tools.justification}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: change-tasks
+          path: /change
+          description: "Change task operations."
+          operations:
+            - name: list-change-tasks
+              method: GET
+              path: /{sys_id}/task
+              description: "List tasks for a change request."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the change request."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-change-task
+              method: POST
+              path: /{sys_id}/task
+              description: "Create a task for a change request."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the change request."
+              body:
+                type: json
+                data:
+                  short_description: "{{tools.short_description}}"
+                  assigned_to: "{{tools.assigned_to}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: servicenow-change-management-api
+      resources:
+        - path: /v1/normal-changes
+          name: normal-changes
+          description: "Normal change request operations."
+          operations:
+            - method: GET
+              name: list-normal-changes
+              description: "List normal change requests."
+              call: "servicenow-change-management.list-normal-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+                sysparm_offset: "rest.sysparm_offset"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-normal-change
+              description: "Create a normal change request."
+              call: "servicenow-change-management.create-normal-change"
+              with:
+                short_description: "rest.short_description"
+                description: "rest.description"
+                priority: "rest.priority"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/normal-changes/{sys_id}
+          name: normal-change-detail
+          description: "Single normal change operations."
+          operations:
+            - method: GET
+              name: get-normal-change
+              description: "Retrieve a normal change request."
+              call: "servicenow-change-management.get-normal-change"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: PATCH
+              name: update-normal-change
+              description: "Update a normal change request."
+              call: "servicenow-change-management.update-normal-change"
+              with:
+                sys_id: "rest.sys_id"
+                short_description: "rest.short_description"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/standard-changes
+          name: standard-changes
+          description: "Standard change request operations."
+          operations:
+            - method: GET
+              name: list-standard-changes
+              description: "List standard change requests."
+              call: "servicenow-change-management.list-standard-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/emergency-changes
+          name: emergency-changes
+          description: "Emergency change request operations."
+          operations:
+            - method: GET
+              name: list-emergency-changes
+              description: "List emergency change requests."
+              call: "servicenow-change-management.list-emergency-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-emergency-change
+              description: "Create an emergency change request."
+              call: "servicenow-change-management.create-emergency-change"
+              with:
+                short_description: "rest.short_description"
+                description: "rest.description"
+                priority: "rest.priority"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/changes/{sys_id}/tasks
+          name: change-tasks
+          description: "Change task operations."
+          operations:
+            - method: GET
+              name: list-change-tasks
+              description: "List tasks for a change request."
+              call: "servicenow-change-management.list-change-tasks"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-change-task
+              description: "Create a task for a change request."
+              call: "servicenow-change-management.create-change-task"
+              with:
+                sys_id: "rest.sys_id"
+                short_description: "rest.short_description"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9102
+      namespace: servicenow-change-management-mcp
+      transport: http
+      tools:
+        - name: list-normal-changes
+          description: "List normal change requests with optional filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-normal-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-normal-change
+          description: "Create a new normal change request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-normal-change"
+          with:
+            short_description: "tools.short_description"
+            description: "tools.description"
+            priority: "tools.priority"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-normal-change
+          description: "Retrieve a specific normal change request by sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-change-management.get-normal-change"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: update-normal-change
+          description: "Update fields on an existing normal change request."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-change-management.update-normal-change"
+          with:
+            sys_id: "tools.sys_id"
+            short_description: "tools.short_description"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-standard-changes
+          description: "List standard change requests."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-standard-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-standard-change
+          description: "Create a standard change from a pre-approved template."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-standard-change"
+          with:
+            standard_change_template_id: "tools.standard_change_template_id"
+            short_description: "tools.short_description"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-emergency-changes
+          description: "List emergency change requests."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-emergency-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-emergency-change
+          description: "Create an emergency change request for urgent situations."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-emergency-change"
+          with:
+            short_description: "tools.short_description"
+            description: "tools.description"
+            priority: "tools.priority"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-change-tasks
+          description: "List tasks associated with a change request."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-change-management.list-change-tasks"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-change-task
+          description: "Create a new task for a change request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-change-task"
+          with:
+            sys_id: "tools.sys_id"
+            short_description: "tools.short_description"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

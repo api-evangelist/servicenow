@@ -1,0 +1,18 @@
+{
+  "@type": "example_value",
+  "id": "abc123",
+  "href": "example_value",
+  "creationDate": "2026-01-15T10:30:00Z",
+  "lastUpdate": "2026-01-15T10:30:00Z",
+  "name": "Example Title",
+  "description": "A sample description.",
+  "severity": "2 - High",
+  "status": "example_value",
+  "ticketType": "Case",
+  "channel": {
+    "name": "Example Title"
+  },
+  "note": [],
+  "relatedEntity": [],
+  "relatedParty": []
+}

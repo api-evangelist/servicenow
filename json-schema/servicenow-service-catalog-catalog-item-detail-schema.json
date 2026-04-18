@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "description": "Full details of a catalog item including its variables.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog item.",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the item.",
+      "example": "Example Title"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the item.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "The full description of the item.",
+      "example": "A sample description."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category sys_id.",
+      "example": "example_value"
+    },
+    "price": {
+      "type": "string",
+      "description": "The displayed price.",
+      "example": "example_value"
+    },
+    "picture": {
+      "type": "string",
+      "description": "URL to the item picture.",
+      "example": "example_value"
+    },
+    "mandatory_attachment": {
+      "type": "boolean",
+      "description": "Whether a file attachment is required to order the item.",
+      "example": true
+    },
+    "request_method": {
+      "type": "string",
+      "description": "The method used to fulfill the request.",
+      "example": "example_value"
+    },
+    "variables": {
+      "type": "array",
+      "description": "The list of variables (form fields) that must be filled in when ordering the item.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "description": "A variable on a catalog item form.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The internal name of the variable.",
+            "example": "Example Title"
+          },
+          "label": {
+            "type": "string",
+            "description": "The display label.",
+            "example": "Example Title"
+          },
+          "type": {
+            "type": "string",
+            "description": "The variable type.",
+            "example": "example_value"
+          },
+          "mandatory": {
+            "type": "boolean",
+            "description": "Whether the variable is required.",
+            "example": true
+          },
+          "default_value": {
+            "type": "string",
+            "description": "The default value.",
+            "example": "example_value"
+          },
+          "choices": {
+            "type": "array",
+            "description": "Available choices for select-type variables.",
+            "example": [],
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CatalogItemDetail"
+}

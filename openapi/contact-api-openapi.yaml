@@ -16,52 +16,54 @@ info:
   x-namespace: now
 
 servers:
-  - url: https://{instance}.servicenow.com/api/now
-    description: ServiceNow instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 
 security:
-  - basicAuth: []
+- basicAuth: []
 
 tags:
-  - name: Contact
-    description: Operations for managing Customer Service Management contacts
+- name: Contact
+  description: Operations for managing Customer Service Management contacts
 
 paths:
   /contact:
     get:
       tags:
-        - Contact
-      summary: ServiceNow Retrieve contacts
+      - Contact
+      summary: Servicenow Retrieve Contacts
       description: Retrieves a specified set of Customer Service Management (CSM) contacts.
       operationId: getContacts
       parameters:
-        - name: sysparm_query
-          in: query
-          description: Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses.
-          required: false
-          schema:
-            type: string
-          example: "caller_id=javascript:gs.getUserID()^active=true"
-        - name: sysparm_limit
-          in: query
-          description: Maximum number of records to return
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            default: 10
-        - name: sysparm_offset
-          in: query
-          description: Starting record index for pagination (do not pass negative numbers)
-          required: false
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
+      - name: sysparm_query
+        in: query
+        description: Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses.
+        required: false
+        schema:
+          type: string
+        example: "caller_id=javascript:gs.getUserID()^active=true"
+      - name: sysparm_limit
+        in: query
+        description: Maximum number of records to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 10
+        example: 10
+      - name: sysparm_offset
+        in: query
+        description: Starting record index for pagination (do not pass negative numbers)
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
       responses:
         '200':
           description: Successful. The request was successfully processed.
@@ -74,6 +76,77 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Contact'
+              examples:
+                Getcontacts200Example:
+                  summary: Default getContacts 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      name: Example Title
+                      first_name: example_value
+                      middle_name: example_value
+                      last_name: example_value
+                      user_name: example_value
+                      email: user@example.com
+                      phone: example_value
+                      mobile_phone: example_value
+                      home_phone: example_value
+                      title: Example Title
+                      employee_number: example_value
+                      company: example_value
+                      account: 42
+                      department: example_value
+                      manager: example_value
+                      location: example_value
+                      building: example_value
+                      street: example_value
+                      city: example_value
+                      state: example_value
+                      zip: example_value
+                      country: 42
+                      active: true
+                      vip: true
+                      locked_out: true
+                      web_service_access_only: true
+                      internal_integration_user: true
+                      enable_multifactor_authn: true
+                      geolocation_tracked: true
+                      notification: 1
+                      calendar_integration: 10
+                      failed_attempts: 10
+                      latitude: 42.5
+                      longitude: 42.5
+                      time_zone: example_value
+                      date_format: "dd/mm/yyyy"
+                      time_format: "hh.mm.ss a"
+                      preferred_language: example_value
+                      gender: example_value
+                      photo: example_value
+                      introduction: example_value
+                      source: example_value
+                      roles: example_value
+                      cost_center: example_value
+                      schedule: example_value
+                      time_sheet_policy: example_value
+                      default_perspective: example_value
+                      ldap_server: example_value
+                      agent_status: "Off work"
+                      on_schedule: "Ahead"
+                      edu_status: example_value
+                      last_login: '2026-01-15'
+                      last_login_time: '2026-01-15T10:30:00Z'
+                      last_login_device: example_value
+                      last_position_update: '2026-01-15T10:30:00Z'
+                      sys_class_name: example_value
+                      sys_created_by: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_mod_count: 42
+                      sys_domain: example_value
+                      sys_domain_path: example_value
+                      sys_tags: example_value
             application/xml:
               schema:
                 type: object
@@ -82,6 +155,77 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Contact'
+              examples:
+                Getcontacts200Example:
+                  summary: Default getContacts 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      name: Example Title
+                      first_name: example_value
+                      middle_name: example_value
+                      last_name: example_value
+                      user_name: example_value
+                      email: user@example.com
+                      phone: example_value
+                      mobile_phone: example_value
+                      home_phone: example_value
+                      title: Example Title
+                      employee_number: example_value
+                      company: example_value
+                      account: 42
+                      department: example_value
+                      manager: example_value
+                      location: example_value
+                      building: example_value
+                      street: example_value
+                      city: example_value
+                      state: example_value
+                      zip: example_value
+                      country: 42
+                      active: true
+                      vip: true
+                      locked_out: true
+                      web_service_access_only: true
+                      internal_integration_user: true
+                      enable_multifactor_authn: true
+                      geolocation_tracked: true
+                      notification: 1
+                      calendar_integration: 10
+                      failed_attempts: 10
+                      latitude: 42.5
+                      longitude: 42.5
+                      time_zone: example_value
+                      date_format: "dd/mm/yyyy"
+                      time_format: "hh.mm.ss a"
+                      preferred_language: example_value
+                      gender: example_value
+                      photo: example_value
+                      introduction: example_value
+                      source: example_value
+                      roles: example_value
+                      cost_center: example_value
+                      schedule: example_value
+                      time_sheet_policy: example_value
+                      default_perspective: example_value
+                      ldap_server: example_value
+                      agent_status: "Off work"
+                      on_schedule: "Ahead"
+                      edu_status: example_value
+                      last_login: '2026-01-15'
+                      last_login_time: '2026-01-15T10:30:00Z'
+                      last_login_device: example_value
+                      last_position_update: '2026-01-15T10:30:00Z'
+                      sys_class_name: example_value
+                      sys_created_by: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_mod_count: 42
+                      sys_domain: example_value
+                      sys_domain_path: example_value
+                      sys_tags: example_value
         '500':
           description: Internal server error
           content:
@@ -89,10 +233,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Getcontacts500Example:
+                  summary: Default getContacts 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       tags:
-        - Contact
-      summary: ServiceNow Create a contact
+      - Contact
+      summary: Servicenow Create a Contact
       description: |
         Creates a new Customer Service Management (CSM) contact.
 
@@ -109,6 +264,67 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ContactCreate'
+            examples:
+              CreatecontactRequestExample:
+                summary: Default createContact request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  first_name: example_value
+                  middle_name: example_value
+                  last_name: example_value
+                  user_name: example_value
+                  email: user@example.com
+                  phone: example_value
+                  mobile_phone: example_value
+                  home_phone: example_value
+                  title: Example Title
+                  employee_number: example_value
+                  company: example_value
+                  account: 42
+                  department: example_value
+                  manager: example_value
+                  location: example_value
+                  building: example_value
+                  street: example_value
+                  city: example_value
+                  state: example_value
+                  zip: example_value
+                  country: 42
+                  active: true
+                  vip: true
+                  locked_out: true
+                  web_service_access_only: true
+                  internal_integration_user: true
+                  enable_multifactor_authn: true
+                  geolocation_tracked: true
+                  notification: 1
+                  calendar_integration: 10
+                  failed_attempts: 10
+                  latitude: 42.5
+                  longitude: 42.5
+                  time_zone: example_value
+                  date_format: "dd/mm/yyyy"
+                  time_format: "hh.mm.ss a"
+                  preferred_language: example_value
+                  gender: example_value
+                  photo: example_value
+                  introduction: example_value
+                  source: example_value
+                  roles: example_value
+                  cost_center: example_value
+                  schedule: example_value
+                  time_sheet_policy: example_value
+                  default_perspective: example_value
+                  ldap_server: example_value
+                  agent_status: "Off work"
+                  on_schedule: "Ahead"
+                  edu_status: example_value
+                  last_login_time: '2026-01-15T10:30:00Z'
+                  last_login_device: example_value
+                  social_channel: example_value
+                  social_handle: example_value
+                  social_handle_url: https://www.example.com
       responses:
         '201':
           description: New contact record was successfully created
@@ -120,18 +336,40 @@ paths:
                   result:
                     type: string
                     description: Sys_id of the newly created contact record
+              examples:
+                Createcontact201Example:
+                  summary: Default createContact 201 response
+                  x-microcks-default: true
+                  value:
+                    result: example_value
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createcontact400Example:
+                  summary: Default createContact 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Createcontact401Example:
+                  summary: Default createContact 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '500':
           description: Internal server error
           content:
@@ -139,20 +377,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Createcontact500Example:
+                  summary: Default createContact 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /contact/{id}:
     get:
       tags:
-        - Contact
-      summary: ServiceNow Retrieve a specific contact
+      - Contact
+      summary: Servicenow Retrieve a Specific Contact
       description: Retrieves the specified Customer Service Management (CSM) contact.
       operationId: getContactById
       parameters:
-        - name: id
-          in: path
-          description: Sys_id of the contact to retrieve
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        description: Sys_id of the contact to retrieve
+        required: true
+        schema:
+          type: string
+        example: abc123
       responses:
         '200':
           description: Successful. The request was successfully processed.
@@ -163,18 +413,168 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Contact'
+              examples:
+                Getcontactbyid200Example:
+                  summary: Default getContactById 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      name: Example Title
+                      first_name: example_value
+                      middle_name: example_value
+                      last_name: example_value
+                      user_name: example_value
+                      email: user@example.com
+                      phone: example_value
+                      mobile_phone: example_value
+                      home_phone: example_value
+                      title: Example Title
+                      employee_number: example_value
+                      company: example_value
+                      account: 42
+                      department: example_value
+                      manager: example_value
+                      location: example_value
+                      building: example_value
+                      street: example_value
+                      city: example_value
+                      state: example_value
+                      zip: example_value
+                      country: 42
+                      active: true
+                      vip: true
+                      locked_out: true
+                      web_service_access_only: true
+                      internal_integration_user: true
+                      enable_multifactor_authn: true
+                      geolocation_tracked: true
+                      notification: 1
+                      calendar_integration: 10
+                      failed_attempts: 10
+                      latitude: 42.5
+                      longitude: 42.5
+                      time_zone: example_value
+                      date_format: "dd/mm/yyyy"
+                      time_format: "hh.mm.ss a"
+                      preferred_language: example_value
+                      gender: example_value
+                      photo: example_value
+                      introduction: example_value
+                      source: example_value
+                      roles: example_value
+                      cost_center: example_value
+                      schedule: example_value
+                      time_sheet_policy: example_value
+                      default_perspective: example_value
+                      ldap_server: example_value
+                      agent_status: "Off work"
+                      on_schedule: "Ahead"
+                      edu_status: example_value
+                      last_login: '2026-01-15'
+                      last_login_time: '2026-01-15T10:30:00Z'
+                      last_login_device: example_value
+                      last_position_update: '2026-01-15T10:30:00Z'
+                      sys_class_name: example_value
+                      sys_created_by: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_mod_count: 42
+                      sys_domain: example_value
+                      sys_domain_path: example_value
+                      sys_tags: example_value
             application/xml:
               schema:
                 type: object
                 properties:
                   result:
                     $ref: '#/components/schemas/Contact'
+              examples:
+                Getcontactbyid200Example:
+                  summary: Default getContactById 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      name: Example Title
+                      first_name: example_value
+                      middle_name: example_value
+                      last_name: example_value
+                      user_name: example_value
+                      email: user@example.com
+                      phone: example_value
+                      mobile_phone: example_value
+                      home_phone: example_value
+                      title: Example Title
+                      employee_number: example_value
+                      company: example_value
+                      account: 42
+                      department: example_value
+                      manager: example_value
+                      location: example_value
+                      building: example_value
+                      street: example_value
+                      city: example_value
+                      state: example_value
+                      zip: example_value
+                      country: 42
+                      active: true
+                      vip: true
+                      locked_out: true
+                      web_service_access_only: true
+                      internal_integration_user: true
+                      enable_multifactor_authn: true
+                      geolocation_tracked: true
+                      notification: 1
+                      calendar_integration: 10
+                      failed_attempts: 10
+                      latitude: 42.5
+                      longitude: 42.5
+                      time_zone: example_value
+                      date_format: "dd/mm/yyyy"
+                      time_format: "hh.mm.ss a"
+                      preferred_language: example_value
+                      gender: example_value
+                      photo: example_value
+                      introduction: example_value
+                      source: example_value
+                      roles: example_value
+                      cost_center: example_value
+                      schedule: example_value
+                      time_sheet_policy: example_value
+                      default_perspective: example_value
+                      ldap_server: example_value
+                      agent_status: "Off work"
+                      on_schedule: "Ahead"
+                      edu_status: example_value
+                      last_login: '2026-01-15'
+                      last_login_time: '2026-01-15T10:30:00Z'
+                      last_login_device: example_value
+                      last_position_update: '2026-01-15T10:30:00Z'
+                      sys_class_name: example_value
+                      sys_created_by: example_value
+                      sys_created_on: '2026-01-15T10:30:00Z'
+                      sys_updated_by: example_value
+                      sys_updated_on: '2026-01-15T10:30:00Z'
+                      sys_mod_count: 42
+                      sys_domain: example_value
+                      sys_domain_path: example_value
+                      sys_tags: example_value
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcontactbyid401Example:
+                  summary: Default getContactById 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: |
             Not found. Could be due to:
@@ -184,6 +584,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcontactbyid404Example:
+                  summary: Default getContactById 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '500':
           description: Internal server error
           content:
@@ -191,6 +599,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Getcontactbyid500Example:
+                  summary: Default getContactById 500 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -206,272 +625,337 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the contact record
+          example: '500123'
         name:
           type: string
           maxLength: 151
           description: Contact full name
+          example: Example Title
         first_name:
           type: string
           maxLength: 50
           description: Contact first name
+          example: example_value
         middle_name:
           type: string
           maxLength: 50
           description: Contact middle name
+          example: example_value
         last_name:
           type: string
           maxLength: 50
           description: Contact last name
+          example: example_value
         user_name:
           type: string
           maxLength: 40
           description: Contact user ID
+          example: example_value
         email:
           type: string
           description: Contact email address
+          example: user@example.com
         phone:
           type: string
           maxLength: 40
           description: Contact business phone number
+          example: example_value
         mobile_phone:
           type: string
           maxLength: 40
           description: Contact mobile phone number
+          example: example_value
         home_phone:
           type: string
           maxLength: 40
           description: Contact home phone number
+          example: example_value
         title:
           type: string
           maxLength: 60
           description: Contact business title
+          example: Example Title
         employee_number:
           type: string
           description: Contact employee number
+          example: example_value
         company:
           type: string
           description: Sys_id of the company record
+          example: example_value
         account:
           type: string
           description: Sys_id of the account record
+          example: 42
         department:
           type: string
           description: Sys_id of the department
+          example: example_value
         manager:
           type: string
           description: Sys_id of the direct supervisor
+          example: example_value
         location:
           type: string
           description: Sys_id of the location
+          example: example_value
         building:
           type: string
           description: Sys_id of the building
+          example: example_value
         street:
           type: string
           maxLength: 255
           description: Contact street address
+          example: example_value
         city:
           type: string
           maxLength: 40
           description: City in which the contact resides
+          example: example_value
         state:
           type: string
           maxLength: 40
           description: State in which the contact resides
+          example: example_value
         zip:
           type: string
           maxLength: 40
           description: Contact zip code
+          example: example_value
         country:
           type: string
           maxLength: 3
           description: Country code
+          example: 42
         active:
           type: boolean
           default: true
           description: Flag indicating whether the contact is active
+          example: true
         vip:
           type: boolean
           default: false
           description: Flag indicating whether the contact has VIP status
+          example: true
         locked_out:
           type: boolean
           default: false
           description: Flag indicating if the contact is locked-out
+          example: true
         web_service_access_only:
           type: boolean
           default: false
           description: Flag indicating whether the contact can only access services through the web
+          example: true
         internal_integration_user:
           type: boolean
           default: false
           description: Flag indicating whether the contact is an internal integration user
+          example: true
         enable_multifactor_authn:
           type: boolean
           default: false
           description: Flag indicating whether multifactor authorization is required
+          example: true
         geolocation_tracked:
           type: boolean
           default: false
           description: Flag indicating whether the contact location is obtained through geotracking
+          example: true
         notification:
           type: integer
           default: 2
           description: Indicates whether the contact should receive notifications (1=Disabled, 2=Enabled)
           enum: [1, 2]
+          example: 1
         calendar_integration:
           type: integer
           default: 1
           description: Calendar application that the contact uses (1=Outlook)
+          example: 10
         failed_attempts:
           type: integer
           description: Number of failed login attempts
+          example: 10
         latitude:
           type: number
           format: float
           maxLength: 40
           description: Latitude coordinate of the contact
+          example: 42.5
         longitude:
           type: number
           format: float
           maxLength: 40
           description: Longitude coordinate of the contact
+          example: 42.5
         time_zone:
           type: string
           maxLength: 40
           description: Time zone in which the contact resides
+          example: example_value
         date_format:
           type: string
           maxLength: 40
           description: Format in which to display dates
           enum:
-            - "dd/mm/yyyy"
-            - "dd-mm-yyyy"
-            - "dd.mm.yyyy"
-            - "mm-dd-yyyy"
-            - "yyyy-mm-dd"
+          - "dd/mm/yyyy"
+          - "dd-mm-yyyy"
+          - "dd.mm.yyyy"
+          - "mm-dd-yyyy"
+          - "yyyy-mm-dd"
+          example: "dd/mm/yyyy"
         time_format:
           type: string
           maxLength: 40
           description: Format in which to display time
           enum:
-            - "hh.mm.ss a"
-            - "hh:mm:ss a"
-            - "HH.mm.ss"
-            - "HH:mm:ss"
+          - "hh.mm.ss a"
+          - "hh:mm:ss a"
+          - "HH.mm.ss"
+          - "HH:mm:ss"
+          example: "hh.mm.ss a"
         preferred_language:
           type: string
           maxLength: 3
           description: Country code of the contact primary language
+          example: example_value
         gender:
           type: string
           maxLength: 40
           description: Contact gender
+          example: example_value
         photo:
           type: string
           description: Photo image of the contact
+          example: example_value
         introduction:
           type: string
           maxLength: 40
           description: Introduction
+          example: example_value
         source:
           type: string
           maxLength: 255
           description: Source of the contact
+          example: example_value
         roles:
           type: string
           maxLength: 40
           description: List of user roles associated with the contact
+          example: example_value
         cost_center:
           type: string
           description: Sys_id of the cost center
+          example: example_value
         schedule:
           type: string
           description: Sys_id of the work schedule
+          example: example_value
         time_sheet_policy:
           type: string
           description: Sys_id of the time sheet policy
+          example: example_value
         default_perspective:
           type: string
           description: Sys_id of the default perspective
+          example: example_value
         ldap_server:
           type: string
           description: Sys_id of the LDAP server
+          example: example_value
         agent_status:
           type: string
           maxLength: 40
           description: Status of the agent
           enum:
-            - "Off work"
-            - "On break"
-            - "On route"
-            - "On site"
+          - "Off work"
+          - "On break"
+          - "On route"
+          - "On site"
+          example: "Off work"
         on_schedule:
           type: string
           maxLength: 40
           description: Indicates the timeliness of dispatched service personnel
           enum:
-            - "Ahead"
-            - "behind_less30"
-            - "behind_30to60"
-            - "behind_more60"
-            - "on_time"
+          - "Ahead"
+          - "behind_less30"
+          - "behind_30to60"
+          - "behind_more60"
+          - "on_time"
+          example: "Ahead"
         edu_status:
           type: string
           maxLength: 40
           default: faculty
           description: Education status of the contact
+          example: example_value
         last_login:
           type: string
           format: date
           description: Date on which the contact last logged into the system
+          example: '2026-01-15'
         last_login_time:
           type: string
           format: date-time
           description: Date and time the contact logged in to the system
+          example: '2026-01-15T10:30:00Z'
         last_login_device:
           type: string
           maxLength: 40
           description: Device the consumer used the last time they logged in
+          example: example_value
         last_position_update:
           type: string
           format: date-time
           description: Date and time the last position was updated
+          example: '2026-01-15T10:30:00Z'
         sys_class_name:
           type: string
           maxLength: 80
           description: Table that contains the contact record
+          example: example_value
         sys_created_by:
           type: string
           maxLength: 40
           description: User that originally created the contact record
+          example: example_value
         sys_created_on:
           type: string
           format: date-time
           description: Date and time the contact was originally created
+          example: '2026-01-15T10:30:00Z'
         sys_updated_by:
           type: string
           maxLength: 40
           description: User that last updated the contact information
+          example: example_value
         sys_updated_on:
           type: string
           format: date-time
           description: Date and time the contact information was updated
+          example: '2026-01-15T10:30:00Z'
         sys_mod_count:
           type: integer
           description: Number of times that the contact record has been modified
+          example: 42
         sys_domain:
           type: string
           description: ServiceNow instance domain of the contact record
+          example: example_value
         sys_domain_path:
           type: string
           maxLength: 255
           default: "/"
           description: Contact record domain path
+          example: example_value
         sys_tags:
           type: string
           description: System tags
 
+          example: example_value
     ContactCreate:
       type: object
       description: Contact creation request
@@ -480,233 +964,289 @@ components:
           type: string
           maxLength: 151
           description: Contact full name
+          example: Example Title
         first_name:
           type: string
           maxLength: 50
           description: Contact first name
+          example: example_value
         middle_name:
           type: string
           maxLength: 50
           description: Contact middle name
+          example: example_value
         last_name:
           type: string
           maxLength: 50
           description: Contact last name
+          example: example_value
         user_name:
           type: string
           maxLength: 40
           description: Contact user ID
+          example: example_value
         email:
           type: string
           description: Contact email address
+          example: user@example.com
         phone:
           type: string
           maxLength: 40
           description: Contact business phone number
+          example: example_value
         mobile_phone:
           type: string
           maxLength: 40
           description: Contact mobile phone number
+          example: example_value
         home_phone:
           type: string
           maxLength: 40
           description: Contact home phone number
+          example: example_value
         title:
           type: string
           maxLength: 60
           description: Contact business title
+          example: Example Title
         employee_number:
           type: string
           description: Contact employee number
+          example: example_value
         company:
           type: string
           description: Sys_id of the company record
+          example: example_value
         account:
           type: string
           description: Sys_id of the account record
+          example: 42
         department:
           type: string
           description: Sys_id of the department
+          example: example_value
         manager:
           type: string
           description: Sys_id of the direct supervisor
+          example: example_value
         location:
           type: string
           description: Sys_id of the location
+          example: example_value
         building:
           type: string
           description: Sys_id of the building
+          example: example_value
         street:
           type: string
           maxLength: 255
           description: Contact street address
+          example: example_value
         city:
           type: string
           maxLength: 40
           description: City in which the contact resides
+          example: example_value
         state:
           type: string
           maxLength: 40
           description: State in which the contact resides
+          example: example_value
         zip:
           type: string
           maxLength: 40
           description: Contact zip code
+          example: example_value
         country:
           type: string
           maxLength: 3
           description: Country code
+          example: 42
         active:
           type: boolean
           default: true
           description: Flag indicating whether the contact is active
+          example: true
         vip:
           type: boolean
           default: false
           description: Flag indicating whether the contact has VIP status
+          example: true
         locked_out:
           type: boolean
           default: false
           description: Flag indicating if the contact is locked-out
+          example: true
         web_service_access_only:
           type: boolean
           default: false
           description: Flag indicating whether the contact can only access services through the web
+          example: true
         internal_integration_user:
           type: boolean
           default: false
           description: Flag indicating whether the contact is an internal integration user
+          example: true
         enable_multifactor_authn:
           type: boolean
           default: false
           description: Flag indicating whether multifactor authorization is required
+          example: true
         geolocation_tracked:
           type: boolean
           default: false
           description: Flag indicating whether the contact location is obtained through geotracking
+          example: true
         notification:
           type: integer
           default: 2
           description: Indicates whether the contact should receive notifications (1=Disabled, 2=Enabled)
           enum: [1, 2]
+          example: 1
         calendar_integration:
           type: integer
           default: 1
           description: Calendar application that the contact uses (1=Outlook)
+          example: 10
         failed_attempts:
           type: integer
           description: Number of failed login attempts
+          example: 10
         latitude:
           type: number
           format: float
           description: Latitude coordinate of the contact
+          example: 42.5
         longitude:
           type: number
           format: float
           description: Longitude coordinate of the contact
+          example: 42.5
         time_zone:
           type: string
           maxLength: 40
           description: Time zone in which the contact resides
+          example: example_value
         date_format:
           type: string
           maxLength: 40
           description: Format in which to display dates
           enum:
-            - "dd/mm/yyyy"
-            - "dd-mm-yyyy"
-            - "dd.mm.yyyy"
-            - "mm-dd-yyyy"
-            - "yyyy-mm-dd"
+          - "dd/mm/yyyy"
+          - "dd-mm-yyyy"
+          - "dd.mm.yyyy"
+          - "mm-dd-yyyy"
+          - "yyyy-mm-dd"
+          example: "dd/mm/yyyy"
         time_format:
           type: string
           maxLength: 40
           description: Format in which to display time
           enum:
-            - "hh.mm.ss a"
-            - "hh:mm:ss a"
-            - "HH.mm.ss"
-            - "HH:mm:ss"
+          - "hh.mm.ss a"
+          - "hh:mm:ss a"
+          - "HH.mm.ss"
+          - "HH:mm:ss"
+          example: "hh.mm.ss a"
         preferred_language:
           type: string
           maxLength: 3
           description: Country code of the contact primary language
+          example: example_value
         gender:
           type: string
           maxLength: 40
           description: Contact gender
+          example: example_value
         photo:
           type: string
           description: Photo image of the contact
+          example: example_value
         introduction:
           type: string
           maxLength: 40
           description: Introduction
+          example: example_value
         source:
           type: string
           maxLength: 255
           description: Source of the contact
+          example: example_value
         roles:
           type: string
           maxLength: 40
           description: List of user roles associated with the contact
+          example: example_value
         cost_center:
           type: string
           description: Sys_id of the cost center
+          example: example_value
         schedule:
           type: string
           description: Sys_id of the work schedule
+          example: example_value
         time_sheet_policy:
           type: string
           description: Sys_id of the time sheet policy
+          example: example_value
         default_perspective:
           type: string
           description: Sys_id of the default perspective
+          example: example_value
         ldap_server:
           type: string
           description: Sys_id of the LDAP server
+          example: example_value
         agent_status:
           type: string
           maxLength: 40
           description: Status of the agent
           enum:
-            - "Off work"
-            - "On break"
-            - "On route"
-            - "On site"
+          - "Off work"
+          - "On break"
+          - "On route"
+          - "On site"
+          example: "Off work"
         on_schedule:
           type: string
           maxLength: 40
           description: Indicates the timeliness of dispatched service personnel
           enum:
-            - "Ahead"
-            - "behind_less30"
-            - "behind_30to60"
-            - "behind_more60"
-            - "on_time"
+          - "Ahead"
+          - "behind_less30"
+          - "behind_30to60"
+          - "behind_more60"
+          - "on_time"
+          example: "Ahead"
         edu_status:
           type: string
           maxLength: 40
           default: faculty
           description: Education status of the contact
+          example: example_value
         last_login_time:
           type: string
           format: date-time
           description: Date and time the contact logged in to the system
+          example: '2026-01-15T10:30:00Z'
         last_login_device:
           type: string
           maxLength: 40
           description: Device the consumer used the last time they logged in
+          example: example_value
         social_channel:
           type: string
           description: Social media channel (Twitter, Facebook, Instagram, etc.)
+          example: example_value
         social_handle:
           type: string
           description: User handle on the social media channel
+          example: example_value
         social_handle_url:
           type: string
           description: URL to the contact's social channel profile
 
+          example: https://www.example.com
     Error:
       type: object
       properties:
@@ -719,3 +1259,4 @@ components:
             detail:
               type: string
               description: Detailed error information
+          example: example_value

@@ -18,81 +18,87 @@ info:
   x-namespace: sn_ind_tsm_sdwan
 
 servers:
-  - url: https://{instance}.servicenow.com/api/sn_ind_tsm_sdwan/ticket
-    description: ServiceNow instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.servicenow.com/api/sn_ind_tsm_sdwan/ticket
+  description: ServiceNow instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 
 security:
-  - basicAuth: []
+- basicAuth: []
 
 tags:
-  - name: Trouble Ticket
-    description: Operations for managing trouble tickets (Cases, Incidents, and Service Problem Cases)
+- name: Trouble Ticket
+  description: Operations for managing trouble tickets (Cases, Incidents, and Service Problem Cases)
 
 paths:
   /troubleTicket:
     get:
       tags:
-        - Trouble Ticket
-      summary: ServiceNow Retrieve all trouble tickets
+      - Trouble Ticket
+      summary: Servicenow Retrieve All Trouble Tickets
       description: Retrieves a list of all trouble ticket records from the Case, Incident, and Service Problem Case tables.
       operationId: getTroubleTickets
       parameters:
-        - name: fields
-          in: query
-          description: List of fields to return in the response. Invalid fields are ignored.
-          required: false
-          schema:
-            type: string
-          example: "id,name,description,status,severity,ticketType"
-        - name: id
-          in: query
-          description: Filter trouble tickets by sys_id
-          required: false
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: Maximum number of records to return
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-            default: 25
-        - name: offset
-          in: query
-          description: Starting index at which to begin retrieving records
-          required: false
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
-        - name: severity
-          in: query
-          description: Filter trouble tickets by severity
-          required: false
-          schema:
-            type: string
-        - name: status
-          in: query
-          description: Filter trouble tickets by status
-          required: false
-          schema:
-            type: string
-        - name: ticketType
-          in: query
-          description: Filter trouble tickets by ticket type
-          required: false
-          schema:
-            type: string
-            enum:
-              - Case
-              - Incident
-              - Service Problem Case
+      - name: fields
+        in: query
+        description: List of fields to return in the response. Invalid fields are ignored.
+        required: false
+        schema:
+          type: string
+        example: "id,name,description,status,severity,ticketType"
+      - name: id
+        in: query
+        description: Filter trouble tickets by sys_id
+        required: false
+        schema:
+          type: string
+        example: abc123
+      - name: limit
+        in: query
+        description: Maximum number of records to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+        example: 10
+      - name: offset
+        in: query
+        description: Starting index at which to begin retrieving records
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
+      - name: severity
+        in: query
+        description: Filter trouble tickets by severity
+        required: false
+        schema:
+          type: string
+        example: example_value
+      - name: status
+        in: query
+        description: Filter trouble tickets by status
+        required: false
+        schema:
+          type: string
+        example: example_value
+      - name: ticketType
+        in: query
+        description: Filter trouble tickets by ticket type
+        required: false
+        schema:
+          type: string
+          enum:
+          - Case
+          - Incident
+          - Service Problem Case
+        example: Case
       responses:
         '200':
           description: Request successfully processed. Full resource returned in response (no pagination).
@@ -111,6 +117,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TroubleTicket'
+              examples:
+                Gettroubletickets200Example:
+                  summary: Default getTroubleTickets 200 response
+                  x-microcks-default: true
+                  value:
+                  - '@type': example_value
+                    id: abc123
+                    href: example_value
+                    creationDate: '2026-01-15T10:30:00Z'
+                    lastUpdate: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    description: A sample description.
+                    severity: example_value
+                    status: example_value
+                    ticketType: Case
+                    channel:
+                      name: Example Title
+                    note:
+                    - {}
+                    relatedEntity:
+                    - {}
+                    relatedParty:
+                    - {}
         '206':
           description: Partial resource returned in response (with pagination).
           headers:
@@ -137,12 +166,43 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TroubleTicket'
+              examples:
+                Gettroubletickets206Example:
+                  summary: Default getTroubleTickets 206 response
+                  x-microcks-default: true
+                  value:
+                  - '@type': example_value
+                    id: abc123
+                    href: example_value
+                    creationDate: '2026-01-15T10:30:00Z'
+                    lastUpdate: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    description: A sample description.
+                    severity: example_value
+                    status: example_value
+                    ticketType: Case
+                    channel:
+                      name: Example Title
+                    note:
+                    - {}
+                    relatedEntity:
+                    - {}
+                    relatedParty:
+                    - {}
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Gettroubletickets400Example:
+                  summary: Default getTroubleTickets 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Record not found
           content:
@@ -150,10 +210,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Gettroubletickets404Example:
+                  summary: Default getTroubleTickets 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       tags:
-        - Trouble Ticket
-      summary: ServiceNow Create a trouble ticket
+      - Trouble Ticket
+      summary: Servicenow Create a Trouble Ticket
       description: Creates a record in the Case, Incident, or Service Problem Case table.
       operationId: createTroubleTicket
       requestBody:
@@ -162,6 +233,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TroubleTicketCreate'
+            examples:
+              CreatetroubleticketRequestExample:
+                summary: Default createTroubleTicket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  severity: "1"
+                  status: example_value
+                  ticketType: Case
+                  channel:
+                    name: Example Title
+                  note:
+                  - text: example_value
+                    '@type': comments
+                  relatedEntity:
+                  - id: abc123
+                    '@referredType': asset
+                  relatedParty:
+                  - id: abc123
+                    '@referredType': customer
       responses:
         '201':
           description: Successful. The request was successfully processed.
@@ -169,6 +261,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TroubleTicket'
+              examples:
+                Createtroubleticket201Example:
+                  summary: Default createTroubleTicket 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    id: abc123
+                    href: example_value
+                    creationDate: '2026-01-15T10:30:00Z'
+                    lastUpdate: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    description: A sample description.
+                    severity: example_value
+                    status: example_value
+                    ticketType: Case
+                    channel:
+                      name: Example Title
+                    note:
+                    - '@type': example_value
+                      text: example_value
+                      date: '2026-01-15T10:30:00Z'
+                      author: example_value
+                    relatedEntity:
+                    - '@type': example_value
+                      id: abc123
+                      href: example_value
+                      name: Example Title
+                      role: example_value
+                      '@referredType': asset
+                    relatedParty:
+                    - id: abc123
+                      name: Example Title
+                      '@referredType': assigned_to
         '400':
           description: Bad request
           content:
@@ -176,26 +301,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Createtroubleticket400Example:
+                  summary: Default createTroubleTicket 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /troubleTicket/{id}:
     get:
       tags:
-        - Trouble Ticket
-      summary: ServiceNow Retrieve a specific trouble ticket
+      - Trouble Ticket
+      summary: Servicenow Retrieve a Specific Trouble Ticket
       description: Retrieves a specified record from the Case, Incident, or Service Problem Case table.
       operationId: getTroubleTicketById
       parameters:
-        - name: id
-          in: path
-          description: Sys_id of the case or incident record to retrieve
-          required: true
-          schema:
-            type: string
-        - name: fields
-          in: query
-          description: List of fields to return in the response. Invalid fields are ignored.
-          required: false
-          schema:
-            type: string
+      - name: id
+        in: path
+        description: Sys_id of the case or incident record to retrieve
+        required: true
+        schema:
+          type: string
+        example: abc123
+      - name: fields
+        in: query
+        description: List of fields to return in the response. Invalid fields are ignored.
+        required: false
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful. The request was successfully processed.
@@ -203,12 +341,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TroubleTicket'
+              examples:
+                Gettroubleticketbyid200Example:
+                  summary: Default getTroubleTicketById 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    id: abc123
+                    href: example_value
+                    creationDate: '2026-01-15T10:30:00Z'
+                    lastUpdate: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    description: A sample description.
+                    severity: example_value
+                    status: example_value
+                    ticketType: Case
+                    channel:
+                      name: Example Title
+                    note:
+                    - '@type': example_value
+                      text: example_value
+                      date: '2026-01-15T10:30:00Z'
+                      author: example_value
+                    relatedEntity:
+                    - '@type': example_value
+                      id: abc123
+                      href: example_value
+                      name: Example Title
+                      role: example_value
+                      '@referredType': asset
+                    relatedParty:
+                    - id: abc123
+                      name: Example Title
+                      '@referredType': assigned_to
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Gettroubleticketbyid400Example:
+                  summary: Default getTroubleTicketById 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Record not found
           content:
@@ -216,25 +395,57 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Gettroubleticketbyid404Example:
+                  summary: Default getTroubleTicketById 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       tags:
-        - Trouble Ticket
-      summary: ServiceNow Update a trouble ticket
+      - Trouble Ticket
+      summary: Servicenow Update a Trouble Ticket
       description: Updates a specified record in the Case, Incident, or Service Problem Case table.
       operationId: updateTroubleTicket
       parameters:
-        - name: id
-          in: path
-          description: Sys_id of the case or incident record to update
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        description: Sys_id of the case or incident record to update
+        required: true
+        schema:
+          type: string
+        example: abc123
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TroubleTicketUpdate'
+            examples:
+              UpdatetroubleticketRequestExample:
+                summary: Default updateTroubleTicket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  severity: "1"
+                  status: example_value
+                  channel:
+                    name: Example Title
+                  note:
+                  - text: example_value
+                    '@type': comments
+                  relatedEntity:
+                  - id: abc123
+                    '@referredType': asset
+                  relatedParty:
+                  - id: abc123
+                    '@referredType': customer
       responses:
         '200':
           description: Successful. The request was successfully processed.
@@ -242,12 +453,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TroubleTicket'
+              examples:
+                Updatetroubleticket200Example:
+                  summary: Default updateTroubleTicket 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    id: abc123
+                    href: example_value
+                    creationDate: '2026-01-15T10:30:00Z'
+                    lastUpdate: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    description: A sample description.
+                    severity: example_value
+                    status: example_value
+                    ticketType: Case
+                    channel:
+                      name: Example Title
+                    note:
+                    - '@type': example_value
+                      text: example_value
+                      date: '2026-01-15T10:30:00Z'
+                      author: example_value
+                    relatedEntity:
+                    - '@type': example_value
+                      id: abc123
+                      href: example_value
+                      name: Example Title
+                      role: example_value
+                      '@referredType': asset
+                    relatedParty:
+                    - id: abc123
+                      name: Example Title
+                      '@referredType': assigned_to
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Updatetroubleticket400Example:
+                  summary: Default updateTroubleTicket 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: Record not found
           content:
@@ -255,6 +507,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+              examples:
+                Updatetroubleticket404Example:
+                  summary: Default updateTroubleTicket 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -270,26 +533,33 @@ components:
           type: string
           default: TroubleTicket
           description: This value is always TroubleTicket
+          example: example_value
         id:
           type: string
           description: The sys_id of the case or incident record
+          example: abc123
         href:
           type: string
           description: Relative link to the case or incident record
+          example: example_value
         creationDate:
           type: string
           format: date-time
           description: The date that the case or incident record was created
+          example: '2026-01-15T10:30:00Z'
         lastUpdate:
           type: string
           format: date-time
           description: The date the record was last updated
+          example: '2026-01-15T10:30:00Z'
         name:
           type: string
           description: The name of the trouble ticket, typically a short description of the issue
+          example: Example Title
         description:
           type: string
           description: The description of the issue from the ticket
+          example: A sample description.
         severity:
           type: string
           description: The severity of the issue described by the trouble ticket
@@ -297,13 +567,15 @@ components:
         status:
           type: string
           description: The current status of the trouble ticket
+          example: example_value
         ticketType:
           type: string
           enum:
-            - Case
-            - Incident
-            - Service Problem Case
+          - Case
+          - Incident
+          - Service Problem Case
           description: The type of ticket
+          example: Case
         channel:
           $ref: '#/components/schemas/Channel'
         note:
@@ -311,38 +583,43 @@ components:
           description: A list of all comments on the ticket (excludes work notes)
           items:
             $ref: '#/components/schemas/Note'
+          example: []
         relatedEntity:
           type: array
           description: List of impacted assets, products, sold products, configuration items, or services
           items:
             $ref: '#/components/schemas/RelatedEntity'
+          example: []
         relatedParty:
           type: array
           description: Details about contacts for the ticket
           items:
             $ref: '#/components/schemas/RelatedParty'
 
+          example: []
     TroubleTicketCreate:
       type: object
       required:
-        - description
-        - severity
-        - status
+      - description
+      - severity
+      - status
       properties:
         name:
           type: string
           description: Name of the trouble ticket, typically a short description of the issue
+          example: Example Title
         description:
           type: string
           description: A description of the issue
+          example: A sample description.
         severity:
           type: string
           enum:
-            - "1"
-            - "2"
-            - "3"
-            - "4"
-            - "5"
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
           description: |
             The severity of the issue (must provide choice value only):
             - 1: Critical
@@ -350,17 +627,20 @@ components:
             - 3: Moderate
             - 4: Low
             - 5: Planning (Incident only)
+          example: "1"
         status:
           type: string
           description: The current status of the trouble ticket (can provide choice label or value)
+          example: example_value
         ticketType:
           type: string
           enum:
-            - Case
-            - Incident
-            - Service Problem Case
+          - Case
+          - Incident
+          - Service Problem Case
           default: Incident
           description: The type of ticket to create
+          example: Case
         channel:
           $ref: '#/components/schemas/ChannelInput'
         note:
@@ -368,34 +648,39 @@ components:
           description: List of work notes and comments to add to the ticket
           items:
             $ref: '#/components/schemas/NoteInput'
+          example: []
         relatedEntity:
           type: array
           description: List of impacted assets, products, sold products, configuration items, or services
           items:
             $ref: '#/components/schemas/RelatedEntityInput'
+          example: []
         relatedParty:
           type: array
           description: Details about contacts for the ticket
           items:
             $ref: '#/components/schemas/RelatedPartyInput'
 
+          example: []
     TroubleTicketUpdate:
       type: object
       properties:
         name:
           type: string
           description: Name of the trouble ticket, typically a short description of the issue
+          example: Example Title
         description:
           type: string
           description: Description of the issue
+          example: A sample description.
         severity:
           type: string
           enum:
-            - "1"
-            - "2"
-            - "3"
-            - "4"
-            - "5"
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
           description: |
             The severity of the issue (must provide choice value only):
             - 1: Critical
@@ -403,9 +688,11 @@ components:
             - 3: Moderate
             - 4: Low
             - 5: Planning (Incident only)
+          example: "1"
         status:
           type: string
           description: The current status of the trouble ticket (can provide choice label or value)
+          example: example_value
         channel:
           $ref: '#/components/schemas/ChannelInput'
         note:
@@ -413,17 +700,20 @@ components:
           description: List of work notes and comments to add to the ticket
           items:
             $ref: '#/components/schemas/NoteInput'
+          example: []
         relatedEntity:
           type: array
           description: List of impacted assets, products, sold products, configuration items, or services
           items:
             $ref: '#/components/schemas/RelatedEntityInput'
+          example: []
         relatedParty:
           type: array
           description: Details about contacts for the ticket
           items:
             $ref: '#/components/schemas/RelatedPartyInput'
 
+          example: []
     Channel:
       type: object
       properties:
@@ -431,6 +721,7 @@ components:
           type: string
           description: The name of the contact method
 
+          example: Example Title
     ChannelInput:
       type: object
       properties:
@@ -438,6 +729,7 @@ components:
           type: string
           description: Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')
 
+          example: Example Title
     Note:
       type: object
       properties:
@@ -445,33 +737,39 @@ components:
           type: string
           default: comments
           description: The type of note (always 'comments' in responses)
+          example: example_value
         text:
           type: string
           description: The comment text
+          example: example_value
         date:
           type: string
           format: date-time
           description: The date the comment was created
+          example: '2026-01-15T10:30:00Z'
         author:
           type: string
           description: The name of the user who wrote the comment
 
+          example: example_value
     NoteInput:
       type: object
       required:
-        - text
-        - '@type'
+      - text
+      - '@type'
       properties:
         text:
           type: string
           description: Note text
+          example: example_value
         '@type':
           type: string
           enum:
-            - comments
-            - work_notes
+          - comments
+          - work_notes
           description: Type of note (determines whether recorded in Work notes or Additional comments field)
 
+          example: comments
     RelatedEntity:
       type: object
       properties:
@@ -479,63 +777,73 @@ components:
           type: string
           default: relatedEntity
           description: This value is always relatedEntity
+          example: example_value
         id:
           type: string
           description: Sys_id of the impacted item or service
+          example: abc123
         href:
           type: string
           description: Returns an empty string
+          example: example_value
         name:
           type: string
           description: Name of the impacted item or service
+          example: Example Title
         role:
           type: string
           description: Description of the impacted item or service
+          example: example_value
         '@referredType':
           type: string
           enum:
-            - asset
-            - product
-            - product_inventory
-            - cmdb_ci
-            - cmdb_ci_service
+          - asset
+          - product
+          - product_inventory
+          - cmdb_ci
+          - cmdb_ci_service
           description: Type of item or service
 
+          example: asset
     RelatedEntityInput:
       type: object
       required:
-        - id
-        - '@referredType'
+      - id
+      - '@referredType'
       properties:
         id:
           type: string
           description: Sys_id of the impacted item or service
+          example: abc123
         '@referredType':
           type: string
           enum:
-            - asset
-            - product
-            - product_inventory
-            - cmdb_ci
-            - cmdb_ci_service
+          - asset
+          - product
+          - product_inventory
+          - cmdb_ci
+          - cmdb_ci_service
           description: Type of item or service
 
+          example: asset
     RelatedParty:
       type: object
       properties:
         id:
           type: string
           description: Sys_id of the related party
+          example: abc123
         name:
           type: string
           description: Name of the related party
+          example: Example Title
         '@referredType':
           type: string
           enum:
-            - assigned_to
-            - assignment_group
-            - customer
-            - customer_contact
+          - assigned_to
+          - assignment_group
+          - customer
+          - customer_contact
           description: |
             Type of related party:
             - assigned_to: User assigned to work on the ticket
@@ -543,25 +851,28 @@ components:
             - customer: Company or account for the ticket
             - customer_contact: Caller or contact for the ticket
 
+          example: assigned_to
     RelatedPartyInput:
       type: object
       required:
-        - id
-        - '@referredType'
+      - id
+      - '@referredType'
       properties:
         id:
           type: string
           description: Sys_id of the related party
+          example: abc123
         '@referredType':
           type: string
           enum:
-            - customer
-            - customer_contact
+          - customer
+          - customer_contact
           description: |
             Type of related party:
             - customer: Company or account for the ticket
             - customer_contact: Caller or contact for the ticket
 
+          example: customer
     Error:
       type: object
       properties:
@@ -574,3 +885,4 @@ components:
             detail:
               type: string
               description: Detailed error information
+          example: example_value

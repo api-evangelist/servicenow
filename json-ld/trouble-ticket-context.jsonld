@@ -1,0 +1,249 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "TroubleTicket": {
+      "@id": "ns:TroubleTicket",
+      "@context": {
+        "@type": {
+          "@id": "ns:@type",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "href": {
+          "@id": "ns:href",
+          "@type": "xsd:string"
+        },
+        "creationDate": {
+          "@id": "ns:creationDate",
+          "@type": "xsd:string"
+        },
+        "lastUpdate": {
+          "@id": "ns:lastUpdate",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "severity": {
+          "@id": "ns:severity",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "ns:status",
+          "@type": "xsd:string"
+        },
+        "ticketType": {
+          "@id": "ns:ticketType",
+          "@type": "xsd:string"
+        },
+        "channel": {
+          "@id": "ns:channel",
+          "@type": "xsd:string"
+        },
+        "note": "ns:note",
+        "relatedEntity": "ns:relatedEntity",
+        "relatedParty": "ns:relatedParty"
+      }
+    },
+    "TroubleTicketCreate": {
+      "@id": "ns:TroubleTicketCreate",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "severity": {
+          "@id": "ns:severity",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "ns:status",
+          "@type": "xsd:string"
+        },
+        "ticketType": {
+          "@id": "ns:ticketType",
+          "@type": "xsd:string"
+        },
+        "channel": {
+          "@id": "ns:channel",
+          "@type": "xsd:string"
+        },
+        "note": "ns:note",
+        "relatedEntity": "ns:relatedEntity",
+        "relatedParty": "ns:relatedParty"
+      }
+    },
+    "TroubleTicketUpdate": {
+      "@id": "ns:TroubleTicketUpdate",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "severity": {
+          "@id": "ns:severity",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "ns:status",
+          "@type": "xsd:string"
+        },
+        "channel": {
+          "@id": "ns:channel",
+          "@type": "xsd:string"
+        },
+        "note": "ns:note",
+        "relatedEntity": "ns:relatedEntity",
+        "relatedParty": "ns:relatedParty"
+      }
+    },
+    "Channel": {
+      "@id": "ns:Channel",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ChannelInput": {
+      "@id": "ns:ChannelInput",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Note": {
+      "@id": "ns:Note",
+      "@context": {
+        "@type": {
+          "@id": "ns:@type",
+          "@type": "xsd:string"
+        },
+        "text": {
+          "@id": "ns:text",
+          "@type": "xsd:string"
+        },
+        "date": {
+          "@id": "ns:date",
+          "@type": "xsd:string"
+        },
+        "author": {
+          "@id": "ns:author",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "NoteInput": {
+      "@id": "ns:NoteInput",
+      "@context": {
+        "text": {
+          "@id": "ns:text",
+          "@type": "xsd:string"
+        },
+        "@type": {
+          "@id": "ns:@type",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RelatedEntity": {
+      "@id": "ns:RelatedEntity",
+      "@context": {
+        "@type": {
+          "@id": "ns:@type",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "href": {
+          "@id": "ns:href",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "role": {
+          "@id": "ns:role",
+          "@type": "xsd:string"
+        },
+        "@referredType": {
+          "@id": "ns:@referredType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RelatedEntityInput": {
+      "@id": "ns:RelatedEntityInput",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "@referredType": {
+          "@id": "ns:@referredType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RelatedParty": {
+      "@id": "ns:RelatedParty",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "@referredType": {
+          "@id": "ns:@referredType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RelatedPartyInput": {
+      "@id": "ns:RelatedPartyInput",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "@referredType": {
+          "@id": "ns:@referredType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

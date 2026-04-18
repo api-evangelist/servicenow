@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "description": "A variable on a catalog item form.",
+  "name": "CatalogVariable",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The internal name of the variable."
+    },
+    "label": {
+      "type": "string",
+      "description": "The display label."
+    },
+    "type": {
+      "type": "string",
+      "description": "The variable type."
+    },
+    "mandatory": {
+      "type": "boolean",
+      "description": "Whether the variable is required."
+    },
+    "default_value": {
+      "type": "string",
+      "description": "The default value."
+    },
+    "choices": {
+      "type": "array",
+      "description": "Available choices for select-type variables.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,237 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "ChangeRequest": {
+      "@id": "ns:ChangeRequest",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "ns:number",
+          "@type": "xsd:string"
+        },
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "ns:state",
+          "@type": "xsd:string"
+        },
+        "priority": {
+          "@id": "ns:priority",
+          "@type": "xsd:string"
+        },
+        "risk": {
+          "@id": "ns:risk",
+          "@type": "xsd:string"
+        },
+        "impact": {
+          "@id": "ns:impact",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "assigned_to": {
+          "@id": "ns:assigned_to",
+          "@type": "xsd:string"
+        },
+        "assignment_group": {
+          "@id": "ns:assignment_group",
+          "@type": "xsd:string"
+        },
+        "requested_by": {
+          "@id": "ns:requested_by",
+          "@type": "xsd:string"
+        },
+        "start_date": {
+          "@id": "ns:start_date",
+          "@type": "xsd:string"
+        },
+        "end_date": {
+          "@id": "ns:end_date",
+          "@type": "xsd:string"
+        },
+        "cmdb_ci": {
+          "@id": "ns:cmdb_ci",
+          "@type": "xsd:string"
+        },
+        "close_code": {
+          "@id": "ns:close_code",
+          "@type": "xsd:string"
+        },
+        "close_notes": {
+          "@id": "ns:close_notes",
+          "@type": "xsd:string"
+        },
+        "approval": {
+          "@id": "ns:approval",
+          "@type": "xsd:string"
+        },
+        "sys_created_on": {
+          "@id": "ns:sys_created_on",
+          "@type": "xsd:string"
+        },
+        "sys_updated_on": {
+          "@id": "ns:sys_updated_on",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ChangeRequestInput": {
+      "@id": "ns:ChangeRequestInput",
+      "@context": {
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "priority": {
+          "@id": "ns:priority",
+          "@type": "xsd:string"
+        },
+        "risk": {
+          "@id": "ns:risk",
+          "@type": "xsd:string"
+        },
+        "impact": {
+          "@id": "ns:impact",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "assigned_to": {
+          "@id": "ns:assigned_to",
+          "@type": "xsd:string"
+        },
+        "assignment_group": {
+          "@id": "ns:assignment_group",
+          "@type": "xsd:string"
+        },
+        "requested_by": {
+          "@id": "ns:requested_by",
+          "@type": "xsd:string"
+        },
+        "start_date": {
+          "@id": "ns:start_date",
+          "@type": "xsd:string"
+        },
+        "end_date": {
+          "@id": "ns:end_date",
+          "@type": "xsd:string"
+        },
+        "cmdb_ci": {
+          "@id": "ns:cmdb_ci",
+          "@type": "xsd:string"
+        },
+        "justification": {
+          "@id": "ns:justification",
+          "@type": "xsd:string"
+        },
+        "implementation_plan": {
+          "@id": "ns:implementation_plan",
+          "@type": "xsd:string"
+        },
+        "backout_plan": {
+          "@id": "ns:backout_plan",
+          "@type": "xsd:string"
+        },
+        "test_plan": {
+          "@id": "ns:test_plan",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ChangeTask": {
+      "@id": "ns:ChangeTask",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "ns:number",
+          "@type": "xsd:string"
+        },
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "ns:state",
+          "@type": "xsd:string"
+        },
+        "assigned_to": {
+          "@id": "ns:assigned_to",
+          "@type": "xsd:string"
+        },
+        "change_request": {
+          "@id": "ns:change_request",
+          "@type": "xsd:string"
+        },
+        "planned_start_date": {
+          "@id": "ns:planned_start_date",
+          "@type": "xsd:string"
+        },
+        "planned_end_date": {
+          "@id": "ns:planned_end_date",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ChangeTaskInput": {
+      "@id": "ns:ChangeTaskInput",
+      "@context": {
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "assigned_to": {
+          "@id": "ns:assigned_to",
+          "@type": "xsd:string"
+        },
+        "assignment_group": {
+          "@id": "ns:assignment_group",
+          "@type": "xsd:string"
+        },
+        "planned_start_date": {
+          "@id": "ns:planned_start_date",
+          "@type": "xsd:string"
+        },
+        "planned_end_date": {
+          "@id": "ns:planned_end_date",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

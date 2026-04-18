@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "Record": {
+      "@id": "ns:Record",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "sys_created_on": {
+          "@id": "ns:sys_created_on",
+          "@type": "xsd:string"
+        },
+        "sys_created_by": {
+          "@id": "ns:sys_created_by",
+          "@type": "xsd:string"
+        },
+        "sys_updated_on": {
+          "@id": "ns:sys_updated_on",
+          "@type": "xsd:string"
+        },
+        "sys_updated_by": {
+          "@id": "ns:sys_updated_by",
+          "@type": "xsd:string"
+        },
+        "sys_mod_count": {
+          "@id": "ns:sys_mod_count",
+          "@type": "xsd:integer"
+        },
+        "sys_tags": {
+          "@id": "ns:sys_tags",
+          "@type": "xsd:string"
+        },
+        "sys_class_name": {
+          "@id": "ns:sys_class_name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

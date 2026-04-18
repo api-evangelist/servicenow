@@ -1,0 +1,12 @@
+{
+  "transform_map": "example_value",
+  "table": "example_value",
+  "display_name": "example_value",
+  "display_value": "example_value",
+  "record_link": "https://www.example.com",
+  "status": "inserted",
+  "status_message": "example_value",
+  "sys_id": "500123",
+  "target_sys_id": "500123",
+  "import_set": "example_value"
+}

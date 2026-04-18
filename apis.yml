@@ -16,7 +16,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
-        type: Reference
+        type: APIReference
       - url: openapi/servicenow-table-api-openapi.yml
         type: OpenAPI
     description: The ServiceNow Table API provides endpoints to perform create, read, update, and delete (CRUD) operations on records within any ServiceNow table. It is the primary REST interface for interacting with ServiceNow platform data such as incidents, problems, changes, and custom tables.
@@ -97,7 +97,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/change-management-api.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/change-management-api.html
-        type: Reference
+        type: APIReference
       - url: openapi/servicenow-change-management-api-openapi.yml
         type: OpenAPI
     description: The ServiceNow Change Management API provides REST endpoints for creating, retrieving, updating, and managing change requests and their associated tasks and approvals. It supports the full change lifecycle including normal, standard, and emergency change types.
@@ -115,7 +115,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/knowledge-api.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/knowledge-api.html
-        type: Reference
+        type: APIReference
     description: The ServiceNow Knowledge Management REST API provides endpoints for searching and retrieving knowledge articles, including most-viewed and featured articles. It supports public and authenticated access to knowledge bases and requires the Knowledge API (sn_km_api) plugin to be activated.
   - aid: servicenow:servicenow-service-catalog-api
     name: ServiceNow Service Catalog API
@@ -131,7 +131,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ServiceCatalogAPI.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/c_ServiceCatalogAPI.html
-        type: Reference
+        type: APIReference
       - url: openapi/servicenow-service-catalog-api-openapi.yml
         type: OpenAPI
     description: The ServiceNow Service Catalog API provides REST endpoints for browsing catalog categories and items, retrieving catalog item details and variables, and submitting catalog requests. It enables external applications and portals to integrate with ServiceNow's self-service request capabilities.
@@ -149,7 +149,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/cmdb-instance-api.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/cmdb-instance-api.html
-        type: Reference
+        type: APIReference
       - url: openapi/servicenow-cmdb-instance-api-openapi.yml
         type: OpenAPI
     description: The ServiceNow CMDB Instance API provides REST endpoints for retrieving configuration item (CI) records from the Configuration Management Database by class name and sys_id. It is used to query and access infrastructure and application CI data stored in ServiceNow's CMDB.
@@ -167,7 +167,7 @@ apis:
       - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_IdentifyReconcileAPI.html
         type: Documentation
       - url: https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/concept/c_IdentifyReconcileAPI.html
-        type: Reference
+        type: APIReference
     description: The ServiceNow Identification and Reconciliation API provides a REST endpoint for creating or updating configuration items (CIs) in the CMDB using the platform's identification and reconciliation engine. It ensures that CI data from external discovery sources is correctly identified, deduplicated, and reconciled against existing CMDB records.
   - aid: servicenow:servicenow-performance-analytics-api
     name: ServiceNow Performance Analytics API
@@ -243,7 +243,7 @@ apis:
       - url: https://docs.servicenow.com/bundle/tokyo-application-development/page/integrate/graphql/concept/scripted-graph-ql.html
         type: Documentation
       - url: https://www.servicenow.com/community/developer-articles/getting-started-graphql-api-framework/ta-p/2312207
-        type: Getting Started
+        type: GettingStarted
     description: The ServiceNow GraphQL API framework allows developers to create custom GraphQL API schemas on the Now Platform for querying record data from components or external systems. It supports defining resolvers with server-side scripts and enables flexible, client-driven queries as an alternative to REST-based integration.
   - aid: servicenow:servicenow-application-service-api
     name: ServiceNow Application Service API
@@ -853,7 +853,7 @@ access: 3rd-Party
 common:
   - url: json-ld/servicenow-context.jsonld
     name: ServiceNow JSON-LD Context
-    type: JSON-LD
+    type: JSONLD
   - url: json-schema/servicenow-incident-schema.json
     name: ServiceNow Incident Schema
     type: JSONSchema
@@ -897,19 +897,19 @@ common:
     description: 'null'
   - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
     name: REST API Reference
-    type: Reference
+    type: APIReference
   - url: https://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_rest_tokyo_rest_api_explorer
     name: Getting Started
-    type: Getting Started
+    type: GettingStarted
   - url: https://www.servicenow.com/docs/bundle/yokohama-platform-security/page/administer/security/concept/c_OAuthApplications.html
     name: OAuth 2.0 Authentication
     type: Authentication
   - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
     name: Rate Limits
-    type: Rate Limits
+    type: RateLimits
   - url: https://status.servicenow.com
     name: ServiceNow Status
-    type: Status
+    type: StatusPage
   - url: https://support.servicenow.com
     name: Support
     type: Support
@@ -918,36 +918,36 @@ common:
     type: Pricing
   - url: https://www.servicenow.com/terms-of-use.html
     name: Website terms of use - ServiceNow
-    type: Terms of Service
+    type: TermsOfService
     description: 'null'
   - url: https://www.servicenow.com/privacy-statement.html
     name: Website and Events Privacy Statement - ServiceNow
-    type: Privacy Policy
+    type: PrivacyPolicy
     description: 'null'
   - url: https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html
     name: Release Notes
-    type: Change Log
+    type: ChangeLog
   - url: https://github.com/ServiceNow
     name: ServiceNow GitHub Organization
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://github.com/ServiceNowDevProgram
     name: ServiceNow Developer Program GitHub
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://github.com/ServiceNow/sdk
     name: ServiceNow SDK
     type: GitHubRepository
   - url: https://www.npmjs.com/package/@servicenow/sdk
     name: ServiceNow SDK on npm
-    type: Client Libraries
+    type: SDK
   - url: https://www.servicenow.com/docs/bundle/yokohama-application-development/page/build/servicenow-sdk/concept/servicenow-sdk-landing.html
     name: ServiceNow SDK Documentation
     type: Documentation
   - url: https://stackoverflow.com/questions/tagged/servicenow
     name: ServiceNow on Stack Overflow
-    type: Stack Overflow
+    type: StackOverflow
   - url: https://developer.servicenow.com/dev.do
     name: Developer Portal Sign Up
-    type: Sign Up
+    type: SignUp
   - url: https://developer.servicenow.com/dev.do
     name: Developer Portal Login
     type: Login
@@ -956,19 +956,19 @@ common:
     type: YouTube
   - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/inbound-REST-API-rate-limiting.html
     name: Inbound REST API Rate Limiting
-    type: Rate Limits
+    type: RateLimits
   - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/use-REST-API-Explorer.html
     name: REST API Explorer
-    type: Developer Tools
+    type: Documentation
   - url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/task/export-openapi-specification.html
     name: Export OpenAPI Specification
-    type: Developer Tools
+    type: Documentation
   - url: https://github.com/ServiceNow/PySNC
     name: PySNC - Python API for ServiceNow
     type: GitHubRepository
   - url: https://pypi.org/project/pysnc/
     name: PySNC on PyPI
-    type: Client Libraries
+    type: SDK
   - url: https://servicenow.github.io/PySNC/
     name: PySNC Documentation
     type: Documentation
@@ -983,15 +983,101 @@ common:
     type: LinkedIn
   - url: https://www.servicenow.com/university/training-and-certification.html
     name: Training and Certifications
-    type: Getting Started
+    type: GettingStarted
   - url: https://www.servicenow.com/products/api-integrations.html
     name: APIs and Integration Tools
     type: Documentation
   - url: https://developer.servicenow.com/dev.do#!/reference/api/yokohama/rest/
     name: Yokohama REST API Reference
-    type: Reference
+    type: APIReference
+  - url: json-ld/contact-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-aggregate-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-attachment-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-change-management-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-cmdb-instance-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-import-set-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-service-catalog-context.jsonld
+    type: JSONLD
+  - url: json-ld/servicenow-table-context.jsonld
+    type: JSONLD
+  - url: json-ld/trouble-ticket-context.jsonld
+    type: JSONLD
+  - url: rules/servicenow-spectral-rules.yml
+    type: SpectralRules
+  - url: vocabulary/servicenow-vocabulary.yaml
+    type: Vocabulary
+  - url: capabilities/itsm-operations.yaml
+    type: NaftikoCapability
+  - url: capabilities/customer-service.yaml
+    type: NaftikoCapability
+  - url: capabilities/data-integration-and-configuration.yaml
+    type: NaftikoCapability
+  - type: Features
+    data:
+      - name: Table-Driven Architecture
+        description: Universal Table API for CRUD operations on any ServiceNow table including incidents, changes, and custom tables.
+      - name: IT Service Management
+        description: Complete ITSM capabilities with dedicated APIs for incident, change, problem, and knowledge management.
+      - name: Configuration Management Database
+        description: CMDB APIs for managing configuration items, relationships, and service mappings with identification and reconciliation.
+      - name: Service Catalog And Self-Service
+        description: Service Catalog APIs for browsing items, submitting requests, and managing cart operations.
+      - name: Customer Service Management
+        description: CSM APIs for cases, contacts, accounts, and consumer management with omnichannel routing.
+      - name: Advanced Work Assignment
+        description: AWA APIs for intelligent work routing, agent management, and capacity-based assignment.
+      - name: Virtual Agent Integration
+        description: Bot Integration APIs for connecting external messaging platforms with ServiceNow conversational AI.
+      - name: CI/CD And DevOps
+        description: CI/CD and DevOps APIs for automated application deployment, testing, and change velocity management.
+      - name: Event Management
+        description: Event Management APIs for ingesting alerts and events from external monitoring systems.
+      - name: Predictive Intelligence
+        description: ML-powered APIs for automated classification, assignment, and prioritization of records.
+  - type: UseCases
+    data:
+      - name: Incident Management Automation
+        description: Automate incident creation, assignment, escalation, and resolution through Table and Predictive Intelligence APIs.
+      - name: Change Management Integration
+        description: Integrate external CI/CD pipelines with ServiceNow change management for automated change request workflows.
+      - name: CMDB Synchronization
+        description: Keep the CMDB in sync with external discovery and monitoring tools using Identification and Reconciliation APIs.
+      - name: Self-Service Portal Integration
+        description: Build custom portals that browse service catalogs, submit requests, and track order status.
+      - name: Customer Service Orchestration
+        description: Manage customer cases, contacts, and interactions across channels with CSM and Virtual Agent APIs.
+      - name: IT Operations Monitoring
+        description: Ingest events and metrics from monitoring tools for centralized alert management and correlation.
+      - name: Data Migration And ETL
+        description: Load data from external sources using Import Set APIs with transform maps for automated field mapping.
+      - name: Workforce Optimization
+        description: Manage agent availability and route work items based on skills and capacity using AWA APIs.
+  - type: Integrations
+    data:
+      - name: Jira
+        description: Bidirectional synchronization of incidents and issues between ServiceNow and Atlassian Jira.
+      - name: Microsoft Teams
+        description: Virtual Agent and notification integration for managing IT requests directly from Microsoft Teams.
+      - name: Slack
+        description: Conversational IT support and incident management through Slack channel integrations.
+      - name: Jenkins
+        description: CI/CD pipeline integration for automated change request creation and deployment tracking.
+      - name: Azure DevOps
+        description: DevOps pipeline integration for change velocity and automated deployment workflows.
+      - name: Splunk
+        description: Event and alert ingestion from Splunk for centralized IT operations monitoring.
+      - name: PagerDuty
+        description: Incident alerting and on-call management integration for streamlined incident response.
+      - name: AWS
+        description: Cloud resource discovery and CMDB synchronization for AWS infrastructure management.
 created: '2025-01-08'
-modified: '2026-03-03'
+modified: '2026-04-18'
 position: Consuming
 segments:
   - Workflows

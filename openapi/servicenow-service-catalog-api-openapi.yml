@@ -16,53 +16,55 @@ externalDocs:
   description: ServiceNow Service Catalog API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ServiceCatalogAPI.html
 servers:
-  - url: https://{instance}.service-now.com/api/sn_sc
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/sn_sc
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Cart
-    description: >-
-      Operations for managing the shopping cart and submitting orders.
-  - name: Catalog Items
-    description: >-
-      Operations for retrieving catalog item details and variables.
-  - name: Catalogs
-    description: >-
-      Operations for browsing and retrieving service catalogs.
-  - name: Categories
-    description: >-
-      Operations for browsing catalog categories.
+- name: Cart
+  description: >-
+    Operations for managing the shopping cart and submitting orders.
+- name: Catalog Items
+  description: >-
+    Operations for retrieving catalog item details and variables.
+- name: Catalogs
+  description: >-
+    Operations for browsing and retrieving service catalogs.
+- name: Categories
+  description: >-
+    Operations for browsing catalog categories.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /servicecatalog/catalogs:
     get:
       operationId: listCatalogs
-      summary: ServiceNow List service catalogs
+      summary: Servicenow List Service Catalogs
       description: >-
         Retrieves a list of all available service catalogs on the instance.
       tags:
-        - Catalogs
+      - Catalogs
       parameters:
-        - name: sysparm_limit
-          in: query
-          required: false
-          description: Maximum number of catalogs to return.
-          schema:
-            type: integer
-            minimum: 1
-        - name: sysparm_offset
-          in: query
-          required: false
-          description: Starting index for pagination.
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
+      - name: sysparm_limit
+        in: query
+        required: false
+        description: Maximum number of catalogs to return.
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: sysparm_offset
+        in: query
+        required: false
+        description: Starting index for pagination.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
       responses:
         '200':
           description: Successful response returning available catalogs.
@@ -75,23 +77,45 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Catalog'
+              examples:
+                Listcatalogs200Example:
+                  summary: Default listCatalogs 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      title: Example Title
+                      description: A sample description.
+                      has_categories: true
+                      has_items: true
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listcatalogs401Example:
+                  summary: Default listCatalogs 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/catalogs/{sys_id}:
     get:
       operationId: getCatalog
-      summary: ServiceNow Retrieve a specific catalog
+      summary: Servicenow Retrieve a Specific Catalog
       description: >-
         Retrieves details for a specific service catalog including its
         categories.
       tags:
-        - Catalogs
+      - Catalogs
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '200':
           description: Successful response returning the catalog details.
@@ -102,23 +126,45 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Catalog'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      title: Example Title
+                      description: A sample description.
+                      has_categories: true
+                      has_items: true
         '404':
           description: Catalog not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcatalog404Example:
+                  summary: Default getCatalog 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/categories/{sys_id}:
     get:
       operationId: getCategory
-      summary: ServiceNow Retrieve a catalog category
+      summary: Servicenow Retrieve a Catalog Category
       description: >-
         Retrieves details for a specific catalog category including its
         child categories and items.
       tags:
-        - Categories
+      - Categories
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '200':
           description: Successful response returning category details.
@@ -129,49 +175,77 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Category'
+              examples:
+                Getcategory200Example:
+                  summary: Default getCategory 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      title: Example Title
+                      description: A sample description.
+                      full_description: example_value
+                      subcategories:
+                      - sys_id: '500123'
+                        title: Example Title
         '404':
           description: Category not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcategory404Example:
+                  summary: Default getCategory 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/items:
     get:
       operationId: listCatalogItems
-      summary: ServiceNow List catalog items
+      summary: Servicenow List Catalog Items
       description: >-
         Retrieves a list of catalog items. Supports filtering by catalog
         and category.
       tags:
-        - Catalog Items
+      - Catalog Items
       parameters:
-        - name: sysparm_catalog
-          in: query
-          required: false
-          description: The sys_id of the catalog to filter items by.
-          schema:
-            type: string
-        - name: sysparm_category
-          in: query
-          required: false
-          description: The sys_id of the category to filter items by.
-          schema:
-            type: string
-        - name: sysparm_limit
-          in: query
-          required: false
-          description: Maximum number of items to return.
-          schema:
-            type: integer
-            minimum: 1
-        - name: sysparm_offset
-          in: query
-          required: false
-          description: Starting index for pagination.
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
+      - name: sysparm_catalog
+        in: query
+        required: false
+        description: The sys_id of the catalog to filter items by.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_category
+        in: query
+        required: false
+        description: The sys_id of the category to filter items by.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_limit
+        in: query
+        required: false
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: sysparm_offset
+        in: query
+        required: false
+        description: Starting index for pagination.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
       responses:
         '200':
           description: Successful response returning catalog items.
@@ -184,23 +258,46 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/CatalogItem'
+              examples:
+                Listcatalogitems200Example:
+                  summary: Default listCatalogItems 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      name: Example Title
+                      short_description: example_value
+                      category: example_value
+                      price: example_value
+                      picture: example_value
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Listcatalogitems401Example:
+                  summary: Default listCatalogItems 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/items/{sys_id}:
     get:
       operationId: getCatalogItem
-      summary: ServiceNow Retrieve a catalog item
+      summary: Servicenow Retrieve a Catalog Item
       description: >-
         Retrieves details for a specific catalog item including its
         variables and pricing information.
       tags:
-        - Catalog Items
+      - Catalog Items
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       responses:
         '200':
           description: Successful response returning item details.
@@ -211,29 +308,64 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/CatalogItemDetail'
+              examples:
+                Getcatalogitem200Example:
+                  summary: Default getCatalogItem 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      name: Example Title
+                      short_description: example_value
+                      description: A sample description.
+                      category: example_value
+                      price: example_value
+                      picture: example_value
+                      mandatory_attachment: true
+                      request_method: example_value
+                      variables:
+                      - {}
         '404':
           description: Catalog item not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcatalogitem404Example:
+                  summary: Default getCatalogItem 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/items/{sys_id}/add_to_cart:
     post:
       operationId: addItemToCart
-      summary: ServiceNow Add a catalog item to the cart
+      summary: Servicenow Add a Catalog Item to the Cart
       description: >-
         Adds the specified catalog item to the shopping cart with the
         given quantity and variable values.
       tags:
-        - Cart
+      - Cart
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CartItemInput'
+            examples:
+              AdditemtocartRequestExample:
+                summary: Default addItemToCart request
+                x-microcks-default: true
+                value:
+                  sysparm_quantity: 10
+                  variables: example_value
       responses:
         '200':
           description: Item successfully added to the cart.
@@ -244,29 +376,57 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/CartItem'
+              examples:
+                Additemtocart200Example:
+                  summary: Default addItemToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      cart_item_id: '500123'
+                      catalog_item_id: '500123'
+                      quantity: 10
+                      subtotal: 42
         '400':
           description: Bad request. Required variables are missing.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Additemtocart400Example:
+                  summary: Default addItemToCart 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/items/{sys_id}/order_now:
     post:
       operationId: orderItemNow
-      summary: ServiceNow Order a catalog item immediately
+      summary: Servicenow Order a Catalog Item Immediately
       description: >-
         Orders the specified catalog item without going through the cart.
         Creates a request directly with the given quantity and variable values.
       tags:
-        - Cart
+      - Cart
       parameters:
-        - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CartItemInput'
+            examples:
+              OrderitemnowRequestExample:
+                summary: Default orderItemNow request
+                x-microcks-default: true
+                value:
+                  sysparm_quantity: 10
+                  variables: example_value
       responses:
         '200':
           description: Order successfully submitted.
@@ -277,20 +437,40 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/OrderResult'
+              examples:
+                Orderitemnow200Example:
+                  summary: Default orderItemNow 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      request_number: example_value
+                      request_id: '500123'
+                      table: example_value
         '400':
           description: Bad request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Orderitemnow400Example:
+                  summary: Default orderItemNow 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/cart:
     get:
       operationId: getCart
-      summary: ServiceNow Retrieve the current cart
+      summary: Servicenow Retrieve the Current Cart
       description: >-
         Retrieves the contents of the current user's shopping cart.
       tags:
-        - Cart
+      - Cart
       responses:
         '200':
           description: Successful response returning cart contents.
@@ -301,19 +481,39 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/Cart'
+              examples:
+                Getcart200Example:
+                  summary: Default getCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      items:
+                      - {}
+                      subtotal: 42
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getcart401Example:
+                  summary: Default getCart 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: emptyCart
-      summary: ServiceNow Empty the cart
+      summary: Servicenow Empty the Cart
       description: >-
         Removes all items from the current user's shopping cart.
       tags:
-        - Cart
+      - Cart
       responses:
         '200':
           description: Cart successfully emptied.
@@ -324,21 +524,38 @@ paths:
                 properties:
                   result:
                     type: object
+              examples:
+                Emptycart200Example:
+                  summary: Default emptyCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result: example_value
         '401':
           description: Unauthorized.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Emptycart401Example:
+                  summary: Default emptyCart 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /servicecatalog/cart/submit_order:
     post:
       operationId: submitCartOrder
-      summary: ServiceNow Submit the cart as an order
+      summary: Servicenow Submit the Cart as an Order
       description: >-
         Submits all items in the current user's shopping cart as a service
         catalog request. Returns the request number and details.
       tags:
-        - Cart
+      - Cart
       responses:
         '200':
           description: Order successfully submitted.
@@ -349,12 +566,32 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/OrderResult'
+              examples:
+                Submitcartorder200Example:
+                  summary: Default submitCartOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      request_number: example_value
+                      request_id: '500123'
+                      table: example_value
         '400':
           description: Cart is empty or contains invalid items.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Submitcartorder400Example:
+                  summary: Default submitCartOrder 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -385,18 +622,23 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the catalog.
+          example: '500123'
         title:
           type: string
           description: The display title of the catalog.
+          example: Example Title
         description:
           type: string
           description: A description of the catalog.
+          example: A sample description.
         has_categories:
           type: boolean
           description: Whether the catalog has categories.
+          example: true
         has_items:
           type: boolean
           description: Whether the catalog has items.
+          example: true
     Category:
       type: object
       description: A catalog category.
@@ -404,15 +646,19 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the category.
+          example: '500123'
         title:
           type: string
           description: The display title of the category.
+          example: Example Title
         description:
           type: string
           description: A description of the category.
+          example: A sample description.
         full_description:
           type: string
           description: The full description of the category.
+          example: example_value
         subcategories:
           type: array
           description: Child categories.
@@ -423,6 +669,7 @@ components:
                 type: string
               title:
                 type: string
+          example: []
     CatalogItem:
       type: object
       description: A catalog item summary.
@@ -430,21 +677,27 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the catalog item.
+          example: '500123'
         name:
           type: string
           description: The display name of the item.
+          example: Example Title
         short_description:
           type: string
           description: A brief description of the item.
+          example: example_value
         category:
           type: string
           description: The category sys_id.
+          example: example_value
         price:
           type: string
           description: The displayed price of the item.
+          example: example_value
         picture:
           type: string
           description: URL to the item picture.
+          example: example_value
     CatalogItemDetail:
       type: object
       description: Full details of a catalog item including its variables.
@@ -452,30 +705,39 @@ components:
         sys_id:
           type: string
           description: Unique identifier for the catalog item.
+          example: '500123'
         name:
           type: string
           description: The display name of the item.
+          example: Example Title
         short_description:
           type: string
           description: A brief description of the item.
+          example: example_value
         description:
           type: string
           description: The full description of the item.
+          example: A sample description.
         category:
           type: string
           description: The category sys_id.
+          example: example_value
         price:
           type: string
           description: The displayed price.
+          example: example_value
         picture:
           type: string
           description: URL to the item picture.
+          example: example_value
         mandatory_attachment:
           type: boolean
           description: Whether a file attachment is required to order the item.
+          example: true
         request_method:
           type: string
           description: The method used to fulfill the request.
+          example: example_value
         variables:
           type: array
           description: >-
@@ -483,6 +745,7 @@ components:
             ordering the item.
           items:
             $ref: '#/components/schemas/CatalogVariable'
+          example: []
     CatalogVariable:
       type: object
       description: A variable on a catalog item form.
@@ -490,18 +753,23 @@ components:
         name:
           type: string
           description: The internal name of the variable.
+          example: Example Title
         label:
           type: string
           description: The display label.
+          example: Example Title
         type:
           type: string
           description: The variable type.
+          example: example_value
         mandatory:
           type: boolean
           description: Whether the variable is required.
+          example: true
         default_value:
           type: string
           description: The default value.
+          example: example_value
         choices:
           type: array
           description: Available choices for select-type variables.
@@ -512,16 +780,18 @@ components:
                 type: string
               value:
                 type: string
+          example: []
     CartItemInput:
       type: object
       description: Input for adding a catalog item to the cart or ordering directly.
       required:
-        - sysparm_quantity
+      - sysparm_quantity
       properties:
         sysparm_quantity:
           type: integer
           minimum: 1
           description: The quantity of items to order.
+          example: 10
         variables:
           type: object
           description: >-
@@ -529,6 +799,7 @@ components:
             names and values are the user-provided entries.
           additionalProperties:
             type: string
+          example: example_value
     CartItem:
       type: object
       description: An item in the shopping cart.
@@ -536,15 +807,19 @@ components:
         cart_item_id:
           type: string
           description: Unique identifier for the cart item.
+          example: '500123'
         catalog_item_id:
           type: string
           description: The sys_id of the catalog item.
+          example: '500123'
         quantity:
           type: integer
           description: The quantity ordered.
+          example: 10
         subtotal:
           type: string
           description: The subtotal for this cart item.
+          example: 42
     Cart:
       type: object
       description: The shopping cart contents.
@@ -553,9 +828,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CartItem'
+          example: []
         subtotal:
           type: string
           description: The cart subtotal.
+          example: 42
     OrderResult:
       type: object
       description: The result of a submitted catalog order.
@@ -563,12 +840,15 @@ components:
         request_number:
           type: string
           description: The generated request number.
+          example: example_value
         request_id:
           type: string
           description: The sys_id of the request record.
+          example: '500123'
         table:
           type: string
           description: The table name where the request is stored.
+          example: example_value
     Error:
       type: object
       properties:
@@ -581,3 +861,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

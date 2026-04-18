@@ -1,0 +1,12 @@
+{
+  "name": "Example Title",
+  "description": "A sample description.",
+  "severity": "1",
+  "status": "example_value",
+  "channel": {
+    "name": "Example Title"
+  },
+  "note": [],
+  "relatedEntity": [],
+  "relatedParty": []
+}

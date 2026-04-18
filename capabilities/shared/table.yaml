@@ -1,0 +1,340 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Table API"
+  description: "Perform CRUD operations on records within any ServiceNow table including incidents, problems, changes, and custom tables."
+  tags:
+    - ServiceNow
+    - Table
+    - CRUD
+    - Records
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-table
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/now"
+      description: "ServiceNow Table API for CRUD operations on any table."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: table-records
+          path: /table
+          description: "Table record CRUD operations."
+          operations:
+            - name: list-records
+              method: GET
+              path: /{tableName}
+              description: "List records from a ServiceNow table."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter results."
+                - name: sysparm_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields to return."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+                - name: sysparm_display_value
+                  in: query
+                  type: string
+                  required: false
+                  description: "Controls display vs actual values in response."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-record
+              method: POST
+              path: /{tableName}
+              description: "Create a new record in a ServiceNow table."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+              body:
+                type: json
+                data: "{{tools.record_data}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-record
+              method: GET
+              path: /{tableName}/{sys_id}
+              description: "Retrieve a single record by sys_id."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique 32-character system identifier."
+                - name: sysparm_fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of fields to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: update-record
+              method: PUT
+              path: /{tableName}/{sys_id}
+              description: "Update an existing record."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique 32-character system identifier."
+              body:
+                type: json
+                data: "{{tools.record_data}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: patch-record
+              method: PATCH
+              path: /{tableName}/{sys_id}
+              description: "Partially update an existing record."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique 32-character system identifier."
+              body:
+                type: json
+                data: "{{tools.record_data}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: delete-record
+              method: DELETE
+              path: /{tableName}/{sys_id}
+              description: "Permanently delete a record."
+              inputParameters:
+                - name: tableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the ServiceNow table."
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique 32-character system identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8106
+      namespace: servicenow-table-api
+      resources:
+        - path: /v1/tables/{tableName}
+          name: table-records
+          description: "Table record operations."
+          operations:
+            - method: GET
+              name: list-records
+              description: "List table records."
+              call: "servicenow-table.list-records"
+              with:
+                tableName: "rest.tableName"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_fields: "rest.sysparm_fields"
+                sysparm_limit: "rest.sysparm_limit"
+                sysparm_offset: "rest.sysparm_offset"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-record
+              description: "Create a table record."
+              call: "servicenow-table.create-record"
+              with:
+                tableName: "rest.tableName"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/tables/{tableName}/{sys_id}
+          name: table-record-detail
+          description: "Single record operations."
+          operations:
+            - method: GET
+              name: get-record
+              description: "Get a single record."
+              call: "servicenow-table.get-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: PUT
+              name: update-record
+              description: "Update a record."
+              call: "servicenow-table.update-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: delete-record
+              description: "Delete a record."
+              call: "servicenow-table.delete-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9106
+      namespace: servicenow-table-mcp
+      transport: http
+      tools:
+        - name: list-records
+          description: "List records from any ServiceNow table with query filtering and pagination."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-table.list-records"
+          with:
+            tableName: "tools.tableName"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_fields: "tools.sysparm_fields"
+            sysparm_limit: "tools.sysparm_limit"
+            sysparm_offset: "tools.sysparm_offset"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-record
+          description: "Create a new record in any ServiceNow table."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-table.create-record"
+          with:
+            tableName: "tools.tableName"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-record
+          description: "Retrieve a single record from a ServiceNow table by sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-table.get-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: update-record
+          description: "Update an existing record in a ServiceNow table."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-table.update-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: patch-record
+          description: "Partially update an existing record in a ServiceNow table."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-table.patch-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: delete-record
+          description: "Permanently delete a record from a ServiceNow table."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-table.delete-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

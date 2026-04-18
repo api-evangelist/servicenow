@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "description": "Fields for creating or updating a change request.",
+  "properties": {
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the change.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the change.",
+      "example": "A sample description."
+    },
+    "priority": {
+      "type": "string",
+      "description": "The priority level.",
+      "example": "1",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "risk": {
+      "type": "string",
+      "description": "The risk level.",
+      "example": "example_value"
+    },
+    "impact": {
+      "type": "string",
+      "description": "The impact level.",
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the change.",
+      "example": "example_value"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user.",
+      "example": "example_value"
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the assignment group.",
+      "example": "example_value"
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The sys_id of the requesting user.",
+      "example": "example_value"
+    },
+    "start_date": {
+      "type": "string",
+      "description": "The planned start date and time.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "end_date": {
+      "type": "string",
+      "description": "The planned end date and time.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "cmdb_ci": {
+      "type": "string",
+      "description": "The sys_id of the affected configuration item.",
+      "example": "example_value"
+    },
+    "justification": {
+      "type": "string",
+      "description": "The business justification for the change.",
+      "example": "example_value"
+    },
+    "implementation_plan": {
+      "type": "string",
+      "description": "The plan for implementing the change.",
+      "example": "example_value"
+    },
+    "backout_plan": {
+      "type": "string",
+      "description": "The plan for reverting the change if needed.",
+      "example": "example_value"
+    },
+    "test_plan": {
+      "type": "string",
+      "description": "The plan for testing the change.",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeRequestInput"
+}

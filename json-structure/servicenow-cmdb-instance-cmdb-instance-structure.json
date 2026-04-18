@@ -1,0 +1,120 @@
+{
+  "type": "object",
+  "description": "A full CMDB configuration item record. Fields vary by CI class but common attributes are included below.",
+  "name": "CmdbInstance",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the configuration item."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the configuration item."
+    },
+    "sys_class_name": {
+      "type": "string",
+      "description": "The CMDB class name for this CI."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the CI."
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "The subcategory of the CI."
+    },
+    "operational_status": {
+      "type": "string",
+      "description": "The operational status of the CI.",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "install_status": {
+      "type": "string",
+      "description": "The installation status of the CI."
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "The serial number of the hardware asset."
+    },
+    "asset_tag": {
+      "type": "string",
+      "description": "The asset tag identifier."
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address of the CI."
+    },
+    "mac_address": {
+      "type": "string",
+      "description": "The MAC address of the CI."
+    },
+    "dns_domain": {
+      "type": "string",
+      "description": "The DNS domain of the CI."
+    },
+    "fqdn": {
+      "type": "string",
+      "description": "The fully qualified domain name."
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system."
+    },
+    "os_version": {
+      "type": "string",
+      "description": "The operating system version."
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "The sys_id of the manufacturer."
+    },
+    "model_id": {
+      "type": "string",
+      "description": "The sys_id of the model."
+    },
+    "location": {
+      "type": "string",
+      "description": "The sys_id of the CI location."
+    },
+    "department": {
+      "type": "string",
+      "description": "The sys_id of the department."
+    },
+    "company": {
+      "type": "string",
+      "description": "The sys_id of the owning company."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "managed_by": {
+      "type": "string",
+      "description": "The sys_id of the managing user."
+    },
+    "owned_by": {
+      "type": "string",
+      "description": "The sys_id of the owner."
+    },
+    "support_group": {
+      "type": "string",
+      "description": "The sys_id of the support group."
+    },
+    "sys_created_on": {
+      "type": "datetime",
+      "description": "The date and time when the CI was created."
+    },
+    "sys_updated_on": {
+      "type": "datetime",
+      "description": "The date and time when the CI was last updated."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

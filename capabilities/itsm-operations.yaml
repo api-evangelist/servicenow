@@ -1,0 +1,512 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow ITSM Operations"
+  description: "Unified workflow for IT Service Management operations combining table records, aggregate analytics, change management, and trouble tickets. Used by ITSM administrators and service desk agents to manage incidents, changes, and operational reporting."
+  tags:
+    - ServiceNow
+    - ITSM
+    - Change Management
+    - Incident Management
+    - Service Desk
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+      SERVICENOW_INSTANCE: SERVICENOW_INSTANCE
+
+capability:
+  consumes:
+    - import: servicenow-table
+      location: ./shared/table.yaml
+    - import: servicenow-aggregate
+      location: ./shared/aggregate.yaml
+    - import: servicenow-change-management
+      location: ./shared/change-management.yaml
+    - import: servicenow-trouble-ticket
+      location: ./shared/trouble-ticket.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: servicenow-itsm-operations-api
+      description: "Unified REST API for ServiceNow ITSM operations including records, changes, and trouble tickets."
+      resources:
+        - path: /v1/records/{tableName}
+          name: table-records
+          description: "Generic table record operations for any ServiceNow table."
+          operations:
+            - method: GET
+              name: list-records
+              description: "List records from any ServiceNow table."
+              call: "servicenow-table.list-records"
+              with:
+                tableName: "rest.tableName"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_fields: "rest.sysparm_fields"
+                sysparm_limit: "rest.sysparm_limit"
+                sysparm_offset: "rest.sysparm_offset"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-record
+              description: "Create a record in any table."
+              call: "servicenow-table.create-record"
+              with:
+                tableName: "rest.tableName"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/records/{tableName}/{sys_id}
+          name: table-record-detail
+          description: "Single record operations."
+          operations:
+            - method: GET
+              name: get-record
+              description: "Get a single record."
+              call: "servicenow-table.get-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: PUT
+              name: update-record
+              description: "Update a record."
+              call: "servicenow-table.update-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: delete-record
+              description: "Delete a record."
+              call: "servicenow-table.delete-record"
+              with:
+                tableName: "rest.tableName"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/aggregate-stats/{tableName}
+          name: aggregate-statistics
+          description: "Aggregate statistics on table data."
+          operations:
+            - method: GET
+              name: get-aggregate-stats
+              description: "Compute aggregate statistics."
+              call: "servicenow-aggregate.get-aggregate-stats"
+              with:
+                tableName: "rest.tableName"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_count: "rest.sysparm_count"
+                sysparm_sum_fields: "rest.sysparm_sum_fields"
+                sysparm_group_by: "rest.sysparm_group_by"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/normal-changes
+          name: normal-changes
+          description: "Normal change request management."
+          operations:
+            - method: GET
+              name: list-normal-changes
+              description: "List normal change requests."
+              call: "servicenow-change-management.list-normal-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-normal-change
+              description: "Create a normal change request."
+              call: "servicenow-change-management.create-normal-change"
+              with:
+                short_description: "rest.short_description"
+                description: "rest.description"
+                priority: "rest.priority"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/normal-changes/{sys_id}
+          name: normal-change-detail
+          description: "Single normal change operations."
+          operations:
+            - method: GET
+              name: get-normal-change
+              description: "Get a normal change request."
+              call: "servicenow-change-management.get-normal-change"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: PATCH
+              name: update-normal-change
+              description: "Update a normal change request."
+              call: "servicenow-change-management.update-normal-change"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/emergency-changes
+          name: emergency-changes
+          description: "Emergency change operations."
+          operations:
+            - method: GET
+              name: list-emergency-changes
+              description: "List emergency changes."
+              call: "servicenow-change-management.list-emergency-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-emergency-change
+              description: "Create an emergency change."
+              call: "servicenow-change-management.create-emergency-change"
+              with:
+                short_description: "rest.short_description"
+                description: "rest.description"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/standard-changes
+          name: standard-changes
+          description: "Standard change operations."
+          operations:
+            - method: GET
+              name: list-standard-changes
+              description: "List standard changes."
+              call: "servicenow-change-management.list-standard-changes"
+              with:
+                sysparm_query: "rest.sysparm_query"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/trouble-tickets
+          name: trouble-tickets
+          description: "Trouble ticket operations."
+          operations:
+            - method: GET
+              name: list-trouble-tickets
+              description: "List trouble tickets."
+              call: "servicenow-trouble-ticket.list-trouble-tickets"
+              with:
+                limit: "rest.limit"
+                severity: "rest.severity"
+                status: "rest.status"
+                ticketType: "rest.ticketType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-trouble-ticket
+              description: "Create a trouble ticket."
+              call: "servicenow-trouble-ticket.create-trouble-ticket"
+              with:
+                name: "rest.name"
+                description: "rest.description"
+                severity: "rest.severity"
+                status: "rest.status"
+                ticketType: "rest.ticketType"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/trouble-tickets/{id}
+          name: trouble-ticket-detail
+          description: "Single trouble ticket operations."
+          operations:
+            - method: GET
+              name: get-trouble-ticket
+              description: "Get a trouble ticket."
+              call: "servicenow-trouble-ticket.get-trouble-ticket"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PATCH
+              name: update-trouble-ticket
+              description: "Update a trouble ticket."
+              call: "servicenow-trouble-ticket.update-trouble-ticket"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: servicenow-itsm-operations-mcp
+      transport: http
+      description: "MCP server for AI-assisted ServiceNow ITSM operations."
+      tools:
+        - name: list-records
+          description: "List records from any ServiceNow table with query filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-table.list-records"
+          with:
+            tableName: "tools.tableName"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_fields: "tools.sysparm_fields"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-record
+          description: "Create a new record in any ServiceNow table."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-table.create-record"
+          with:
+            tableName: "tools.tableName"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-record
+          description: "Retrieve a single record by table name and sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-table.get-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: update-record
+          description: "Update an existing record in a ServiceNow table."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-table.update-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: delete-record
+          description: "Permanently delete a record from a ServiceNow table."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-table.delete-record"
+          with:
+            tableName: "tools.tableName"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-aggregate-stats
+          description: "Compute aggregate statistics on any ServiceNow table."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-aggregate.get-aggregate-stats"
+          with:
+            tableName: "tools.tableName"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_count: "tools.sysparm_count"
+            sysparm_sum_fields: "tools.sysparm_sum_fields"
+            sysparm_group_by: "tools.sysparm_group_by"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-normal-changes
+          description: "List normal change requests."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-normal-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-normal-change
+          description: "Create a new normal change request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-normal-change"
+          with:
+            short_description: "tools.short_description"
+            description: "tools.description"
+            priority: "tools.priority"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-normal-change
+          description: "Retrieve a specific normal change request."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-change-management.get-normal-change"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: update-normal-change
+          description: "Update a normal change request."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-change-management.update-normal-change"
+          with:
+            sys_id: "tools.sys_id"
+            short_description: "tools.short_description"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-standard-changes
+          description: "List standard change requests."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-standard-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-standard-change
+          description: "Create a standard change from a template."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-standard-change"
+          with:
+            standard_change_template_id: "tools.standard_change_template_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-emergency-changes
+          description: "List emergency change requests."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-change-management.list-emergency-changes"
+          with:
+            sysparm_query: "tools.sysparm_query"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-emergency-change
+          description: "Create an emergency change for urgent situations."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-emergency-change"
+          with:
+            short_description: "tools.short_description"
+            description: "tools.description"
+            priority: "tools.priority"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-change-tasks
+          description: "List tasks for a change request."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-change-management.list-change-tasks"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-change-task
+          description: "Create a task for a change request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-change-management.create-change-task"
+          with:
+            sys_id: "tools.sys_id"
+            short_description: "tools.short_description"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-trouble-tickets
+          description: "List trouble tickets with filtering by severity, status, and type."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-trouble-ticket.list-trouble-tickets"
+          with:
+            limit: "tools.limit"
+            severity: "tools.severity"
+            status: "tools.status"
+            ticketType: "tools.ticketType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-trouble-ticket
+          description: "Create a trouble ticket (Case, Incident, or Service Problem Case)."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-trouble-ticket.create-trouble-ticket"
+          with:
+            name: "tools.name"
+            description: "tools.description"
+            severity: "tools.severity"
+            status: "tools.status"
+            ticketType: "tools.ticketType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-trouble-ticket
+          description: "Retrieve a specific trouble ticket."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-trouble-ticket.get-trouble-ticket"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-trouble-ticket
+          description: "Update an existing trouble ticket."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "servicenow-trouble-ticket.update-trouble-ticket"
+          with:
+            id: "tools.id"
+            name: "tools.name"
+            severity: "tools.severity"
+          outputParameters:
+            - type: object
+              mapping: "$."

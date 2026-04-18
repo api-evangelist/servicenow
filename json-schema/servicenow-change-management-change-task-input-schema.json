@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "description": "Fields for creating a change task.",
+  "properties": {
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the task.",
+      "example": "A sample description."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user.",
+      "example": "example_value"
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the assignment group.",
+      "example": "example_value"
+    },
+    "planned_start_date": {
+      "type": "string",
+      "description": "The planned start date.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "planned_end_date": {
+      "type": "string",
+      "description": "The planned end date.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeTaskInput"
+}

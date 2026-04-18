@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "name": "RelatedEntity",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "This value is always relatedEntity"
+    },
+    "id": {
+      "type": "string",
+      "description": "Sys_id of the impacted item or service"
+    },
+    "href": {
+      "type": "string",
+      "description": "Returns an empty string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the impacted item or service"
+    },
+    "role": {
+      "type": "string",
+      "description": "Description of the impacted item or service"
+    },
+    "@referredType": {
+      "type": "string",
+      "description": "Type of item or service",
+      "enum": [
+        "asset",
+        "product",
+        "product_inventory",
+        "cmdb_ci",
+        "cmdb_ci_service"
+      ]
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

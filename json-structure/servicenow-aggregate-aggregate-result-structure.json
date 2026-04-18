@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "The aggregate statistics result. Structure varies based on the requested aggregate types and group-by fields.",
+  "name": "AggregateResult",
+  "properties": {
+    "stats": {
+      "type": "object",
+      "description": "Contains the computed aggregate values organized by field name and aggregate type.",
+      "properties": {
+        "count": {
+          "type": "string",
+          "description": "The total count of records matching the query."
+        }
+      }
+    },
+    "group_by": {
+      "type": "array",
+      "description": "When group-by fields are specified, contains an entry for each unique group with its aggregate values.",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

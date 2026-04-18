@@ -16,122 +16,129 @@ externalDocs:
   description: ServiceNow Aggregate API Documentation
   url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_AggregateAPI.html
 servers:
-  - url: https://{instance}.service-now.com/api/now
-    description: ServiceNow Instance
-    variables:
-      instance:
-        default: instance
-        description: Your ServiceNow instance name
+- url: https://{instance}.service-now.com/api/now
+  description: ServiceNow Instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
 tags:
-  - name: Aggregate Statistics
-    description: >-
-      Operations for computing aggregate statistics on ServiceNow table records
-      including count, sum, average, minimum, and maximum values.
+- name: Aggregate Statistics
+  description: >-
+    Operations for computing aggregate statistics on ServiceNow table records
+    including count, sum, average, minimum, and maximum values.
 security:
-  - basicAuth: []
-  - oauth2: []
+- basicAuth: []
+- oauth2: []
 paths:
   /stats/{tableName}:
     get:
       operationId: getAggregateStats
-      summary: ServiceNow Retrieve aggregate statistics for a table
+      summary: Servicenow Retrieve Aggregate Statistics for a Table
       description: >-
         Computes aggregate statistics for records in the specified table.
         Supports count, sum, average, minimum, and maximum calculations with
         optional query filtering and group-by fields. Multiple aggregate types
         can be requested in a single call.
       tags:
-        - Aggregate Statistics
+      - Aggregate Statistics
       parameters:
-        - $ref: '#/components/parameters/tableName'
-        - name: sysparm_query
-          in: query
-          required: false
-          description: >-
-            An encoded query string to filter records before aggregation.
-            Uses the same syntax as the Table API sysparm_query parameter.
-          schema:
-            type: string
-          example: 'active=true^priority=1'
-        - name: sysparm_count
-          in: query
-          required: false
-          description: >-
-            When set to true, returns the count of records matching the query.
-          schema:
-            type: boolean
-            default: false
-        - name: sysparm_sum_fields
-          in: query
-          required: false
-          description: >-
-            A comma-separated list of numeric fields for which to calculate
-            the sum.
-          schema:
-            type: string
-          example: 'reassignment_count,reopen_count'
-        - name: sysparm_avg_fields
-          in: query
-          required: false
-          description: >-
-            A comma-separated list of numeric fields for which to calculate
-            the average.
-          schema:
-            type: string
-        - name: sysparm_min_fields
-          in: query
-          required: false
-          description: >-
-            A comma-separated list of fields for which to find the minimum
-            value.
-          schema:
-            type: string
-        - name: sysparm_max_fields
-          in: query
-          required: false
-          description: >-
-            A comma-separated list of fields for which to find the maximum
-            value.
-          schema:
-            type: string
-        - name: sysparm_group_by
-          in: query
-          required: false
-          description: >-
-            A comma-separated list of fields by which to group the aggregated
-            results. Each unique combination of group-by field values produces
-            a separate result entry.
-          schema:
-            type: string
-          example: 'priority,state'
-        - name: sysparm_order_by
-          in: query
-          required: false
-          description: >-
-            The field by which to order the grouped results.
-          schema:
-            type: string
-        - name: sysparm_having
-          in: query
-          required: false
-          description: >-
-            An additional filter applied after aggregation to restrict which
-            groups are returned based on aggregate values.
-          schema:
-            type: string
-        - name: sysparm_display_value
-          in: query
-          required: false
-          description: >-
-            Controls whether display values or actual values are returned for
-            group-by fields.
-          schema:
-            type: string
-            enum:
-              - 'true'
-              - 'false'
-              - all
-            default: 'false'
+      - $ref: '#/components/parameters/tableName'
+      - name: sysparm_query
+        in: query
+        required: false
+        description: >-
+          An encoded query string to filter records before aggregation.
+          Uses the same syntax as the Table API sysparm_query parameter.
+        schema:
+          type: string
+        example: 'active=true^priority=1'
+      - name: sysparm_count
+        in: query
+        required: false
+        description: >-
+          When set to true, returns the count of records matching the query.
+        schema:
+          type: boolean
+          default: false
+        example: 42
+      - name: sysparm_sum_fields
+        in: query
+        required: false
+        description: >-
+          A comma-separated list of numeric fields for which to calculate
+          the sum.
+        schema:
+          type: string
+        example: 'reassignment_count,reopen_count'
+      - name: sysparm_avg_fields
+        in: query
+        required: false
+        description: >-
+          A comma-separated list of numeric fields for which to calculate
+          the average.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_min_fields
+        in: query
+        required: false
+        description: >-
+          A comma-separated list of fields for which to find the minimum
+          value.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_max_fields
+        in: query
+        required: false
+        description: >-
+          A comma-separated list of fields for which to find the maximum
+          value.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_group_by
+        in: query
+        required: false
+        description: >-
+          A comma-separated list of fields by which to group the aggregated
+          results. Each unique combination of group-by field values produces
+          a separate result entry.
+        schema:
+          type: string
+        example: 'priority,state'
+      - name: sysparm_order_by
+        in: query
+        required: false
+        description: >-
+          The field by which to order the grouped results.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_having
+        in: query
+        required: false
+        description: >-
+          An additional filter applied after aggregation to restrict which
+          groups are returned based on aggregate values.
+        schema:
+          type: string
+        example: example_value
+      - name: sysparm_display_value
+        in: query
+        required: false
+        description: >-
+          Controls whether display values or actual values are returned for
+          group-by fields.
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          - all
+          default: 'false'
+        example: 'true'
       responses:
         '200':
           description: >-
@@ -143,12 +150,30 @@ paths:
                 properties:
                   result:
                     $ref: '#/components/schemas/AggregateResult'
+              examples:
+                Getaggregatestats200Example:
+                  summary: Default getAggregateStats 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      stats:
+                        count: 42
+                      group_by:
+                      - {}
         '401':
           description: Unauthorized. Authentication credentials are missing or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getaggregatestats401Example:
+                  summary: Default getAggregateStats 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
         '404':
           description: >-
             Not found. The specified table does not exist.
@@ -156,6 +181,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                Getaggregatestats404Example:
+                  summary: Default getAggregateStats 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -199,6 +235,7 @@ components:
               type: string
               description: The total count of records matching the query.
           additionalProperties: true
+          example: example_value
         group_by:
           type: array
           description: >-
@@ -207,6 +244,7 @@ components:
           items:
             type: object
             additionalProperties: true
+          example: []
     Error:
       type: object
       properties:
@@ -219,3 +257,4 @@ components:
             detail:
               type: string
               description: Detailed information about the error.
+          example: example_value

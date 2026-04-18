@@ -1,0 +1,180 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Contact API"
+  description: "Retrieve and create Customer Service Management (CSM) contact records in ServiceNow, including social media profile creation."
+  tags:
+    - ServiceNow
+    - Contact
+    - Customer Service Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-contact
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.servicenow.com/api/now"
+      description: "ServiceNow Contact API for managing CSM contacts."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: contacts
+          path: /contact
+          description: "CSM contact operations."
+          operations:
+            - name: list-contacts
+              method: GET
+              description: "Retrieve a list of CSM contacts."
+              inputParameters:
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query to filter contacts."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: create-contact
+              method: POST
+              description: "Create a new CSM contact."
+              body:
+                type: json
+                data:
+                  first_name: "{{tools.first_name}}"
+                  last_name: "{{tools.last_name}}"
+                  email: "{{tools.email}}"
+                  phone: "{{tools.phone}}"
+                  company: "{{tools.company}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-contact
+              method: GET
+              path: /{id}
+              description: "Retrieve a specific contact by sys_id."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The sys_id of the contact."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8107
+      namespace: servicenow-contact-api
+      resources:
+        - path: /v1/contacts
+          name: contacts
+          description: "CSM contact operations."
+          operations:
+            - method: GET
+              name: list-contacts
+              description: "List CSM contacts."
+              call: "servicenow-contact.list-contacts"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+                sysparm_offset: "rest.sysparm_offset"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: POST
+              name: create-contact
+              description: "Create a CSM contact."
+              call: "servicenow-contact.create-contact"
+              with:
+                first_name: "rest.first_name"
+                last_name: "rest.last_name"
+                email: "rest.email"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/contacts/{id}
+          name: contact-detail
+          description: "Single contact operations."
+          operations:
+            - method: GET
+              name: get-contact
+              description: "Get a specific contact."
+              call: "servicenow-contact.get-contact"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9107
+      namespace: servicenow-contact-mcp
+      transport: http
+      tools:
+        - name: list-contacts
+          description: "List Customer Service Management contacts with optional filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-contact.list-contacts"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: create-contact
+          description: "Create a new CSM contact with optional social media profile."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-contact.create-contact"
+          with:
+            first_name: "tools.first_name"
+            last_name: "tools.last_name"
+            email: "tools.email"
+            phone: "tools.phone"
+            company: "tools.company"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-contact
+          description: "Retrieve a specific CSM contact by sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-contact.get-contact"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

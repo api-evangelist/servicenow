@@ -1,0 +1,10 @@
+{
+  "sys_id": "500123",
+  "number": "example_value",
+  "short_description": "example_value",
+  "state": "example_value",
+  "assigned_to": "example_value",
+  "change_request": "example_value",
+  "planned_start_date": "2026-01-15T10:30:00Z",
+  "planned_end_date": "2026-01-15T10:30:00Z"
+}

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "description": "A generic ServiceNow record. The actual fields depend on the table being queried. Common system fields are included in every record.",
+  "name": "Record",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "The unique 32-character system identifier for the record."
+    },
+    "sys_created_on": {
+      "type": "datetime",
+      "description": "The date and time when the record was created."
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who created the record."
+    },
+    "sys_updated_on": {
+      "type": "datetime",
+      "description": "The date and time when the record was last updated."
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last updated the record."
+    },
+    "sys_mod_count": {
+      "type": "integer",
+      "description": "The number of times the record has been modified."
+    },
+    "sys_tags": {
+      "type": "string",
+      "description": "System tags associated with the record."
+    },
+    "sys_class_name": {
+      "type": "string",
+      "description": "The table class name for the record."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

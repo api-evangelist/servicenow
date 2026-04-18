@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "A ServiceNow service catalog.",
+  "name": "Catalog",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog."
+    },
+    "title": {
+      "type": "string",
+      "description": "The display title of the catalog."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the catalog."
+    },
+    "has_categories": {
+      "type": "boolean",
+      "description": "Whether the catalog has categories."
+    },
+    "has_items": {
+      "type": "boolean",
+      "description": "Whether the catalog has items."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

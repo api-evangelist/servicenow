@@ -1,0 +1,253 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Attachment API"
+  description: "Upload, retrieve, download, and delete file attachments associated with ServiceNow table records."
+  tags:
+    - ServiceNow
+    - Attachments
+    - Files
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-attachment
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/now"
+      description: "ServiceNow Attachment API for managing file attachments on records."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: attachments
+          path: /attachment
+          description: "File attachment operations."
+          operations:
+            - name: list-attachments
+              method: GET
+              description: "Retrieve metadata for file attachments with optional filtering."
+              inputParameters:
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter attachments."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of attachment records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-attachment
+              method: GET
+              path: /{sys_id}
+              description: "Retrieve metadata for a single attachment by sys_id."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique system identifier for the attachment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: delete-attachment
+              method: DELETE
+              path: /{sys_id}
+              description: "Delete an attachment and its file content."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique system identifier for the attachment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: download-attachment-file
+              method: GET
+              path: /{sys_id}/file
+              description: "Download the binary file content of an attachment."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique system identifier for the attachment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: upload-attachment-binary
+              method: POST
+              path: /file
+              description: "Upload a file as a binary stream attached to a table record."
+              inputParameters:
+                - name: table_name
+                  in: query
+                  type: string
+                  required: true
+                  description: "The table to which the file is attached."
+                - name: table_sys_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The sys_id of the record to attach the file to."
+                - name: file_name
+                  in: query
+                  type: string
+                  required: true
+                  description: "The file name including extension."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: servicenow-attachment-api
+      resources:
+        - path: /v1/attachments
+          name: attachments
+          description: "Manage file attachments on ServiceNow records."
+          operations:
+            - method: GET
+              name: list-attachments
+              description: "List attachment metadata."
+              call: "servicenow-attachment.list-attachments"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+                sysparm_offset: "rest.sysparm_offset"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/attachments/{sys_id}
+          name: attachment-detail
+          description: "Single attachment operations."
+          operations:
+            - method: GET
+              name: get-attachment
+              description: "Get attachment metadata."
+              call: "servicenow-attachment.get-attachment"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: delete-attachment
+              description: "Delete an attachment."
+              call: "servicenow-attachment.delete-attachment"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/attachments/{sys_id}/file
+          name: attachment-file
+          description: "Download attachment file content."
+          operations:
+            - method: GET
+              name: download-attachment-file
+              description: "Download attachment binary content."
+              call: "servicenow-attachment.download-attachment-file"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: servicenow-attachment-mcp
+      transport: http
+      tools:
+        - name: list-attachments
+          description: "List file attachment metadata with optional filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-attachment.list-attachments"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-attachment
+          description: "Get metadata for a specific attachment by sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-attachment.get-attachment"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: delete-attachment
+          description: "Delete an attachment and its file content."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-attachment.delete-attachment"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: download-attachment-file
+          description: "Download the binary file content of an attachment."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-attachment.download-attachment-file"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-attachment-binary
+          description: "Upload a file as a binary stream attached to a record."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-attachment.upload-attachment-binary"
+          with:
+            table_name: "tools.table_name"
+            table_sys_id: "tools.table_sys_id"
+            file_name: "tools.file_name"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

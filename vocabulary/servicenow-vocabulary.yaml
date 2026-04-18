@@ -1,0 +1,42 @@
+name: servicenow API Vocabulary
+provider: servicenow
+created: '2026-04-18'
+modified: '2026-04-18'
+apis:
+- name: ServiceNow Contact API
+  version: Zurich
+- name: ServiceNow Aggregate API
+  version: Yokohama
+- name: ServiceNow Attachment API
+  version: Yokohama
+- name: ServiceNow Change Management API
+  version: Yokohama
+- name: ServiceNow CMDB Instance API
+  version: Yokohama
+- name: ServiceNow Import Set API
+  version: Yokohama
+- name: ServiceNow Service Catalog API
+  version: Yokohama
+- name: ServiceNow Table API
+  version: Yokohama
+- name: ServiceNow Trouble Ticket Open API
+  version: Zurich
+resources: 9
+operations: 44
+schemas: 35
+tags:
+- Aggregate Statistics
+- Attachments
+- CMDB Instances
+- Cart
+- Catalog Items
+- Catalogs
+- Categories
+- Change Tasks
+- Contact
+- Emergency Changes
+- Import Sets
+- Normal Changes
+- Standard Changes
+- Table Records
+- Trouble Ticket

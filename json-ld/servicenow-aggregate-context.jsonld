@@ -1,0 +1,20 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "AggregateResult": {
+      "@id": "ns:AggregateResult",
+      "@context": {
+        "stats": "ns:stats",
+        "group_by": "ns:group_by"
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

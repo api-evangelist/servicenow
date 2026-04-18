@@ -1,0 +1,246 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Data Integration And Configuration"
+  description: "Unified workflow for data integration and configuration management combining import sets for ETL, CMDB for configuration items, and attachment management. Used by integration engineers and CMDB administrators."
+  tags:
+    - ServiceNow
+    - Data Integration
+    - CMDB
+    - ETL
+    - Attachments
+    - Configuration Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+      SERVICENOW_INSTANCE: SERVICENOW_INSTANCE
+
+capability:
+  consumes:
+    - import: servicenow-import-set
+      location: ./shared/import-set.yaml
+    - import: servicenow-cmdb-instance
+      location: ./shared/cmdb-instance.yaml
+    - import: servicenow-attachment
+      location: ./shared/attachment.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: servicenow-data-integration-api
+      description: "Unified REST API for ServiceNow data integration and configuration management."
+      resources:
+        - path: /v1/import-sets/{stagingTableName}
+          name: import-sets
+          description: "Import set operations."
+          operations:
+            - method: POST
+              name: insert-import-set-record
+              description: "Insert a record into a staging table."
+              call: "servicenow-import-set.insert-import-set-record"
+              with:
+                stagingTableName: "rest.stagingTableName"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/import-sets/{stagingTableName}/bulk
+          name: import-sets-bulk
+          description: "Bulk import operations."
+          operations:
+            - method: POST
+              name: insert-multiple-import-set-records
+              description: "Insert multiple records into a staging table."
+              call: "servicenow-import-set.insert-multiple-import-set-records"
+              with:
+                stagingTableName: "rest.stagingTableName"
+                records: "rest.records"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/cmdb-instances/{className}
+          name: cmdb-instances
+          description: "CMDB configuration item operations."
+          operations:
+            - method: GET
+              name: list-cmdb-instances
+              description: "List CIs by class."
+              call: "servicenow-cmdb-instance.list-cmdb-instances"
+              with:
+                className: "rest.className"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/cmdb-instances/{className}/{sys_id}
+          name: cmdb-instance-detail
+          description: "Single CI operations."
+          operations:
+            - method: GET
+              name: get-cmdb-instance
+              description: "Get a specific CI."
+              call: "servicenow-cmdb-instance.get-cmdb-instance"
+              with:
+                className: "rest.className"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/attachments
+          name: attachments
+          description: "File attachment operations."
+          operations:
+            - method: GET
+              name: list-attachments
+              description: "List attachments."
+              call: "servicenow-attachment.list-attachments"
+              with:
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/attachments/{sys_id}
+          name: attachment-detail
+          description: "Single attachment operations."
+          operations:
+            - method: GET
+              name: get-attachment
+              description: "Get attachment metadata."
+              call: "servicenow-attachment.get-attachment"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: delete-attachment
+              description: "Delete an attachment."
+              call: "servicenow-attachment.delete-attachment"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: servicenow-data-integration-mcp
+      transport: http
+      description: "MCP server for AI-assisted ServiceNow data integration and CMDB management."
+      tools:
+        - name: insert-import-set-record
+          description: "Insert a single record into an import set staging table."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-import-set.insert-import-set-record"
+          with:
+            stagingTableName: "tools.stagingTableName"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: insert-multiple-import-set-records
+          description: "Insert multiple records into an import set staging table."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-import-set.insert-multiple-import-set-records"
+          with:
+            stagingTableName: "tools.stagingTableName"
+            records: "tools.records"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-cmdb-instances
+          description: "List configuration items by CMDB class."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-cmdb-instance.list-cmdb-instances"
+          with:
+            className: "tools.className"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-cmdb-instance
+          description: "Retrieve full details of a configuration item."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-cmdb-instance.get-cmdb-instance"
+          with:
+            className: "tools.className"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-attachments
+          description: "List file attachment metadata."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-attachment.list-attachments"
+          with:
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-attachment
+          description: "Get metadata for a specific attachment."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-attachment.get-attachment"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: download-attachment-file
+          description: "Download the binary file content of an attachment."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-attachment.download-attachment-file"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-attachment
+          description: "Delete an attachment and its file content."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-attachment.delete-attachment"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-attachment-binary
+          description: "Upload a file as a binary stream attached to a record."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-attachment.upload-attachment-binary"
+          with:
+            table_name: "tools.table_name"
+            table_sys_id: "tools.table_sys_id"
+            file_name: "tools.file_name"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

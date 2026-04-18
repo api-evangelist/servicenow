@@ -1,0 +1,408 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Service Catalog API"
+  description: "Browse catalogs, categories, and items, manage shopping carts, and submit service catalog requests in ServiceNow."
+  tags:
+    - ServiceNow
+    - Service Catalog
+    - Self Service
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-service-catalog
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/sn_sc"
+      description: "ServiceNow Service Catalog API for browsing and ordering catalog items."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: catalogs
+          path: /servicecatalog/catalogs
+          description: "Service catalog operations."
+          operations:
+            - name: list-catalogs
+              method: GET
+              description: "List all available service catalogs."
+              inputParameters:
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of catalogs to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-catalog
+              method: GET
+              path: /{sys_id}
+              description: "Retrieve a specific service catalog."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier for the catalog."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: categories
+          path: /servicecatalog/categories
+          description: "Catalog category operations."
+          operations:
+            - name: get-category
+              method: GET
+              path: /{sys_id}
+              description: "Retrieve a catalog category with child categories."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier for the category."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: catalog-items
+          path: /servicecatalog/items
+          description: "Catalog item operations."
+          operations:
+            - name: list-catalog-items
+              method: GET
+              description: "List catalog items with optional filtering."
+              inputParameters:
+                - name: sysparm_catalog
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by catalog sys_id."
+                - name: sysparm_category
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by category sys_id."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of items to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-catalog-item
+              method: GET
+              path: /{sys_id}
+              description: "Retrieve a catalog item with variables and pricing."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique identifier for the catalog item."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: add-item-to-cart
+              method: POST
+              path: /{sys_id}/add_to_cart
+              description: "Add a catalog item to the shopping cart."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item sys_id."
+              body:
+                type: json
+                data:
+                  sysparm_quantity: "{{tools.quantity}}"
+                  variables: "{{tools.variables}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: order-item-now
+              method: POST
+              path: /{sys_id}/order_now
+              description: "Order a catalog item immediately without using the cart."
+              inputParameters:
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item sys_id."
+              body:
+                type: json
+                data:
+                  sysparm_quantity: "{{tools.quantity}}"
+                  variables: "{{tools.variables}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+        - name: cart
+          path: /servicecatalog/cart
+          description: "Shopping cart operations."
+          operations:
+            - name: get-cart
+              method: GET
+              description: "Retrieve the current user's shopping cart."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: empty-cart
+              method: DELETE
+              description: "Remove all items from the shopping cart."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: submit-cart-order
+              method: POST
+              path: /submit_order
+              description: "Submit all cart items as a service catalog request."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8105
+      namespace: servicenow-service-catalog-api
+      resources:
+        - path: /v1/catalogs
+          name: catalogs
+          description: "Service catalog browsing."
+          operations:
+            - method: GET
+              name: list-catalogs
+              description: "List service catalogs."
+              call: "servicenow-service-catalog.list-catalogs"
+              with:
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalogs/{sys_id}
+          name: catalog-detail
+          description: "Single catalog details."
+          operations:
+            - method: GET
+              name: get-catalog
+              description: "Get a specific catalog."
+              call: "servicenow-service-catalog.get-catalog"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalog-items
+          name: catalog-items
+          description: "Catalog item browsing."
+          operations:
+            - method: GET
+              name: list-catalog-items
+              description: "List catalog items."
+              call: "servicenow-service-catalog.list-catalog-items"
+              with:
+                sysparm_catalog: "rest.sysparm_catalog"
+                sysparm_category: "rest.sysparm_category"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/catalog-items/{sys_id}
+          name: catalog-item-detail
+          description: "Single catalog item."
+          operations:
+            - method: GET
+              name: get-catalog-item
+              description: "Get catalog item details."
+              call: "servicenow-service-catalog.get-catalog-item"
+              with:
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/cart
+          name: cart
+          description: "Shopping cart operations."
+          operations:
+            - method: GET
+              name: get-cart
+              description: "Get current cart."
+              call: "servicenow-service-catalog.get-cart"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+            - method: DELETE
+              name: empty-cart
+              description: "Empty the cart."
+              call: "servicenow-service-catalog.empty-cart"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9105
+      namespace: servicenow-service-catalog-mcp
+      transport: http
+      tools:
+        - name: list-catalogs
+          description: "List all available service catalogs."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-service-catalog.list-catalogs"
+          with:
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-catalog
+          description: "Retrieve a specific service catalog by sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-catalog"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-category
+          description: "Retrieve a catalog category with subcategories."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-category"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: list-catalog-items
+          description: "List catalog items with optional catalog/category filtering."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-service-catalog.list-catalog-items"
+          with:
+            sysparm_catalog: "tools.sysparm_catalog"
+            sysparm_category: "tools.sysparm_category"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-catalog-item
+          description: "Retrieve catalog item details including variables and pricing."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-catalog-item"
+          with:
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: add-item-to-cart
+          description: "Add a catalog item to the shopping cart."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.add-item-to-cart"
+          with:
+            sys_id: "tools.sys_id"
+            quantity: "tools.quantity"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: order-item-now
+          description: "Order a catalog item immediately without using the cart."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.order-item-now"
+          with:
+            sys_id: "tools.sys_id"
+            quantity: "tools.quantity"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-cart
+          description: "Retrieve the current user's shopping cart contents."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-service-catalog.get-cart"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: empty-cart
+          description: "Remove all items from the shopping cart."
+          hints:
+            destructive: true
+            idempotent: true
+          call: "servicenow-service-catalog.empty-cart"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: submit-cart-order
+          description: "Submit all cart items as a service catalog request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-service-catalog.submit-cart-order"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

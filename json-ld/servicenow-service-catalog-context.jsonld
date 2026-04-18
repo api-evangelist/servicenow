@@ -1,0 +1,215 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "Catalog": {
+      "@id": "ns:Catalog",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "has_categories": {
+          "@id": "ns:has_categories",
+          "@type": "xsd:boolean"
+        },
+        "has_items": {
+          "@id": "ns:has_items",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "Category": {
+      "@id": "ns:Category",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "full_description": {
+          "@id": "ns:full_description",
+          "@type": "xsd:string"
+        },
+        "subcategories": "ns:subcategories"
+      }
+    },
+    "CatalogItem": {
+      "@id": "ns:CatalogItem",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "price": {
+          "@id": "ns:price",
+          "@type": "xsd:string"
+        },
+        "picture": {
+          "@id": "ns:picture",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "CatalogItemDetail": {
+      "@id": "ns:CatalogItemDetail",
+      "@context": {
+        "sys_id": {
+          "@id": "ns:sys_id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "short_description": {
+          "@id": "ns:short_description",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "price": {
+          "@id": "ns:price",
+          "@type": "xsd:string"
+        },
+        "picture": {
+          "@id": "ns:picture",
+          "@type": "xsd:string"
+        },
+        "mandatory_attachment": {
+          "@id": "ns:mandatory_attachment",
+          "@type": "xsd:boolean"
+        },
+        "request_method": {
+          "@id": "ns:request_method",
+          "@type": "xsd:string"
+        },
+        "variables": "ns:variables"
+      }
+    },
+    "CatalogVariable": {
+      "@id": "ns:CatalogVariable",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "label": {
+          "@id": "ns:label",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        },
+        "mandatory": {
+          "@id": "ns:mandatory",
+          "@type": "xsd:boolean"
+        },
+        "default_value": {
+          "@id": "ns:default_value",
+          "@type": "xsd:string"
+        },
+        "choices": "ns:choices"
+      }
+    },
+    "CartItemInput": {
+      "@id": "ns:CartItemInput",
+      "@context": {
+        "sysparm_quantity": {
+          "@id": "ns:sysparm_quantity",
+          "@type": "xsd:integer"
+        },
+        "variables": "ns:variables"
+      }
+    },
+    "CartItem": {
+      "@id": "ns:CartItem",
+      "@context": {
+        "cart_item_id": {
+          "@id": "ns:cart_item_id",
+          "@type": "xsd:string"
+        },
+        "catalog_item_id": {
+          "@id": "ns:catalog_item_id",
+          "@type": "xsd:string"
+        },
+        "quantity": {
+          "@id": "ns:quantity",
+          "@type": "xsd:integer"
+        },
+        "subtotal": {
+          "@id": "ns:subtotal",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Cart": {
+      "@id": "ns:Cart",
+      "@context": {
+        "items": "ns:items",
+        "subtotal": {
+          "@id": "ns:subtotal",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "OrderResult": {
+      "@id": "ns:OrderResult",
+      "@context": {
+        "request_number": {
+          "@id": "ns:request_number",
+          "@type": "xsd:string"
+        },
+        "request_id": {
+          "@id": "ns:request_id",
+          "@type": "xsd:string"
+        },
+        "table": {
+          "@id": "ns:table",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Error": {
+      "@id": "ns:Error",
+      "@context": {
+        "error": "ns:error"
+      }
+    }
+  }
+}

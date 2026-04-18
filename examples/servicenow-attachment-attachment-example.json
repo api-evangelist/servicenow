@@ -1,0 +1,18 @@
+{
+  "sys_id": "500123",
+  "file_name": "example_value",
+  "table_name": "example_value",
+  "table_sys_id": "500123",
+  "content_type": "example_value",
+  "size_bytes": 10,
+  "size_compressed": 10,
+  "download_link": "https://www.example.com",
+  "image_height": 10,
+  "image_width": 10,
+  "hash": "example_value",
+  "state": "example_value",
+  "sys_created_on": "2026-01-15T10:30:00Z",
+  "sys_created_by": "example_value",
+  "sys_updated_on": "2026-01-15T10:30:00Z",
+  "sys_updated_by": "example_value"
+}

@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "description": "Fields for creating or updating a change request.",
+  "name": "ChangeRequestInput",
+  "properties": {
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the change."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the change."
+    },
+    "priority": {
+      "type": "string",
+      "description": "The priority level.",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "risk": {
+      "type": "string",
+      "description": "The risk level."
+    },
+    "impact": {
+      "type": "string",
+      "description": "The impact level."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the change."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the assignment group."
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The sys_id of the requesting user."
+    },
+    "start_date": {
+      "type": "datetime",
+      "description": "The planned start date and time."
+    },
+    "end_date": {
+      "type": "datetime",
+      "description": "The planned end date and time."
+    },
+    "cmdb_ci": {
+      "type": "string",
+      "description": "The sys_id of the affected configuration item."
+    },
+    "justification": {
+      "type": "string",
+      "description": "The business justification for the change."
+    },
+    "implementation_plan": {
+      "type": "string",
+      "description": "The plan for implementing the change."
+    },
+    "backout_plan": {
+      "type": "string",
+      "description": "The plan for reverting the change if needed."
+    },
+    "test_plan": {
+      "type": "string",
+      "description": "The plan for testing the change."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

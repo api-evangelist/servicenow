@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "description": "A ServiceNow change request record.",
+  "name": "ChangeRequest",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the change request."
+    },
+    "number": {
+      "type": "string",
+      "description": "The human-readable change request number."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the change."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the change and its purpose."
+    },
+    "type": {
+      "type": "string",
+      "description": "The change type: normal, standard, or emergency.",
+      "enum": [
+        "normal",
+        "standard",
+        "emergency"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the change request in its lifecycle."
+    },
+    "priority": {
+      "type": "string",
+      "description": "The priority level of the change request.",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "risk": {
+      "type": "string",
+      "description": "The risk level assessed for this change."
+    },
+    "impact": {
+      "type": "string",
+      "description": "The impact level of this change."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the change."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the user assigned to implement the change."
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the group responsible for the change."
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The sys_id of the user who requested the change."
+    },
+    "start_date": {
+      "type": "datetime",
+      "description": "The planned start date and time for the change."
+    },
+    "end_date": {
+      "type": "datetime",
+      "description": "The planned end date and time for the change."
+    },
+    "cmdb_ci": {
+      "type": "string",
+      "description": "The sys_id of the configuration item affected by this change."
+    },
+    "close_code": {
+      "type": "string",
+      "description": "The close code indicating how the change was resolved."
+    },
+    "close_notes": {
+      "type": "string",
+      "description": "Notes recorded when closing the change request."
+    },
+    "approval": {
+      "type": "string",
+      "description": "The current approval status."
+    },
+    "sys_created_on": {
+      "type": "datetime",
+      "description": "The date and time the change request was created."
+    },
+    "sys_updated_on": {
+      "type": "datetime",
+      "description": "The date and time the change request was last updated."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the trouble ticket, typically a short description of the issue",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the issue",
+      "example": "A sample description."
+    },
+    "severity": {
+      "type": "string",
+      "description": "The severity of the issue (must provide choice value only):\n- 1: Critical\n- 2: High\n- 3: Moderate\n- 4: Low\n- 5: Planning (Incident only)\n",
+      "example": "1",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the trouble ticket (can provide choice label or value)",
+      "example": "example_value"
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')",
+          "example": "Example Title"
+        }
+      }
+    },
+    "note": {
+      "type": "array",
+      "description": "List of work notes and comments to add to the ticket",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Note text",
+            "example": "example_value"
+          },
+          "@type": {
+            "type": "string",
+            "description": "Type of note (determines whether recorded in Work notes or Additional comments field)",
+            "example": "comments",
+            "enum": [
+              "comments",
+              "work_notes"
+            ]
+          }
+        },
+        "required": [
+          "text",
+          "@type"
+        ]
+      }
+    },
+    "relatedEntity": {
+      "type": "array",
+      "description": "List of impacted assets, products, sold products, configuration items, or services",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the impacted item or service",
+            "example": "abc123"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of item or service",
+            "example": "asset",
+            "enum": [
+              "asset",
+              "product",
+              "product_inventory",
+              "cmdb_ci",
+              "cmdb_ci_service"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "@referredType"
+        ]
+      }
+    },
+    "relatedParty": {
+      "type": "array",
+      "description": "Details about contacts for the ticket",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the related party",
+            "example": "abc123"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of related party:\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+            "example": "customer",
+            "enum": [
+              "customer",
+              "customer_contact"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "@referredType"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TroubleTicketUpdate"
+}

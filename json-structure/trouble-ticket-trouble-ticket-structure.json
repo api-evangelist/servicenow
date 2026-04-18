@@ -1,0 +1,153 @@
+{
+  "type": "object",
+  "name": "TroubleTicket",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "This value is always TroubleTicket"
+    },
+    "id": {
+      "type": "string",
+      "description": "The sys_id of the case or incident record"
+    },
+    "href": {
+      "type": "string",
+      "description": "Relative link to the case or incident record"
+    },
+    "creationDate": {
+      "type": "datetime",
+      "description": "The date that the case or incident record was created"
+    },
+    "lastUpdate": {
+      "type": "datetime",
+      "description": "The date the record was last updated"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the trouble ticket, typically a short description of the issue"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the issue from the ticket"
+    },
+    "severity": {
+      "type": "string",
+      "description": "The severity of the issue described by the trouble ticket"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the trouble ticket"
+    },
+    "ticketType": {
+      "type": "string",
+      "description": "The type of ticket",
+      "enum": [
+        "Case",
+        "Incident",
+        "Service Problem Case"
+      ]
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the contact method"
+        }
+      }
+    },
+    "note": {
+      "type": "array",
+      "description": "A list of all comments on the ticket (excludes work notes)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "The type of note (always 'comments' in responses)"
+          },
+          "text": {
+            "type": "string",
+            "description": "The comment text"
+          },
+          "date": {
+            "type": "datetime",
+            "description": "The date the comment was created"
+          },
+          "author": {
+            "type": "string",
+            "description": "The name of the user who wrote the comment"
+          }
+        }
+      }
+    },
+    "relatedEntity": {
+      "type": "array",
+      "description": "List of impacted assets, products, sold products, configuration items, or services",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "This value is always relatedEntity"
+          },
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the impacted item or service"
+          },
+          "href": {
+            "type": "string",
+            "description": "Returns an empty string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the impacted item or service"
+          },
+          "role": {
+            "type": "string",
+            "description": "Description of the impacted item or service"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of item or service",
+            "enum": [
+              "asset",
+              "product",
+              "product_inventory",
+              "cmdb_ci",
+              "cmdb_ci_service"
+            ]
+          }
+        }
+      }
+    },
+    "relatedParty": {
+      "type": "array",
+      "description": "Details about contacts for the ticket",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sys_id of the related party"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related party"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "Type of related party:\n- assigned_to: User assigned to work on the ticket\n- assignment_group: Group assigned to work on the ticket\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n",
+            "enum": [
+              "assigned_to",
+              "assignment_group",
+              "customer",
+              "customer_contact"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

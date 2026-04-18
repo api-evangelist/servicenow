@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "description": "Metadata about a file attachment stored in ServiceNow.",
+  "name": "Attachment",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the attachment record."
+    },
+    "file_name": {
+      "type": "string",
+      "description": "The name of the attached file."
+    },
+    "table_name": {
+      "type": "string",
+      "description": "The table to which the attachment belongs."
+    },
+    "table_sys_id": {
+      "type": "string",
+      "description": "The sys_id of the record to which the file is attached."
+    },
+    "content_type": {
+      "type": "string",
+      "description": "The MIME type of the attached file."
+    },
+    "size_bytes": {
+      "type": "integer",
+      "description": "The size of the attached file in bytes."
+    },
+    "size_compressed": {
+      "type": "integer",
+      "description": "The compressed size of the attached file in bytes."
+    },
+    "download_link": {
+      "type": "uri",
+      "description": "The URL to download the attachment file content."
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "The height in pixels if the attachment is an image."
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "The width in pixels if the attachment is an image."
+    },
+    "hash": {
+      "type": "string",
+      "description": "The MD5 hash of the file content."
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the attachment processing."
+    },
+    "sys_created_on": {
+      "type": "datetime",
+      "description": "The date and time the attachment was created."
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who uploaded the attachment."
+    },
+    "sys_updated_on": {
+      "type": "datetime",
+      "description": "The date and time the attachment was last modified."
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last modified the attachment record."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

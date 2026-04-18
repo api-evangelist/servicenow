@@ -1,0 +1,128 @@
+{
+  "type": "object",
+  "description": "A ServiceNow change request record.",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the change request.",
+      "example": "500123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The human-readable change request number.",
+      "example": "example_value"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the change.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the change and its purpose.",
+      "example": "A sample description."
+    },
+    "type": {
+      "type": "string",
+      "description": "The change type: normal, standard, or emergency.",
+      "example": "normal",
+      "enum": [
+        "normal",
+        "standard",
+        "emergency"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the change request in its lifecycle.",
+      "example": "example_value"
+    },
+    "priority": {
+      "type": "string",
+      "description": "The priority level of the change request.",
+      "example": "1",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "risk": {
+      "type": "string",
+      "description": "The risk level assessed for this change.",
+      "example": "example_value"
+    },
+    "impact": {
+      "type": "string",
+      "description": "The impact level of this change.",
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "The category of the change.",
+      "example": "example_value"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the user assigned to implement the change.",
+      "example": "example_value"
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the group responsible for the change.",
+      "example": "example_value"
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The sys_id of the user who requested the change.",
+      "example": "example_value"
+    },
+    "start_date": {
+      "type": "string",
+      "description": "The planned start date and time for the change.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "end_date": {
+      "type": "string",
+      "description": "The planned end date and time for the change.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "cmdb_ci": {
+      "type": "string",
+      "description": "The sys_id of the configuration item affected by this change.",
+      "example": "example_value"
+    },
+    "close_code": {
+      "type": "string",
+      "description": "The close code indicating how the change was resolved.",
+      "example": "example_value"
+    },
+    "close_notes": {
+      "type": "string",
+      "description": "Notes recorded when closing the change request.",
+      "example": "example_value"
+    },
+    "approval": {
+      "type": "string",
+      "description": "The current approval status.",
+      "example": "example_value"
+    },
+    "sys_created_on": {
+      "type": "string",
+      "description": "The date and time the change request was created.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "description": "The date and time the change request was last updated.",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeRequest"
+}

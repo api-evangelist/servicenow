@@ -1,0 +1,321 @@
+{
+  "type": "object",
+  "description": "Contact creation request",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Contact full name",
+      "example": "Example Title"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "Contact first name",
+      "example": "example_value"
+    },
+    "middle_name": {
+      "type": "string",
+      "description": "Contact middle name",
+      "example": "example_value"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Contact last name",
+      "example": "example_value"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Contact user ID",
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "description": "Contact email address",
+      "example": "user@example.com"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Contact business phone number",
+      "example": "example_value"
+    },
+    "mobile_phone": {
+      "type": "string",
+      "description": "Contact mobile phone number",
+      "example": "example_value"
+    },
+    "home_phone": {
+      "type": "string",
+      "description": "Contact home phone number",
+      "example": "example_value"
+    },
+    "title": {
+      "type": "string",
+      "description": "Contact business title",
+      "example": "Example Title"
+    },
+    "employee_number": {
+      "type": "string",
+      "description": "Contact employee number",
+      "example": "example_value"
+    },
+    "company": {
+      "type": "string",
+      "description": "Sys_id of the company record",
+      "example": "example_value"
+    },
+    "account": {
+      "type": "string",
+      "description": "Sys_id of the account record",
+      "example": 42
+    },
+    "department": {
+      "type": "string",
+      "description": "Sys_id of the department",
+      "example": "example_value"
+    },
+    "manager": {
+      "type": "string",
+      "description": "Sys_id of the direct supervisor",
+      "example": "example_value"
+    },
+    "location": {
+      "type": "string",
+      "description": "Sys_id of the location",
+      "example": "example_value"
+    },
+    "building": {
+      "type": "string",
+      "description": "Sys_id of the building",
+      "example": "example_value"
+    },
+    "street": {
+      "type": "string",
+      "description": "Contact street address",
+      "example": "example_value"
+    },
+    "city": {
+      "type": "string",
+      "description": "City in which the contact resides",
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "State in which the contact resides",
+      "example": "example_value"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Contact zip code",
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country code",
+      "example": 42
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Flag indicating whether the contact is active",
+      "example": true
+    },
+    "vip": {
+      "type": "boolean",
+      "description": "Flag indicating whether the contact has VIP status",
+      "example": true
+    },
+    "locked_out": {
+      "type": "boolean",
+      "description": "Flag indicating if the contact is locked-out",
+      "example": true
+    },
+    "web_service_access_only": {
+      "type": "boolean",
+      "description": "Flag indicating whether the contact can only access services through the web",
+      "example": true
+    },
+    "internal_integration_user": {
+      "type": "boolean",
+      "description": "Flag indicating whether the contact is an internal integration user",
+      "example": true
+    },
+    "enable_multifactor_authn": {
+      "type": "boolean",
+      "description": "Flag indicating whether multifactor authorization is required",
+      "example": true
+    },
+    "geolocation_tracked": {
+      "type": "boolean",
+      "description": "Flag indicating whether the contact location is obtained through geotracking",
+      "example": true
+    },
+    "notification": {
+      "type": "integer",
+      "description": "Indicates whether the contact should receive notifications (1=Disabled, 2=Enabled)",
+      "example": 1,
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "calendar_integration": {
+      "type": "integer",
+      "description": "Calendar application that the contact uses (1=Outlook)",
+      "example": 10
+    },
+    "failed_attempts": {
+      "type": "integer",
+      "description": "Number of failed login attempts",
+      "example": 10
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude coordinate of the contact",
+      "format": "float",
+      "example": 42.5
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude coordinate of the contact",
+      "format": "float",
+      "example": 42.5
+    },
+    "time_zone": {
+      "type": "string",
+      "description": "Time zone in which the contact resides",
+      "example": "example_value"
+    },
+    "date_format": {
+      "type": "string",
+      "description": "Format in which to display dates",
+      "example": "dd/mm/yyyy",
+      "enum": [
+        "dd/mm/yyyy",
+        "dd-mm-yyyy",
+        "dd.mm.yyyy",
+        "mm-dd-yyyy",
+        "yyyy-mm-dd"
+      ]
+    },
+    "time_format": {
+      "type": "string",
+      "description": "Format in which to display time",
+      "example": "hh.mm.ss a",
+      "enum": [
+        "hh.mm.ss a",
+        "hh:mm:ss a",
+        "HH.mm.ss",
+        "HH:mm:ss"
+      ]
+    },
+    "preferred_language": {
+      "type": "string",
+      "description": "Country code of the contact primary language",
+      "example": "example_value"
+    },
+    "gender": {
+      "type": "string",
+      "description": "Contact gender",
+      "example": "example_value"
+    },
+    "photo": {
+      "type": "string",
+      "description": "Photo image of the contact",
+      "example": "example_value"
+    },
+    "introduction": {
+      "type": "string",
+      "description": "Introduction",
+      "example": "example_value"
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the contact",
+      "example": "example_value"
+    },
+    "roles": {
+      "type": "string",
+      "description": "List of user roles associated with the contact",
+      "example": "example_value"
+    },
+    "cost_center": {
+      "type": "string",
+      "description": "Sys_id of the cost center",
+      "example": "example_value"
+    },
+    "schedule": {
+      "type": "string",
+      "description": "Sys_id of the work schedule",
+      "example": "example_value"
+    },
+    "time_sheet_policy": {
+      "type": "string",
+      "description": "Sys_id of the time sheet policy",
+      "example": "example_value"
+    },
+    "default_perspective": {
+      "type": "string",
+      "description": "Sys_id of the default perspective",
+      "example": "example_value"
+    },
+    "ldap_server": {
+      "type": "string",
+      "description": "Sys_id of the LDAP server",
+      "example": "example_value"
+    },
+    "agent_status": {
+      "type": "string",
+      "description": "Status of the agent",
+      "example": "Off work",
+      "enum": [
+        "Off work",
+        "On break",
+        "On route",
+        "On site"
+      ]
+    },
+    "on_schedule": {
+      "type": "string",
+      "description": "Indicates the timeliness of dispatched service personnel",
+      "example": "Ahead",
+      "enum": [
+        "Ahead",
+        "behind_less30",
+        "behind_30to60",
+        "behind_more60",
+        "on_time"
+      ]
+    },
+    "edu_status": {
+      "type": "string",
+      "description": "Education status of the contact",
+      "example": "example_value"
+    },
+    "last_login_time": {
+      "type": "string",
+      "description": "Date and time the contact logged in to the system",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "last_login_device": {
+      "type": "string",
+      "description": "Device the consumer used the last time they logged in",
+      "example": "example_value"
+    },
+    "social_channel": {
+      "type": "string",
+      "description": "Social media channel (Twitter, Facebook, Instagram, etc.)",
+      "example": "example_value"
+    },
+    "social_handle": {
+      "type": "string",
+      "description": "User handle on the social media channel",
+      "example": "example_value"
+    },
+    "social_handle_url": {
+      "type": "string",
+      "description": "URL to the contact's social channel profile",
+      "example": "https://www.example.com"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContactCreate"
+}

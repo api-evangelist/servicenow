@@ -1,0 +1,136 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow Import Set API"
+  description: "Push data into ServiceNow import set staging tables for synchronous or asynchronous transformation and loading into target tables."
+  tags:
+    - ServiceNow
+    - Import Set
+    - Data Integration
+    - ETL
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-import-set
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/now"
+      description: "ServiceNow Import Set API for bulk data loading and ETL workflows."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: import-sets
+          path: /import
+          description: "Import set staging table operations."
+          operations:
+            - name: insert-import-set-record
+              method: POST
+              path: /{stagingTableName}
+              description: "Insert a single record into an import set staging table."
+              inputParameters:
+                - name: stagingTableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the import set staging table."
+              body:
+                type: json
+                data: "{{tools.record_data}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: insert-multiple-import-set-records
+              method: POST
+              path: /{stagingTableName}/insertMultiple
+              description: "Insert multiple records into an import set staging table."
+              inputParameters:
+                - name: stagingTableName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The name of the import set staging table."
+              body:
+                type: json
+                data:
+                  records: "{{tools.records}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8104
+      namespace: servicenow-import-set-api
+      resources:
+        - path: /v1/import-sets/{stagingTableName}
+          name: import-sets
+          description: "Import set staging table operations."
+          operations:
+            - method: POST
+              name: insert-import-set-record
+              description: "Insert a record into a staging table."
+              call: "servicenow-import-set.insert-import-set-record"
+              with:
+                stagingTableName: "rest.stagingTableName"
+                record_data: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/import-sets/{stagingTableName}/bulk
+          name: import-sets-bulk
+          description: "Bulk import set operations."
+          operations:
+            - method: POST
+              name: insert-multiple-import-set-records
+              description: "Insert multiple records into a staging table."
+              call: "servicenow-import-set.insert-multiple-import-set-records"
+              with:
+                stagingTableName: "rest.stagingTableName"
+                records: "rest.records"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9104
+      namespace: servicenow-import-set-mcp
+      transport: http
+      tools:
+        - name: insert-import-set-record
+          description: "Insert a single record into an import set staging table and trigger transformation."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-import-set.insert-import-set-record"
+          with:
+            stagingTableName: "tools.stagingTableName"
+            record_data: "tools.record_data"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: insert-multiple-import-set-records
+          description: "Insert multiple records into an import set staging table in a single request."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "servicenow-import-set.insert-multiple-import-set-records"
+          with:
+            stagingTableName: "tools.stagingTableName"
+            records: "tools.records"
+          outputParameters:
+            - type: object
+              mapping: "$.result"

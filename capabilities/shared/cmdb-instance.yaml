@@ -1,0 +1,151 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ServiceNow CMDB Instance API"
+  description: "Retrieve configuration item (CI) records from the ServiceNow Configuration Management Database by class name and sys_id."
+  tags:
+    - ServiceNow
+    - CMDB
+    - Configuration Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SERVICENOW_USERNAME: SERVICENOW_USERNAME
+      SERVICENOW_PASSWORD: SERVICENOW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: servicenow-cmdb-instance
+      baseUri: "https://{{SERVICENOW_INSTANCE}}.service-now.com/api/now/cmdb"
+      description: "ServiceNow CMDB Instance API for querying configuration items."
+      authentication:
+        type: basic
+        username: "{{SERVICENOW_USERNAME}}"
+        password: "{{SERVICENOW_PASSWORD}}"
+      resources:
+        - name: cmdb-instances
+          path: /instance
+          description: "Configuration item instance operations."
+          operations:
+            - name: list-cmdb-instances
+              method: GET
+              path: /{className}
+              description: "List configuration items by CMDB class."
+              inputParameters:
+                - name: className
+                  in: path
+                  type: string
+                  required: true
+                  description: "The CMDB class name (e.g., cmdb_ci_server, cmdb_ci_linux_server)."
+                - name: sysparm_query
+                  in: query
+                  type: string
+                  required: false
+                  description: "Encoded query string to filter CI records."
+                - name: sysparm_limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of records to return."
+                - name: sysparm_offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Starting record index for pagination."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+            - name: get-cmdb-instance
+              method: GET
+              path: /{className}/{sys_id}
+              description: "Retrieve full details of a specific configuration item."
+              inputParameters:
+                - name: className
+                  in: path
+                  type: string
+                  required: true
+                  description: "The CMDB class name."
+                - name: sys_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The unique sys_id of the configuration item."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$.result"
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: servicenow-cmdb-instance-api
+      resources:
+        - path: /v1/cmdb-instances/{className}
+          name: cmdb-instances
+          description: "List configuration items by class."
+          operations:
+            - method: GET
+              name: list-cmdb-instances
+              description: "List CIs by CMDB class."
+              call: "servicenow-cmdb-instance.list-cmdb-instances"
+              with:
+                className: "rest.className"
+                sysparm_query: "rest.sysparm_query"
+                sysparm_limit: "rest.sysparm_limit"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+        - path: /v1/cmdb-instances/{className}/{sys_id}
+          name: cmdb-instance-detail
+          description: "Retrieve a specific CI."
+          operations:
+            - method: GET
+              name: get-cmdb-instance
+              description: "Get a specific configuration item."
+              call: "servicenow-cmdb-instance.get-cmdb-instance"
+              with:
+                className: "rest.className"
+                sys_id: "rest.sys_id"
+              outputParameters:
+                - type: object
+                  mapping: "$.result"
+
+    - type: mcp
+      port: 9103
+      namespace: servicenow-cmdb-instance-mcp
+      transport: http
+      tools:
+        - name: list-cmdb-instances
+          description: "List configuration items by CMDB class name."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "servicenow-cmdb-instance.list-cmdb-instances"
+          with:
+            className: "tools.className"
+            sysparm_query: "tools.sysparm_query"
+            sysparm_limit: "tools.sysparm_limit"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
+        - name: get-cmdb-instance
+          description: "Retrieve full details of a specific configuration item by class and sys_id."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "servicenow-cmdb-instance.get-cmdb-instance"
+          with:
+            className: "tools.className"
+            sys_id: "tools.sys_id"
+          outputParameters:
+            - type: object
+              mapping: "$.result"
