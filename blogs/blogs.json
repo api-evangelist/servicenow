@@ -1,0 +1,13 @@
+{
+  "repo": "servicenow",
+  "feeds": [
+    {
+      "source": "https://www.servicenow.com/community/developer-blog/bg-p/developer-blog",
+      "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
+      "saved": 10,
+      "title": "Developer blog articles"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:35:57Z"
+}
