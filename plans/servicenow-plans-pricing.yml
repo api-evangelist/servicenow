@@ -1,0 +1,664 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ServiceNow
+providerId: servicenow
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Automation
+  - Cloud Services
+  - Digital Workflows
+  - Enterprise Platform
+  - IT Service Management
+  - ITSM
+  - Processes
+  - T1
+  - Workflow Automation
+  - Workflows
+description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
+  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+plans:
+  - id: servicenow-free
+    name: Free
+    type: freemium
+    description: Free entry tier for the ServiceNow API surface. Intended for evaluation, prototyping,
+      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
+      plan documentation.
+    entries:
+      - label: API Requests
+        description: Monthly API request quota across all included endpoints
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: 1000
+        timeFrame: month
+        geo: global
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Rate Limit
+        description: Maximum requests per minute on the free tier
+        name: rate_limit
+        type: rate
+        metric: requests_per_minute
+        limit: 10
+        timeFrame: minute
+        geo: global
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Public Documentation
+      - name: Community Support
+      - name: Sandbox Access
+      - name: ServiceNow Table API
+      - name: ServiceNow Aggregate API
+      - name: ServiceNow Attachment API
+      - name: ServiceNow Import Set API
+      - name: ServiceNow Batch API
+      - name: ServiceNow Change Management API
+      - name: ServiceNow Knowledge Management API
+      - name: ServiceNow Service Catalog API
+  - id: servicenow-pro
+    name: Professional
+    type: paid
+    description: Production tier for ServiceNow. Provides higher quotas, priority support, and access
+      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+    entries:
+      - label: API Requests
+        description: Monthly API request quota
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: 100000
+        timeFrame: month
+        geo: global
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: TBD
+        userMultiplied: false
+      - label: Rate Limit
+        description: Maximum requests per minute on the professional tier
+        name: rate_limit
+        type: rate
+        metric: requests_per_minute
+        limit: 100
+        timeFrame: minute
+        geo: global
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Overage
+        description: Per-request price after monthly quota is exceeded
+        name: overage
+        type: metered
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1000
+        price: TBD
+        userMultiplied: false
+    elements:
+      - name: All Production Endpoints
+      - name: Email Support
+      - name: SLA Targets
+      - name: Webhook Subscriptions
+      - name: ServiceNow Table API
+      - name: ServiceNow Aggregate API
+      - name: ServiceNow Attachment API
+      - name: ServiceNow Import Set API
+      - name: ServiceNow Batch API
+      - name: ServiceNow Change Management API
+      - name: ServiceNow Knowledge Management API
+      - name: ServiceNow Service Catalog API
+      - name: ServiceNow CMDB Instance API
+      - name: ServiceNow Identification and Reconciliation API
+      - name: ServiceNow Performance Analytics API
+      - name: ServiceNow Contact API
+      - name: ServiceNow Trouble Ticket Open API
+      - name: ServiceNow Scripted REST APIs
+      - name: ServiceNow GraphQL API
+      - name: ServiceNow Application Service API
+      - name: ServiceNow Case API
+      - name: ServiceNow Account API
+      - name: ServiceNow Consumer API
+      - name: ServiceNow CSM Attachment API
+      - name: ServiceNow Email API
+      - name: ServiceNow CI/CD API
+      - name: ServiceNow CI/CD Update Set API
+      - name: ServiceNow DevOps API
+      - name: ServiceNow DevOps Config API
+      - name: ServiceNow CMDB Meta API
+      - name: ServiceNow CMDB Data Ingestion API
+      - name: ServiceNow MetricBase Time Series API
+      - name: ServiceNow Interaction Management API
+      - name: ServiceNow Voice Interaction Resource API
+      - name: ServiceNow User Role Inheritance API
+      - name: ServiceNow HR API
+      - name: ServiceNow Event Management Topic Open API
+      - name: ServiceNow Predictive Intelligence API
+      - name: ServiceNow AWA Agent API
+      - name: ServiceNow AWA Offer Work API
+      - name: ServiceNow Virtual Agent Bot Integration API
+      - name: ServiceNow Openframe API
+      - name: ServiceNow AI Assets API
+      - name: ServiceNow Lead API
+      - name: ServiceNow Sales Agreement API
+      - name: ServiceNow Agent Client Collector API
+      - name: ServiceNow Agent Mapping API
+      - name: ServiceNow Automation Center API
+      - name: ServiceNow AP Invoice API
+      - name: ServiceNow CSM Order API
+      - name: ServiceNow CI Lifecycle Management API
+      - name: ServiceNow Alarm Management Open API
+      - name: ServiceNow SAM Software Usage Data Integration API
+      - name: ServiceNow Product Catalog Open API
+      - name: ServiceNow Service Catalog Open API
+      - name: ServiceNow Product Order Open API
+      - name: ServiceNow Service Order Open API
+      - name: ServiceNow Resource Inventory Open API
+      - name: ServiceNow Product Inventory Open API
+      - name: ServiceNow Service Test Management Open API
+      - name: ServiceNow Project Portfolio Management API
+  - id: servicenow-enterprise
+    name: Enterprise
+    type: enterprise
+    description: Custom-negotiated tier for ServiceNow. Includes dedicated capacity, contractual SLAs,
+      security review, data residency options, and named technical account management.
+    entries:
+      - label: API Requests
+        description: Negotiated request volume; -1 indicates uncapped subject to fair use
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: configurable
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: custom
+        userMultiplied: false
+      - label: Rate Limit
+        description: Negotiated burst and steady-state rate
+        name: rate_limit
+        type: rate
+        metric: requests_per_minute
+        limit: 1000
+        timeFrame: minute
+        geo: configurable
+        domains:
+          - https://{instance}.service-now.com/api/now/table
+          - https://{instance}.service-now.com/api/now/stats
+          - https://{instance}.service-now.com/api/now/attachment
+          - https://{instance}.service-now.com/api/now/import
+          - https://{instance}.service-now.com/api/now/v1/batch
+          - https://{instance}.service-now.com/api/sn_chg_rest/v1/change
+          - https://{instance}.service-now.com/api/sn_km_api/knowledge
+          - https://{instance}.service-now.com/api/sn_sc/servicecatalog
+          - https://{instance}.service-now.com/api/now/cmdb/instance
+          - https://{instance}.service-now.com/api/now/identifyreconcile
+          - https://{instance}.service-now.com/api/now/pa
+          - https://{instance}.service-now.com/api/now/contact
+          - https://{instance}.service-now.com/api/now/troubleticket
+          - https://{instance}.service-now.com/api/{namespace}/{api_id}
+          - https://{instance}.service-now.com/api/now/graphql
+          - https://{instance}.service-now.com/api/now/cmdb/app_service
+          - https://{instance}.service-now.com/api/sn_customerservice/case
+          - https://{instance}.service-now.com/api/now/account
+          - https://{instance}.service-now.com/api/now/consumer
+          - https://{instance}.service-now.com/api/sn_customerservice/attachment
+          - https://{instance}.service-now.com/api/now/email
+          - https://{instance}.service-now.com/api/sn_cicd
+          - https://{instance}.service-now.com/api/sn_cicd/update_set
+          - https://{instance}.service-now.com/api/sn_devops
+          - https://{instance}.service-now.com/api/sn_devops_config
+          - https://{instance}.service-now.com/api/now/cmdb/meta
+          - https://{instance}.service-now.com/api/now/cmdb/ingest
+          - https://{instance}.service-now.com/api/now/clotho
+          - https://{instance}.service-now.com/api/interaction
+          - https://{instance}.service-now.com/api/now/voice
+          - https://{instance}.service-now.com/api/now/user_role_inheritance
+          - https://{instance}.service-now.com/api/sn_hr_core
+          - https://{instance}.service-now.com/api/em/topic
+          - https://{instance}.service-now.com/api/now/agent_intelligence
+          - https://{instance}.service-now.com/api/now/awa/agent
+          - https://{instance}.service-now.com/api/now/awa/offerwork
+          - https://{instance}.service-now.com/api/sn_va_as_service
+          - https://{instance}.service-now.com/api/now/openframe
+          - https://{instance}.service-now.com/api/now/ai/assets
+          - https://{instance}.service-now.com/api/sn_lead
+          - https://{instance}.service-now.com/api/sn_sales_agreement
+          - https://{instance}.service-now.com/api/now/acc
+          - https://{instance}.service-now.com/api/now/agent_mapping
+          - https://{instance}.service-now.com/api/sn_automation_center
+          - https://{instance}.service-now.com/api/now/ap/invoice
+          - https://{instance}.service-now.com/api/sn_customerservice/order
+          - https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
+          - https://{instance}.service-now.com/api/now/alarm
+          - https://{instance}.service-now.com/api/sam/software_usage
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
+          - https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
+          - https://{instance}.service-now.com/api/now/ppm
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: Unlimited / Negotiated Volume
+      - name: 24/7 Dedicated Support
+      - name: Contractual SLA
+      - name: Security & Compliance Review
+      - name: Dedicated Account Manager
+      - name: Custom Data Residency
+      - name: ServiceNow Table API
+      - name: ServiceNow Aggregate API
+      - name: ServiceNow Attachment API
+      - name: ServiceNow Import Set API
+      - name: ServiceNow Batch API
+      - name: ServiceNow Change Management API
+      - name: ServiceNow Knowledge Management API
+      - name: ServiceNow Service Catalog API
+      - name: ServiceNow CMDB Instance API
+      - name: ServiceNow Identification and Reconciliation API
+      - name: ServiceNow Performance Analytics API
+      - name: ServiceNow Contact API
+      - name: ServiceNow Trouble Ticket Open API
+      - name: ServiceNow Scripted REST APIs
+      - name: ServiceNow GraphQL API
+      - name: ServiceNow Application Service API
+      - name: ServiceNow Case API
+      - name: ServiceNow Account API
+      - name: ServiceNow Consumer API
+      - name: ServiceNow CSM Attachment API
+      - name: ServiceNow Email API
+      - name: ServiceNow CI/CD API
+      - name: ServiceNow CI/CD Update Set API
+      - name: ServiceNow DevOps API
+      - name: ServiceNow DevOps Config API
+      - name: ServiceNow CMDB Meta API
+      - name: ServiceNow CMDB Data Ingestion API
+      - name: ServiceNow MetricBase Time Series API
+      - name: ServiceNow Interaction Management API
+      - name: ServiceNow Voice Interaction Resource API
+      - name: ServiceNow User Role Inheritance API
+      - name: ServiceNow HR API
+      - name: ServiceNow Event Management Topic Open API
+      - name: ServiceNow Predictive Intelligence API
+      - name: ServiceNow AWA Agent API
+      - name: ServiceNow AWA Offer Work API
+      - name: ServiceNow Virtual Agent Bot Integration API
+      - name: ServiceNow Openframe API
+      - name: ServiceNow AI Assets API
+      - name: ServiceNow Lead API
+      - name: ServiceNow Sales Agreement API
+      - name: ServiceNow Agent Client Collector API
+      - name: ServiceNow Agent Mapping API
+      - name: ServiceNow Automation Center API
+      - name: ServiceNow AP Invoice API
+      - name: ServiceNow CSM Order API
+      - name: ServiceNow CI Lifecycle Management API
+      - name: ServiceNow Alarm Management Open API
+      - name: ServiceNow SAM Software Usage Data Integration API
+      - name: ServiceNow Product Catalog Open API
+      - name: ServiceNow Service Catalog Open API
+      - name: ServiceNow Product Order Open API
+      - name: ServiceNow Service Order Open API
+      - name: ServiceNow Resource Inventory Open API
+      - name: ServiceNow Product Inventory Open API
+      - name: ServiceNow Service Test Management Open API
+      - name: ServiceNow Project Portfolio Management API
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
