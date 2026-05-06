@@ -4,371 +4,46 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: ServiceNow
 providerId: servicenow
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Automation
-  - Cloud Services
-  - Digital Workflows
-  - Enterprise Platform
-  - IT Service Management
   - ITSM
-  - Processes
-  - T1
-  - Workflow Automation
-  - Workflows
+  - Now Platform
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the ServiceNow API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: ServiceNow's REST API rate limits are configured per instance by ServiceNow administrators
+  via System Web Services > REST > API rate-limiting rules. There is no globally-published, fixed numeric
+  limit; thresholds, scope (per user / role / IP), and warning/violation behavior are tenant-specific.
+  When a rule fires, the API responds with HTTP 429 and a Retry-After header. Public ServiceNow product
+  documentation describes the mechanism but not numeric defaults, and the docs.servicenow.com site is
+  not directly reachable from public crawlers.
+sources:
+  - https://www.servicenow.com/docs/
+notes: Numeric thresholds are configured per-instance and are not publicly documented. Reconciliation
+  is limited to mechanism-level information.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+headers:
+  retryAfter: Retry-After
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - ServiceNow Table API
-      - ServiceNow Aggregate API
-      - ServiceNow Attachment API
-      - ServiceNow Import Set API
-      - ServiceNow Batch API
-      - ServiceNow Change Management API
-      - ServiceNow Knowledge Management API
-      - ServiceNow Service Catalog API
-      - ServiceNow CMDB Instance API
-      - ServiceNow Identification and Reconciliation API
-      - ServiceNow Performance Analytics API
-      - ServiceNow Contact API
-      - ServiceNow Trouble Ticket Open API
-      - ServiceNow Scripted REST APIs
-      - ServiceNow GraphQL API
-      - ServiceNow Application Service API
-      - ServiceNow Case API
-      - ServiceNow Account API
-      - ServiceNow Consumer API
-      - ServiceNow CSM Attachment API
-      - ServiceNow Email API
-      - ServiceNow CI/CD API
-      - ServiceNow CI/CD Update Set API
-      - ServiceNow DevOps API
-      - ServiceNow DevOps Config API
-      - ServiceNow CMDB Meta API
-      - ServiceNow CMDB Data Ingestion API
-      - ServiceNow MetricBase Time Series API
-      - ServiceNow Interaction Management API
-      - ServiceNow Voice Interaction Resource API
-      - ServiceNow User Role Inheritance API
-      - ServiceNow HR API
-      - ServiceNow Event Management Topic Open API
-      - ServiceNow Predictive Intelligence API
-      - ServiceNow AWA Agent API
-      - ServiceNow AWA Offer Work API
-      - ServiceNow Virtual Agent Bot Integration API
-      - ServiceNow Openframe API
-      - ServiceNow AI Assets API
-      - ServiceNow Lead API
-      - ServiceNow Sales Agreement API
-      - ServiceNow Agent Client Collector API
-      - ServiceNow Agent Mapping API
-      - ServiceNow Automation Center API
-      - ServiceNow AP Invoice API
-      - ServiceNow CSM Order API
-      - ServiceNow CI Lifecycle Management API
-      - ServiceNow Alarm Management Open API
-      - ServiceNow SAM Software Usage Data Integration API
-      - ServiceNow Product Catalog Open API
-      - ServiceNow Service Catalog Open API
-      - ServiceNow Product Order Open API
-      - ServiceNow Service Order Open API
-      - ServiceNow Resource Inventory Open API
-      - ServiceNow Product Inventory Open API
-      - ServiceNow Service Test Management Open API
-      - ServiceNow Project Portfolio Management API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - ServiceNow Table API
-      - ServiceNow Aggregate API
-      - ServiceNow Attachment API
-      - ServiceNow Import Set API
-      - ServiceNow Batch API
-      - ServiceNow Change Management API
-      - ServiceNow Knowledge Management API
-      - ServiceNow Service Catalog API
-      - ServiceNow CMDB Instance API
-      - ServiceNow Identification and Reconciliation API
-      - ServiceNow Performance Analytics API
-      - ServiceNow Contact API
-      - ServiceNow Trouble Ticket Open API
-      - ServiceNow Scripted REST APIs
-      - ServiceNow GraphQL API
-      - ServiceNow Application Service API
-      - ServiceNow Case API
-      - ServiceNow Account API
-      - ServiceNow Consumer API
-      - ServiceNow CSM Attachment API
-      - ServiceNow Email API
-      - ServiceNow CI/CD API
-      - ServiceNow CI/CD Update Set API
-      - ServiceNow DevOps API
-      - ServiceNow DevOps Config API
-      - ServiceNow CMDB Meta API
-      - ServiceNow CMDB Data Ingestion API
-      - ServiceNow MetricBase Time Series API
-      - ServiceNow Interaction Management API
-      - ServiceNow Voice Interaction Resource API
-      - ServiceNow User Role Inheritance API
-      - ServiceNow HR API
-      - ServiceNow Event Management Topic Open API
-      - ServiceNow Predictive Intelligence API
-      - ServiceNow AWA Agent API
-      - ServiceNow AWA Offer Work API
-      - ServiceNow Virtual Agent Bot Integration API
-      - ServiceNow Openframe API
-      - ServiceNow AI Assets API
-      - ServiceNow Lead API
-      - ServiceNow Sales Agreement API
-      - ServiceNow Agent Client Collector API
-      - ServiceNow Agent Mapping API
-      - ServiceNow Automation Center API
-      - ServiceNow AP Invoice API
-      - ServiceNow CSM Order API
-      - ServiceNow CI Lifecycle Management API
-      - ServiceNow Alarm Management Open API
-      - ServiceNow SAM Software Usage Data Integration API
-      - ServiceNow Product Catalog Open API
-      - ServiceNow Service Catalog Open API
-      - ServiceNow Product Order Open API
-      - ServiceNow Service Order Open API
-      - ServiceNow Resource Inventory Open API
-      - ServiceNow Product Inventory Open API
-      - ServiceNow Service Test Management Open API
-      - ServiceNow Project Portfolio Management API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - ServiceNow Table API
-      - ServiceNow Aggregate API
-      - ServiceNow Attachment API
-      - ServiceNow Import Set API
-      - ServiceNow Batch API
-      - ServiceNow Change Management API
-      - ServiceNow Knowledge Management API
-      - ServiceNow Service Catalog API
-      - ServiceNow CMDB Instance API
-      - ServiceNow Identification and Reconciliation API
-      - ServiceNow Performance Analytics API
-      - ServiceNow Contact API
-      - ServiceNow Trouble Ticket Open API
-      - ServiceNow Scripted REST APIs
-      - ServiceNow GraphQL API
-      - ServiceNow Application Service API
-      - ServiceNow Case API
-      - ServiceNow Account API
-      - ServiceNow Consumer API
-      - ServiceNow CSM Attachment API
-      - ServiceNow Email API
-      - ServiceNow CI/CD API
-      - ServiceNow CI/CD Update Set API
-      - ServiceNow DevOps API
-      - ServiceNow DevOps Config API
-      - ServiceNow CMDB Meta API
-      - ServiceNow CMDB Data Ingestion API
-      - ServiceNow MetricBase Time Series API
-      - ServiceNow Interaction Management API
-      - ServiceNow Voice Interaction Resource API
-      - ServiceNow User Role Inheritance API
-      - ServiceNow HR API
-      - ServiceNow Event Management Topic Open API
-      - ServiceNow Predictive Intelligence API
-      - ServiceNow AWA Agent API
-      - ServiceNow AWA Offer Work API
-      - ServiceNow Virtual Agent Bot Integration API
-      - ServiceNow Openframe API
-      - ServiceNow AI Assets API
-      - ServiceNow Lead API
-      - ServiceNow Sales Agreement API
-      - ServiceNow Agent Client Collector API
-      - ServiceNow Agent Mapping API
-      - ServiceNow Automation Center API
-      - ServiceNow AP Invoice API
-      - ServiceNow CSM Order API
-      - ServiceNow CI Lifecycle Management API
-      - ServiceNow Alarm Management Open API
-      - ServiceNow SAM Software Usage Data Integration API
-      - ServiceNow Product Catalog Open API
-      - ServiceNow Service Catalog Open API
-      - ServiceNow Product Order Open API
-      - ServiceNow Service Order Open API
-      - ServiceNow Resource Inventory Open API
-      - ServiceNow Product Inventory Open API
-      - ServiceNow Service Test Management Open API
-      - ServiceNow Project Portfolio Management API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - ServiceNow Table API
-      - ServiceNow Aggregate API
-      - ServiceNow Attachment API
-      - ServiceNow Import Set API
-      - ServiceNow Batch API
-      - ServiceNow Change Management API
-      - ServiceNow Knowledge Management API
-      - ServiceNow Service Catalog API
-      - ServiceNow CMDB Instance API
-      - ServiceNow Identification and Reconciliation API
-      - ServiceNow Performance Analytics API
-      - ServiceNow Contact API
-      - ServiceNow Trouble Ticket Open API
-      - ServiceNow Scripted REST APIs
-      - ServiceNow GraphQL API
-      - ServiceNow Application Service API
-      - ServiceNow Case API
-      - ServiceNow Account API
-      - ServiceNow Consumer API
-      - ServiceNow CSM Attachment API
-      - ServiceNow Email API
-      - ServiceNow CI/CD API
-      - ServiceNow CI/CD Update Set API
-      - ServiceNow DevOps API
-      - ServiceNow DevOps Config API
-      - ServiceNow CMDB Meta API
-      - ServiceNow CMDB Data Ingestion API
-      - ServiceNow MetricBase Time Series API
-      - ServiceNow Interaction Management API
-      - ServiceNow Voice Interaction Resource API
-      - ServiceNow User Role Inheritance API
-      - ServiceNow HR API
-      - ServiceNow Event Management Topic Open API
-      - ServiceNow Predictive Intelligence API
-      - ServiceNow AWA Agent API
-      - ServiceNow AWA Offer Work API
-      - ServiceNow Virtual Agent Bot Integration API
-      - ServiceNow Openframe API
-      - ServiceNow AI Assets API
-      - ServiceNow Lead API
-      - ServiceNow Sales Agreement API
-      - ServiceNow Agent Client Collector API
-      - ServiceNow Agent Mapping API
-      - ServiceNow Automation Center API
-      - ServiceNow AP Invoice API
-      - ServiceNow CSM Order API
-      - ServiceNow CI Lifecycle Management API
-      - ServiceNow Alarm Management Open API
-      - ServiceNow SAM Software Usage Data Integration API
-      - ServiceNow Product Catalog Open API
-      - ServiceNow Service Catalog Open API
-      - ServiceNow Product Order Open API
-      - ServiceNow Service Order Open API
-      - ServiceNow Resource Inventory Open API
-      - ServiceNow Product Inventory Open API
-      - ServiceNow Service Test Management Open API
-      - ServiceNow Project Portfolio Management API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - ServiceNow Table API
-      - ServiceNow Aggregate API
-      - ServiceNow Attachment API
-      - ServiceNow Import Set API
-      - ServiceNow Batch API
-      - ServiceNow Change Management API
-      - ServiceNow Knowledge Management API
-      - ServiceNow Service Catalog API
-      - ServiceNow CMDB Instance API
-      - ServiceNow Identification and Reconciliation API
-      - ServiceNow Performance Analytics API
-      - ServiceNow Contact API
-      - ServiceNow Trouble Ticket Open API
-      - ServiceNow Scripted REST APIs
-      - ServiceNow GraphQL API
-      - ServiceNow Application Service API
-      - ServiceNow Case API
-      - ServiceNow Account API
-      - ServiceNow Consumer API
-      - ServiceNow CSM Attachment API
-      - ServiceNow Email API
-      - ServiceNow CI/CD API
-      - ServiceNow CI/CD Update Set API
-      - ServiceNow DevOps API
-      - ServiceNow DevOps Config API
-      - ServiceNow CMDB Meta API
-      - ServiceNow CMDB Data Ingestion API
-      - ServiceNow MetricBase Time Series API
-      - ServiceNow Interaction Management API
-      - ServiceNow Voice Interaction Resource API
-      - ServiceNow User Role Inheritance API
-      - ServiceNow HR API
-      - ServiceNow Event Management Topic Open API
-      - ServiceNow Predictive Intelligence API
-      - ServiceNow AWA Agent API
-      - ServiceNow AWA Offer Work API
-      - ServiceNow Virtual Agent Bot Integration API
-      - ServiceNow Openframe API
-      - ServiceNow AI Assets API
-      - ServiceNow Lead API
-      - ServiceNow Sales Agreement API
-      - ServiceNow Agent Client Collector API
-      - ServiceNow Agent Mapping API
-      - ServiceNow Automation Center API
-      - ServiceNow AP Invoice API
-      - ServiceNow CSM Order API
-      - ServiceNow CI Lifecycle Management API
-      - ServiceNow Alarm Management Open API
-      - ServiceNow SAM Software Usage Data Integration API
-      - ServiceNow Product Catalog Open API
-      - ServiceNow Service Catalog Open API
-      - ServiceNow Product Order Open API
-      - ServiceNow Service Order Open API
-      - ServiceNow Resource Inventory Open API
-      - ServiceNow Product Inventory Open API
-      - ServiceNow Service Test Management Open API
-      - ServiceNow Project Portfolio Management API
+  - name: Per-instance configurable rate-limit rule
+    scope: instance/user-or-role
+    metric: requests_per_hour
+    limit: see instance configuration
+    notes: Administrators define numeric thresholds per user, per role, or per request URI. Default sample
+      rules ship with the platform but are not a contractual SLA.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Configurable rule engine
+    description: Rate limits are policies in the customer's instance, editable by admins. They can be
+      applied per user, per role, per integration user, and per URI pattern, with separate warning vs
+      violation thresholds.
+  - name: 429 + Retry-After
+    description: When a violation rule fires, ServiceNow returns HTTP 429 with a Retry-After header indicating
+      seconds until the rule's window resets.
+  - name: Disclosure
+    description: Specific numeric thresholds are tenant-internal and disclosed to integrators by the
+      customer's ServiceNow admin team, not publicly.
+  - name: Backoff
+    description: Honor Retry-After; apply exponential backoff with jitter on repeated 429s.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

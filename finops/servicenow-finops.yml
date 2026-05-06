@@ -1,644 +1,100 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ServiceNow
+providerId: servicenow
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - ITSM
+  - Now Platform
+  - FinOps
+  - FOCUS
+description: FinOps shape for ServiceNow — a quote-based enterprise SaaS platform. Cost is dominated
+  by negotiated subscription line items (fulfiller / requester users, named modules, Now Assist consumption
+  units, Integration Hub transactions). Numeric pricing is not published and is negotiated per contract.
+  Integration consumption (table API calls, Integration Hub transactions, Now Assist tokens) maps to internal
+  instance meters that ServiceNow exposes through Subscription Management Lifecycle and Performance Analytics.
+sources:
+  - https://www.servicenow.com/
+notes: Pricing line items, FOCUS column mappings, and meter unit prices are not publicly disclosed; reconciled
+  to known commercial structure only.
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: ServiceNow
-providerId: servicenow
-publisherName: ServiceNow
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Automation
-  - Cloud Services
-  - Digital Workflows
-  - Enterprise Platform
-  - IT Service Management
-  - ITSM
-  - Processes
-  - T1
-  - Workflow Automation
-  - Workflows
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the ServiceNow API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: ServiceNow, Inc.
+serviceCategory: Enterprise Workflow / Now Platform
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription + Consumption Units
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+    - Usage
 focusColumns:
-  ServiceName: ServiceNow
-  ServiceCategory: Developer Tools / API
+  ServiceName: ServiceNow Now Platform
+  ServiceCategory: Enterprise Workflow / ITSM
   ProviderName: ServiceNow
-  PublisherName: ServiceNow
-  InvoiceIssuerName: ServiceNow
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: ServiceNow, Inc.
+  InvoiceIssuerName: ServiceNow, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: fulfiller_users
+    description: Named fulfiller / agent users (primary subscription driver)
+    unit: seat
+    aggregation: max
+    dimensions:
+      - role
+  - name: requester_users
+    description: Requester / employee users where licensed
+    unit: seat
+    aggregation: max
+  - name: integration_hub_transactions
+    description: Integration Hub transactions consumed against the subscription pool
+    unit: transaction
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - flow
+      - spoke
+  - name: now_assist_consumption_units
+    description: Now Assist generative-AI consumption units (where licensed)
+    unit: consumption-unit
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - module
+  - name: custom_table_updates
+    description: Custom Table Updates / table API write volume against the entitlement
+    unit: update
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: ServiceNow Table API
-    baseURL: https://{instance}.service-now.com/api/now/table
-    tags:
-      - CRUD
-      - Data
-      - ITSM
-      - Records
-      - Tables
-    serviceName: ServiceNow Table API
-    serviceCategory: API
-  - name: ServiceNow Aggregate API
-    baseURL: https://{instance}.service-now.com/api/now/stats
-    tags:
-      - Aggregation
-      - Analytics
-      - Reporting
-      - Statistics
-      - Tables
-    serviceName: ServiceNow Aggregate API
-    serviceCategory: API
-  - name: ServiceNow Attachment API
-    baseURL: https://{instance}.service-now.com/api/now/attachment
-    tags:
-      - Attachments
-      - Files
-      - Records
-      - Upload
-    serviceName: ServiceNow Attachment API
-    serviceCategory: API
-  - name: ServiceNow Import Set API
-    baseURL: https://{instance}.service-now.com/api/now/import
-    tags:
-      - Data Loading
-      - ETL
-      - Import
-      - Integration
-    serviceName: ServiceNow Import Set API
-    serviceCategory: API
-  - name: ServiceNow Batch API
-    baseURL: https://{instance}.service-now.com/api/now/v1/batch
-    tags:
-      - Batch
-      - Integration
-      - Performance
-      - REST
-    serviceName: ServiceNow Batch API
-    serviceCategory: API
-  - name: ServiceNow Change Management API
-    baseURL: https://{instance}.service-now.com/api/sn_chg_rest/v1/change
-    tags:
-      - Change Management
-      - IT Operations
-      - ITSM
-      - Workflows
-    serviceName: ServiceNow Change Management API
-    serviceCategory: API
-  - name: ServiceNow Knowledge Management API
-    baseURL: https://{instance}.service-now.com/api/sn_km_api/knowledge
-    tags:
-      - Articles
-      - Knowledge Base
-      - Knowledge Management
-      - Self-Service
-    serviceName: ServiceNow Knowledge Management API
-    serviceCategory: API
-  - name: ServiceNow Service Catalog API
-    baseURL: https://{instance}.service-now.com/api/sn_sc/servicecatalog
-    tags:
-      - ITSM
-      - Requests
-      - Self-Service
-      - Service Catalog
-    serviceName: ServiceNow Service Catalog API
-    serviceCategory: API
-  - name: ServiceNow CMDB Instance API
-    baseURL: https://{instance}.service-now.com/api/now/cmdb/instance
-    tags:
-      - Assets
-      - CMDB
-      - Configuration Management
-      - IT Operations
-    serviceName: ServiceNow CMDB Instance API
-    serviceCategory: API
-  - name: ServiceNow Identification and Reconciliation API
-    baseURL: https://{instance}.service-now.com/api/now/identifyreconcile
-    tags:
-      - CMDB
-      - Configuration Management
-      - Discovery
-      - Reconciliation
-    serviceName: ServiceNow Identification and Reconciliation API
-    serviceCategory: API
-  - name: ServiceNow Performance Analytics API
-    baseURL: https://{instance}.service-now.com/api/now/pa
-    tags:
-      - Analytics
-      - Dashboards
-      - Performance
-      - Reporting
-    serviceName: ServiceNow Performance Analytics API
-    serviceCategory: API
-  - name: ServiceNow Contact API
-    baseURL: https://{instance}.service-now.com/api/now/contact
-    tags:
-      - Contacts
-      - CSM
-      - Customer Service
-      - Records
-    serviceName: ServiceNow Contact API
-    serviceCategory: API
-  - name: ServiceNow Trouble Ticket Open API
-    baseURL: https://{instance}.service-now.com/api/now/troubleticket
-    tags:
-      - Customer Service
-      - Incidents
-      - TM Forum
-      - Trouble Tickets
-    serviceName: ServiceNow Trouble Ticket Open API
-    serviceCategory: API
-  - name: ServiceNow Scripted REST APIs
-    baseURL: https://{instance}.service-now.com/api/{namespace}/{api_id}
-    tags:
-      - Custom APIs
-      - Integration
-      - Platform
-      - Scripting
-    serviceName: ServiceNow Scripted REST APIs
-    serviceCategory: API
-  - name: ServiceNow GraphQL API
-    baseURL: https://{instance}.service-now.com/api/now/graphql
-    tags:
-      - Custom APIs
-      - GraphQL
-      - Integration
-      - Platform
-    serviceName: ServiceNow GraphQL API
-    serviceCategory: API
-  - name: ServiceNow Application Service API
-    baseURL: https://{instance}.service-now.com/api/now/cmdb/app_service
-    tags:
-      - Application Services
-      - CMDB
-      - IT Operations
-      - Service Mapping
-    serviceName: ServiceNow Application Service API
-    serviceCategory: API
-  - name: ServiceNow Case API
-    baseURL: https://{instance}.service-now.com/api/sn_customerservice/case
-    tags:
-      - Cases
-      - CSM
-      - Customer Service
-      - Support
-    serviceName: ServiceNow Case API
-    serviceCategory: API
-  - name: ServiceNow Account API
-    baseURL: https://{instance}.service-now.com/api/now/account
-    tags:
-      - Accounts
-      - CSM
-      - Customer Service
-      - Records
-    serviceName: ServiceNow Account API
-    serviceCategory: API
-  - name: ServiceNow Consumer API
-    baseURL: https://{instance}.service-now.com/api/now/consumer
-    tags:
-      - Consumers
-      - CSM
-      - Customer Service
-      - Self-Service
-    serviceName: ServiceNow Consumer API
-    serviceCategory: API
-  - name: ServiceNow CSM Attachment API
-    baseURL: https://{instance}.service-now.com/api/sn_customerservice/attachment
-    tags:
-      - Attachments
-      - CSM
-      - Customer Service
-      - Files
-    serviceName: ServiceNow CSM Attachment API
-    serviceCategory: API
-  - name: ServiceNow Email API
-    baseURL: https://{instance}.service-now.com/api/now/email
-    tags:
-      - Email
-      - Messaging
-      - Notifications
-      - Platform
-    serviceName: ServiceNow Email API
-    serviceCategory: API
-  - name: ServiceNow CI/CD API
-    baseURL: https://{instance}.service-now.com/api/sn_cicd
-    tags:
-      - Automation
-      - CI/CD
-      - Deployment
-      - DevOps
-    serviceName: ServiceNow CI/CD API
-    serviceCategory: API
-  - name: ServiceNow CI/CD Update Set API
-    baseURL: https://{instance}.service-now.com/api/sn_cicd/update_set
-    tags:
-      - CI/CD
-      - Deployment
-      - DevOps
-      - Update Sets
-    serviceName: ServiceNow CI/CD Update Set API
-    serviceCategory: API
-  - name: ServiceNow DevOps API
-    baseURL: https://{instance}.service-now.com/api/sn_devops
-    tags:
-      - Change Velocity
-      - CI/CD
-      - DevOps
-      - Pipelines
-    serviceName: ServiceNow DevOps API
-    serviceCategory: API
-  - name: ServiceNow DevOps Config API
-    baseURL: https://{instance}.service-now.com/api/sn_devops_config
-    tags:
-      - Automation
-      - Change Management
-      - Configuration
-      - DevOps
-    serviceName: ServiceNow DevOps Config API
-    serviceCategory: API
-  - name: ServiceNow CMDB Meta API
-    baseURL: https://{instance}.service-now.com/api/now/cmdb/meta
-    tags:
-      - CMDB
-      - Configuration Management
-      - Metadata
-      - Schema
-    serviceName: ServiceNow CMDB Meta API
-    serviceCategory: API
-  - name: ServiceNow CMDB Data Ingestion API
-    baseURL: https://{instance}.service-now.com/api/now/cmdb/ingest
-    tags:
-      - CMDB
-      - Configuration Management
-      - Data Ingestion
-      - Integration
-    serviceName: ServiceNow CMDB Data Ingestion API
-    serviceCategory: API
-  - name: ServiceNow MetricBase Time Series API
-    baseURL: https://{instance}.service-now.com/api/now/clotho
-    tags:
-      - ITOM
-      - Metrics
-      - Monitoring
-      - Time Series
-    serviceName: ServiceNow MetricBase Time Series API
-    serviceCategory: API
-  - name: ServiceNow Interaction Management API
-    baseURL: https://{instance}.service-now.com/api/interaction
-    tags:
-      - Agent Workspace
-      - Customer Service
-      - Interactions
-      - Omnichannel
-    serviceName: ServiceNow Interaction Management API
-    serviceCategory: API
-  - name: ServiceNow Voice Interaction Resource API
-    baseURL: https://{instance}.service-now.com/api/now/voice
-    tags:
-      - Contact Center
-      - Interactions
-      - Telephony
-      - Voice
-    serviceName: ServiceNow Voice Interaction Resource API
-    serviceCategory: API
-  - name: ServiceNow User Role Inheritance API
-    baseURL: https://{instance}.service-now.com/api/now/user_role_inheritance
-    tags:
-      - Access Control
-      - Roles
-      - Security
-      - Users
-    serviceName: ServiceNow User Role Inheritance API
-    serviceCategory: API
-  - name: ServiceNow HR API
-    baseURL: https://{instance}.service-now.com/api/sn_hr_core
-    tags:
-      - Employee Services
-      - HR Service Delivery
-      - HRSD
-      - Human Resources
-    serviceName: ServiceNow HR API
-    serviceCategory: API
-  - name: ServiceNow Event Management Topic Open API
-    baseURL: https://{instance}.service-now.com/api/em/topic
-    tags:
-      - Alerts
-      - Event Management
-      - ITOM
-      - Monitoring
-    serviceName: ServiceNow Event Management Topic Open API
-    serviceCategory: API
-  - name: ServiceNow Predictive Intelligence API
-    baseURL: https://{instance}.service-now.com/api/now/agent_intelligence
-    tags:
-      - AI
-      - Classification
-      - Machine Learning
-      - Predictions
-    serviceName: ServiceNow Predictive Intelligence API
-    serviceCategory: API
-  - name: ServiceNow AWA Agent API
-    baseURL: https://{instance}.service-now.com/api/now/awa/agent
-    tags:
-      - Agent Workspace
-      - Queues
-      - Routing
-      - Workforce Management
-    serviceName: ServiceNow AWA Agent API
-    serviceCategory: API
-  - name: ServiceNow AWA Offer Work API
-    baseURL: https://{instance}.service-now.com/api/now/awa/offerwork
-    tags:
-      - Agent Workspace
-      - Queues
-      - Routing
-      - Work Assignment
-    serviceName: ServiceNow AWA Offer Work API
-    serviceCategory: API
-  - name: ServiceNow Virtual Agent Bot Integration API
-    baseURL: https://{instance}.service-now.com/api/sn_va_as_service
-    tags:
-      - Chatbot
-      - Conversational AI
-      - Self-Service
-      - Virtual Agent
-    serviceName: ServiceNow Virtual Agent Bot Integration API
-    serviceCategory: API
-  - name: ServiceNow Openframe API
-    baseURL: https://{instance}.service-now.com/api/now/openframe
-    tags:
-      - CCaaS
-      - Contact Center
-      - Integration
-      - Telephony
-    serviceName: ServiceNow Openframe API
-    serviceCategory: API
-  - name: ServiceNow AI Assets API
-    baseURL: https://{instance}.service-now.com/api/now/ai/assets
-    tags:
-      - AI Governance
-      - Artificial Intelligence
-      - Machine Learning
-      - Platform
-    serviceName: ServiceNow AI Assets API
-    serviceCategory: API
-  - name: ServiceNow Lead API
-    baseURL: https://{instance}.service-now.com/api/sn_lead
-    tags:
-      - CRM
-      - Leads
-      - Marketing
-      - Sales
-    serviceName: ServiceNow Lead API
-    serviceCategory: API
-  - name: ServiceNow Sales Agreement API
-    baseURL: https://{instance}.service-now.com/api/sn_sales_agreement
-    tags:
-      - Agreements
-      - Contracts
-      - CRM
-      - Sales
-    serviceName: ServiceNow Sales Agreement API
-    serviceCategory: API
-  - name: ServiceNow Agent Client Collector API
-    baseURL: https://{instance}.service-now.com/api/now/acc
-    tags:
-      - Agents
-      - Discovery
-      - ITOM
-      - Monitoring
-    serviceName: ServiceNow Agent Client Collector API
-    serviceCategory: API
-  - name: ServiceNow Agent Mapping API
-    baseURL: https://{instance}.service-now.com/api/now/agent_mapping
-    tags:
-      - Agent Workspace
-      - Integration
-      - Mapping
-      - Routing
-    serviceName: ServiceNow Agent Mapping API
-    serviceCategory: API
-  - name: ServiceNow Automation Center API
-    baseURL: https://{instance}.service-now.com/api/sn_automation_center
-    tags:
-      - Automation
-      - Orchestration
-      - Platform
-      - Workflows
-    serviceName: ServiceNow Automation Center API
-    serviceCategory: API
-  - name: ServiceNow AP Invoice API
-    baseURL: https://{instance}.service-now.com/api/now/ap/invoice
-    tags:
-      - Accounts Payable
-      - Finance
-      - Invoices
-      - Procurement
-    serviceName: ServiceNow AP Invoice API
-    serviceCategory: API
-  - name: ServiceNow CSM Order API
-    baseURL: https://{instance}.service-now.com/api/sn_customerservice/order
-    tags:
-      - Commerce
-      - CSM
-      - Customer Service
-      - Orders
-    serviceName: ServiceNow CSM Order API
-    serviceCategory: API
-  - name: ServiceNow CI Lifecycle Management API
-    baseURL: https://{instance}.service-now.com/api/now/cmdb/ci_lifecycle
-    tags:
-      - CMDB
-      - Configuration Management
-      - IT Operations
-      - Lifecycle
-    serviceName: ServiceNow CI Lifecycle Management API
-    serviceCategory: API
-  - name: ServiceNow Alarm Management Open API
-    baseURL: https://{instance}.service-now.com/api/now/alarm
-    tags:
-      - Alerts
-      - Event Management
-      - ITOM
-      - Monitoring
-    serviceName: ServiceNow Alarm Management Open API
-    serviceCategory: API
-  - name: ServiceNow SAM Software Usage Data Integration API
-    baseURL: https://{instance}.service-now.com/api/sam/software_usage
-    tags:
-      - ITAM
-      - Licensing
-      - Software Asset Management
-      - Usage Tracking
-    serviceName: ServiceNow SAM Software Usage Data Integration API
-    serviceCategory: API
-  - name: ServiceNow Product Catalog Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/catalogManagement/v4
-    tags:
-      - Commerce
-      - Product Catalog
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Product Catalog Open API
-    serviceCategory: API
-  - name: ServiceNow Service Catalog Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceCatalogManagement/v4
-    tags:
-      - Commerce
-      - Service Catalog
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Service Catalog Open API
-    serviceCategory: API
-  - name: ServiceNow Product Order Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/productOrderingManagement/v4
-    tags:
-      - Commerce
-      - Product Ordering
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Product Order Open API
-    serviceCategory: API
-  - name: ServiceNow Service Order Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceOrderingManagement/v4
-    tags:
-      - Commerce
-      - Service Ordering
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Service Order Open API
-    serviceCategory: API
-  - name: ServiceNow Resource Inventory Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/resourceInventoryManagement/v4
-    tags:
-      - Inventory
-      - Resources
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Resource Inventory Open API
-    serviceCategory: API
-  - name: ServiceNow Product Inventory Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/productInventoryManagement/v4
-    tags:
-      - Inventory
-      - Products
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Product Inventory Open API
-    serviceCategory: API
-  - name: ServiceNow Service Test Management Open API
-    baseURL: https://{instance}.service-now.com/api/sn_ind_tmt_orm/serviceTestManagement/v4
-    tags:
-      - Quality
-      - Service Testing
-      - Telecommunications
-      - TMF
-    serviceName: ServiceNow Service Test Management Open API
-    serviceCategory: API
-  - name: ServiceNow Project Portfolio Management API
-    baseURL: https://{instance}.service-now.com/api/now/ppm
-    tags:
-      - Governance
-      - PPM
-      - Project Management
-      - Strategic Portfolio Management
-    serviceName: ServiceNow Project Portfolio Management API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - table
+  - name: subscription_fee
+    description: Negotiated annual subscription fee (modules + seats)
+    unit: year
+    aggregation: sum
+    dimensions:
+      - module
+principles:
+  - name: Visibility
+    description: Use ServiceNow Subscription Management Lifecycle, Performance Analytics, and the SAM
+      Pro app to track entitlement burn for users, transactions, and Now Assist consumption units. Custom
+      reports on sys_audit and the integration_hub.transaction tables expose granular activity.
+  - name: Allocation
+    description: Allocate subscription cost by user role / department from the user table, and tag integrations
+      with a consuming-application reference so Integration Hub transaction usage rolls up to the right
+      cost center.
+  - name: Optimization
+    description: Right-size fulfiller seats annually against actual login activity; consolidate redundant
+      Integration Hub flows; cap Now Assist usage with platform guardrails before approving generative-AI
+      features in production.
+  - name: Accountability
+    description: ServiceNow CoE / Platform owner is accountable for entitlement burn and rate-limit
+      configuration; finance leads contract renegotiation; module owners (ITSM, HRSD, CSM) defend their
+      seat counts.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
