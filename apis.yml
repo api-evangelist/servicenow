@@ -1076,8 +1076,11 @@ common:
         description: Incident alerting and on-call management integration for streamlined incident response.
       - name: AWS
         description: Cloud resource discovery and CMDB synchronization for AWS infrastructure management.
+  - name: Agent Skills
+    url: https://github.com/ServiceNow/saai-skill-feedback
+    type: AgentSkill
 created: '2025-01-08'
-modified: '2026-04-18'
+modified: '2026-05-19'
 position: Consuming
 segments:
   - Workflows
