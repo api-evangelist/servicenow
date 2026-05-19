@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ServiceNow Service Catalog API — Cart
+  description: 'ServiceNow Service Catalog API — Cart. 5 operations. Lead operation: Servicenow Retrieve the Current Cart.
+    Self-contained Naftiko capability covering one Servicenow business surface.'
+  tags:
+  - Servicenow
+  - Cart
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SERVICENOW_API_KEY: SERVICENOW_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: service-catalog-cart
+    baseUri: https://{instance}.service-now.com/api/sn_sc
+    description: ServiceNow Service Catalog API — Cart business capability. Self-contained, no shared references.
+    resources:
+    - name: servicecatalog-cart
+      path: /servicecatalog/cart
+      operations:
+      - name: getcart
+        method: GET
+        description: Servicenow Retrieve the Current Cart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: emptycart
+        method: DELETE
+        description: Servicenow Empty the Cart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servicecatalog-cart-submit_order
+      path: /servicecatalog/cart/submit_order
+      operations:
+      - name: submitcartorder
+        method: POST
+        description: Servicenow Submit the Cart as an Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servicecatalog-items-sys_id-add_to_cart
+      path: /servicecatalog/items/{sys_id}/add_to_cart
+      operations:
+      - name: additemtocart
+        method: POST
+        description: Servicenow Add a Catalog Item to the Cart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: servicecatalog-items-sys_id-order_now
+      path: /servicecatalog/items/{sys_id}/order_now
+      operations:
+      - name: orderitemnow
+        method: POST
+        description: Servicenow Order a Catalog Item Immediately
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SERVICENOW_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: service-catalog-cart-rest
+    port: 8080
+    description: REST adapter for ServiceNow Service Catalog API — Cart. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/servicecatalog/cart
+      name: servicecatalog-cart
+      description: REST surface for servicecatalog-cart.
+      operations:
+      - method: GET
+        name: getcart
+        description: Servicenow Retrieve the Current Cart
+        call: service-catalog-cart.getcart
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: emptycart
+        description: Servicenow Empty the Cart
+        call: service-catalog-cart.emptycart
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servicecatalog/cart/submit-order
+      name: servicecatalog-cart-submit-order
+      description: REST surface for servicecatalog-cart-submit_order.
+      operations:
+      - method: POST
+        name: submitcartorder
+        description: Servicenow Submit the Cart as an Order
+        call: service-catalog-cart.submitcartorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servicecatalog/items/{sys-id}/add-to-cart
+      name: servicecatalog-items-sys-id-add-to-cart
+      description: REST surface for servicecatalog-items-sys_id-add_to_cart.
+      operations:
+      - method: POST
+        name: additemtocart
+        description: Servicenow Add a Catalog Item to the Cart
+        call: service-catalog-cart.additemtocart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/servicecatalog/items/{sys-id}/order-now
+      name: servicecatalog-items-sys-id-order-now
+      description: REST surface for servicecatalog-items-sys_id-order_now.
+      operations:
+      - method: POST
+        name: orderitemnow
+        description: Servicenow Order a Catalog Item Immediately
+        call: service-catalog-cart.orderitemnow
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: service-catalog-cart-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ServiceNow Service Catalog API — Cart. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: servicenow-retrieve-current-cart
+      description: Servicenow Retrieve the Current Cart
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: service-catalog-cart.getcart
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-empty-cart
+      description: Servicenow Empty the Cart
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: service-catalog-cart.emptycart
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-submit-cart-order
+      description: Servicenow Submit the Cart as an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: service-catalog-cart.submitcartorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-add-catalog-item-cart
+      description: Servicenow Add a Catalog Item to the Cart
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: service-catalog-cart.additemtocart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-order-catalog-item-immediately
+      description: Servicenow Order a Catalog Item Immediately
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: service-catalog-cart.orderitemnow
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

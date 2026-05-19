@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ServiceNow Change Management API — Normal Changes
+  description: 'ServiceNow Change Management API — Normal Changes. 4 operations. Lead operation: Servicenow List Normal Change
+    Requests. Self-contained Naftiko capability covering one Servicenow business surface.'
+  tags:
+  - Servicenow
+  - Normal Changes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SERVICENOW_API_KEY: SERVICENOW_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: change-management-normal-changes
+    baseUri: https://{instance}.service-now.com/api/sn_chg_rest/v1
+    description: ServiceNow Change Management API — Normal Changes business capability. Self-contained, no shared references.
+    resources:
+    - name: change-normal
+      path: /change/normal
+      operations:
+      - name: listnormalchanges
+        method: GET
+        description: Servicenow List Normal Change Requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnormalchange
+        method: POST
+        description: Servicenow Create a Normal Change Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: change-normal-sys_id
+      path: /change/normal/{sys_id}
+      operations:
+      - name: getnormalchange
+        method: GET
+        description: Servicenow Retrieve a Normal Change Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatenormalchange
+        method: PATCH
+        description: Servicenow Update a Normal Change Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SERVICENOW_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: change-management-normal-changes-rest
+    port: 8080
+    description: REST adapter for ServiceNow Change Management API — Normal Changes. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/change/normal
+      name: change-normal
+      description: REST surface for change-normal.
+      operations:
+      - method: GET
+        name: listnormalchanges
+        description: Servicenow List Normal Change Requests
+        call: change-management-normal-changes.listnormalchanges
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createnormalchange
+        description: Servicenow Create a Normal Change Request
+        call: change-management-normal-changes.createnormalchange
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/change/normal/{sys-id}
+      name: change-normal-sys-id
+      description: REST surface for change-normal-sys_id.
+      operations:
+      - method: GET
+        name: getnormalchange
+        description: Servicenow Retrieve a Normal Change Request
+        call: change-management-normal-changes.getnormalchange
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatenormalchange
+        description: Servicenow Update a Normal Change Request
+        call: change-management-normal-changes.updatenormalchange
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: change-management-normal-changes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ServiceNow Change Management API — Normal Changes. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: servicenow-list-normal-change-requests
+      description: Servicenow List Normal Change Requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: change-management-normal-changes.listnormalchanges
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-create-normal-change-request
+      description: Servicenow Create a Normal Change Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: change-management-normal-changes.createnormalchange
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-retrieve-normal-change-request
+      description: Servicenow Retrieve a Normal Change Request
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: change-management-normal-changes.getnormalchange
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-update-normal-change-request
+      description: Servicenow Update a Normal Change Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: change-management-normal-changes.updatenormalchange
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

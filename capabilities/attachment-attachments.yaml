@@ -1,0 +1,286 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ServiceNow Attachment API — Attachments
+  description: 'ServiceNow Attachment API — Attachments. 6 operations. Lead operation: Servicenow List Attachments. Self-contained
+    Naftiko capability covering one Servicenow business surface.'
+  tags:
+  - Servicenow
+  - Attachments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SERVICENOW_API_KEY: SERVICENOW_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: attachment-attachments
+    baseUri: https://{instance}.service-now.com/api/now
+    description: ServiceNow Attachment API — Attachments business capability. Self-contained, no shared references.
+    resources:
+    - name: attachment
+      path: /attachment
+      operations:
+      - name: listattachments
+        method: GET
+        description: Servicenow List Attachments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sysparm_query
+          in: query
+          type: string
+          description: Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name,
+            and content_type.
+        - name: sysparm_limit
+          in: query
+          type: integer
+          description: Maximum number of attachment records to return.
+        - name: sysparm_offset
+          in: query
+          type: integer
+          description: Starting record index for pagination.
+    - name: attachment-file
+      path: /attachment/file
+      operations:
+      - name: uploadattachmentbinary
+        method: POST
+        description: Servicenow Upload a File Attachment via Binary Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: table_name
+          in: query
+          type: string
+          description: The name of the table to which the file is attached.
+          required: true
+        - name: table_sys_id
+          in: query
+          type: string
+          description: The sys_id of the record to which the file is attached.
+          required: true
+        - name: file_name
+          in: query
+          type: string
+          description: The name of the file including its extension.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: attachment-upload
+      path: /attachment/upload
+      operations:
+      - name: uploadattachmentmultipart
+        method: POST
+        description: Servicenow Upload a File Attachment via Multipart Form Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: attachment-sys_id
+      path: /attachment/{sys_id}
+      operations:
+      - name: getattachment
+        method: GET
+        description: Servicenow Retrieve Attachment Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteattachment
+        method: DELETE
+        description: Servicenow Delete an Attachment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: attachment-sys_id-file
+      path: /attachment/{sys_id}/file
+      operations:
+      - name: downloadattachmentfile
+        method: GET
+        description: Servicenow Download Attachment File Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SERVICENOW_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: attachment-attachments-rest
+    port: 8080
+    description: REST adapter for ServiceNow Attachment API — Attachments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/attachment
+      name: attachment
+      description: REST surface for attachment.
+      operations:
+      - method: GET
+        name: listattachments
+        description: Servicenow List Attachments
+        call: attachment-attachments.listattachments
+        with:
+          sysparm_query: rest.sysparm_query
+          sysparm_limit: rest.sysparm_limit
+          sysparm_offset: rest.sysparm_offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/attachment/file
+      name: attachment-file
+      description: REST surface for attachment-file.
+      operations:
+      - method: POST
+        name: uploadattachmentbinary
+        description: Servicenow Upload a File Attachment via Binary Stream
+        call: attachment-attachments.uploadattachmentbinary
+        with:
+          table_name: rest.table_name
+          table_sys_id: rest.table_sys_id
+          file_name: rest.file_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/attachment/upload
+      name: attachment-upload
+      description: REST surface for attachment-upload.
+      operations:
+      - method: POST
+        name: uploadattachmentmultipart
+        description: Servicenow Upload a File Attachment via Multipart Form Data
+        call: attachment-attachments.uploadattachmentmultipart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/attachment/{sys-id}
+      name: attachment-sys-id
+      description: REST surface for attachment-sys_id.
+      operations:
+      - method: GET
+        name: getattachment
+        description: Servicenow Retrieve Attachment Metadata
+        call: attachment-attachments.getattachment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteattachment
+        description: Servicenow Delete an Attachment
+        call: attachment-attachments.deleteattachment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/attachment/{sys-id}/file
+      name: attachment-sys-id-file
+      description: REST surface for attachment-sys_id-file.
+      operations:
+      - method: GET
+        name: downloadattachmentfile
+        description: Servicenow Download Attachment File Content
+        call: attachment-attachments.downloadattachmentfile
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: attachment-attachments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ServiceNow Attachment API — Attachments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: servicenow-list-attachments
+      description: Servicenow List Attachments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: attachment-attachments.listattachments
+      with:
+        sysparm_query: tools.sysparm_query
+        sysparm_limit: tools.sysparm_limit
+        sysparm_offset: tools.sysparm_offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-upload-file-attachment-binary
+      description: Servicenow Upload a File Attachment via Binary Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: attachment-attachments.uploadattachmentbinary
+      with:
+        table_name: tools.table_name
+        table_sys_id: tools.table_sys_id
+        file_name: tools.file_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-upload-file-attachment-multipart
+      description: Servicenow Upload a File Attachment via Multipart Form Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: attachment-attachments.uploadattachmentmultipart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-retrieve-attachment-metadata
+      description: Servicenow Retrieve Attachment Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: attachment-attachments.getattachment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-delete-attachment
+      description: Servicenow Delete an Attachment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: attachment-attachments.deleteattachment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: servicenow-download-attachment-file-content
+      description: Servicenow Download Attachment File Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: attachment-attachments.downloadattachmentfile
+      outputParameters:
+      - type: object
+        mapping: $.
