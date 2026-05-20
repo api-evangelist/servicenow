@@ -3,12 +3,11 @@
   "feeds": [
     {
       "source": "https://www.servicenow.com/community/developer-blog/bg-p/developer-blog",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
+      "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
+      "title": "Developer blog articles",
+      "saved": 16
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-09T20:17:51Z"
+  "post_count": 26,
+  "fetched": "2026-05-17T20:48:52Z"
 }
