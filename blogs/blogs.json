@@ -2,12 +2,20 @@
   "repo": "servicenow",
   "feeds": [
     {
+      "source": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
+      "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.servicenow.com/community/developer-blog/bg-p/developer-blog",
       "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
-      "title": "Developer blog articles",
-      "saved": 16
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 26,
-  "fetched": "2026-05-17T20:48:52Z"
+  "post_count": 32,
+  "fetched": "2026-06-01T23:35:02Z"
 }
