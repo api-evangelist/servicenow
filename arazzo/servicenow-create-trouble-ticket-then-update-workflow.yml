@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Create Trouble Ticket Then Update
+  summary: Create a trouble ticket, read it back by id, then update its status and severity.
+  description: >-
+    The TM Forum-style trouble-ticket lifecycle exposed by ServiceNow over the
+    Case, Incident, and Service Problem Case tables. The workflow creates a
+    trouble ticket, retrieves it by its returned id to confirm persistence, and
+    then updates its status and severity as the ticket progresses. Unlike the
+    Table API, the Trouble Ticket API returns each ticket as a flat object
+    keyed by id rather than wrapping it under a result object. Every request is
+    written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: troubleTicketApi
+  url: ../openapi/trouble-ticket-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: create-trouble-ticket-then-update
+  summary: Open a trouble ticket and progress its status.
+  description: >-
+    Creates a trouble ticket, reads it back by id, and updates its status and
+    severity.
+  inputs:
+    type: object
+    required:
+    - name
+    - ticketType
+    properties:
+      name:
+        type: string
+        description: The title of the trouble ticket.
+      description:
+        type: string
+        description: The full description of the trouble ticket.
+      severity:
+        type: string
+        description: The initial severity of the ticket.
+      ticketType:
+        type: string
+        description: The ticket type — one of Case, Incident, or Service Problem Case.
+      newStatus:
+        type: string
+        description: The status to set during the update.
+      newSeverity:
+        type: string
+        description: The severity to set during the update.
+  steps:
+  - stepId: createTicket
+    description: >-
+      Create a trouble ticket record in the Case, Incident, or Service Problem
+      Case table per the supplied ticket type.
+    operationId: createTroubleTicket
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        severity: $inputs.severity
+        ticketType: $inputs.ticketType
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      ticketId: $response.body#/id
+  - stepId: getTicket
+    description: >-
+      Retrieve the trouble ticket by its id to confirm it persisted before
+      updating it.
+    operationId: getTroubleTicketById
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createTicket.outputs.ticketId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/status
+  - stepId: updateTicket
+    description: >-
+      Update the trouble ticket's status and severity as it progresses.
+    operationId: updateTroubleTicket
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createTicket.outputs.ticketId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: $inputs.newStatus
+        severity: $inputs.newSeverity
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ticketId: $response.body#/id
+      status: $response.body#/status
+      lastUpdate: $response.body#/lastUpdate
+  outputs:
+    ticketId: $steps.updateTicket.outputs.ticketId
+    status: $steps.updateTicket.outputs.status

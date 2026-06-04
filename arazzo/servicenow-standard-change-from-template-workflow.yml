@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Standard Change From Template
+  summary: List standard change models, create a change from a template, then read it back.
+  description: >-
+    The pre-approved standard-change path. The workflow lists existing standard
+    change records to give context on available models, creates a new standard
+    change from a supplied template sys_id (which carries the template's default
+    values and pre-configured approvals), and reads the resulting change back by
+    its sys_id. Each request is written inline, including the API convention of
+    wrapping the change under a result object and lists under a result array.
+  version: 1.0.0
+sourceDescriptions:
+- name: changeApi
+  url: ../openapi/servicenow-change-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: standard-change-from-template
+  summary: Create a standard change from a pre-approved template.
+  description: >-
+    Surveys existing standard changes, creates a new one from a template, and
+    confirms it by reading it back.
+  inputs:
+    type: object
+    required:
+    - templateId
+    properties:
+      templateId:
+        type: string
+        description: The sys_id of the standard change template to instantiate.
+      shortDescription:
+        type: string
+        description: An optional short description override for the new change.
+      assignmentGroup:
+        type: string
+        description: An optional assignment group override.
+      startDate:
+        type: string
+        description: An optional planned start date/time override.
+      endDate:
+        type: string
+        description: An optional planned end date/time override.
+  steps:
+  - stepId: listStandardChanges
+    description: >-
+      List existing standard change requests to provide context before creating
+      a new one from a template.
+    operationId: listStandardChanges
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstChangeSysId: $response.body#/result/0/sys_id
+  - stepId: createFromTemplate
+    description: >-
+      Create a new standard change request from the supplied template. The
+      template determines default values and pre-configured approvals; the
+      supplied body fields override template defaults.
+    operationId: createStandardChange
+    parameters:
+    - name: standard_change_template_id
+      in: path
+      value: $inputs.templateId
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        assignment_group: $inputs.assignmentGroup
+        start_date: $inputs.startDate
+        end_date: $inputs.endDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      changeSysId: $response.body#/result/sys_id
+      number: $response.body#/result/number
+  - stepId: getChange
+    description: >-
+      Read the newly created standard change back by its sys_id to confirm it
+      was created from the template.
+    operationId: getNormalChange
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.createFromTemplate.outputs.changeSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/result/state
+      approval: $response.body#/result/approval
+  outputs:
+    changeSysId: $steps.createFromTemplate.outputs.changeSysId
+    number: $steps.createFromTemplate.outputs.number
+    approval: $steps.getChange.outputs.approval

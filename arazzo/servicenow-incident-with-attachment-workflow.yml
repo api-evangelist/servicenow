@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Incident With Attachment
+  summary: Create an incident, attach a file to it via multipart upload, then confirm the attachment.
+  description: >-
+    An intake-plus-evidence flow spanning the Table and Attachment APIs. The
+    workflow creates an incident on the Table API, uploads a file to that
+    incident record using a multipart form-data attachment, and then retrieves
+    the attachment metadata by its sys_id to confirm it landed. The Table and
+    Attachment APIs wrap single records under a result object. Every request is
+    written inline, including the multipart upload that targets the new record
+    by table name and sys_id.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+- name: attachmentApi
+  url: ../openapi/servicenow-attachment-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: incident-with-attachment
+  summary: Open an incident and attach a supporting file to it.
+  description: >-
+    Creates an incident, uploads a file attachment to it, and confirms the
+    attachment metadata.
+  inputs:
+    type: object
+    required:
+    - shortDescription
+    - uploadFile
+    properties:
+      shortDescription:
+        type: string
+        description: The short description of the incident.
+      callerId:
+        type: string
+        description: The sys_id of the caller reporting the incident.
+      uploadFile:
+        type: string
+        description: The file content to attach to the incident.
+  steps:
+  - stepId: createIncident
+    description: >-
+      Create a new incident record to which the file will be attached.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        caller_id: $inputs.callerId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      number: $response.body#/result/number
+  - stepId: uploadAttachment
+    description: >-
+      Upload a file to the new incident using multipart form-data, targeting the
+      incident table and the incident sys_id.
+    operationId: uploadAttachmentMultipart
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        table_name: incident
+        table_sys_id: $steps.createIncident.outputs.incidentSysId
+        uploadFile: $inputs.uploadFile
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      attachmentSysId: $response.body#/result/sys_id
+  - stepId: confirmAttachment
+    description: >-
+      Retrieve the attachment metadata by sys_id to confirm it was stored and
+      linked to the incident.
+    operationId: getAttachment
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.uploadAttachment.outputs.attachmentSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fileName: $response.body#/result/file_name
+      tableSysId: $response.body#/result/table_sys_id
+  outputs:
+    incidentSysId: $steps.createIncident.outputs.incidentSysId
+    attachmentSysId: $steps.uploadAttachment.outputs.attachmentSysId

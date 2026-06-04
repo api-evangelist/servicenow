@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Table Record Lifecycle
+  summary: Exercise the full Table API CRUD lifecycle — create, read, update, then delete a record.
+  description: >-
+    A generic create-read-update-delete walkthrough of the ServiceNow Table
+    API against any table. The workflow creates a record from a supplied field
+    map, reads it back by sys_id, updates it with a second field map, and
+    finally deletes it. This demonstrates the complete record lifecycle and the
+    Table API convention of wrapping the single record under a result object on
+    create, read, and update.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: table-record-lifecycle
+  summary: Create, read, update, and delete a single record in any table.
+  description: >-
+    Walks a record through its full lifecycle on the Table API, creating it,
+    retrieving it, applying an update, and removing it.
+  inputs:
+    type: object
+    required:
+    - tableName
+    - createFields
+    - updateFields
+    properties:
+      tableName:
+        type: string
+        description: The ServiceNow table to operate on (e.g. incident, change_request, cmdb_ci).
+      createFields:
+        type: object
+        description: Field name/value pairs for the new record.
+      updateFields:
+        type: object
+        description: Field name/value pairs to apply during the update step.
+  steps:
+  - stepId: createRecord
+    description: >-
+      Create a new record in the target table using the supplied create field
+      map.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    requestBody:
+      contentType: application/json
+      payload: $inputs.createFields
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      recordSysId: $response.body#/result/sys_id
+  - stepId: getRecord
+    description: >-
+      Read the newly created record back by its sys_id to confirm it exists.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sys_id
+      in: path
+      value: $steps.createRecord.outputs.recordSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdOn: $response.body#/result/sys_created_on
+  - stepId: updateRecord
+    description: >-
+      Replace the record's fields with the supplied update field map using a
+      full PUT update.
+    operationId: updateRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sys_id
+      in: path
+      value: $steps.createRecord.outputs.recordSysId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.updateFields
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedOn: $response.body#/result/sys_updated_on
+  - stepId: deleteRecord
+    description: >-
+      Delete the record to complete the lifecycle. A successful delete returns
+      no content.
+    operationId: deleteRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sys_id
+      in: path
+      value: $steps.createRecord.outputs.recordSysId
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    recordSysId: $steps.createRecord.outputs.recordSysId
+    updatedOn: $steps.updateRecord.outputs.updatedOn

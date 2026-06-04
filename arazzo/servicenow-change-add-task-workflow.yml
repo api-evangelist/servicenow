@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Add Task to Change Request
+  summary: Create a change task on a change, list the change's tasks, then update the task.
+  description: >-
+    Builds out the implementation work for a change request. The workflow
+    creates a change task under a parent change, lists the tasks on that change
+    to confirm the new task appears, and then patches the task with an
+    assignment and planned schedule. The change task endpoints wrap their
+    payloads under a result object and key the task to its parent change by
+    sys_id. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: changeApi
+  url: ../openapi/servicenow-change-management-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-change-task
+  summary: Create and schedule a task on a change request.
+  description: >-
+    Creates a change task on a parent change, lists the change's tasks, and
+    updates the new task with an owner and schedule via the Table API.
+  inputs:
+    type: object
+    required:
+    - changeSysId
+    - shortDescription
+    properties:
+      changeSysId:
+        type: string
+        description: The sys_id of the parent change request.
+      shortDescription:
+        type: string
+        description: The short description of the change task.
+      description:
+        type: string
+        description: The full description of the change task.
+      assignedTo:
+        type: string
+        description: The sys_id of the user to assign the task to.
+      assignmentGroup:
+        type: string
+        description: The sys_id of the assignment group for the task.
+      plannedStartDate:
+        type: string
+        description: The planned start date/time for the task.
+      plannedEndDate:
+        type: string
+        description: The planned end date/time for the task.
+      taskState:
+        type: string
+        description: The state value to set on the task during the update.
+  steps:
+  - stepId: createTask
+    description: >-
+      Create a new change task under the supplied parent change request.
+    operationId: createChangeTask
+    parameters:
+    - name: sys_id
+      in: path
+      value: $inputs.changeSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        description: $inputs.description
+        assigned_to: $inputs.assignedTo
+        assignment_group: $inputs.assignmentGroup
+        planned_start_date: $inputs.plannedStartDate
+        planned_end_date: $inputs.plannedEndDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      taskSysId: $response.body#/result/sys_id
+      taskNumber: $response.body#/result/number
+  - stepId: listTasks
+    description: >-
+      List the tasks on the parent change request to confirm the new task is
+      attached.
+    operationId: listChangeTasks
+    parameters:
+    - name: sys_id
+      in: path
+      value: $inputs.changeSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstTaskSysId: $response.body#/result/0/sys_id
+  - stepId: updateTask
+    description: >-
+      Update the change task state via the Table API change_task table. The
+      Change Management API has no task update endpoint, so the generic Table
+      API is used to patch the task by sys_id.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: change_task
+    - name: sys_id
+      in: path
+      value: $steps.createTask.outputs.taskSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: $inputs.taskState
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskSysId: $response.body#/result/sys_id
+  outputs:
+    taskSysId: $steps.createTask.outputs.taskSysId
+    taskNumber: $steps.createTask.outputs.taskNumber

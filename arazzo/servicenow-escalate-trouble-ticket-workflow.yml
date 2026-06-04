@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Escalate Trouble Ticket
+  summary: Find an open trouble ticket by type, read it, then raise its severity to escalate.
+  description: >-
+    A find-then-act escalation flow over the Trouble Ticket API. The workflow
+    lists trouble tickets filtered by type and status, branches on whether a
+    candidate was returned, reads the first match back by id, and then raises
+    its severity to escalate the issue. The Trouble Ticket API returns lists as
+    a flat array and single tickets as a flat object keyed by id. Every request
+    is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: troubleTicketApi
+  url: ../openapi/trouble-ticket-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: escalate-trouble-ticket
+  summary: Locate an open trouble ticket and escalate its severity.
+  description: >-
+    Lists trouble tickets by type and status and, when one exists, escalates
+    the first match by raising its severity.
+  inputs:
+    type: object
+    required:
+    - ticketType
+    - escalatedSeverity
+    properties:
+      ticketType:
+        type: string
+        description: The ticket type to filter on (Case, Incident, or Service Problem Case).
+      status:
+        type: string
+        description: The status to filter open tickets on.
+      escalatedSeverity:
+        type: string
+        description: The raised severity value to apply on escalation.
+  steps:
+  - stepId: findTickets
+    description: >-
+      List trouble tickets filtered by type and status, limited to a single
+      candidate for escalation.
+    operationId: getTroubleTickets
+    parameters:
+    - name: ticketType
+      in: query
+      value: $inputs.ticketType
+    - name: status
+      in: query
+      value: $inputs.status
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      candidateId: $response.body#/0/id
+    onSuccess:
+    - name: ticketFound
+      type: goto
+      stepId: getTicket
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: noTicket
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: getTicket
+    description: >-
+      Read the candidate trouble ticket back by id to confirm it is still open
+      before escalating.
+    operationId: getTroubleTicketById
+    parameters:
+    - name: id
+      in: path
+      value: $steps.findTickets.outputs.candidateId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentSeverity: $response.body#/severity
+  - stepId: escalateTicket
+    description: >-
+      Raise the trouble ticket's severity to escalate the issue.
+    operationId: updateTroubleTicket
+    parameters:
+    - name: id
+      in: path
+      value: $steps.findTickets.outputs.candidateId
+    requestBody:
+      contentType: application/json
+      payload:
+        severity: $inputs.escalatedSeverity
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ticketId: $response.body#/id
+      severity: $response.body#/severity
+  outputs:
+    ticketId: $steps.escalateTicket.outputs.ticketId
+    severity: $steps.escalateTicket.outputs.severity

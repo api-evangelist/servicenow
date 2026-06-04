@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Create and Approve Normal Change
+  summary: Create a normal change request, read it back, then move it through approval.
+  description: >-
+    The change-management intake-to-approval pattern. The workflow creates a
+    normal change request, retrieves it by sys_id to confirm persistence, and
+    then patches its approval and state fields to advance it through the
+    approval gate. The Change Management API does not expose a dedicated
+    approve endpoint, so approval is modeled here as a documented PATCH that
+    sets the approval and state fields on the change record. Every request is
+    written inline, including the API convention of wrapping the change under a
+    result object.
+  version: 1.0.0
+sourceDescriptions:
+- name: changeApi
+  url: ../openapi/servicenow-change-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-change-then-approve
+  summary: Create a normal change request and advance it through approval.
+  description: >-
+    Creates a normal change request from the supplied fields, reads it back,
+    and patches its approval and state to move it forward.
+  inputs:
+    type: object
+    required:
+    - shortDescription
+    properties:
+      shortDescription:
+        type: string
+        description: The one-line summary of the change.
+      description:
+        type: string
+        description: The full description of the change.
+      priority:
+        type: string
+        description: The change priority (e.g. "2").
+      risk:
+        type: string
+        description: The risk level of the change.
+      assignmentGroup:
+        type: string
+        description: The assignment group responsible for the change.
+      implementationPlan:
+        type: string
+        description: The implementation plan text.
+      backoutPlan:
+        type: string
+        description: The backout plan text.
+      approval:
+        type: string
+        description: The approval value to set (e.g. "approved").
+      state:
+        type: string
+        description: The state to advance the change to after approval.
+  steps:
+  - stepId: createChange
+    description: >-
+      Create a new normal change request with the supplied planning fields.
+    operationId: createNormalChange
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        description: $inputs.description
+        priority: $inputs.priority
+        risk: $inputs.risk
+        assignment_group: $inputs.assignmentGroup
+        implementation_plan: $inputs.implementationPlan
+        backout_plan: $inputs.backoutPlan
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      changeSysId: $response.body#/result/sys_id
+      number: $response.body#/result/number
+  - stepId: getChange
+    description: >-
+      Read the newly created change request back by its sys_id to confirm it
+      persisted before submitting it for approval.
+    operationId: getNormalChange
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.createChange.outputs.changeSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentApproval: $response.body#/result/approval
+  - stepId: approveChange
+    description: >-
+      Patch the change request to set its approval and advance its state.
+      ServiceNow has no dedicated approve endpoint, so approval is applied by
+      updating the approval and state fields directly.
+    operationId: updateNormalChange
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.createChange.outputs.changeSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        approval: $inputs.approval
+        state: $inputs.state
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      changeSysId: $response.body#/result/sys_id
+      approval: $response.body#/result/approval
+      state: $response.body#/result/state
+  outputs:
+    changeSysId: $steps.approveChange.outputs.changeSysId
+    number: $steps.createChange.outputs.number
+    approval: $steps.approveChange.outputs.approval

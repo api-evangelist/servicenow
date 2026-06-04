@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Close Problem
+  summary: Find a problem by number, read it, then close it with a resolution code and notes.
+  description: >-
+    A find-then-act closure flow for problem management over the Table API.
+    ServiceNow has no dedicated problem API, so the generic Table API drives the
+    problem table. The workflow searches the problem table by number, branches
+    on whether a match exists, reads the matched problem back by sys_id, and
+    then patches it into a closed state with a resolution code and close notes.
+    The Table API returns lists under a result array and single records under a
+    result object. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: close-problem
+  summary: Locate a problem by number and close it with a resolution.
+  description: >-
+    Queries the problem table by number and, when a match exists, closes the
+    problem with a resolution code and notes.
+  inputs:
+    type: object
+    required:
+    - number
+    - resolutionCode
+    - closeNotes
+    properties:
+      number:
+        type: string
+        description: The human-readable problem number (e.g. PRB0040001).
+      closedState:
+        type: string
+        description: The state value representing Closed (e.g. "107").
+      resolutionCode:
+        type: string
+        description: The problem resolution code.
+      closeNotes:
+        type: string
+        description: The notes describing how the problem was resolved.
+  steps:
+  - stepId: findProblem
+    description: >-
+      Search the problem table for a single record whose number matches the
+      supplied value.
+    operationId: listRecords
+    parameters:
+    - name: tableName
+      in: path
+      value: problem
+    - name: sysparm_query
+      in: query
+      value: "number=$inputs.number"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: problemFound
+      type: goto
+      stepId: getProblem
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: problemMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: getProblem
+    description: >-
+      Read the matched problem back by sys_id to confirm it is still open before
+      closing it.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: problem
+    - name: sys_id
+      in: path
+      value: $steps.findProblem.outputs.matchedSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: closeProblem
+    description: >-
+      Patch the problem into a closed state with the supplied resolution code
+      and close notes.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: problem
+    - name: sys_id
+      in: path
+      value: $steps.findProblem.outputs.matchedSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: $inputs.closedState
+        resolution_code: $inputs.resolutionCode
+        close_notes: $inputs.closeNotes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      problemSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    problemSysId: $steps.closeProblem.outputs.problemSysId

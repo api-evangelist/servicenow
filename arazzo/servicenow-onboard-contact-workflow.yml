@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Onboard Contact
+  summary: Create a CSM contact, fetch it by its new sys_id, then open a welcome incident for it.
+  description: >-
+    A user-onboarding flow spanning the Contact and Table APIs. The workflow
+    creates a new CSM contact, fetches the contact by the sys_id returned from
+    the create call to confirm it persisted, and then opens a welcome incident
+    on the Table API that references the new contact as its caller. The Contact
+    API create returns the new sys_id under a result string while the get and
+    Table API calls wrap their records under a result object. Every request is
+    written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: contactApi
+  url: ../openapi/contact-api-openapi.yaml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboard-contact
+  summary: Create a contact and open a welcome incident for them.
+  description: >-
+    Creates a CSM contact, reads it back by sys_id, and opens an onboarding
+    incident keyed to the new contact.
+  inputs:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - email
+    properties:
+      firstName:
+        type: string
+        description: The contact's first name.
+      lastName:
+        type: string
+        description: The contact's last name.
+      email:
+        type: string
+        description: The contact's email address.
+      phone:
+        type: string
+        description: The contact's phone number.
+      welcomeShortDescription:
+        type: string
+        description: The short description for the onboarding incident.
+  steps:
+  - stepId: createContact
+    description: >-
+      Create a new CSM contact from the supplied identity fields.
+    operationId: createContact
+    requestBody:
+      contentType: application/json
+      payload:
+        first_name: $inputs.firstName
+        last_name: $inputs.lastName
+        email: $inputs.email
+        phone: $inputs.phone
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      contactSysId: $response.body#/result
+  - stepId: getContact
+    description: >-
+      Fetch the newly created contact by its sys_id to confirm it persisted.
+    operationId: getContactById
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createContact.outputs.contactSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: openWelcomeIncident
+    description: >-
+      Open a welcome incident on the Table API referencing the new contact as
+      the caller.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.welcomeShortDescription
+        caller_id: $steps.createContact.outputs.contactSysId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      incidentNumber: $response.body#/result/number
+  outputs:
+    contactSysId: $steps.createContact.outputs.contactSysId
+    incidentSysId: $steps.openWelcomeIncident.outputs.incidentSysId

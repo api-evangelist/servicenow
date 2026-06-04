@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Bulk Import Records
+  summary: Insert multiple records into an import set staging table, then verify the first transformed row.
+  description: >-
+    The batch-ingestion flow spanning the Import Set and Table APIs. The
+    workflow inserts an array of records into an import set staging table in a
+    single call, each individually transformed into a target table, then reads
+    the first transformed target record back through the Table API using the
+    target_sys_id returned for that row to confirm the batch landed. The Import
+    Set API returns its per-row transform outcomes under a result array, and the
+    Table API wraps the target record under a result object. Every request is
+    written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: importSetApi
+  url: ../openapi/servicenow-import-set-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bulk-import-records
+  summary: Bulk-load staging records and verify the first transformed target row.
+  description: >-
+    Inserts multiple records into an import set staging table and reads the
+    first transformed target record back to confirm the batch.
+  inputs:
+    type: object
+    required:
+    - stagingTableName
+    - targetTableName
+    - records
+    properties:
+      stagingTableName:
+        type: string
+        description: The import set staging table name (must extend sys_import_set_row).
+      targetTableName:
+        type: string
+        description: The target table the transform map loads into (e.g. incident).
+      records:
+        type: array
+        description: The array of record objects to insert into the staging table.
+        items:
+          type: object
+  steps:
+  - stepId: insertBatch
+    description: >-
+      Insert the array of records into the import set staging table, triggering
+      a synchronous transform for each row.
+    operationId: insertMultipleImportSetRecords
+    parameters:
+    - name: stagingTableName
+      in: path
+      value: $inputs.stagingTableName
+    requestBody:
+      contentType: application/json
+      payload:
+        records: $inputs.records
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      firstTargetSysId: $response.body#/result/0/target_sys_id
+      firstStatus: $response.body#/result/0/status
+  - stepId: verifyFirstRecord
+    description: >-
+      Read the first transformed target record back through the Table API using
+      its target_sys_id to confirm the batch loaded.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.targetTableName
+    - name: sys_id
+      in: path
+      value: $steps.insertBatch.outputs.firstTargetSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recordSysId: $response.body#/result/sys_id
+  outputs:
+    firstTargetSysId: $steps.insertBatch.outputs.firstTargetSysId
+    firstStatus: $steps.insertBatch.outputs.firstStatus
+    recordSysId: $steps.verifyFirstRecord.outputs.recordSysId

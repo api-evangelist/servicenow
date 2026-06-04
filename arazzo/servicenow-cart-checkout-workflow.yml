@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Cart Checkout
+  summary: Add a catalog item to the cart, review the cart contents, then submit the order.
+  description: >-
+    The shopping-cart checkout path through the Service Catalog API. The
+    workflow adds a catalog item to the current user's cart with a quantity and
+    variable values, retrieves the cart to review its contents, and submits the
+    cart as a single service catalog request, returning the request number. The
+    Service Catalog API wraps the cart item and order result under a result
+    object. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: serviceCatalogApi
+  url: ../openapi/servicenow-service-catalog-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cart-checkout
+  summary: Add an item to the cart and check out.
+  description: >-
+    Adds a catalog item to the cart, reviews the cart, and submits the cart as
+    an order.
+  inputs:
+    type: object
+    required:
+    - itemSysId
+    properties:
+      itemSysId:
+        type: string
+        description: The sys_id of the catalog item to add to the cart.
+      quantity:
+        type: integer
+        description: The quantity to add.
+      variables:
+        type: object
+        description: The variable name/value pairs required by the catalog item.
+  steps:
+  - stepId: addToCart
+    description: >-
+      Add the catalog item to the current user's cart with the supplied
+      quantity and variables.
+    operationId: addItemToCart
+    parameters:
+    - name: sys_id
+      in: path
+      value: $inputs.itemSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        sysparm_quantity: $inputs.quantity
+        variables: $inputs.variables
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cartItemId: $response.body#/result/cart_item_id
+  - stepId: reviewCart
+    description: >-
+      Retrieve the current cart to review its contents before submitting the
+      order.
+    operationId: getCart
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: submitOrder
+    description: >-
+      Submit all items in the cart as a single service catalog request.
+    operationId: submitCartOrder
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestNumber: $response.body#/result/request_number
+      requestId: $response.body#/result/request_id
+  outputs:
+    cartItemId: $steps.addToCart.outputs.cartItemId
+    requestNumber: $steps.submitOrder.outputs.requestNumber

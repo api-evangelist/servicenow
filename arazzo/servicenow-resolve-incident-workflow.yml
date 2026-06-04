@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Resolve Incident
+  summary: Find an open incident by number, read it, then resolve it with a close code and notes.
+  description: >-
+    A find-then-act flow over the ServiceNow Table API. The workflow searches
+    the incident table for a record matching a supplied incident number,
+    branches on whether a match was found, reads the matched record back, and
+    then patches it into a resolved state with a close code and close notes.
+    Every request is written inline, including the Table API convention of
+    returning lists under a result array and single records under a result
+    object.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: resolve-incident
+  summary: Locate an incident by number and move it to a resolved state.
+  description: >-
+    Queries the incident table by number, and when a match exists, patches the
+    incident with a resolved state, close code, and close notes.
+  inputs:
+    type: object
+    required:
+    - number
+    - closeCode
+    - closeNotes
+    properties:
+      number:
+        type: string
+        description: The human-readable incident number (e.g. INC0010023).
+      resolvedState:
+        type: string
+        description: The state value representing Resolved (typically "6").
+      closeCode:
+        type: string
+        description: The resolution close code (e.g. "Solved (Permanently)").
+      closeNotes:
+        type: string
+        description: The resolution notes describing how the incident was resolved.
+  steps:
+  - stepId: findIncident
+    description: >-
+      Search the incident table for a single record whose number matches the
+      supplied value.
+    operationId: listRecords
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sysparm_query
+      in: query
+      value: "number=$inputs.number"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: incidentFound
+      type: goto
+      stepId: getIncident
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: incidentMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: getIncident
+    description: >-
+      Read the matched incident back by its sys_id to confirm it is still
+      available before resolving it.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.findIncident.outputs.matchedSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: resolveIncident
+    description: >-
+      Patch the incident into a resolved state with the supplied close code and
+      close notes.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.findIncident.outputs.matchedSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: $inputs.resolvedState
+        close_code: $inputs.closeCode
+        close_notes: $inputs.closeNotes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    incidentSysId: $steps.resolveIncident.outputs.incidentSysId

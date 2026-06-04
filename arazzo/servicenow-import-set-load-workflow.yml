@@ -1,0 +1,81 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Import Set Load and Verify
+  summary: Insert a record into an import set staging table, then read the transformed target record.
+  description: >-
+    The bulk-ingestion verification flow spanning the Import Set and Table APIs.
+    The workflow inserts a single record into an import set staging table, which
+    is synchronously transformed and loaded into a target table, then reads the
+    resulting target record back through the Table API using the target_sys_id
+    returned by the transform so the load can be confirmed. The Import Set API
+    returns its transform outcome under a result array, and the Table API wraps
+    the target record under a result object. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: importSetApi
+  url: ../openapi/servicenow-import-set-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: import-set-load-and-verify
+  summary: Load a staging record and verify the transformed target record.
+  description: >-
+    Inserts a record into an import set staging table and reads the transformed
+    target record back to confirm the load succeeded.
+  inputs:
+    type: object
+    required:
+    - stagingTableName
+    - targetTableName
+    - record
+    properties:
+      stagingTableName:
+        type: string
+        description: The import set staging table name (must extend sys_import_set_row).
+      targetTableName:
+        type: string
+        description: The target table the transform map loads into (e.g. incident).
+      record:
+        type: object
+        description: The field name/value pairs to insert into the staging table.
+  steps:
+  - stepId: insertStagingRecord
+    description: >-
+      Insert a single record into the import set staging table, triggering the
+      synchronous transform into the target table.
+    operationId: insertImportSetRecord
+    parameters:
+    - name: stagingTableName
+      in: path
+      value: $inputs.stagingTableName
+    requestBody:
+      contentType: application/json
+      payload: $inputs.record
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      targetSysId: $response.body#/result/0/target_sys_id
+      status: $response.body#/result/0/status
+  - stepId: verifyTargetRecord
+    description: >-
+      Read the transformed target record back through the Table API using the
+      target_sys_id returned by the transform to confirm the load.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.targetTableName
+    - name: sys_id
+      in: path
+      value: $steps.insertStagingRecord.outputs.targetSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recordSysId: $response.body#/result/sys_id
+      createdOn: $response.body#/result/sys_created_on
+  outputs:
+    targetSysId: $steps.insertStagingRecord.outputs.targetSysId
+    status: $steps.insertStagingRecord.outputs.status
+    recordSysId: $steps.verifyTargetRecord.outputs.recordSysId

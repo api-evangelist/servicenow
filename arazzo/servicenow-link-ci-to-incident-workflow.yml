@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Link Configuration Item to Incident
+  summary: Find a CI by name in a CMDB class, fetch its full record, then attach it to an incident.
+  description: >-
+    A CMDB-to-ITSM linking flow. The workflow lists configuration items in a
+    CMDB class filtered by name, branches on whether a CI was found, fetches the
+    matched CI's full record from the CMDB Instance API, and then patches an
+    incident on the Table API to reference that CI as its affected
+    configuration item. The CMDB Instance API returns lists and single CIs
+    under a result object/array. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: cmdbApi
+  url: ../openapi/servicenow-cmdb-instance-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: link-ci-to-incident
+  summary: Locate a CMDB configuration item and attach it to an incident.
+  description: >-
+    Finds a CI by name within a CMDB class, reads its full record, and links it
+    to an incident as the affected configuration item.
+  inputs:
+    type: object
+    required:
+    - className
+    - ciName
+    - incidentSysId
+    properties:
+      className:
+        type: string
+        description: The CMDB class to search (e.g. cmdb_ci_linux_server).
+      ciName:
+        type: string
+        description: The configuration item name to match.
+      incidentSysId:
+        type: string
+        description: The sys_id of the incident to attach the CI to.
+  steps:
+  - stepId: findCi
+    description: >-
+      List configuration items in the CMDB class filtered by name, returning at
+      most one match.
+    operationId: listCmdbInstances
+    parameters:
+    - name: className
+      in: path
+      value: $inputs.className
+    - name: sysparm_query
+      in: query
+      value: "name=$inputs.ciName"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ciSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: ciFound
+      type: goto
+      stepId: getCi
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: ciMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: getCi
+    description: >-
+      Fetch the matched configuration item's full record to confirm its details
+      before linking.
+    operationId: getCmdbInstance
+    parameters:
+    - name: className
+      in: path
+      value: $inputs.className
+    - name: sys_id
+      in: path
+      value: $steps.findCi.outputs.ciSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedCiSysId: $response.body#/result/sys_id
+  - stepId: linkToIncident
+    description: >-
+      Patch the incident to reference the configuration item as its affected
+      CI via the Table API.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $inputs.incidentSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        cmdb_ci: $steps.findCi.outputs.ciSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+  outputs:
+    ciSysId: $steps.findCi.outputs.ciSysId
+    incidentSysId: $steps.linkToIncident.outputs.incidentSysId

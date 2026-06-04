@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Create Emergency Change With Task
+  summary: Create an emergency change request, read it back, then attach an implementation task.
+  description: >-
+    The urgent-change path through the Change Management API. The workflow
+    creates an emergency change request for changes that cannot wait for the
+    standard approval process, reads it back by sys_id to capture its number,
+    and then creates an implementation task under it so work can begin
+    immediately. Each request is written inline, including the API convention
+    of wrapping the change and task under a result object.
+  version: 1.0.0
+sourceDescriptions:
+- name: changeApi
+  url: ../openapi/servicenow-change-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-emergency-change
+  summary: Create an emergency change and attach an implementation task.
+  description: >-
+    Creates an emergency change request, retrieves it by sys_id, and creates a
+    task under it to drive immediate remediation.
+  inputs:
+    type: object
+    required:
+    - shortDescription
+    properties:
+      shortDescription:
+        type: string
+        description: The one-line summary of the emergency change.
+      description:
+        type: string
+        description: The full description of the emergency change.
+      priority:
+        type: string
+        description: The change priority (e.g. "1").
+      cmdbCi:
+        type: string
+        description: The sys_id of the configuration item affected by the change.
+      assignmentGroup:
+        type: string
+        description: The assignment group responsible for the change.
+      taskShortDescription:
+        type: string
+        description: The short description for the implementation task.
+      taskAssignedTo:
+        type: string
+        description: The sys_id of the user assigned to the implementation task.
+  steps:
+  - stepId: createEmergencyChange
+    description: >-
+      Create a new emergency change request for an urgent change that cannot
+      wait for the normal approval cycle.
+    operationId: createEmergencyChange
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        description: $inputs.description
+        priority: $inputs.priority
+        cmdb_ci: $inputs.cmdbCi
+        assignment_group: $inputs.assignmentGroup
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      changeSysId: $response.body#/result/sys_id
+      number: $response.body#/result/number
+  - stepId: getChange
+    description: >-
+      Read the emergency change back by its sys_id to confirm it persisted and
+      capture its assigned number.
+    operationId: getNormalChange
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.createEmergencyChange.outputs.changeSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedNumber: $response.body#/result/number
+  - stepId: createTask
+    description: >-
+      Create an implementation task under the emergency change so remediation
+      work can begin immediately.
+    operationId: createChangeTask
+    parameters:
+    - name: sys_id
+      in: path
+      value: $steps.createEmergencyChange.outputs.changeSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.taskShortDescription
+        assigned_to: $inputs.taskAssignedTo
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      taskSysId: $response.body#/result/sys_id
+      taskNumber: $response.body#/result/number
+  outputs:
+    changeSysId: $steps.createEmergencyChange.outputs.changeSysId
+    number: $steps.createEmergencyChange.outputs.number
+    taskSysId: $steps.createTask.outputs.taskSysId

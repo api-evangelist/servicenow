@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Create Incident Then Triage
+  summary: Create an incident via the Table API, read it back, then update its state and assignment.
+  description: >-
+    The core ITSM intake pattern on the ServiceNow Table API. The workflow
+    creates a new record in the incident table, reads the freshly created
+    record back by its sys_id to confirm persistence, and then patches the
+    record to move it into a triaged state with an assignment group and
+    priority. Every request is spelled out inline so the flow can be read and
+    executed without opening the underlying OpenAPI description, including the
+    Table API convention of wrapping single records under a result object.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-incident-then-update
+  summary: Create an incident record and immediately triage it.
+  description: >-
+    Creates an incident in the incident table, retrieves it by sys_id, and
+    patches it with a new state, priority, and assignment group.
+  inputs:
+    type: object
+    required:
+    - shortDescription
+    properties:
+      shortDescription:
+        type: string
+        description: The one-line summary of the incident.
+      description:
+        type: string
+        description: The full description of the incident.
+      callerId:
+        type: string
+        description: The sys_id or user reference of the caller reporting the incident.
+      state:
+        type: string
+        description: The target incident state to set during triage (e.g. "2" for In Progress).
+      priority:
+        type: string
+        description: The target priority to set during triage (e.g. "2").
+      assignmentGroup:
+        type: string
+        description: The sys_id of the assignment group to route the incident to.
+  steps:
+  - stepId: createIncident
+    description: >-
+      Create a new record in the incident table using the supplied caller and
+      description fields.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        description: $inputs.description
+        caller_id: $inputs.callerId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      number: $response.body#/result/number
+  - stepId: getIncident
+    description: >-
+      Read the newly created incident back by its sys_id to confirm it was
+      persisted before applying triage changes.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.createIncident.outputs.incidentSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: triageIncident
+    description: >-
+      Patch the incident with its triaged state, priority, and assignment
+      group. Only the supplied fields are modified.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.createIncident.outputs.incidentSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: $inputs.state
+        priority: $inputs.priority
+        assignment_group: $inputs.assignmentGroup
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    incidentSysId: $steps.triageIncident.outputs.incidentSysId
+    number: $steps.createIncident.outputs.number

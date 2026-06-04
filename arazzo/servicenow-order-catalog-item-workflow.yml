@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Order Catalog Item
+  summary: Look up a catalog item, read its details, then order it immediately.
+  description: >-
+    The direct order-now path through the Service Catalog API. The workflow
+    lists catalog items in a catalog to find a candidate, reads the chosen item
+    by sys_id to confirm it is orderable, and then submits an immediate order
+    for it with a quantity and variable values, returning the request number.
+    The Service Catalog API wraps each item and the order result under a result
+    object. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: serviceCatalogApi
+  url: ../openapi/servicenow-service-catalog-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: order-catalog-item
+  summary: Find a catalog item and order it immediately.
+  description: >-
+    Lists items in a catalog, reads the chosen item, and places an immediate
+    order for it.
+  inputs:
+    type: object
+    required:
+    - itemSysId
+    properties:
+      catalogId:
+        type: string
+        description: The sys_id of the catalog to list items from.
+      itemSysId:
+        type: string
+        description: The sys_id of the catalog item to order.
+      quantity:
+        type: integer
+        description: The quantity to order.
+      variables:
+        type: object
+        description: The variable name/value pairs required by the catalog item.
+  steps:
+  - stepId: listItems
+    description: >-
+      List catalog items in the supplied catalog to provide context for the
+      order.
+    operationId: listCatalogItems
+    parameters:
+    - name: sysparm_catalog
+      in: query
+      value: $inputs.catalogId
+    - name: sysparm_limit
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemSysId: $response.body#/result/0/sys_id
+  - stepId: getItem
+    description: >-
+      Read the chosen catalog item by sys_id to confirm it exists and is
+      orderable.
+    operationId: getCatalogItem
+    parameters:
+    - name: sys_id
+      in: path
+      value: $inputs.itemSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemSysId: $response.body#/result/sys_id
+  - stepId: orderNow
+    description: >-
+      Submit an immediate order for the catalog item with the supplied quantity
+      and variables, bypassing the cart.
+    operationId: orderItemNow
+    parameters:
+    - name: sys_id
+      in: path
+      value: $inputs.itemSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        sysparm_quantity: $inputs.quantity
+        variables: $inputs.variables
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestNumber: $response.body#/result/request_number
+      requestId: $response.body#/result/request_id
+  outputs:
+    requestNumber: $steps.orderNow.outputs.requestNumber
+    requestId: $steps.orderNow.outputs.requestId

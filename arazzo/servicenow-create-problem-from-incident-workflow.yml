@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Create Problem From Incident
+  summary: Read a source incident, open a problem record from it, then link the incident to the problem.
+  description: >-
+    The problem-management escalation pattern over the Table API. The workflow
+    reads a source incident by sys_id to capture its description, creates a new
+    record in the problem table seeded from the incident, and then patches the
+    incident to reference the new problem so the two are linked. ServiceNow has
+    no dedicated problem API, so the generic Table API drives all three steps
+    against the incident and problem tables, each wrapping its single record
+    under a result object. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-problem-from-incident
+  summary: Escalate an incident into a problem and link them.
+  description: >-
+    Reads a source incident, creates a problem from it, and links the incident
+    back to the new problem record.
+  inputs:
+    type: object
+    required:
+    - incidentSysId
+    properties:
+      incidentSysId:
+        type: string
+        description: The sys_id of the source incident to escalate.
+      problemShortDescription:
+        type: string
+        description: The short description for the new problem record.
+      assignmentGroup:
+        type: string
+        description: The assignment group to own the problem.
+  steps:
+  - stepId: getIncident
+    description: >-
+      Read the source incident by sys_id to capture the fields used to seed the
+      problem record.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $inputs.incidentSysId
+    - name: sysparm_fields
+      in: query
+      value: sys_id,number,short_description,description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentDescription: $response.body#/result/sys_id
+  - stepId: createProblem
+    description: >-
+      Create a new record in the problem table seeded from the source incident.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: problem
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.problemShortDescription
+        assignment_group: $inputs.assignmentGroup
+        first_reported_by_task: $inputs.incidentSysId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      problemSysId: $response.body#/result/sys_id
+      problemNumber: $response.body#/result/number
+  - stepId: linkIncident
+    description: >-
+      Patch the source incident to reference the new problem, linking the two
+      records together.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $inputs.incidentSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        problem_id: $steps.createProblem.outputs.problemSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+  outputs:
+    problemSysId: $steps.createProblem.outputs.problemSysId
+    problemNumber: $steps.createProblem.outputs.problemNumber
+    incidentSysId: $steps.linkIncident.outputs.incidentSysId

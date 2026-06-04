@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Publish Knowledge Article
+  summary: Create a knowledge article draft on the kb_knowledge table, read it, then publish it.
+  description: >-
+    The knowledge-base authoring flow over the Table API. ServiceNow has no
+    dedicated knowledge write API, so the generic Table API drives the
+    kb_knowledge table. The workflow creates a draft article, reads it back by
+    sys_id to confirm it persisted, and then patches its workflow_state to
+    publish it. The Table API wraps each single record under a result object.
+    Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: publish-knowledge-article
+  summary: Author a knowledge article draft and publish it.
+  description: >-
+    Creates a kb_knowledge draft, reads it back, and moves it to a published
+    state.
+  inputs:
+    type: object
+    required:
+    - shortDescription
+    - text
+    properties:
+      shortDescription:
+        type: string
+        description: The article title / short description.
+      text:
+        type: string
+        description: The article body content.
+      knowledgeBase:
+        type: string
+        description: The sys_id of the knowledge base to file the article under.
+      category:
+        type: string
+        description: The sys_id of the article category.
+      publishedState:
+        type: string
+        description: The workflow_state value representing Published (e.g. "published").
+  steps:
+  - stepId: createDraft
+    description: >-
+      Create a draft article in the kb_knowledge table.
+    operationId: createRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: kb_knowledge
+    requestBody:
+      contentType: application/json
+      payload:
+        short_description: $inputs.shortDescription
+        text: $inputs.text
+        kb_knowledge_base: $inputs.knowledgeBase
+        kb_category: $inputs.category
+        workflow_state: draft
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      articleSysId: $response.body#/result/sys_id
+  - stepId: getArticle
+    description: >-
+      Read the draft article back by sys_id to confirm it persisted before
+      publishing.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: kb_knowledge
+    - name: sys_id
+      in: path
+      value: $steps.createDraft.outputs.articleSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: publishArticle
+    description: >-
+      Patch the article's workflow_state to move it into the published state.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: kb_knowledge
+    - name: sys_id
+      in: path
+      value: $steps.createDraft.outputs.articleSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        workflow_state: $inputs.publishedState
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      articleSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    articleSysId: $steps.publishArticle.outputs.articleSysId

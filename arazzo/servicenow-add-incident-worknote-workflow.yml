@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Add Incident Work Note
+  summary: Find an incident by number, read it, then append a work note and reassign it.
+  description: >-
+    A find-then-act collaboration flow over the Table API. The workflow searches
+    the incident table by number, branches on whether a match exists, reads the
+    matched incident back by sys_id, and then patches it to append a work note
+    and reassign it to a new group in a single update. The work_notes field on
+    the incident table is a journal field, so writing to it appends an entry
+    rather than overwriting prior notes. The Table API returns lists under a
+    result array and single records under a result object. Every request is
+    written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-incident-worknote
+  summary: Locate an incident by number and append a work note while reassigning it.
+  description: >-
+    Queries the incident table by number and, when a match exists, appends a
+    work note and updates the assignment group.
+  inputs:
+    type: object
+    required:
+    - number
+    - workNote
+    properties:
+      number:
+        type: string
+        description: The human-readable incident number (e.g. INC0010023).
+      workNote:
+        type: string
+        description: The work note text to append to the incident journal.
+      assignmentGroup:
+        type: string
+        description: The sys_id of the assignment group to reassign the incident to.
+  steps:
+  - stepId: findIncident
+    description: >-
+      Search the incident table for a single record whose number matches the
+      supplied value.
+    operationId: listRecords
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sysparm_query
+      in: query
+      value: "number=$inputs.number"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: incidentFound
+      type: goto
+      stepId: getIncident
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: incidentMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: getIncident
+    description: >-
+      Read the matched incident back by sys_id to confirm it is available before
+      annotating it.
+    operationId: getRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.findIncident.outputs.matchedSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSysId: $response.body#/result/sys_id
+  - stepId: annotateIncident
+    description: >-
+      Patch the incident to append a work note and reassign it. Writing to the
+      work_notes journal field appends a new entry rather than overwriting.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sys_id
+      in: path
+      value: $steps.findIncident.outputs.matchedSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        work_notes: $inputs.workNote
+        assignment_group: $inputs.assignmentGroup
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      incidentSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    incidentSysId: $steps.annotateIncident.outputs.incidentSysId

@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Assign Open Task
+  summary: Find the oldest unassigned task on a table, claim it, then mark it work in progress.
+  description: >-
+    A find-then-act flow for queue triage over the Table API. The workflow
+    queries a task-based table for the oldest unassigned, open record, branches
+    on whether a candidate was found, assigns the record to a supplied user,
+    and then moves it into a work-in-progress state. Because ServiceNow task
+    types all extend the task table, this same flow works across sc_task,
+    change_task, and incident-style queues. Every request is written inline,
+    with the Table API returning lists under a result array.
+  version: 1.0.0
+sourceDescriptions:
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: assign-open-task
+  summary: Claim and start the oldest unassigned open task on a table.
+  description: >-
+    Finds the oldest unassigned, open record on a task table and, when one
+    exists, assigns it to a user and moves it to a working state.
+  inputs:
+    type: object
+    required:
+    - tableName
+    - assignedTo
+    properties:
+      tableName:
+        type: string
+        description: The task-based table to triage (e.g. sc_task, change_task).
+      assignedTo:
+        type: string
+        description: The sys_id of the user to assign the claimed task to.
+      workingState:
+        type: string
+        description: The state value representing Work in Progress (e.g. "2").
+  steps:
+  - stepId: findOpenTask
+    description: >-
+      Query the table for the single oldest open, unassigned task, ordered by
+      creation date ascending.
+    operationId: listRecords
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sysparm_query
+      in: query
+      value: "active=true^assigned_toISEMPTY^ORDERBYsys_created_on"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    - name: sysparm_fields
+      in: query
+      value: sys_id,number,short_description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: taskFound
+      type: goto
+      stepId: claimTask
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: noTask
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: claimTask
+    description: >-
+      Assign the matched task to the supplied user.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sys_id
+      in: path
+      value: $steps.findOpenTask.outputs.taskSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        assigned_to: $inputs.assignedTo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      claimedSysId: $response.body#/result/sys_id
+  - stepId: startTask
+    description: >-
+      Move the claimed task into the work-in-progress state.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: sys_id
+      in: path
+      value: $steps.findOpenTask.outputs.taskSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: $inputs.workingState
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    taskSysId: $steps.startTask.outputs.taskSysId

@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Incident Backlog Report
+  summary: Count open incidents grouped by priority, then list the matching backlog records.
+  description: >-
+    A reporting flow that pairs the Aggregate API with the Table API. The
+    workflow computes a grouped count of open incidents by priority via the
+    Aggregate API stats endpoint, then lists the underlying open incident
+    records from the Table API using the same filter so the aggregate totals can
+    be reconciled against the detail rows. The Aggregate API wraps its stats and
+    group_by results under a result object, and the Table API returns its rows
+    under a result array. Every request is written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: aggregateApi
+  url: ../openapi/servicenow-aggregate-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: incident-backlog-report
+  summary: Summarize and then list the open incident backlog.
+  description: >-
+    Computes a grouped count of open incidents by priority and lists the
+    matching incident records.
+  inputs:
+    type: object
+    properties:
+      query:
+        type: string
+        description: The encoded query identifying the open backlog (e.g. active=true).
+      groupBy:
+        type: string
+        description: The field to group the aggregate count by (e.g. priority).
+      detailLimit:
+        type: integer
+        description: The maximum number of detail rows to return.
+  steps:
+  - stepId: aggregateByPriority
+    description: >-
+      Compute a grouped count of incidents matching the backlog query, grouped
+      by the supplied field.
+    operationId: getAggregateStats
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sysparm_query
+      in: query
+      value: $inputs.query
+    - name: sysparm_count
+      in: query
+      value: true
+    - name: sysparm_group_by
+      in: query
+      value: $inputs.groupBy
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalCount: $response.body#/result/stats/count
+      groups: $response.body#/result/group_by
+  - stepId: listBacklog
+    description: >-
+      List the underlying open incident records matching the same query so the
+      aggregate totals can be reconciled against detail rows.
+    operationId: listRecords
+    parameters:
+    - name: tableName
+      in: path
+      value: incident
+    - name: sysparm_query
+      in: query
+      value: $inputs.query
+    - name: sysparm_fields
+      in: query
+      value: sys_id,number,short_description,priority,state
+    - name: sysparm_limit
+      in: query
+      value: $inputs.detailLimit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstIncidentSysId: $response.body#/result/0/sys_id
+  outputs:
+    totalCount: $steps.aggregateByPriority.outputs.totalCount
+    groups: $steps.aggregateByPriority.outputs.groups

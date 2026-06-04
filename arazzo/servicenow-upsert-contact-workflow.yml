@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Upsert Contact
+  summary: Find a CSM contact by email and update it if it exists, otherwise create it.
+  description: >-
+    The contact deduplication pattern on the ServiceNow Contact API. The
+    workflow searches for an existing CSM contact by email using an encoded
+    query, branches on whether a match was found, and either patches the
+    matched contact through the Table API customer_contact table or creates a
+    new contact. The Contact API returns lists under a result array and create
+    returns the new sys_id under a result string. Every request is written
+    inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: contactApi
+  url: ../openapi/contact-api-openapi.yaml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upsert-contact
+  summary: Create or update a CSM contact keyed on email.
+  description: >-
+    Looks for an existing contact by email and either updates the matched
+    contact or creates a new one.
+  inputs:
+    type: object
+    required:
+    - email
+    - firstName
+    - lastName
+    properties:
+      email:
+        type: string
+        description: The email address used to match an existing contact.
+      firstName:
+        type: string
+        description: The contact's first name.
+      lastName:
+        type: string
+        description: The contact's last name.
+      phone:
+        type: string
+        description: The contact's phone number.
+      title:
+        type: string
+        description: The contact's job title.
+  steps:
+  - stepId: findContact
+    description: >-
+      Search for an existing contact whose email matches the supplied value,
+      returning at most one record.
+    operationId: getContacts
+    parameters:
+    - name: sysparm_query
+      in: query
+      value: "email=$inputs.email"
+    - name: sysparm_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedSysId: $response.body#/result/0/sys_id
+    onSuccess:
+    - name: contactExists
+      type: goto
+      stepId: updateContact
+      criteria:
+      - context: $response.body
+        condition: $.result.length > 0
+        type: jsonpath
+    - name: contactMissing
+      type: goto
+      stepId: createContact
+      criteria:
+      - context: $response.body
+        condition: $.result.length == 0
+        type: jsonpath
+  - stepId: updateContact
+    description: >-
+      Patch the matched contact through the Table API customer_contact table.
+      The Contact API exposes no update endpoint, so the generic Table API is
+      used to apply changes by sys_id.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: customer_contact
+    - name: sys_id
+      in: path
+      value: $steps.findContact.outputs.matchedSysId
+    requestBody:
+      contentType: application/json
+      payload:
+        first_name: $inputs.firstName
+        last_name: $inputs.lastName
+        phone: $inputs.phone
+        title: $inputs.title
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      contactSysId: $response.body#/result/sys_id
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createContact
+    description: >-
+      Create a new CSM contact when no existing contact matched the email.
+    operationId: createContact
+    requestBody:
+      contentType: application/json
+      payload:
+        first_name: $inputs.firstName
+        last_name: $inputs.lastName
+        email: $inputs.email
+        phone: $inputs.phone
+        title: $inputs.title
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      contactSysId: $response.body#/result
+  outputs:
+    updatedContactSysId: $steps.updateContact.outputs.contactSysId
+    createdContactSysId: $steps.createContact.outputs.contactSysId

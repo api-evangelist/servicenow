@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: ServiceNow Update Configuration Item Attributes
+  summary: List CIs in a class, fetch one's full record, then update its attributes via the Table API.
+  description: >-
+    A CMDB maintenance flow. The workflow lists configuration items in a CMDB
+    class, fetches a specific CI's full attribute set from the CMDB Instance
+    API, and then patches its attributes through the Table API by sys_id, since
+    the CMDB Instance API is read-only and exposes no write endpoint. The CMDB
+    Instance API wraps records under a result object/array. Every request is
+    written inline.
+  version: 1.0.0
+sourceDescriptions:
+- name: cmdbApi
+  url: ../openapi/servicenow-cmdb-instance-api-openapi.yml
+  type: openapi
+- name: tableApi
+  url: ../openapi/servicenow-table-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-ci-attributes
+  summary: Read a configuration item and update its attributes.
+  description: >-
+    Lists CIs in a class, reads a target CI's full record, and patches its
+    attributes via the Table API.
+  inputs:
+    type: object
+    required:
+    - className
+    - ciSysId
+    - attributes
+    properties:
+      className:
+        type: string
+        description: The CMDB class of the configuration item (e.g. cmdb_ci_server).
+      ciSysId:
+        type: string
+        description: The sys_id of the configuration item to update.
+      attributes:
+        type: object
+        description: The field name/value pairs to write to the CI record.
+  steps:
+  - stepId: listCis
+    description: >-
+      List configuration items in the class to provide context for the update.
+    operationId: listCmdbInstances
+    parameters:
+    - name: className
+      in: path
+      value: $inputs.className
+    - name: sysparm_limit
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstCiSysId: $response.body#/result/0/sys_id
+  - stepId: getCi
+    description: >-
+      Fetch the target configuration item's full attribute set before applying
+      changes.
+    operationId: getCmdbInstance
+    parameters:
+    - name: className
+      in: path
+      value: $inputs.className
+    - name: sys_id
+      in: path
+      value: $inputs.ciSysId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedCiSysId: $response.body#/result/sys_id
+  - stepId: updateCi
+    description: >-
+      Patch the configuration item's attributes through the Table API, keyed by
+      the CMDB class name as the table and the CI sys_id.
+    operationId: patchRecord
+    parameters:
+    - name: tableName
+      in: path
+      value: $inputs.className
+    - name: sys_id
+      in: path
+      value: $inputs.ciSysId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.attributes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ciSysId: $response.body#/result/sys_id
+      updatedOn: $response.body#/result/sys_updated_on
+  outputs:
+    ciSysId: $steps.updateCi.outputs.ciSysId
