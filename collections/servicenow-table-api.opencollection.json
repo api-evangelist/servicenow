@@ -1,0 +1,355 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Table API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Records From a Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sysparm_query",
+                "value": "active=true^priority=1^ORDERBYDESCsys_created_on",
+                "type": "query",
+                "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "sys_id,number,short_description,state,priority",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+              },
+              {
+                "name": "sysparm_exclude_reference_link",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+              },
+              {
+                "name": "sysparm_suppress_pagination_header",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, the Link header for pagination is not included in the response."
+              },
+              {
+                "name": "sysparm_view",
+                "value": "",
+                "type": "query",
+                "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+              },
+              {
+                "name": "sysparm_query_category",
+                "value": "",
+                "type": "query",
+                "description": "The name of the query category used to filter the query."
+              },
+              {
+                "name": "sysparm_query_no_domain",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, the query ignores domain separation and returns records from all domains."
+              },
+              {
+                "name": "sysparm_no_count",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables."
+              }
+            ]
+          },
+          "docs": "Retrieves multiple records from the specified ServiceNow table. Supports encoded query filtering, field selection, pagination via limit and offset, and control over display values and link formatting."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Record in a Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "sys_id,number,short_description,state,priority",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+              },
+              {
+                "name": "sysparm_exclude_reference_link",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+              },
+              {
+                "name": "sysparm_view",
+                "value": "",
+                "type": "query",
+                "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+              },
+              {
+                "name": "sysparm_input_display_value",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new record in the specified ServiceNow table. The request body should contain field name-value pairs for the new record. Fields not included in the request body use their default values."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Single Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName/:sys_id",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique 32-character system identifier for a record in ServiceNow."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "sys_id,number,short_description,state,priority",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+              },
+              {
+                "name": "sysparm_exclude_reference_link",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+              },
+              {
+                "name": "sysparm_view",
+                "value": "",
+                "type": "query",
+                "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+              }
+            ]
+          },
+          "docs": "Retrieves a single record from the specified table by its unique sys_id identifier. Supports field selection and display value formatting."
+        },
+        {
+          "info": {
+            "name": "Servicenow Update a Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName/:sys_id",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique 32-character system identifier for a record in ServiceNow."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "sys_id,number,short_description,state,priority",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+              },
+              {
+                "name": "sysparm_exclude_reference_link",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+              },
+              {
+                "name": "sysparm_view",
+                "value": "",
+                "type": "query",
+                "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+              },
+              {
+                "name": "sysparm_input_display_value",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing record in the specified table. The request body should contain the fields to be updated. Fields not included in the request body are not modified."
+        },
+        {
+          "info": {
+            "name": "Servicenow Patch a Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName/:sys_id",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique 32-character system identifier for a record in ServiceNow."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "sys_id,number,short_description,state,priority",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+              },
+              {
+                "name": "sysparm_exclude_reference_link",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+              },
+              {
+                "name": "sysparm_view",
+                "value": "",
+                "type": "query",
+                "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+              },
+              {
+                "name": "sysparm_input_display_value",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates an existing record in the specified table. Only the fields included in the request body are modified. This is functionally similar to PUT but follows the PATCH semantics for partial updates."
+        },
+        {
+          "info": {
+            "name": "Servicenow Delete a Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.service-now.com/api/now/table/:tableName/:sys_id",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+              },
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique 32-character system identifier for a record in ServiceNow."
+              }
+            ]
+          },
+          "docs": "Deletes a record from the specified table by its sys_id. This operation is permanent and cannot be undone through the API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

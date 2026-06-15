@@ -1,0 +1,371 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Change Management API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Normal Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Normal Change Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/normal",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "",
+                "type": "query",
+                "description": "An encoded query string to filter results."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of normal change requests. Supports query filtering, field selection, and pagination."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/normal",
+            "params": [
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new normal change request. Normal changes require full assessment and approval before implementation."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/normal/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific normal change request by its sys_id."
+        },
+        {
+          "info": {
+            "name": "Servicenow Update a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/normal/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fields on an existing normal change request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Standard Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Standard Change Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/standard",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "",
+                "type": "query",
+                "description": "An encoded query string to filter results."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of standard change requests. Standard changes are created from pre-approved templates."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Standard Change From a Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/standard/:standard_change_template_id",
+            "params": [
+              {
+                "name": "standard_change_template_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The sys_id of the standard change template to use for creating the change request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new standard change request based on a pre-approved standard change template. The template sys_id determines the default values and pre-configured approvals."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Emergency Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Emergency Change Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/emergency",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "",
+                "type": "query",
+                "description": "An encoded query string to filter results."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of emergency change requests. Emergency changes bypass normal approval processes for urgent situations."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create an Emergency Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/emergency",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new emergency change request for urgent changes that cannot wait for standard approval processes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Change Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Tasks for a Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/:sys_id/task",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all tasks associated with the specified change request."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Task for a Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_chg_rest/v1/change/:sys_id/task",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new task associated with the specified change request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Attachment API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/attachment",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "table_name=incident^table_sys_id=abc123def456",
+                "type": "query",
+                "description": "Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name, and content_type."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of attachment records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for file attachments. Supports query filtering by table name, record sys_id, file name, and other attachment attributes."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve Attachment Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/attachment/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the attachment record."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a single attachment by its sys_id. Does not return the binary file content; use the file download endpoint instead."
+        },
+        {
+          "info": {
+            "name": "Servicenow Delete an Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.service-now.com/api/now/attachment/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the attachment record."
+              }
+            ]
+          },
+          "docs": "Deletes an attachment and its associated file content from the ServiceNow instance."
+        },
+        {
+          "info": {
+            "name": "Servicenow Download Attachment File Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/attachment/:sys_id/file",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the attachment record."
+              }
+            ]
+          },
+          "docs": "Downloads the binary file content of an attachment. The response Content-Type header reflects the original file type."
+        },
+        {
+          "info": {
+            "name": "Servicenow Upload a File Attachment via Binary Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/now/attachment/file",
+            "params": [
+              {
+                "name": "table_name",
+                "value": "incident",
+                "type": "query",
+                "description": "The name of the table to which the file is attached."
+              },
+              {
+                "name": "table_sys_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The sys_id of the record to which the file is attached."
+              },
+              {
+                "name": "file_name",
+                "value": "screenshot.png",
+                "type": "query",
+                "description": "The name of the file including its extension."
+              }
+            ]
+          },
+          "docs": "Uploads a file as a binary stream and attaches it to the specified table record. The Content-Type header should match the actual file type being uploaded."
+        },
+        {
+          "info": {
+            "name": "Servicenow Upload a File Attachment via Multipart Form Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/now/attachment/upload",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "table_name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "table_sys_id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "uploadFile",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file using multipart form-data encoding and attaches it to the specified table record. This method is suitable for web browser and form-based uploads."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

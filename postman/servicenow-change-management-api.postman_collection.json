@@ -1,0 +1,2152 @@
+{
+  "info": {
+    "_postman_id": "661afdd0-928a-4e81-998d-2833b7438c1a",
+    "name": "ServiceNow Change Management API",
+    "description": "The ServiceNow Change Management API provides REST endpoints for creating, retrieving, updating, and managing change requests and their associated tasks and approvals. It supports the full change lifecycle including normal, standard, and emergency change types within the ITSM Change Management application.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:26.000Z",
+    "updatedAt": "2026-06-05T15:17:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-661afdd0-928a-4e81-998d-2833b7438c1a"
+  },
+  "item": [
+    {
+      "name": "change",
+      "item": [
+        {
+          "name": "normal",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "Servicenow Retrieve a Normal Change Request",
+                  "id": "7222e8c2-e1d4-4cfc-8f8e-2d2f3b9fb6ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal",
+                        ":sys_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "8b002119-8833-481c-a774-62b0f882736b",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier for the change request."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a specific normal change request by its sys_id."
+                  },
+                  "response": [
+                    {
+                      "id": "7b2904a1-997c-45ac-ae85-5c09ddea5649",
+                      "name": "Successful response returning the change request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "normal",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"standard\",\n    \"state\": \"<string>\",\n    \"priority\": \"4\",\n    \"risk\": \"<string>\",\n    \"impact\": \"<string>\",\n    \"category\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"assignment_group\": \"<string>\",\n    \"requested_by\": \"<string>\",\n    \"start_date\": \"<dateTime>\",\n    \"end_date\": \"<dateTime>\",\n    \"cmdb_ci\": \"<string>\",\n    \"close_code\": \"<string>\",\n    \"close_notes\": \"<string>\",\n    \"approval\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-7b2904a1-997c-45ac-ae85-5c09ddea5649"
+                    },
+                    {
+                      "id": "53cce96f-ef18-4359-9ef9-2a2455f68f9d",
+                      "name": "Change request not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "normal",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-53cce96f-ef18-4359-9ef9-2a2455f68f9d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-7222e8c2-e1d4-4cfc-8f8e-2d2f3b9fb6ee"
+                },
+                {
+                  "name": "Servicenow Update a Normal Change Request",
+                  "id": "30a66f2b-e885-4898-b1cc-8454746410a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal",
+                        ":sys_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3f305ec2-775e-4b47-b61b-c5ed2c68090f",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier for the change request."
+                        }
+                      ]
+                    },
+                    "description": "Updates fields on an existing normal change request."
+                  },
+                  "response": [
+                    {
+                      "id": "a32d06fb-6bca-4cb4-9e97-a05a1cef2cdc",
+                      "name": "Change request successfully updated.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "normal",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"standard\",\n    \"state\": \"<string>\",\n    \"priority\": \"4\",\n    \"risk\": \"<string>\",\n    \"impact\": \"<string>\",\n    \"category\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"assignment_group\": \"<string>\",\n    \"requested_by\": \"<string>\",\n    \"start_date\": \"<dateTime>\",\n    \"end_date\": \"<dateTime>\",\n    \"cmdb_ci\": \"<string>\",\n    \"close_code\": \"<string>\",\n    \"close_notes\": \"<string>\",\n    \"approval\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-a32d06fb-6bca-4cb4-9e97-a05a1cef2cdc"
+                    },
+                    {
+                      "id": "d0ccf9b8-78ec-4018-aa1c-40bcf84b989e",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "normal",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-d0ccf9b8-78ec-4018-aa1c-40bcf84b989e"
+                    },
+                    {
+                      "id": "e33403f0-3c36-4dfb-800f-145527e86a99",
+                      "name": "Change request not found.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/normal/:sys_id?sysparm_fields=<string>&sysparm_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "normal",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-e33403f0-3c36-4dfb-800f-145527e86a99"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-30a66f2b-e885-4898-b1cc-8454746410a6"
+                }
+              ],
+              "id": "68caea43-1c62-43c0-94f2-bc75150f5a77",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-68caea43-1c62-43c0-94f2-bc75150f5a77"
+            },
+            {
+              "name": "Servicenow List Normal Change Requests",
+              "id": "cc078f63-0509-47d0-a93a-38abee833d0a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/change/normal?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string to filter results.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of field names to include in the response.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return.",
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of normal change requests. Supports query filtering, field selection, and pagination."
+              },
+              "response": [
+                {
+                  "id": "152ee9a1-5c01-463e-b7e0-2658c68d59e9",
+                  "name": "Successful response returning normal change requests.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"standard\",\n      \"state\": \"<string>\",\n      \"priority\": \"2\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"emergency\",\n      \"state\": \"<string>\",\n      \"priority\": \"3\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-152ee9a1-5c01-463e-b7e0-2658c68d59e9"
+                },
+                {
+                  "id": "acec7f35-caf6-4f1e-8916-2f39d07f5687",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-acec7f35-caf6-4f1e-8916-2f39d07f5687"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-cc078f63-0509-47d0-a93a-38abee833d0a"
+            },
+            {
+              "name": "Servicenow Create a Normal Change Request",
+              "id": "f5cf4e0f-fce3-4eb8-a0b4-f4e26432709d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/change/normal?sysparm_fields=<string>&sysparm_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "query": [
+                    {
+                      "description": "A comma-separated list of field names to include in the response.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Creates a new normal change request. Normal changes require full assessment and approval before implementation."
+              },
+              "response": [
+                {
+                  "id": "375bbe2b-6ed5-41ea-a155-3200a6c75f7e",
+                  "name": "Normal change request successfully created.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal?sysparm_fields=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"standard\",\n    \"state\": \"<string>\",\n    \"priority\": \"4\",\n    \"risk\": \"<string>\",\n    \"impact\": \"<string>\",\n    \"category\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"assignment_group\": \"<string>\",\n    \"requested_by\": \"<string>\",\n    \"start_date\": \"<dateTime>\",\n    \"end_date\": \"<dateTime>\",\n    \"cmdb_ci\": \"<string>\",\n    \"close_code\": \"<string>\",\n    \"close_notes\": \"<string>\",\n    \"approval\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-375bbe2b-6ed5-41ea-a155-3200a6c75f7e"
+                },
+                {
+                  "id": "89cb0ef3-f36a-451d-82d2-1a2af4a473cf",
+                  "name": "Bad request. The request body contains invalid data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal?sysparm_fields=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-89cb0ef3-f36a-451d-82d2-1a2af4a473cf"
+                },
+                {
+                  "id": "3a623856-a8db-4b73-97f9-051c1191f6cd",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/normal?sysparm_fields=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "normal"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-3a623856-a8db-4b73-97f9-051c1191f6cd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-f5cf4e0f-fce3-4eb8-a0b4-f4e26432709d"
+            }
+          ],
+          "id": "f6b1ff06-938d-475c-9b24-606af9381ce2",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-f6b1ff06-938d-475c-9b24-606af9381ce2"
+        },
+        {
+          "name": "standard",
+          "item": [
+            {
+              "name": "{standard_change_template_id}",
+              "item": [
+                {
+                  "name": "Servicenow Create a Standard Change From a Template",
+                  "id": "f03ce02f-6a0d-4a5b-a1f9-b4933b7fa746",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/standard/:standard_change_template_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "standard",
+                        ":standard_change_template_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9e30c5ec-1fa3-49c4-8f51-8c7f626bf7b3",
+                          "key": "standard_change_template_id",
+                          "value": "<string>",
+                          "description": "(Required) The sys_id of the standard change template to use for creating the change request."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new standard change request based on a pre-approved standard change template. The template sys_id determines the default values and pre-configured approvals."
+                  },
+                  "response": [
+                    {
+                      "id": "d3cb43ff-6c34-4a53-8587-b94d12ea4652",
+                      "name": "Standard change request successfully created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/standard/:standard_change_template_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "standard",
+                            ":standard_change_template_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "standard_change_template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"standard\",\n    \"state\": \"<string>\",\n    \"priority\": \"4\",\n    \"risk\": \"<string>\",\n    \"impact\": \"<string>\",\n    \"category\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"assignment_group\": \"<string>\",\n    \"requested_by\": \"<string>\",\n    \"start_date\": \"<dateTime>\",\n    \"end_date\": \"<dateTime>\",\n    \"cmdb_ci\": \"<string>\",\n    \"close_code\": \"<string>\",\n    \"close_notes\": \"<string>\",\n    \"approval\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-d3cb43ff-6c34-4a53-8587-b94d12ea4652"
+                    },
+                    {
+                      "id": "af5b1d1b-3c7a-4fea-82f3-7c98fd1104dc",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/standard/:standard_change_template_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            "standard",
+                            ":standard_change_template_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "standard_change_template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-af5b1d1b-3c7a-4fea-82f3-7c98fd1104dc"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-f03ce02f-6a0d-4a5b-a1f9-b4933b7fa746"
+                }
+              ],
+              "id": "1e8105de-d4a1-41ef-bf1b-dbb05ccf0aa5",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-1e8105de-d4a1-41ef-bf1b-dbb05ccf0aa5"
+            },
+            {
+              "name": "Servicenow List Standard Change Requests",
+              "id": "40dd2c0b-5aa3-4fa8-a0e4-568024d1f8c5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/change/standard?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "change",
+                    "standard"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string to filter results.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of field names to include in the response.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return.",
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of standard change requests. Standard changes are created from pre-approved templates."
+              },
+              "response": [
+                {
+                  "id": "2f9ece01-50dc-4d51-a0cb-86d9bc6ae183",
+                  "name": "Successful response returning standard change requests.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/standard?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "standard"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"standard\",\n      \"state\": \"<string>\",\n      \"priority\": \"2\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"emergency\",\n      \"state\": \"<string>\",\n      \"priority\": \"3\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-2f9ece01-50dc-4d51-a0cb-86d9bc6ae183"
+                },
+                {
+                  "id": "3b16483b-a9fb-4d1a-916c-f972f58f6e50",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/standard?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "standard"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-3b16483b-a9fb-4d1a-916c-f972f58f6e50"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-40dd2c0b-5aa3-4fa8-a0e4-568024d1f8c5"
+            }
+          ],
+          "id": "cb2f35da-1607-41fa-8fb3-4d0ef786744f",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-cb2f35da-1607-41fa-8fb3-4d0ef786744f"
+        },
+        {
+          "name": "emergency",
+          "item": [
+            {
+              "name": "Servicenow List Emergency Change Requests",
+              "id": "5ec591a7-5654-4dea-824c-11adf38bdda8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/change/emergency?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "change",
+                    "emergency"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string to filter results.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of field names to include in the response.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return.",
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of emergency change requests. Emergency changes bypass normal approval processes for urgent situations."
+              },
+              "response": [
+                {
+                  "id": "e5fed036-5ba4-415b-9362-719e6c246fb8",
+                  "name": "Successful response returning emergency change requests.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/emergency?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "emergency"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"standard\",\n      \"state\": \"<string>\",\n      \"priority\": \"2\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"emergency\",\n      \"state\": \"<string>\",\n      \"priority\": \"3\",\n      \"risk\": \"<string>\",\n      \"impact\": \"<string>\",\n      \"category\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"assignment_group\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"cmdb_ci\": \"<string>\",\n      \"close_code\": \"<string>\",\n      \"close_notes\": \"<string>\",\n      \"approval\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_on\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-e5fed036-5ba4-415b-9362-719e6c246fb8"
+                },
+                {
+                  "id": "340fdf0f-7f03-41e7-b1ed-55be73594ba0",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/emergency?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "emergency"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter results.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-340fdf0f-7f03-41e7-b1ed-55be73594ba0"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-5ec591a7-5654-4dea-824c-11adf38bdda8"
+            },
+            {
+              "name": "Servicenow Create an Emergency Change Request",
+              "id": "2fcf1764-5693-4d80-9f11-793c3b133d33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/change/emergency",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "change",
+                    "emergency"
+                  ]
+                },
+                "description": "Creates a new emergency change request for urgent changes that cannot wait for standard approval processes."
+              },
+              "response": [
+                {
+                  "id": "515f5c57-859c-48da-bbe2-12afa671a8c7",
+                  "name": "Emergency change request successfully created.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/emergency",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "emergency"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"standard\",\n    \"state\": \"<string>\",\n    \"priority\": \"4\",\n    \"risk\": \"<string>\",\n    \"impact\": \"<string>\",\n    \"category\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"assignment_group\": \"<string>\",\n    \"requested_by\": \"<string>\",\n    \"start_date\": \"<dateTime>\",\n    \"end_date\": \"<dateTime>\",\n    \"cmdb_ci\": \"<string>\",\n    \"close_code\": \"<string>\",\n    \"close_notes\": \"<string>\",\n    \"approval\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-515f5c57-859c-48da-bbe2-12afa671a8c7"
+                },
+                {
+                  "id": "d7d1bea6-2151-46bc-81e5-08ddab244879",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"2\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/emergency",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        "emergency"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-d7d1bea6-2151-46bc-81e5-08ddab244879"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-2fcf1764-5693-4d80-9f11-793c3b133d33"
+            }
+          ],
+          "id": "f47d5c2f-77a8-4c5a-8efc-a6e555b2a7de",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-f47d5c2f-77a8-4c5a-8efc-a6e555b2a7de"
+        },
+        {
+          "name": "{sys_id}",
+          "item": [
+            {
+              "name": "task",
+              "item": [
+                {
+                  "name": "Servicenow List Tasks for a Change Request",
+                  "id": "6405d3c2-764b-4dae-9491-f83dbd0f88bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/change/:sys_id/task?sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        ":sys_id",
+                        "task"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "51db6b01-4f18-4aa7-ba05-780e6bb5a98b",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier for the change request."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves all tasks associated with the specified change request."
+                  },
+                  "response": [
+                    {
+                      "id": "df50b893-25e3-47cc-9268-37c173198784",
+                      "name": "Successful response returning change tasks.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/change/:sys_id/task?sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            ":sys_id",
+                            "task"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of records to return.",
+                              "key": "sysparm_limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Starting record index for pagination.",
+                              "key": "sysparm_offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"state\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"change_request\": \"<string>\",\n      \"planned_start_date\": \"<dateTime>\",\n      \"planned_end_date\": \"<dateTime>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"number\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"state\": \"<string>\",\n      \"assigned_to\": \"<string>\",\n      \"change_request\": \"<string>\",\n      \"planned_start_date\": \"<dateTime>\",\n      \"planned_end_date\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-df50b893-25e3-47cc-9268-37c173198784"
+                    },
+                    {
+                      "id": "93586f3e-f1c3-41a0-8f86-85a5e99520dd",
+                      "name": "Change request not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/change/:sys_id/task?sysparm_fields=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            ":sys_id",
+                            "task"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of records to return.",
+                              "key": "sysparm_limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Starting record index for pagination.",
+                              "key": "sysparm_offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-93586f3e-f1c3-41a0-8f86-85a5e99520dd"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-6405d3c2-764b-4dae-9491-f83dbd0f88bc"
+                },
+                {
+                  "name": "Servicenow Create a Task for a Change Request",
+                  "id": "2322b484-2f51-4242-8bfe-9100ba3aae81",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"planned_start_date\": \"<dateTime>\",\n  \"planned_end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/change/:sys_id/task",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "change",
+                        ":sys_id",
+                        "task"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ef5444c0-97ea-4389-bced-1effb993d6a7",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier for the change request."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new task associated with the specified change request."
+                  },
+                  "response": [
+                    {
+                      "id": "951f6b16-2077-45f0-8d41-d4681b90721d",
+                      "name": "Change task successfully created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"planned_start_date\": \"<dateTime>\",\n  \"planned_end_date\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/:sys_id/task",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            ":sys_id",
+                            "task"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"number\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"state\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"change_request\": \"<string>\",\n    \"planned_start_date\": \"<dateTime>\",\n    \"planned_end_date\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-951f6b16-2077-45f0-8d41-d4681b90721d"
+                    },
+                    {
+                      "id": "6e425ab7-6388-4893-841a-51737ae6ab46",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"planned_start_date\": \"<dateTime>\",\n  \"planned_end_date\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/change/:sys_id/task",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "change",
+                            ":sys_id",
+                            "task"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:27.000Z",
+                      "updatedAt": "2026-06-05T15:17:27.000Z",
+                      "uid": "35240-6e425ab7-6388-4893-841a-51737ae6ab46"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:27.000Z",
+                  "updatedAt": "2026-06-05T15:17:27.000Z",
+                  "uid": "35240-2322b484-2f51-4242-8bfe-9100ba3aae81"
+                }
+              ],
+              "id": "997ad7bc-c7dc-42c1-8d8a-f654ed8961bc",
+              "createdAt": "2026-06-05T15:17:27.000Z",
+              "updatedAt": "2026-06-05T15:17:27.000Z",
+              "uid": "35240-997ad7bc-c7dc-42c1-8d8a-f654ed8961bc"
+            }
+          ],
+          "id": "4368940b-9e69-4bd1-9a91-4582cce348ad",
+          "createdAt": "2026-06-05T15:17:27.000Z",
+          "updatedAt": "2026-06-05T15:17:27.000Z",
+          "uid": "35240-4368940b-9e69-4bd1-9a91-4582cce348ad"
+        }
+      ],
+      "id": "ff0ecef0-fb16-42ba-999c-f685ca61629d",
+      "createdAt": "2026-06-05T15:17:27.000Z",
+      "updatedAt": "2026-06-05T15:17:27.000Z",
+      "uid": "35240-ff0ecef0-fb16-42ba-999c-f685ca61629d"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/sn_chg_rest/v1"
+    }
+  ]
+}

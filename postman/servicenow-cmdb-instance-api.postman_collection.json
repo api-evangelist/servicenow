@@ -1,0 +1,521 @@
+{
+  "info": {
+    "_postman_id": "5e67cd52-8f4f-4bc5-851d-25dc8292d535",
+    "name": "ServiceNow CMDB Instance API",
+    "description": "The ServiceNow CMDB Instance API provides REST endpoints for retrieving configuration item (CI) records from the Configuration Management Database by class name and sys_id. It is used to query and access infrastructure and application CI data stored in the ServiceNow CMDB for integration with discovery tools and reporting systems.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:29.000Z",
+    "updatedAt": "2026-06-05T15:17:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5e67cd52-8f4f-4bc5-851d-25dc8292d535"
+  },
+  "item": [
+    {
+      "name": "instance",
+      "item": [
+        {
+          "name": "{className}",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "Servicenow Retrieve a Specific Configuration Item",
+                  "id": "c905df71-49ca-48c5-be61-81def8cfa542",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/instance/:className/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "instance",
+                        ":className",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "814237bd-3c1e-4905-bcd8-550d432a0a59",
+                          "key": "className",
+                          "value": "<string>",
+                          "description": "(Required) The CMDB class name."
+                        },
+                        {
+                          "id": "6700f26b-87f2-4261-93bf-4d65a17f190c",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique sys_id of the configuration item."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full details of a specific configuration item by its class name and sys_id. Returns all attributes of the CI record."
+                  },
+                  "response": [
+                    {
+                      "id": "4cc0df73-35ac-49c8-b5fe-f2dec52735c2",
+                      "name": "Successful response returning the CI details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/instance/:className/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "instance",
+                            ":className",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "className"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"sys_class_name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"operational_status\": \"5\",\n    \"install_status\": \"<string>\",\n    \"serial_number\": \"<string>\",\n    \"asset_tag\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"mac_address\": \"<string>\",\n    \"dns_domain\": \"<string>\",\n    \"fqdn\": \"<string>\",\n    \"os\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"manufacturer\": \"<string>\",\n    \"model_id\": \"<string>\",\n    \"location\": \"<string>\",\n    \"department\": \"<string>\",\n    \"company\": \"<string>\",\n    \"assigned_to\": \"<string>\",\n    \"managed_by\": \"<string>\",\n    \"owned_by\": \"<string>\",\n    \"support_group\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_on\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:29.000Z",
+                      "updatedAt": "2026-06-05T15:17:29.000Z",
+                      "uid": "35240-4cc0df73-35ac-49c8-b5fe-f2dec52735c2"
+                    },
+                    {
+                      "id": "f36d847f-bee6-49d5-bda2-9d5b61aefd90",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/instance/:className/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "instance",
+                            ":className",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "className"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:29.000Z",
+                      "updatedAt": "2026-06-05T15:17:29.000Z",
+                      "uid": "35240-f36d847f-bee6-49d5-bda2-9d5b61aefd90"
+                    },
+                    {
+                      "id": "7ae2b286-ffb7-4a52-9906-8ece881a00cb",
+                      "name": "Configuration item not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/instance/:className/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "instance",
+                            ":className",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "className"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:29.000Z",
+                      "updatedAt": "2026-06-05T15:17:29.000Z",
+                      "uid": "35240-7ae2b286-ffb7-4a52-9906-8ece881a00cb"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:29.000Z",
+                  "updatedAt": "2026-06-05T15:17:29.000Z",
+                  "uid": "35240-c905df71-49ca-48c5-be61-81def8cfa542"
+                }
+              ],
+              "id": "fce70290-c093-4e4c-a035-6a17e387457b",
+              "createdAt": "2026-06-05T15:17:29.000Z",
+              "updatedAt": "2026-06-05T15:17:29.000Z",
+              "uid": "35240-fce70290-c093-4e4c-a035-6a17e387457b"
+            },
+            {
+              "name": "Servicenow List Configuration Items by Class",
+              "id": "c7f85716-b2cc-4559-b598-b053ac0eca40",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/instance/:className?sysparm_query=<string>&sysparm_limit=1000&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "instance",
+                    ":className"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string to filter CI records.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return. Default is 1000.",
+                      "key": "sysparm_limit",
+                      "value": "1000"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "348ea4b8-718b-4c62-9b05-b892a6f5220e",
+                      "key": "className",
+                      "value": "<string>",
+                      "description": "(Required) The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of configuration item instances for the specified CMDB class. Returns sys_id and name for each CI by default."
+              },
+              "response": [
+                {
+                  "id": "9b7aee15-66e3-4d8e-8a03-b04e58e019fc",
+                  "name": "Successful response returning a list of CI instances.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/instance/:className?sysparm_query=<string>&sysparm_limit=1000&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "instance",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter CI records.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return. Default is 1000.",
+                          "key": "sysparm_limit",
+                          "value": "1000"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:29.000Z",
+                  "updatedAt": "2026-06-05T15:17:29.000Z",
+                  "uid": "35240-9b7aee15-66e3-4d8e-8a03-b04e58e019fc"
+                },
+                {
+                  "id": "1ed1b213-e285-46ae-91d8-28bce20fb498",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/instance/:className?sysparm_query=<string>&sysparm_limit=1000&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "instance",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter CI records.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return. Default is 1000.",
+                          "key": "sysparm_limit",
+                          "value": "1000"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:29.000Z",
+                  "updatedAt": "2026-06-05T15:17:29.000Z",
+                  "uid": "35240-1ed1b213-e285-46ae-91d8-28bce20fb498"
+                },
+                {
+                  "id": "b3cb8271-c883-481e-8348-9920a9fca7fa",
+                  "name": "The specified CMDB class does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/instance/:className?sysparm_query=<string>&sysparm_limit=1000&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "instance",
+                        ":className"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter CI records.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return. Default is 1000.",
+                          "key": "sysparm_limit",
+                          "value": "1000"
+                        },
+                        {
+                          "description": "Starting record index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "className"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:29.000Z",
+                  "updatedAt": "2026-06-05T15:17:29.000Z",
+                  "uid": "35240-b3cb8271-c883-481e-8348-9920a9fca7fa"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:29.000Z",
+              "updatedAt": "2026-06-05T15:17:29.000Z",
+              "uid": "35240-c7f85716-b2cc-4559-b598-b053ac0eca40"
+            }
+          ],
+          "id": "5d155a84-3798-417f-9ac5-bebbda5867e2",
+          "createdAt": "2026-06-05T15:17:29.000Z",
+          "updatedAt": "2026-06-05T15:17:29.000Z",
+          "uid": "35240-5d155a84-3798-417f-9ac5-bebbda5867e2"
+        }
+      ],
+      "id": "13a35ba6-86b7-48ea-b190-a4f282641b71",
+      "createdAt": "2026-06-05T15:17:29.000Z",
+      "updatedAt": "2026-06-05T15:17:29.000Z",
+      "uid": "35240-13a35ba6-86b7-48ea-b190-a4f282641b71"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/now/cmdb"
+    }
+  ]
+}

@@ -1,0 +1,449 @@
+{
+  "info": {
+    "_postman_id": "8e975bb2-2825-4f43-91ef-001035d1ac6d",
+    "name": "ServiceNow Aggregate API",
+    "description": "The ServiceNow Aggregate API provides endpoints to compute aggregate statistics against records in any ServiceNow table. It supports count, average, minimum, maximum, and sum operations with optional grouping and filtering, making it useful for reporting dashboards and analytics integrations.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:23.000Z",
+    "updatedAt": "2026-06-05T15:17:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8e975bb2-2825-4f43-91ef-001035d1ac6d"
+  },
+  "item": [
+    {
+      "name": "stats",
+      "item": [
+        {
+          "name": "{tableName}",
+          "item": [
+            {
+              "name": "Servicenow Retrieve Aggregate Statistics for a Table",
+              "id": "904a0269-d63b-4880-a2a3-fda93434ca13",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/stats/:tableName?sysparm_query=<string>&sysparm_count=false&sysparm_sum_fields=<string>&sysparm_avg_fields=<string>&sysparm_min_fields=<string>&sysparm_max_fields=<string>&sysparm_group_by=<string>&sysparm_order_by=<string>&sysparm_having=<string>&sysparm_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stats",
+                    ":tableName"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, returns the count of records matching the query.",
+                      "key": "sysparm_count",
+                      "value": "false"
+                    },
+                    {
+                      "description": "A comma-separated list of numeric fields for which to calculate the sum.",
+                      "key": "sysparm_sum_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of numeric fields for which to calculate the average.",
+                      "key": "sysparm_avg_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of fields for which to find the minimum value.",
+                      "key": "sysparm_min_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of fields for which to find the maximum value.",
+                      "key": "sysparm_max_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry.",
+                      "key": "sysparm_group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The field by which to order the grouped results.",
+                      "key": "sysparm_order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values.",
+                      "key": "sysparm_having",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls whether display values or actual values are returned for group-by fields.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "b383e21b-3f2e-4632-bec5-6e645ee9e653",
+                      "key": "tableName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the ServiceNow table on which to compute aggregate statistics."
+                    }
+                  ]
+                },
+                "description": "Computes aggregate statistics for records in the specified table. Supports count, sum, average, minimum, and maximum calculations with optional query filtering and group-by fields. Multiple aggregate types can be requested in a single call."
+              },
+              "response": [
+                {
+                  "id": "3c59211b-ae6c-49c7-99d7-d9eae32478f4",
+                  "name": "Successful response containing the computed aggregate statistics.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stats/:tableName?sysparm_query=<string>&sysparm_count=false&sysparm_sum_fields=<string>&sysparm_avg_fields=<string>&sysparm_min_fields=<string>&sysparm_max_fields=<string>&sysparm_group_by=<string>&sysparm_order_by=<string>&sysparm_having=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stats",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, returns the count of records matching the query.",
+                          "key": "sysparm_count",
+                          "value": "false"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the sum.",
+                          "key": "sysparm_sum_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the average.",
+                          "key": "sysparm_avg_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the minimum value.",
+                          "key": "sysparm_min_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the maximum value.",
+                          "key": "sysparm_max_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry.",
+                          "key": "sysparm_group_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The field by which to order the grouped results.",
+                          "key": "sysparm_order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values.",
+                          "key": "sysparm_having",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls whether display values or actual values are returned for group-by fields.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"stats\": {\n      \"count\": \"<string>\",\n      \"irure6b\": -34641650.64008653,\n      \"non_c\": \"cillum\",\n      \"commodofd5\": \"a\"\n    },\n    \"group_by\": [\n      {\n        \"nisia69\": -26878402,\n        \"ipsum_e0e\": \"sint ullamco\",\n        \"ide0\": \"consequat dolore Lorem labore\"\n      },\n      {\n        \"laborum__e\": -24658232.57264766,\n        \"commodoc8e\": \"cupidatat sunt officia labor\",\n        \"ut_68d\": -48325031.947183475\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:23.000Z",
+                  "updatedAt": "2026-06-05T15:17:23.000Z",
+                  "uid": "35240-3c59211b-ae6c-49c7-99d7-d9eae32478f4"
+                },
+                {
+                  "id": "10a82936-6987-42c6-b1b0-c0b1143b8af6",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stats/:tableName?sysparm_query=<string>&sysparm_count=false&sysparm_sum_fields=<string>&sysparm_avg_fields=<string>&sysparm_min_fields=<string>&sysparm_max_fields=<string>&sysparm_group_by=<string>&sysparm_order_by=<string>&sysparm_having=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stats",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, returns the count of records matching the query.",
+                          "key": "sysparm_count",
+                          "value": "false"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the sum.",
+                          "key": "sysparm_sum_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the average.",
+                          "key": "sysparm_avg_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the minimum value.",
+                          "key": "sysparm_min_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the maximum value.",
+                          "key": "sysparm_max_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry.",
+                          "key": "sysparm_group_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The field by which to order the grouped results.",
+                          "key": "sysparm_order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values.",
+                          "key": "sysparm_having",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls whether display values or actual values are returned for group-by fields.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:23.000Z",
+                  "updatedAt": "2026-06-05T15:17:23.000Z",
+                  "uid": "35240-10a82936-6987-42c6-b1b0-c0b1143b8af6"
+                },
+                {
+                  "id": "49fc85d9-81bd-486e-8742-dc691274625b",
+                  "name": "Not found. The specified table does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stats/:tableName?sysparm_query=<string>&sysparm_count=false&sysparm_sum_fields=<string>&sysparm_avg_fields=<string>&sysparm_min_fields=<string>&sysparm_max_fields=<string>&sysparm_group_by=<string>&sysparm_order_by=<string>&sysparm_having=<string>&sysparm_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stats",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, returns the count of records matching the query.",
+                          "key": "sysparm_count",
+                          "value": "false"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the sum.",
+                          "key": "sysparm_sum_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of numeric fields for which to calculate the average.",
+                          "key": "sysparm_avg_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the minimum value.",
+                          "key": "sysparm_min_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields for which to find the maximum value.",
+                          "key": "sysparm_max_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry.",
+                          "key": "sysparm_group_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The field by which to order the grouped results.",
+                          "key": "sysparm_order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values.",
+                          "key": "sysparm_having",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls whether display values or actual values are returned for group-by fields.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:23.000Z",
+                  "updatedAt": "2026-06-05T15:17:23.000Z",
+                  "uid": "35240-49fc85d9-81bd-486e-8742-dc691274625b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:23.000Z",
+              "updatedAt": "2026-06-05T15:17:23.000Z",
+              "uid": "35240-904a0269-d63b-4880-a2a3-fda93434ca13"
+            }
+          ],
+          "id": "43bf3806-27f2-44b1-892d-f12bdaecdede",
+          "createdAt": "2026-06-05T15:17:23.000Z",
+          "updatedAt": "2026-06-05T15:17:23.000Z",
+          "uid": "35240-43bf3806-27f2-44b1-892d-f12bdaecdede"
+        }
+      ],
+      "id": "40a4a3d8-84fe-437c-9df7-9b3a2174a450",
+      "createdAt": "2026-06-05T15:17:23.000Z",
+      "updatedAt": "2026-06-05T15:17:23.000Z",
+      "uid": "35240-40a4a3d8-84fe-437c-9df7-9b3a2174a450"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/now"
+    }
+  ]
+}

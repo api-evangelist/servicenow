@@ -1,0 +1,2383 @@
+{
+  "item": [
+    {
+      "id": "63afedf4-e120-4214-8dc1-2c8b040b2f73",
+      "name": "Table Records",
+      "description": {
+        "content": "Operations for creating, reading, updating, and deleting records in ServiceNow tables.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79294b83-ccc1-42bd-abb4-3344b1d15a99",
+          "name": "Servicenow List Records From a Table",
+          "request": {
+            "name": "Servicenow List Records From a Table",
+            "description": {
+              "content": "Retrieves multiple records from the specified ServiceNow table. Supports encoded query filtering, field selection, pagination via limit and offset, and control over display values and link formatting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "10000",
+                  "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_exclude_reference_link",
+                  "value": "false",
+                  "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_suppress_pagination_header",
+                  "value": "false",
+                  "description": "When set to true, the Link header for pagination is not included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_view",
+                  "value": "<string>",
+                  "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_query_category",
+                  "value": "<string>",
+                  "description": "The name of the query category used to filter the query."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_query_no_domain",
+                  "value": "false",
+                  "description": "When set to true, the query ignores domain separation and returns records from all domains."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_no_count",
+                  "value": "false",
+                  "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df2d9da2-94fa-402c-8340-85985425ea54",
+              "name": "Successful response returning an array of records matching the query criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1^ORDERBYDESCsys_created_on"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_suppress_pagination_header",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_no_domain",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_no_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_created_by\": \"example_value\",\n      \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_updated_by\": \"example_value\",\n      \"sys_mod_count\": 42,\n      \"sys_tags\": \"example_value\",\n      \"sys_class_name\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44f0ffda-22fd-4aa7-8ece-8932d9104078",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1^ORDERBYDESCsys_created_on"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_suppress_pagination_header",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_no_domain",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_no_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baf2e3c7-9426-4c1f-946e-99ef4140721f",
+              "name": "Forbidden. The authenticated user does not have access to the specified table.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1^ORDERBYDESCsys_created_on"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_suppress_pagination_header",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_query_no_domain",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_no_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "118b7848-a76b-4c6e-9b5a-0f2d4b41bd08",
+          "name": "Servicenow Create a Record in a Table",
+          "request": {
+            "name": "Servicenow Create a Record in a Table",
+            "description": {
+              "content": "Creates a new record in the specified ServiceNow table. The request body should contain field name-value pairs for the new record. Fields not included in the request body use their default values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_exclude_reference_link",
+                  "value": "false",
+                  "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_view",
+                  "value": "<string>",
+                  "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_input_display_value",
+                  "value": "false",
+                  "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 4871.017815917558,\n  \"key_1\": 4887.483320730962\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b704f02-fd4b-4218-b296-ebaa81a9d78a",
+              "name": "Record successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_created_by\": \"example_value\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_by\": \"example_value\",\n    \"sys_mod_count\": 42,\n    \"sys_tags\": \"example_value\",\n    \"sys_class_name\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4db6737-a40c-4eac-b630-5f50727f877a",
+              "name": "Bad request. The request body contains invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb619676-74ee-4a18-9595-e6b713a5a915",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "448f2146-35ea-46da-8c85-4582b40a23a0",
+          "name": "Servicenow Retrieve a Single Record",
+          "request": {
+            "name": "Servicenow Retrieve a Single Record",
+            "description": {
+              "content": "Retrieves a single record from the specified table by its unique sys_id identifier. Supports field selection and display value formatting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_exclude_reference_link",
+                  "value": "false",
+                  "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_view",
+                  "value": "<string>",
+                  "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68afa129-e314-472a-8ca8-8e39123841da",
+              "name": "Successful response returning the requested record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_created_by\": \"example_value\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_by\": \"example_value\",\n    \"sys_mod_count\": 42,\n    \"sys_tags\": \"example_value\",\n    \"sys_class_name\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2160d554-42b5-48b9-8d83-c4115d98d368",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a786347e-a9e1-43a4-b68a-f035ab27f6a5",
+              "name": "Not found. The specified record does not exist or the user does not have access.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "059f7156-bd64-43a0-8136-813353b42201",
+          "name": "Servicenow Update a Record",
+          "request": {
+            "name": "Servicenow Update a Record",
+            "description": {
+              "content": "Updates an existing record in the specified table. The request body should contain the fields to be updated. Fields not included in the request body are not modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_exclude_reference_link",
+                  "value": "false",
+                  "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_view",
+                  "value": "<string>",
+                  "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_input_display_value",
+                  "value": "false",
+                  "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 4871.017815917558,\n  \"key_1\": 4887.483320730962\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e5036d1-bc8f-4169-81c0-6df45bf3b603",
+              "name": "Record successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_created_by\": \"example_value\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_by\": \"example_value\",\n    \"sys_mod_count\": 42,\n    \"sys_tags\": \"example_value\",\n    \"sys_class_name\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8f63823-e021-4c5f-b63b-87ec3768dded",
+              "name": "Bad request. The request body contains invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0297c865-cf1f-4911-b080-ce54e5cd5293",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38cabdd2-5ceb-4aee-8fec-c476107e34f8",
+              "name": "Not found. The specified record does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4b38038-b263-4de7-9b72-a4348cec7268",
+          "name": "Servicenow Patch a Record",
+          "request": {
+            "name": "Servicenow Patch a Record",
+            "description": {
+              "content": "Partially updates an existing record in the specified table. Only the fields included in the request body are modified. This is functionally similar to PUT but follows the PATCH semantics for partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_exclude_reference_link",
+                  "value": "false",
+                  "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_view",
+                  "value": "<string>",
+                  "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_input_display_value",
+                  "value": "false",
+                  "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 4871.017815917558,\n  \"key_1\": 4887.483320730962\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e728bf9-7fcb-4f2e-8515-65eaf3d19dcb",
+              "name": "Record successfully patched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_created_by\": \"example_value\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_by\": \"example_value\",\n    \"sys_mod_count\": 42,\n    \"sys_tags\": \"example_value\",\n    \"sys_class_name\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fd56b9a-44c3-49ca-9f75-d947df3502a4",
+              "name": "Bad request. The request body contains invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77cc9540-f7fd-4069-bbb2-cca34601198d",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ebfef97-9c41-4a47-b202-563259206120",
+              "name": "Not found. The specified record does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "sys_id,number,short_description,state,priority"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6263f23e-ec1b-405b-8530-d3c6b369a542",
+          "name": "Servicenow Delete a Record",
+          "request": {
+            "name": "Servicenow Delete a Record",
+            "description": {
+              "content": "Deletes a record from the specified table by its sys_id. This operation is permanent and cannot be undone through the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "table",
+                ":tableName",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7419586-23d3-46a3-82c8-5a0b8c00f52d",
+              "name": "Record successfully deleted. No content returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "664f87aa-89b7-4708-aafe-f8a8f2ba64db",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee907266-93cd-416b-bc19-51bf8f27f5bf",
+              "name": "Not found. The specified record does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "table",
+                    ":tableName",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.service-now.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "883c0f3f-612e-4716-a4b9-0407be4e24c6",
+    "name": "ServiceNow Table API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ServiceNow Table API provides endpoints to perform create, read, update, and delete (CRUD) operations on records within any ServiceNow table. It is the primary REST interface for interacting with ServiceNow platform data such as incidents, problems, changes, and custom tables. All operations support query filtering, field selection, pagination, and display value control.\n\nContact Support:\n Name: ServiceNow Support",
+      "type": "text/plain"
+    }
+  }
+}

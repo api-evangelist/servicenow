@@ -1,0 +1,2303 @@
+{
+  "item": [
+    {
+      "id": "6f718269-c3f5-4769-af51-c1cf03bcf834",
+      "name": "Change Tasks",
+      "description": {
+        "content": "Operations for managing tasks associated with change requests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c6cc1d7-9d6e-4319-8a2b-ec00921254f6",
+          "name": "Servicenow List Tasks for a Change Request",
+          "request": {
+            "name": "Servicenow List Tasks for a Change Request",
+            "description": {
+              "content": "Retrieves all tasks associated with the specified change request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                ":sys_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique system identifier for the change request."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "991bb739-faec-44d6-ac09-be275588dae9",
+              "name": "Successful response returning change tasks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    ":sys_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"number\": \"example_value\",\n      \"short_description\": \"example_value\",\n      \"state\": \"example_value\",\n      \"assigned_to\": \"example_value\",\n      \"change_request\": \"example_value\",\n      \"planned_start_date\": \"2026-01-15T10:30:00Z\",\n      \"planned_end_date\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "514ef0ad-e2d6-48a9-aa5f-85312312c4af",
+              "name": "Change request not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    ":sys_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71169642-b7e7-46ab-bd29-349c2d29ed3d",
+          "name": "Servicenow Create a Task for a Change Request",
+          "request": {
+            "name": "Servicenow Create a Task for a Change Request",
+            "description": {
+              "content": "Creates a new task associated with the specified change request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                ":sys_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique system identifier for the change request."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"planned_start_date\": \"<dateTime>\",\n  \"planned_end_date\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73f14dee-efc3-4df4-b7df-f27b39219835",
+              "name": "Change task successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    ":sys_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"planned_start_date\": \"2026-01-15T10:30:00Z\",\n  \"planned_end_date\": \"2026-01-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"state\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"change_request\": \"example_value\",\n    \"planned_start_date\": \"2026-01-15T10:30:00Z\",\n    \"planned_end_date\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c1638af-91e0-40a2-8413-03abb1e948d8",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    ":sys_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"planned_start_date\": \"2026-01-15T10:30:00Z\",\n  \"planned_end_date\": \"2026-01-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bd3b1734-c4ec-47bb-9fa5-e965187c699f",
+      "name": "Emergency Changes",
+      "description": {
+        "content": "Operations for managing emergency change requests that require expedited processing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b665d6d5-066a-45cc-bf41-f2ab9fe3a5c6",
+          "name": "Servicenow List Emergency Change Requests",
+          "request": {
+            "name": "Servicenow List Emergency Change Requests",
+            "description": {
+              "content": "Retrieves a list of emergency change requests. Emergency changes bypass normal approval processes for urgent situations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "emergency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49b36207-8f44-4a14-9fa7-b3be84dbf720",
+              "name": "Successful response returning emergency change requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "emergency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"number\": \"example_value\",\n      \"short_description\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"type\": \"normal\",\n      \"state\": \"example_value\",\n      \"priority\": \"1\",\n      \"risk\": \"example_value\",\n      \"impact\": \"example_value\",\n      \"category\": \"example_value\",\n      \"assigned_to\": \"example_value\",\n      \"assignment_group\": \"example_value\",\n      \"requested_by\": \"example_value\",\n      \"start_date\": \"2026-01-15T10:30:00Z\",\n      \"end_date\": \"2026-01-15T10:30:00Z\",\n      \"cmdb_ci\": \"example_value\",\n      \"close_code\": \"example_value\",\n      \"close_notes\": \"example_value\",\n      \"approval\": \"example_value\",\n      \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e019944b-1df9-4148-b3b8-8277f86b7393",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "emergency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e332b4e8-cb49-4e09-a868-368296ecdb35",
+          "name": "Servicenow Create an Emergency Change Request",
+          "request": {
+            "name": "Servicenow Create an Emergency Change Request",
+            "description": {
+              "content": "Creates a new emergency change request for urgent changes that cannot wait for standard approval processes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "emergency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3b03164-e443-4cbb-bc7b-bd007d863873",
+              "name": "Emergency change request successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "emergency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"type\": \"normal\",\n    \"state\": \"example_value\",\n    \"priority\": \"1\",\n    \"risk\": \"example_value\",\n    \"impact\": \"example_value\",\n    \"category\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"assignment_group\": \"example_value\",\n    \"requested_by\": \"example_value\",\n    \"start_date\": \"2026-01-15T10:30:00Z\",\n    \"end_date\": \"2026-01-15T10:30:00Z\",\n    \"cmdb_ci\": \"example_value\",\n    \"close_code\": \"example_value\",\n    \"close_notes\": \"example_value\",\n    \"approval\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef6840ca-df4d-451c-ba02-cbc21a0d13b5",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "emergency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fa771e8b-6181-4dd3-b9bb-40cffbe85fa4",
+      "name": "Normal Changes",
+      "description": {
+        "content": "Operations for managing normal change requests that require full review and approval before implementation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0f058c1-b5c7-45bf-8299-ee2a3c3f75f9",
+          "name": "Servicenow List Normal Change Requests",
+          "request": {
+            "name": "Servicenow List Normal Change Requests",
+            "description": {
+              "content": "Retrieves a list of normal change requests. Supports query filtering, field selection, and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "normal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3b04c0c-feda-49cd-86c6-17e0dc8c9d36",
+              "name": "Successful response returning normal change requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"number\": \"example_value\",\n      \"short_description\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"type\": \"normal\",\n      \"state\": \"example_value\",\n      \"priority\": \"1\",\n      \"risk\": \"example_value\",\n      \"impact\": \"example_value\",\n      \"category\": \"example_value\",\n      \"assigned_to\": \"example_value\",\n      \"assignment_group\": \"example_value\",\n      \"requested_by\": \"example_value\",\n      \"start_date\": \"2026-01-15T10:30:00Z\",\n      \"end_date\": \"2026-01-15T10:30:00Z\",\n      \"cmdb_ci\": \"example_value\",\n      \"close_code\": \"example_value\",\n      \"close_notes\": \"example_value\",\n      \"approval\": \"example_value\",\n      \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82267289-427c-494d-b4c0-5de40f221dd9",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8786dcd5-81ba-43b1-bc9e-e7659f219cb9",
+          "name": "Servicenow Create a Normal Change Request",
+          "request": {
+            "name": "Servicenow Create a Normal Change Request",
+            "description": {
+              "content": "Creates a new normal change request. Normal changes require full assessment and approval before implementation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "normal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09fb5e00-7bb7-43bf-9467-3d4d9ca08d0d",
+              "name": "Normal change request successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"type\": \"normal\",\n    \"state\": \"example_value\",\n    \"priority\": \"1\",\n    \"risk\": \"example_value\",\n    \"impact\": \"example_value\",\n    \"category\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"assignment_group\": \"example_value\",\n    \"requested_by\": \"example_value\",\n    \"start_date\": \"2026-01-15T10:30:00Z\",\n    \"end_date\": \"2026-01-15T10:30:00Z\",\n    \"cmdb_ci\": \"example_value\",\n    \"close_code\": \"example_value\",\n    \"close_notes\": \"example_value\",\n    \"approval\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce5c2571-8b20-4ad5-95ee-07f24c121c29",
+              "name": "Bad request. The request body contains invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24917e53-f615-415f-8cb1-8a510a2c3ccb",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71c9af3e-c8b3-4d4a-ade5-77f340b1b4e1",
+          "name": "Servicenow Retrieve a Normal Change Request",
+          "request": {
+            "name": "Servicenow Retrieve a Normal Change Request",
+            "description": {
+              "content": "Retrieves a specific normal change request by its sys_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "normal",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique system identifier for the change request."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2667b3c8-09df-485a-9ed4-795193c10027",
+              "name": "Successful response returning the change request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"type\": \"normal\",\n    \"state\": \"example_value\",\n    \"priority\": \"1\",\n    \"risk\": \"example_value\",\n    \"impact\": \"example_value\",\n    \"category\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"assignment_group\": \"example_value\",\n    \"requested_by\": \"example_value\",\n    \"start_date\": \"2026-01-15T10:30:00Z\",\n    \"end_date\": \"2026-01-15T10:30:00Z\",\n    \"cmdb_ci\": \"example_value\",\n    \"close_code\": \"example_value\",\n    \"close_notes\": \"example_value\",\n    \"approval\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b475f3-ac70-47f4-aa80-af915e067d2c",
+              "name": "Change request not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84cc82de-4f05-44cc-9db3-5ccbb28d3947",
+          "name": "Servicenow Update a Normal Change Request",
+          "request": {
+            "name": "Servicenow Update a Normal Change Request",
+            "description": {
+              "content": "Updates fields on an existing normal change request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "normal",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique system identifier for the change request."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddfad1cc-9593-44be-9992-7d9407f852a1",
+              "name": "Change request successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"type\": \"normal\",\n    \"state\": \"example_value\",\n    \"priority\": \"1\",\n    \"risk\": \"example_value\",\n    \"impact\": \"example_value\",\n    \"category\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"assignment_group\": \"example_value\",\n    \"requested_by\": \"example_value\",\n    \"start_date\": \"2026-01-15T10:30:00Z\",\n    \"end_date\": \"2026-01-15T10:30:00Z\",\n    \"cmdb_ci\": \"example_value\",\n    \"close_code\": \"example_value\",\n    \"close_notes\": \"example_value\",\n    \"approval\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccf4038b-a110-4d34-a88b-583b490dcdbb",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2d05b58-6aef-4a1f-85b9-d67e66f073a0",
+              "name": "Change request not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "normal",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier for the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a3195363-a94c-497d-b396-c3ce80a121f2",
+      "name": "Standard Changes",
+      "description": {
+        "content": "Operations for managing standard change requests based on pre-approved templates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "744ca74e-e805-44d4-8ca6-8128ad75c761",
+          "name": "Servicenow List Standard Change Requests",
+          "request": {
+            "name": "Servicenow List Standard Change Requests",
+            "description": {
+              "content": "Retrieves a list of standard change requests. Standard changes are created from pre-approved templates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "standard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of field names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls the format of field values in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5649d36f-2a7d-429c-b809-dc915dc3db65",
+              "name": "Successful response returning standard change requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "standard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"number\": \"example_value\",\n      \"short_description\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"type\": \"normal\",\n      \"state\": \"example_value\",\n      \"priority\": \"1\",\n      \"risk\": \"example_value\",\n      \"impact\": \"example_value\",\n      \"category\": \"example_value\",\n      \"assigned_to\": \"example_value\",\n      \"assignment_group\": \"example_value\",\n      \"requested_by\": \"example_value\",\n      \"start_date\": \"2026-01-15T10:30:00Z\",\n      \"end_date\": \"2026-01-15T10:30:00Z\",\n      \"cmdb_ci\": \"example_value\",\n      \"close_code\": \"example_value\",\n      \"close_notes\": \"example_value\",\n      \"approval\": \"example_value\",\n      \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec6984af-99d5-4b04-997c-7b3198c008e5",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "standard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0069480c-29c1-4259-8d76-0fc55203bf40",
+          "name": "Servicenow Create a Standard Change From a Template",
+          "request": {
+            "name": "Servicenow Create a Standard Change From a Template",
+            "description": {
+              "content": "Creates a new standard change request based on a pre-approved standard change template. The template sys_id determines the default values and pre-configured approvals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "change",
+                "standard",
+                ":standard_change_template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "standard_change_template_id",
+                  "description": "(Required) The sys_id of the standard change template to use for creating the change request."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_description\": \"<string>\",\n  \"description\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"risk\": \"<string>\",\n  \"impact\": \"<string>\",\n  \"category\": \"<string>\",\n  \"assigned_to\": \"<string>\",\n  \"assignment_group\": \"<string>\",\n  \"requested_by\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"cmdb_ci\": \"<string>\",\n  \"justification\": \"<string>\",\n  \"implementation_plan\": \"<string>\",\n  \"backout_plan\": \"<string>\",\n  \"test_plan\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "393f46c4-cc36-456c-8ca2-d40d436b5c80",
+              "name": "Standard change request successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "standard",
+                    ":standard_change_template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "standard_change_template_id",
+                      "description": "(Required) The sys_id of the standard change template to use for creating the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"number\": \"example_value\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"type\": \"normal\",\n    \"state\": \"example_value\",\n    \"priority\": \"1\",\n    \"risk\": \"example_value\",\n    \"impact\": \"example_value\",\n    \"category\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"assignment_group\": \"example_value\",\n    \"requested_by\": \"example_value\",\n    \"start_date\": \"2026-01-15T10:30:00Z\",\n    \"end_date\": \"2026-01-15T10:30:00Z\",\n    \"cmdb_ci\": \"example_value\",\n    \"close_code\": \"example_value\",\n    \"close_notes\": \"example_value\",\n    \"approval\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "408d0232-9fc9-4986-ad6d-4b6a3efb9489",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "change",
+                    "standard",
+                    ":standard_change_template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "standard_change_template_id",
+                      "description": "(Required) The sys_id of the standard change template to use for creating the change request."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_description\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"priority\": \"1\",\n  \"risk\": \"example_value\",\n  \"impact\": \"example_value\",\n  \"category\": \"example_value\",\n  \"assigned_to\": \"example_value\",\n  \"assignment_group\": \"example_value\",\n  \"requested_by\": \"example_value\",\n  \"start_date\": \"2026-01-15T10:30:00Z\",\n  \"end_date\": \"2026-01-15T10:30:00Z\",\n  \"cmdb_ci\": \"example_value\",\n  \"justification\": \"example_value\",\n  \"implementation_plan\": \"example_value\",\n  \"backout_plan\": \"example_value\",\n  \"test_plan\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.service-now.com/api/sn_chg_rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5cf29134-5213-4e49-a3a4-252d14964e5c",
+    "name": "ServiceNow Change Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ServiceNow Change Management API provides REST endpoints for creating, retrieving, updating, and managing change requests and their associated tasks and approvals. It supports the full change lifecycle including normal, standard, and emergency change types within the ITSM Change Management application.\n\nContact Support:\n Name: ServiceNow Support",
+      "type": "text/plain"
+    }
+  }
+}

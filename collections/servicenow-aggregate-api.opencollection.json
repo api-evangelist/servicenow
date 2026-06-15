@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Aggregate API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Aggregate Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Retrieve Aggregate Statistics for a Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/stats/:tableName",
+            "params": [
+              {
+                "name": "tableName",
+                "value": "incident",
+                "type": "path",
+                "description": "The name of the ServiceNow table on which to compute aggregate statistics."
+              },
+              {
+                "name": "sysparm_query",
+                "value": "active=true^priority=1",
+                "type": "query",
+                "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter."
+              },
+              {
+                "name": "sysparm_count",
+                "value": "42",
+                "type": "query",
+                "description": "When set to true, returns the count of records matching the query."
+              },
+              {
+                "name": "sysparm_sum_fields",
+                "value": "reassignment_count,reopen_count",
+                "type": "query",
+                "description": "A comma-separated list of numeric fields for which to calculate the sum."
+              },
+              {
+                "name": "sysparm_avg_fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "A comma-separated list of numeric fields for which to calculate the average."
+              },
+              {
+                "name": "sysparm_min_fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "A comma-separated list of fields for which to find the minimum value."
+              },
+              {
+                "name": "sysparm_max_fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "A comma-separated list of fields for which to find the maximum value."
+              },
+              {
+                "name": "sysparm_group_by",
+                "value": "priority,state",
+                "type": "query",
+                "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry."
+              },
+              {
+                "name": "sysparm_order_by",
+                "value": "example_value",
+                "type": "query",
+                "description": "The field by which to order the grouped results."
+              },
+              {
+                "name": "sysparm_having",
+                "value": "example_value",
+                "type": "query",
+                "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "true",
+                "type": "query",
+                "description": "Controls whether display values or actual values are returned for group-by fields."
+              }
+            ]
+          },
+          "docs": "Computes aggregate statistics for records in the specified table. Supports count, sum, average, minimum, and maximum calculations with optional query filtering and group-by fields. Multiple aggregate types can be requested in a single call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2231 @@
+{
+  "info": {
+    "_postman_id": "68fc19d8-dc8f-4818-a3ec-b5bd61ba7839",
+    "name": "ServiceNow Table API",
+    "description": "The ServiceNow Table API provides endpoints to perform create, read, update, and delete (CRUD) operations on records within any ServiceNow table. It is the primary REST interface for interacting with ServiceNow platform data such as incidents, problems, changes, and custom tables. All operations support query filtering, field selection, pagination, and display value control.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:21.000Z",
+    "updatedAt": "2026-06-05T15:17:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-68fc19d8-dc8f-4818-a3ec-b5bd61ba7839"
+  },
+  "item": [
+    {
+      "name": "table",
+      "item": [
+        {
+          "name": "{tableName}",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "Servicenow Retrieve a Single Record",
+                  "id": "c7787e51-b165-4578-ad68-0951d68fbbf3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName",
+                        ":sys_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "d4b8f385-92e2-4675-916a-854c2110cb92",
+                          "key": "tableName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                        },
+                        {
+                          "id": "d6024899-6261-41c8-9e2b-a6153012898c",
+                          "key": "sys_id",
+                          "value": "53484931e0c2c5575dbaecaaf06a4aa7",
+                          "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a single record from the specified table by its unique sys_id identifier. Supports field selection and display value formatting."
+                  },
+                  "response": [
+                    {
+                      "id": "e40f0d9d-6441-4c3e-9d5c-a4a24e3750ad",
+                      "name": "Successful response returning the requested record.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\",\n    \"sys_mod_count\": \"<integer>\",\n    \"sys_tags\": \"<string>\",\n    \"sys_class_name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-e40f0d9d-6441-4c3e-9d5c-a4a24e3750ad"
+                    },
+                    {
+                      "id": "878f4795-a715-479d-9a83-abd930a247be",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-878f4795-a715-479d-9a83-abd930a247be"
+                    },
+                    {
+                      "id": "9278e726-4eb8-4cc8-864c-aadd32d317da",
+                      "name": "Not found. The specified record does not exist or the user does not have access.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-9278e726-4eb8-4cc8-864c-aadd32d317da"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-c7787e51-b165-4578-ad68-0951d68fbbf3"
+                },
+                {
+                  "name": "Servicenow Update a Record",
+                  "id": "82ce67b5-ed4c-461a-9cb8-85686e7f93e6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"esseb\": -36983363\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName",
+                        ":sys_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                          "key": "sysparm_input_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "edd2e159-b045-4782-ba9a-b6eb6baf2715",
+                          "key": "tableName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                        },
+                        {
+                          "id": "f7c559df-1030-425b-b40b-99caa92eadea",
+                          "key": "sys_id",
+                          "value": "53484931e0c2c5575dbaecaaf06a4aa7",
+                          "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing record in the specified table. The request body should contain the fields to be updated. Fields not included in the request body are not modified."
+                  },
+                  "response": [
+                    {
+                      "id": "6bea2d83-9f48-4023-8376-4da37e52b334",
+                      "name": "Record successfully updated.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\",\n    \"sys_mod_count\": \"<integer>\",\n    \"sys_tags\": \"<string>\",\n    \"sys_class_name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-6bea2d83-9f48-4023-8376-4da37e52b334"
+                    },
+                    {
+                      "id": "28269e36-5cfc-4dcd-9515-bd1dcdf1ad30",
+                      "name": "Bad request. The request body contains invalid data.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-28269e36-5cfc-4dcd-9515-bd1dcdf1ad30"
+                    },
+                    {
+                      "id": "a654e21c-f747-4a99-84f9-71623b61c4a5",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-a654e21c-f747-4a99-84f9-71623b61c4a5"
+                    },
+                    {
+                      "id": "bb048872-3aba-4171-8602-f156a87d3759",
+                      "name": "Not found. The specified record does not exist.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-bb048872-3aba-4171-8602-f156a87d3759"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-82ce67b5-ed4c-461a-9cb8-85686e7f93e6"
+                },
+                {
+                  "name": "Servicenow Patch a Record",
+                  "id": "9dda6cb9-375f-49a8-928b-9e69baa89a91",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"esseb\": -36983363\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName",
+                        ":sys_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                          "key": "sysparm_input_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "23ef554a-1be1-4ca9-8f31-a5c9c490ffee",
+                          "key": "tableName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                        },
+                        {
+                          "id": "430b07e4-18b1-4aac-84cc-186c98b64ece",
+                          "key": "sys_id",
+                          "value": "53484931e0c2c5575dbaecaaf06a4aa7",
+                          "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                        }
+                      ]
+                    },
+                    "description": "Partially updates an existing record in the specified table. Only the fields included in the request body are modified. This is functionally similar to PUT but follows the PATCH semantics for partial updates."
+                  },
+                  "response": [
+                    {
+                      "id": "400cfe01-5888-48e7-a35d-2e66231b8d07",
+                      "name": "Record successfully patched.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\",\n    \"sys_mod_count\": \"<integer>\",\n    \"sys_tags\": \"<string>\",\n    \"sys_class_name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-400cfe01-5888-48e7-a35d-2e66231b8d07"
+                    },
+                    {
+                      "id": "4e5524e9-7a1c-449c-a086-ebca62e98be5",
+                      "name": "Bad request. The request body contains invalid data.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-4e5524e9-7a1c-449c-a086-ebca62e98be5"
+                    },
+                    {
+                      "id": "1c15725c-88a2-404a-84dd-b5831a65b1ca",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-1c15725c-88a2-404a-84dd-b5831a65b1ca"
+                    },
+                    {
+                      "id": "d459ed25-9b7d-4dfd-a152-097bf8b1b0b8",
+                      "name": "Not found. The specified record does not exist.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"esseb\": -36983363\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                              "key": "sysparm_fields",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                              "key": "sysparm_display_value",
+                              "value": "false"
+                            },
+                            {
+                              "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                              "key": "sysparm_exclude_reference_link",
+                              "value": "false"
+                            },
+                            {
+                              "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                              "key": "sysparm_view",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                              "key": "sysparm_input_display_value",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-d459ed25-9b7d-4dfd-a152-097bf8b1b0b8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-9dda6cb9-375f-49a8-928b-9e69baa89a91"
+                },
+                {
+                  "name": "Servicenow Delete a Record",
+                  "id": "c8aee67b-0c9a-400f-b5fb-c0035381402b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d646b905-3907-4e64-87d3-da842649a6bf",
+                          "key": "tableName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                        },
+                        {
+                          "id": "87e67f79-d643-43dd-a343-9b5d0dfde749",
+                          "key": "sys_id",
+                          "value": "53484931e0c2c5575dbaecaaf06a4aa7",
+                          "description": "(Required) The unique 32-character system identifier for a record in ServiceNow."
+                        }
+                      ]
+                    },
+                    "description": "Deletes a record from the specified table by its sys_id. This operation is permanent and cannot be undone through the API."
+                  },
+                  "response": [
+                    {
+                      "id": "665b5283-54dd-4380-947f-4092f8ad9a2c",
+                      "name": "Record successfully deleted. No content returned.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-665b5283-54dd-4380-947f-4092f8ad9a2c"
+                    },
+                    {
+                      "id": "8dbd8fff-3651-4ff8-ad68-e67fad0a197b",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-8dbd8fff-3651-4ff8-ad68-e67fad0a197b"
+                    },
+                    {
+                      "id": "be878cb2-0081-4d48-a5cf-0039e795e405",
+                      "name": "Not found. The specified record does not exist.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/:tableName/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            ":tableName",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableName"
+                            },
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:22.000Z",
+                      "updatedAt": "2026-06-05T15:17:22.000Z",
+                      "uid": "35240-be878cb2-0081-4d48-a5cf-0039e795e405"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-c8aee67b-0c9a-400f-b5fb-c0035381402b"
+                }
+              ],
+              "id": "7686150f-950d-4578-9089-fea836fc7066",
+              "createdAt": "2026-06-05T15:17:22.000Z",
+              "updatedAt": "2026-06-05T15:17:22.000Z",
+              "uid": "35240-7686150f-950d-4578-9089-fea836fc7066"
+            },
+            {
+              "name": "Servicenow List Records From a Table",
+              "id": "6896af13-8d70-4762-8d33-08f5c3392d93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/table/:tableName?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=10000&sysparm_offset=0&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_suppress_pagination_header=false&sysparm_view=<string>&sysparm_query_category=<string>&sysparm_query_no_domain=false&sysparm_no_count=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "query": [
+                    {
+                      "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.",
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "description": "When set to true, the Link header for pagination is not included in the response.",
+                      "key": "sysparm_suppress_pagination_header",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The name of the query category used to filter the query.",
+                      "key": "sysparm_query_category",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, the query ignores domain separation and returns records from all domains.",
+                      "key": "sysparm_query_no_domain",
+                      "value": "false"
+                    },
+                    {
+                      "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.",
+                      "key": "sysparm_no_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "4a0ed5b6-6830-49da-9d21-49aaaf5e0754",
+                      "key": "tableName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    }
+                  ]
+                },
+                "description": "Retrieves multiple records from the specified ServiceNow table. Supports encoded query filtering, field selection, pagination via limit and offset, and control over display values and link formatting."
+              },
+              "response": [
+                {
+                  "id": "dee69833-8a0b-484c-a33d-fb0c2ff10d3e",
+                  "name": "Successful response returning an array of records matching the query criteria.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=10000&sysparm_offset=0&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_suppress_pagination_header=false&sysparm_view=<string>&sysparm_query_category=<string>&sysparm_query_no_domain=false&sysparm_no_count=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.",
+                          "key": "sysparm_limit",
+                          "value": "10000"
+                        },
+                        {
+                          "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the Link header for pagination is not included in the response.",
+                          "key": "sysparm_suppress_pagination_header",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The name of the query category used to filter the query.",
+                          "key": "sysparm_query_category",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, the query ignores domain separation and returns records from all domains.",
+                          "key": "sysparm_query_no_domain",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.",
+                          "key": "sysparm_no_count",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\",\n      \"sys_mod_count\": \"<integer>\",\n      \"sys_tags\": \"<string>\",\n      \"sys_class_name\": \"<string>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\",\n      \"sys_mod_count\": \"<integer>\",\n      \"sys_tags\": \"<string>\",\n      \"sys_class_name\": \"<string>\",\n      \"mollit_5f4\": \"Duis culpa\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-dee69833-8a0b-484c-a33d-fb0c2ff10d3e"
+                },
+                {
+                  "id": "baa957f9-081e-42d4-b77c-0f0f5c63960c",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=10000&sysparm_offset=0&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_suppress_pagination_header=false&sysparm_view=<string>&sysparm_query_category=<string>&sysparm_query_no_domain=false&sysparm_no_count=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.",
+                          "key": "sysparm_limit",
+                          "value": "10000"
+                        },
+                        {
+                          "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the Link header for pagination is not included in the response.",
+                          "key": "sysparm_suppress_pagination_header",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The name of the query category used to filter the query.",
+                          "key": "sysparm_query_category",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, the query ignores domain separation and returns records from all domains.",
+                          "key": "sysparm_query_no_domain",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.",
+                          "key": "sysparm_no_count",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-baa957f9-081e-42d4-b77c-0f0f5c63960c"
+                },
+                {
+                  "id": "fbcfda15-cc00-48e7-83fd-ca783bf5b702",
+                  "name": "Forbidden. The authenticated user does not have access to the specified table.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_query=<string>&sysparm_fields=<string>&sysparm_limit=10000&sysparm_offset=0&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_suppress_pagination_header=false&sysparm_view=<string>&sysparm_query_category=<string>&sysparm_query_no_domain=false&sysparm_no_count=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.",
+                          "key": "sysparm_query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.",
+                          "key": "sysparm_limit",
+                          "value": "10000"
+                        },
+                        {
+                          "description": "The starting record index for pagination. Use with sysparm_limit to page through large result sets.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the Link header for pagination is not included in the response.",
+                          "key": "sysparm_suppress_pagination_header",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The name of the query category used to filter the query.",
+                          "key": "sysparm_query_category",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, the query ignores domain separation and returns records from all domains.",
+                          "key": "sysparm_query_no_domain",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.",
+                          "key": "sysparm_no_count",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-fbcfda15-cc00-48e7-83fd-ca783bf5b702"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:22.000Z",
+              "updatedAt": "2026-06-05T15:17:22.000Z",
+              "uid": "35240-6896af13-8d70-4762-8d33-08f5c3392d93"
+            },
+            {
+              "name": "Servicenow Create a Record in a Table",
+              "id": "e4e9376a-60e3-4df3-8de7-e736730bfd33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"esseb\": -36983363\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/table/:tableName?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "table",
+                    ":tableName"
+                  ],
+                  "query": [
+                    {
+                      "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                      "key": "sysparm_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                      "key": "sysparm_display_value",
+                      "value": "false"
+                    },
+                    {
+                      "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                      "key": "sysparm_exclude_reference_link",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                      "key": "sysparm_view",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                      "key": "sysparm_input_display_value",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "98078ca7-0b32-4e52-9833-2243370f8fcc",
+                      "key": "tableName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table."
+                    }
+                  ]
+                },
+                "description": "Creates a new record in the specified ServiceNow table. The request body should contain field name-value pairs for the new record. Fields not included in the request body use their default values."
+              },
+              "response": [
+                {
+                  "id": "cb210a0f-b0a7-467c-8f30-84b95573a5d6",
+                  "name": "Record successfully created.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"esseb\": -36983363\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                          "key": "sysparm_input_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\",\n    \"sys_mod_count\": \"<integer>\",\n    \"sys_tags\": \"<string>\",\n    \"sys_class_name\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-cb210a0f-b0a7-467c-8f30-84b95573a5d6"
+                },
+                {
+                  "id": "2d1ed1b9-f450-4027-bb44-ac934b9e1d9a",
+                  "name": "Bad request. The request body contains invalid data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"esseb\": -36983363\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                          "key": "sysparm_input_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-2d1ed1b9-f450-4027-bb44-ac934b9e1d9a"
+                },
+                {
+                  "id": "11845cc0-82ed-4cab-94ab-3487939b79fe",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"esseb\": -36983363\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/:tableName?sysparm_fields=<string>&sysparm_display_value=false&sysparm_exclude_reference_link=false&sysparm_view=<string>&sysparm_input_display_value=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        ":tableName"
+                      ],
+                      "query": [
+                        {
+                          "description": "A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.",
+                          "key": "sysparm_fields",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.",
+                          "key": "sysparm_display_value",
+                          "value": "false"
+                        },
+                        {
+                          "description": "When set to true, reference fields do not include a link attribute in the response, reducing payload size.",
+                          "key": "sysparm_exclude_reference_link",
+                          "value": "false"
+                        },
+                        {
+                          "description": "The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.",
+                          "key": "sysparm_view",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.",
+                          "key": "sysparm_input_display_value",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:22.000Z",
+                  "updatedAt": "2026-06-05T15:17:22.000Z",
+                  "uid": "35240-11845cc0-82ed-4cab-94ab-3487939b79fe"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:22.000Z",
+              "updatedAt": "2026-06-05T15:17:22.000Z",
+              "uid": "35240-e4e9376a-60e3-4df3-8de7-e736730bfd33"
+            }
+          ],
+          "id": "8f2e4325-0c5f-44c1-8bd4-ffd5d2c46b9f",
+          "createdAt": "2026-06-05T15:17:22.000Z",
+          "updatedAt": "2026-06-05T15:17:22.000Z",
+          "uid": "35240-8f2e4325-0c5f-44c1-8bd4-ffd5d2c46b9f"
+        }
+      ],
+      "id": "e5e7ccf9-8c05-4320-b52e-155918689848",
+      "createdAt": "2026-06-05T15:17:22.000Z",
+      "updatedAt": "2026-06-05T15:17:22.000Z",
+      "uid": "35240-e5e7ccf9-8c05-4320-b52e-155918689848"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/now"
+    }
+  ]
+}

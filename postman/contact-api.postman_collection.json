@@ -1,0 +1,724 @@
+{
+  "info": {
+    "_postman_id": "5d85d662-a291-4943-9827-1becb0f5de6d",
+    "name": "ServiceNow Contact API",
+    "description": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:30.000Z",
+    "updatedAt": "2026-06-05T15:17:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5d85d662-a291-4943-9827-1becb0f5de6d"
+  },
+  "item": [
+    {
+      "name": "contact",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Servicenow Retrieve a Specific Contact",
+              "id": "ea84132b-4f24-49f0-af71-4d8b3dfc79a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contact/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "24689d18-e06b-427b-b7a8-54a25776a5a8",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Sys_id of the contact to retrieve"
+                    }
+                  ]
+                },
+                "description": "Retrieves the specified Customer Service Management (CSM) contact."
+              },
+              "response": [
+                {
+                  "id": "c7f73a7e-5f76-4812-a6f4-12ecf569499c",
+                  "name": "Successful. The request was successfully processed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"user_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"mobile_phone\": \"<string>\",\n    \"home_phone\": \"<string>\",\n    \"title\": \"<string>\",\n    \"employee_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"account\": \"<string>\",\n    \"department\": \"<string>\",\n    \"manager\": \"<string>\",\n    \"location\": \"<string>\",\n    \"building\": \"<string>\",\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"active\": true,\n    \"vip\": false,\n    \"locked_out\": false,\n    \"web_service_access_only\": false,\n    \"internal_integration_user\": false,\n    \"enable_multifactor_authn\": false,\n    \"geolocation_tracked\": false,\n    \"notification\": 2,\n    \"calendar_integration\": 1,\n    \"failed_attempts\": \"<integer>\",\n    \"latitude\": \"<float>\",\n    \"longitude\": \"<float>\",\n    \"time_zone\": \"<string>\",\n    \"date_format\": \"mm-dd-yyyy\",\n    \"time_format\": \"hh:mm:ss a\",\n    \"preferred_language\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"photo\": \"<string>\",\n    \"introduction\": \"<string>\",\n    \"source\": \"<string>\",\n    \"roles\": \"<string>\",\n    \"cost_center\": \"<string>\",\n    \"schedule\": \"<string>\",\n    \"time_sheet_policy\": \"<string>\",\n    \"default_perspective\": \"<string>\",\n    \"ldap_server\": \"<string>\",\n    \"agent_status\": \"On site\",\n    \"on_schedule\": \"on_time\",\n    \"edu_status\": \"faculty\",\n    \"last_login\": \"<date>\",\n    \"last_login_time\": \"<dateTime>\",\n    \"last_login_device\": \"<string>\",\n    \"last_position_update\": \"<dateTime>\",\n    \"sys_class_name\": \"<string>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_mod_count\": \"<integer>\",\n    \"sys_domain\": \"<string>\",\n    \"sys_domain_path\": \"/\",\n    \"sys_tags\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-c7f73a7e-5f76-4812-a6f4-12ecf569499c"
+                },
+                {
+                  "id": "90681e07-011a-44f5-9f41-0c9c87ee8484",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-90681e07-011a-44f5-9f41-0c9c87ee8484"
+                },
+                {
+                  "id": "0e02381a-72d8-4047-8174-c53890aa2f88",
+                  "name": "Not found. Could be due to:\n- Requested contact doesn't exist\n- User doesn't have access to the contact\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-0e02381a-72d8-4047-8174-c53890aa2f88"
+                },
+                {
+                  "id": "dd40bf57-a571-4c62-90b7-17d5010acade",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:30.000Z",
+                  "updatedAt": "2026-06-05T15:17:30.000Z",
+                  "uid": "35240-dd40bf57-a571-4c62-90b7-17d5010acade"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-ea84132b-4f24-49f0-af71-4d8b3dfc79a4"
+            }
+          ],
+          "id": "b89f9fff-453d-4a5a-8b42-bf46b713e47e",
+          "createdAt": "2026-06-05T15:17:30.000Z",
+          "updatedAt": "2026-06-05T15:17:30.000Z",
+          "uid": "35240-b89f9fff-453d-4a5a-8b42-bf46b713e47e"
+        },
+        {
+          "name": "Servicenow Retrieve Contacts",
+          "id": "2907b49d-3d1f-4ac1-a168-0e546bbacadb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/contact?sysparm_query=<string>&sysparm_limit=10&sysparm_offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contact"
+              ],
+              "query": [
+                {
+                  "description": "Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses.",
+                  "key": "sysparm_query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of records to return",
+                  "key": "sysparm_limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Starting record index for pagination (do not pass negative numbers)",
+                  "key": "sysparm_offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieves a specified set of Customer Service Management (CSM) contacts."
+          },
+          "response": [
+            {
+              "id": "1ed369e0-631c-45e5-964f-5976a69058b2",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contact?sysparm_query=<string>&sysparm_limit=10&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ],
+                  "query": [
+                    {
+                      "description": "Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record index for pagination (do not pass negative numbers)",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"mobile_phone\": \"<string>\",\n      \"home_phone\": \"<string>\",\n      \"title\": \"<string>\",\n      \"employee_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"account\": \"<string>\",\n      \"department\": \"<string>\",\n      \"manager\": \"<string>\",\n      \"location\": \"<string>\",\n      \"building\": \"<string>\",\n      \"street\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"active\": true,\n      \"vip\": false,\n      \"locked_out\": false,\n      \"web_service_access_only\": false,\n      \"internal_integration_user\": false,\n      \"enable_multifactor_authn\": false,\n      \"geolocation_tracked\": false,\n      \"notification\": 2,\n      \"calendar_integration\": 1,\n      \"failed_attempts\": \"<integer>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"time_zone\": \"<string>\",\n      \"date_format\": \"dd.mm.yyyy\",\n      \"time_format\": \"hh.mm.ss a\",\n      \"preferred_language\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"photo\": \"<string>\",\n      \"introduction\": \"<string>\",\n      \"source\": \"<string>\",\n      \"roles\": \"<string>\",\n      \"cost_center\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"time_sheet_policy\": \"<string>\",\n      \"default_perspective\": \"<string>\",\n      \"ldap_server\": \"<string>\",\n      \"agent_status\": \"On site\",\n      \"on_schedule\": \"behind_30to60\",\n      \"edu_status\": \"faculty\",\n      \"last_login\": \"<date>\",\n      \"last_login_time\": \"<dateTime>\",\n      \"last_login_device\": \"<string>\",\n      \"last_position_update\": \"<dateTime>\",\n      \"sys_class_name\": \"<string>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_mod_count\": \"<integer>\",\n      \"sys_domain\": \"<string>\",\n      \"sys_domain_path\": \"/\",\n      \"sys_tags\": \"<string>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"mobile_phone\": \"<string>\",\n      \"home_phone\": \"<string>\",\n      \"title\": \"<string>\",\n      \"employee_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"account\": \"<string>\",\n      \"department\": \"<string>\",\n      \"manager\": \"<string>\",\n      \"location\": \"<string>\",\n      \"building\": \"<string>\",\n      \"street\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"active\": true,\n      \"vip\": false,\n      \"locked_out\": false,\n      \"web_service_access_only\": false,\n      \"internal_integration_user\": false,\n      \"enable_multifactor_authn\": false,\n      \"geolocation_tracked\": false,\n      \"notification\": 2,\n      \"calendar_integration\": 1,\n      \"failed_attempts\": \"<integer>\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\",\n      \"time_zone\": \"<string>\",\n      \"date_format\": \"mm-dd-yyyy\",\n      \"time_format\": \"hh.mm.ss a\",\n      \"preferred_language\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"photo\": \"<string>\",\n      \"introduction\": \"<string>\",\n      \"source\": \"<string>\",\n      \"roles\": \"<string>\",\n      \"cost_center\": \"<string>\",\n      \"schedule\": \"<string>\",\n      \"time_sheet_policy\": \"<string>\",\n      \"default_perspective\": \"<string>\",\n      \"ldap_server\": \"<string>\",\n      \"agent_status\": \"On break\",\n      \"on_schedule\": \"behind_30to60\",\n      \"edu_status\": \"faculty\",\n      \"last_login\": \"<date>\",\n      \"last_login_time\": \"<dateTime>\",\n      \"last_login_device\": \"<string>\",\n      \"last_position_update\": \"<dateTime>\",\n      \"sys_class_name\": \"<string>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_mod_count\": \"<integer>\",\n      \"sys_domain\": \"<string>\",\n      \"sys_domain_path\": \"/\",\n      \"sys_tags\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-1ed369e0-631c-45e5-964f-5976a69058b2"
+            },
+            {
+              "id": "61e8284b-6499-465c-8601-dd18697f8ff2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contact?sysparm_query=<string>&sysparm_limit=10&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ],
+                  "query": [
+                    {
+                      "description": "Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record index for pagination (do not pass negative numbers)",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-61e8284b-6499-465c-8601-dd18697f8ff2"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:30.000Z",
+          "updatedAt": "2026-06-05T15:17:30.000Z",
+          "uid": "35240-2907b49d-3d1f-4ac1-a168-0e546bbacadb"
+        },
+        {
+          "name": "Servicenow Create a Contact",
+          "id": "0b30ec9b-38bd-4ae8-b139-20eb5abb28e1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"dd-mm-yyyy\",\n  \"time_format\": \"HH.mm.ss\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"behind_30to60\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contact",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contact"
+              ]
+            },
+            "description": "Creates a new Customer Service Management (CSM) contact.\n\nYou can also create a social media profile for the contact by specifying:\n- social_channel\n- social_handle\n- social_handle_url\n\n**Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.\n"
+          },
+          "response": [
+            {
+              "id": "c666c1ad-5acb-4aca-85ff-4d762768dbc0",
+              "name": "New contact record was successfully created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"dd-mm-yyyy\",\n  \"time_format\": \"HH.mm.ss\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"behind_30to60\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"result\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-c666c1ad-5acb-4aca-85ff-4d762768dbc0"
+            },
+            {
+              "id": "d89807e6-dcdf-4c6a-9a31-68ee85de2cc5",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"dd-mm-yyyy\",\n  \"time_format\": \"HH.mm.ss\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"behind_30to60\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-d89807e6-dcdf-4c6a-9a31-68ee85de2cc5"
+            },
+            {
+              "id": "de1d0c17-812d-42c3-8edf-684b46587930",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"dd-mm-yyyy\",\n  \"time_format\": \"HH.mm.ss\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"behind_30to60\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-de1d0c17-812d-42c3-8edf-684b46587930"
+            },
+            {
+              "id": "638eee72-4d72-4b90-b790-dddb4d92b8b8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"dd-mm-yyyy\",\n  \"time_format\": \"HH.mm.ss\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"behind_30to60\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:30.000Z",
+              "updatedAt": "2026-06-05T15:17:30.000Z",
+              "uid": "35240-638eee72-4d72-4b90-b790-dddb4d92b8b8"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:30.000Z",
+          "updatedAt": "2026-06-05T15:17:30.000Z",
+          "uid": "35240-0b30ec9b-38bd-4ae8-b139-20eb5abb28e1"
+        }
+      ],
+      "id": "e490dd71-40ea-4161-87eb-ea1fddf5d712",
+      "createdAt": "2026-06-05T15:17:30.000Z",
+      "updatedAt": "2026-06-05T15:17:30.000Z",
+      "uid": "35240-e490dd71-40ea-4161-87eb-ea1fddf5d712"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.servicenow.com/api/now"
+    }
+  ]
+}

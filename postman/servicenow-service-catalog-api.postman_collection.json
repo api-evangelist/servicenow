@@ -1,0 +1,1618 @@
+{
+  "info": {
+    "_postman_id": "fa0ec446-3c3d-4370-a833-955176341f5e",
+    "name": "ServiceNow Service Catalog API",
+    "description": "The ServiceNow Service Catalog API provides REST endpoints for browsing catalog categories and items, retrieving catalog item details and variables, and submitting catalog requests. It enables external applications and portals to integrate with ServiceNow's self-service request capabilities including catalog browsing, cart management, and order submission.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:28.000Z",
+    "updatedAt": "2026-06-05T15:17:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fa0ec446-3c3d-4370-a833-955176341f5e"
+  },
+  "item": [
+    {
+      "name": "servicecatalog",
+      "item": [
+        {
+          "name": "catalogs",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "Servicenow Retrieve a Specific Catalog",
+                  "id": "7319a35a-a099-48bc-ba7c-1668216beb93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/catalogs/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "catalogs",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "26610756-57bc-4e12-a73e-3c4d96dea44b",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves details for a specific service catalog including its categories."
+                  },
+                  "response": [
+                    {
+                      "id": "c4c455d8-eb01-4421-bef5-ec408c85c36f",
+                      "name": "Successful response returning the catalog details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/catalogs/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "catalogs",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"has_categories\": \"<boolean>\",\n    \"has_items\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-c4c455d8-eb01-4421-bef5-ec408c85c36f"
+                    },
+                    {
+                      "id": "7c75a811-a8dc-4df1-a724-276ff27b2ff0",
+                      "name": "Catalog not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/catalogs/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "catalogs",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-7c75a811-a8dc-4df1-a724-276ff27b2ff0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-7319a35a-a099-48bc-ba7c-1668216beb93"
+                }
+              ],
+              "id": "7515042a-b8af-4b5f-8084-b98bd521d1e0",
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-7515042a-b8af-4b5f-8084-b98bd521d1e0"
+            },
+            {
+              "name": "Servicenow List Service Catalogs",
+              "id": "4d21bea9-ebad-4376-be0d-462be9f393da",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servicecatalog/catalogs?sysparm_limit=<integer>&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servicecatalog",
+                    "catalogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of catalogs to return.",
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Starting index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of all available service catalogs on the instance."
+              },
+              "response": [
+                {
+                  "id": "02052046-af9e-48bf-a014-1321acaeacf9",
+                  "name": "Successful response returning available catalogs.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/catalogs?sysparm_limit=<integer>&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "catalogs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of catalogs to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"has_categories\": \"<boolean>\",\n      \"has_items\": \"<boolean>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"has_categories\": \"<boolean>\",\n      \"has_items\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-02052046-af9e-48bf-a014-1321acaeacf9"
+                },
+                {
+                  "id": "0dad6b46-421f-4c84-9e44-784504bad4d9",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/catalogs?sysparm_limit=<integer>&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "catalogs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of catalogs to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-0dad6b46-421f-4c84-9e44-784504bad4d9"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-4d21bea9-ebad-4376-be0d-462be9f393da"
+            }
+          ],
+          "id": "d368542d-9efa-4f28-9b4d-5d570bcca353",
+          "createdAt": "2026-06-05T15:17:28.000Z",
+          "updatedAt": "2026-06-05T15:17:28.000Z",
+          "uid": "35240-d368542d-9efa-4f28-9b4d-5d570bcca353"
+        },
+        {
+          "name": "categories",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "Servicenow Retrieve a Catalog Category",
+                  "id": "214cd642-cdff-4773-b9a0-adb3506f6c4b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/categories/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "categories",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0ddc53cc-ad71-4ec0-89a3-aceb973464d8",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves details for a specific catalog category including its child categories and items."
+                  },
+                  "response": [
+                    {
+                      "id": "d97e4905-f601-4537-8209-e466bb5f9061",
+                      "name": "Successful response returning category details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/categories/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "categories",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"full_description\": \"<string>\",\n    \"subcategories\": [\n      {\n        \"sys_id\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"sys_id\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-d97e4905-f601-4537-8209-e466bb5f9061"
+                    },
+                    {
+                      "id": "acbf2f25-d62e-44de-8196-7c0aab695596",
+                      "name": "Category not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/categories/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "categories",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-acbf2f25-d62e-44de-8196-7c0aab695596"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-214cd642-cdff-4773-b9a0-adb3506f6c4b"
+                }
+              ],
+              "id": "8fa51bc3-028b-4c3a-9c48-c8b5f0986303",
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-8fa51bc3-028b-4c3a-9c48-c8b5f0986303"
+            }
+          ],
+          "id": "ca70c09a-b219-41af-badd-982e42be47bc",
+          "createdAt": "2026-06-05T15:17:28.000Z",
+          "updatedAt": "2026-06-05T15:17:28.000Z",
+          "uid": "35240-ca70c09a-b219-41af-badd-982e42be47bc"
+        },
+        {
+          "name": "items",
+          "item": [
+            {
+              "name": "{sys_id}",
+              "item": [
+                {
+                  "name": "add_to_cart",
+                  "item": [
+                    {
+                      "name": "Servicenow Add a Catalog Item to the Cart",
+                      "id": "2cd406db-e630-4e0c-b010-1cc3fdc56e5c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/add_to_cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "items",
+                            ":sys_id",
+                            "add_to_cart"
+                          ],
+                          "variable": [
+                            {
+                              "id": "694e6eba-da4b-4139-aff6-aaf4ef99e8b8",
+                              "key": "sys_id",
+                              "value": "<string>",
+                              "description": "(Required) The unique system identifier."
+                            }
+                          ]
+                        },
+                        "description": "Adds the specified catalog item to the shopping cart with the given quantity and variable values."
+                      },
+                      "response": [
+                        {
+                          "id": "3a0c695f-1c02-48c9-802b-8fc12124f271",
+                          "name": "Item successfully added to the cart.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/add_to_cart",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "servicecatalog",
+                                "items",
+                                ":sys_id",
+                                "add_to_cart"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sys_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"result\": {\n    \"cart_item_id\": \"<string>\",\n    \"catalog_item_id\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"subtotal\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:28.000Z",
+                          "updatedAt": "2026-06-05T15:17:28.000Z",
+                          "uid": "35240-3a0c695f-1c02-48c9-802b-8fc12124f271"
+                        },
+                        {
+                          "id": "07757a0d-1545-4b24-a50d-ab29d7f41e69",
+                          "name": "Bad request. Required variables are missing.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/add_to_cart",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "servicecatalog",
+                                "items",
+                                ":sys_id",
+                                "add_to_cart"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sys_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:28.000Z",
+                          "updatedAt": "2026-06-05T15:17:28.000Z",
+                          "uid": "35240-07757a0d-1545-4b24-a50d-ab29d7f41e69"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-2cd406db-e630-4e0c-b010-1cc3fdc56e5c"
+                    }
+                  ],
+                  "id": "05f37c36-b775-4f74-837f-cb3d6abcc3e4",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-05f37c36-b775-4f74-837f-cb3d6abcc3e4"
+                },
+                {
+                  "name": "order_now",
+                  "item": [
+                    {
+                      "name": "Servicenow Order a Catalog Item Immediately",
+                      "id": "be7af68f-6e5b-48a7-bbec-017dc4c1bb6c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/order_now",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "items",
+                            ":sys_id",
+                            "order_now"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e552b366-c9df-454a-b6d6-e9d01e707760",
+                              "key": "sys_id",
+                              "value": "<string>",
+                              "description": "(Required) The unique system identifier."
+                            }
+                          ]
+                        },
+                        "description": "Orders the specified catalog item without going through the cart. Creates a request directly with the given quantity and variable values."
+                      },
+                      "response": [
+                        {
+                          "id": "ffccb588-40b6-4c21-9457-ab80d4c9ad20",
+                          "name": "Order successfully submitted.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/order_now",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "servicecatalog",
+                                "items",
+                                ":sys_id",
+                                "order_now"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sys_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"result\": {\n    \"request_number\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"table\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:28.000Z",
+                          "updatedAt": "2026-06-05T15:17:28.000Z",
+                          "uid": "35240-ffccb588-40b6-4c21-9457-ab80d4c9ad20"
+                        },
+                        {
+                          "id": "38fde6d2-bf0c-47fc-9b30-414d42c4b3ba",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sysparm_quantity\": \"<integer>\",\n  \"variables\": {\n    \"sed3\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/servicecatalog/items/:sys_id/order_now",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "servicecatalog",
+                                "items",
+                                ":sys_id",
+                                "order_now"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sys_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:28.000Z",
+                          "updatedAt": "2026-06-05T15:17:28.000Z",
+                          "uid": "35240-38fde6d2-bf0c-47fc-9b30-414d42c4b3ba"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-be7af68f-6e5b-48a7-bbec-017dc4c1bb6c"
+                    }
+                  ],
+                  "id": "2caba092-448e-42af-aebb-5f868dc81c84",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-2caba092-448e-42af-aebb-5f868dc81c84"
+                },
+                {
+                  "name": "Servicenow Retrieve a Catalog Item",
+                  "id": "80df8f53-1abe-4560-b2a8-1380baa861eb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/items/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "items",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b10d6773-fb85-48d1-a70f-495a84209107",
+                          "key": "sys_id",
+                          "value": "<string>",
+                          "description": "(Required) The unique system identifier."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves details for a specific catalog item including its variables and pricing information."
+                  },
+                  "response": [
+                    {
+                      "id": "4302e7b2-505a-4dee-994c-b9f8647f4f99",
+                      "name": "Successful response returning item details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/items/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "items",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"description\": \"<string>\",\n    \"category\": \"<string>\",\n    \"price\": \"<string>\",\n    \"picture\": \"<string>\",\n    \"mandatory_attachment\": \"<boolean>\",\n    \"request_method\": \"<string>\",\n    \"variables\": [\n      {\n        \"name\": \"<string>\",\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"mandatory\": \"<boolean>\",\n        \"default_value\": \"<string>\",\n        \"choices\": [\n          {\n            \"label\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"label\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"mandatory\": \"<boolean>\",\n        \"default_value\": \"<string>\",\n        \"choices\": [\n          {\n            \"label\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"label\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-4302e7b2-505a-4dee-994c-b9f8647f4f99"
+                    },
+                    {
+                      "id": "a5363547-cb4f-4b0e-82a4-488589c98c7d",
+                      "name": "Catalog item not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/items/:sys_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "items",
+                            ":sys_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-a5363547-cb4f-4b0e-82a4-488589c98c7d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-80df8f53-1abe-4560-b2a8-1380baa861eb"
+                }
+              ],
+              "id": "06bfbd1d-5835-4709-8c6d-6278ed395ee5",
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-06bfbd1d-5835-4709-8c6d-6278ed395ee5"
+            },
+            {
+              "name": "Servicenow List Catalog Items",
+              "id": "5d662b8a-8f47-4c64-a128-9b808d2cd1cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servicecatalog/items?sysparm_catalog=<string>&sysparm_category=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servicecatalog",
+                    "items"
+                  ],
+                  "query": [
+                    {
+                      "description": "The sys_id of the catalog to filter items by.",
+                      "key": "sysparm_catalog",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The sys_id of the category to filter items by.",
+                      "key": "sysparm_category",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of items to return.",
+                      "key": "sysparm_limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Starting index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of catalog items. Supports filtering by catalog and category."
+              },
+              "response": [
+                {
+                  "id": "f2e94bc3-42e5-43be-85aa-007e0b9ca1cc",
+                  "name": "Successful response returning catalog items.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/items?sysparm_catalog=<string>&sysparm_category=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "items"
+                      ],
+                      "query": [
+                        {
+                          "description": "The sys_id of the catalog to filter items by.",
+                          "key": "sysparm_catalog",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The sys_id of the category to filter items by.",
+                          "key": "sysparm_category",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of items to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"category\": \"<string>\",\n      \"price\": \"<string>\",\n      \"picture\": \"<string>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"category\": \"<string>\",\n      \"price\": \"<string>\",\n      \"picture\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-f2e94bc3-42e5-43be-85aa-007e0b9ca1cc"
+                },
+                {
+                  "id": "61f2141c-369b-4cb3-84ef-f3b9dae2b74e",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/items?sysparm_catalog=<string>&sysparm_category=<string>&sysparm_limit=<integer>&sysparm_offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "items"
+                      ],
+                      "query": [
+                        {
+                          "description": "The sys_id of the catalog to filter items by.",
+                          "key": "sysparm_catalog",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The sys_id of the category to filter items by.",
+                          "key": "sysparm_category",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of items to return.",
+                          "key": "sysparm_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Starting index for pagination.",
+                          "key": "sysparm_offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-61f2141c-369b-4cb3-84ef-f3b9dae2b74e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-5d662b8a-8f47-4c64-a128-9b808d2cd1cf"
+            }
+          ],
+          "id": "665344de-4255-45cc-92a4-7b3dc104b7b1",
+          "createdAt": "2026-06-05T15:17:28.000Z",
+          "updatedAt": "2026-06-05T15:17:28.000Z",
+          "uid": "35240-665344de-4255-45cc-92a4-7b3dc104b7b1"
+        },
+        {
+          "name": "cart",
+          "item": [
+            {
+              "name": "submit_order",
+              "item": [
+                {
+                  "name": "Servicenow Submit the Cart as an Order",
+                  "id": "04832242-9273-47ec-be1b-f2b40ac43ec3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/cart/submit_order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "cart",
+                        "submit_order"
+                      ]
+                    },
+                    "description": "Submits all items in the current user's shopping cart as a service catalog request. Returns the request number and details."
+                  },
+                  "response": [
+                    {
+                      "id": "8f087314-c7e5-4788-aa24-35d23cf6df6c",
+                      "name": "Order successfully submitted.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/cart/submit_order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "cart",
+                            "submit_order"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {\n    \"request_number\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"table\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-8f087314-c7e5-4788-aa24-35d23cf6df6c"
+                    },
+                    {
+                      "id": "2e08efdd-b7e8-4249-93a6-fed54b50c868",
+                      "name": "Cart is empty or contains invalid items.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/servicecatalog/cart/submit_order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "servicecatalog",
+                            "cart",
+                            "submit_order"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:28.000Z",
+                      "updatedAt": "2026-06-05T15:17:28.000Z",
+                      "uid": "35240-2e08efdd-b7e8-4249-93a6-fed54b50c868"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-04832242-9273-47ec-be1b-f2b40ac43ec3"
+                }
+              ],
+              "id": "2d92b0d8-7f54-4e92-ae4b-e34e7f4b3e8c",
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-2d92b0d8-7f54-4e92-ae4b-e34e7f4b3e8c"
+            },
+            {
+              "name": "Servicenow Retrieve the Current Cart",
+              "id": "425e29cb-1095-4b82-a814-c8ad94429431",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servicecatalog/cart",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servicecatalog",
+                    "cart"
+                  ]
+                },
+                "description": "Retrieves the contents of the current user's shopping cart."
+              },
+              "response": [
+                {
+                  "id": "7213d55d-af97-420a-b89f-38988ecf8ee3",
+                  "name": "Successful response returning cart contents.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/cart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "cart"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"items\": [\n      {\n        \"cart_item_id\": \"<string>\",\n        \"catalog_item_id\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"subtotal\": \"<string>\"\n      },\n      {\n        \"cart_item_id\": \"<string>\",\n        \"catalog_item_id\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"subtotal\": \"<string>\"\n      }\n    ],\n    \"subtotal\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-7213d55d-af97-420a-b89f-38988ecf8ee3"
+                },
+                {
+                  "id": "3982f2c3-c213-40c6-b671-88ae882004ef",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/cart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "cart"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-3982f2c3-c213-40c6-b671-88ae882004ef"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-425e29cb-1095-4b82-a814-c8ad94429431"
+            },
+            {
+              "name": "Servicenow Empty the Cart",
+              "id": "db94f317-31b0-4990-af5c-0c7deeaf61ff",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/servicecatalog/cart",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "servicecatalog",
+                    "cart"
+                  ]
+                },
+                "description": "Removes all items from the current user's shopping cart."
+              },
+              "response": [
+                {
+                  "id": "5b94472f-9a3b-4422-9532-d263bfe5790e",
+                  "name": "Cart successfully emptied.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/cart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "cart"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {}\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-5b94472f-9a3b-4422-9532-d263bfe5790e"
+                },
+                {
+                  "id": "69420adc-4cf4-46ac-b7ae-c95c3cccd60f",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/servicecatalog/cart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "servicecatalog",
+                        "cart"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:28.000Z",
+                  "updatedAt": "2026-06-05T15:17:28.000Z",
+                  "uid": "35240-69420adc-4cf4-46ac-b7ae-c95c3cccd60f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:28.000Z",
+              "updatedAt": "2026-06-05T15:17:28.000Z",
+              "uid": "35240-db94f317-31b0-4990-af5c-0c7deeaf61ff"
+            }
+          ],
+          "id": "7ae64268-3479-4d99-8dfe-fa227befe99c",
+          "createdAt": "2026-06-05T15:17:28.000Z",
+          "updatedAt": "2026-06-05T15:17:28.000Z",
+          "uid": "35240-7ae64268-3479-4d99-8dfe-fa227befe99c"
+        }
+      ],
+      "id": "6eb59667-086c-43d7-ade2-858929ac23ad",
+      "createdAt": "2026-06-05T15:17:28.000Z",
+      "updatedAt": "2026-06-05T15:17:28.000Z",
+      "uid": "35240-6eb59667-086c-43d7-ade2-858929ac23ad"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/sn_sc"
+    }
+  ]
+}

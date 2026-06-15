@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow CMDB Instance API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CMDB Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Configuration Items by Class",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/cmdb/instance/:className",
+            "params": [
+              {
+                "name": "className",
+                "value": "cmdb_ci_linux_server",
+                "type": "path",
+                "description": "The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+              },
+              {
+                "name": "sysparm_query",
+                "value": "example_value",
+                "type": "query",
+                "description": "An encoded query string to filter CI records."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of records to return. Default is 1000."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of configuration item instances for the specified CMDB class. Returns sys_id and name for each CI by default."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Specific Configuration Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/now/cmdb/instance/:className/:sys_id",
+            "params": [
+              {
+                "name": "className",
+                "value": "cmdb_ci_linux_server",
+                "type": "path",
+                "description": "The CMDB class name."
+              },
+              {
+                "name": "sys_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique sys_id of the configuration item."
+              }
+            ]
+          },
+          "docs": "Retrieves the full details of a specific configuration item by its class name and sys_id. Returns all attributes of the CI record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

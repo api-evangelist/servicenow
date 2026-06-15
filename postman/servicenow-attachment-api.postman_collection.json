@@ -1,0 +1,1324 @@
+{
+  "info": {
+    "_postman_id": "5eab91d5-25a6-4b4f-b371-8b26c31e4f69",
+    "name": "ServiceNow Attachment API",
+    "description": "The ServiceNow Attachment API enables uploading, retrieving, and deleting file attachments associated with records in ServiceNow tables. It supports uploading files via multipart form-data or binary streams and allows file sizes up to 1024 MB by default. Attachments can be queried by table name, record sys_id, or file metadata.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:24.000Z",
+    "updatedAt": "2026-06-05T15:17:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5eab91d5-25a6-4b4f-b371-8b26c31e4f69"
+  },
+  "item": [
+    {
+      "name": "attachment",
+      "item": [
+        {
+          "name": "{sys_id}",
+          "item": [
+            {
+              "name": "file",
+              "item": [
+                {
+                  "name": "Servicenow Download Attachment File Content",
+                  "id": "5c8fd503-3366-4a7e-903a-ea6ce6b9d731",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id/file",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id",
+                        "file"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c6d4c658-7ae0-4a84-aa2b-149ad23cf53e",
+                          "key": "sys_id",
+                          "value": "8b4123701b2cc661e9f38b1f2726a5c4",
+                          "description": "(Required) The unique system identifier for the attachment record."
+                        }
+                      ]
+                    },
+                    "description": "Downloads the binary file content of an attachment. The response Content-Type header reflects the original file type."
+                  },
+                  "response": [
+                    {
+                      "id": "dd0e2630-3328-474d-9053-7ac9f743b89e",
+                      "name": "Successful response returning the binary file content.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attachment/:sys_id/file",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attachment",
+                            ":sys_id",
+                            "file"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/octet-stream"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:17:24.000Z",
+                      "updatedAt": "2026-06-05T15:17:24.000Z",
+                      "uid": "35240-dd0e2630-3328-474d-9053-7ac9f743b89e"
+                    },
+                    {
+                      "id": "60ef7a68-901b-431c-b8c8-f18ca7906d50",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attachment/:sys_id/file",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attachment",
+                            ":sys_id",
+                            "file"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:24.000Z",
+                      "updatedAt": "2026-06-05T15:17:24.000Z",
+                      "uid": "35240-60ef7a68-901b-431c-b8c8-f18ca7906d50"
+                    },
+                    {
+                      "id": "584633ca-839c-4909-803d-1d4645d08e01",
+                      "name": "Attachment not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attachment/:sys_id/file",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attachment",
+                            ":sys_id",
+                            "file"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sys_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:24.000Z",
+                      "updatedAt": "2026-06-05T15:17:24.000Z",
+                      "uid": "35240-584633ca-839c-4909-803d-1d4645d08e01"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-5c8fd503-3366-4a7e-903a-ea6ce6b9d731"
+                }
+              ],
+              "id": "bc0fe235-f668-4e46-87eb-0e05f69e209a",
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-bc0fe235-f668-4e46-87eb-0e05f69e209a"
+            },
+            {
+              "name": "Servicenow Retrieve Attachment Metadata",
+              "id": "a5d3b7a9-c6e9-4934-85e6-d9befb3cedc1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment/:sys_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment",
+                    ":sys_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4fcf75d8-283b-42e4-af47-d8e9d5983e87",
+                      "key": "sys_id",
+                      "value": "8b4123701b2cc661e9f38b1f2726a5c4",
+                      "description": "(Required) The unique system identifier for the attachment record."
+                    }
+                  ]
+                },
+                "description": "Retrieves metadata for a single attachment by its sys_id. Does not return the binary file content; use the file download endpoint instead."
+              },
+              "response": [
+                {
+                  "id": "b8146510-6596-44e6-ba02-f58ffc665fc6",
+                  "name": "Successful response returning attachment metadata.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"file_name\": \"<string>\",\n    \"table_name\": \"<string>\",\n    \"table_sys_id\": \"<string>\",\n    \"content_type\": \"<string>\",\n    \"size_bytes\": \"<integer>\",\n    \"size_compressed\": \"<integer>\",\n    \"download_link\": \"<uri>\",\n    \"image_height\": \"<integer>\",\n    \"image_width\": \"<integer>\",\n    \"hash\": \"<string>\",\n    \"state\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-b8146510-6596-44e6-ba02-f58ffc665fc6"
+                },
+                {
+                  "id": "0867df4d-a579-446d-b24b-3c5d3fbe9586",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-0867df4d-a579-446d-b24b-3c5d3fbe9586"
+                },
+                {
+                  "id": "2f0f7874-c9df-4565-bcca-003dc3333d17",
+                  "name": "Attachment not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-2f0f7874-c9df-4565-bcca-003dc3333d17"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-a5d3b7a9-c6e9-4934-85e6-d9befb3cedc1"
+            },
+            {
+              "name": "Servicenow Delete an Attachment",
+              "id": "35c05d1f-34cc-479c-983f-157d8a621a80",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment/:sys_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment",
+                    ":sys_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f8f831c8-8e2c-4a49-ae59-e03cc8597703",
+                      "key": "sys_id",
+                      "value": "8b4123701b2cc661e9f38b1f2726a5c4",
+                      "description": "(Required) The unique system identifier for the attachment record."
+                    }
+                  ]
+                },
+                "description": "Deletes an attachment and its associated file content from the ServiceNow instance."
+              },
+              "response": [
+                {
+                  "id": "cf85c2ed-eb8e-4928-be86-c71cfd64f173",
+                  "name": "Attachment successfully deleted. No content returned.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-cf85c2ed-eb8e-4928-be86-c71cfd64f173"
+                },
+                {
+                  "id": "07c93f3b-679b-4056-8c36-58829b058dab",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-07c93f3b-679b-4056-8c36-58829b058dab"
+                },
+                {
+                  "id": "71591cf1-a156-4663-8168-19914874240b",
+                  "name": "Attachment not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/:sys_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        ":sys_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "sys_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-71591cf1-a156-4663-8168-19914874240b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-35c05d1f-34cc-479c-983f-157d8a621a80"
+            }
+          ],
+          "id": "157e648f-275a-4f7a-bca9-6bbf594b5586",
+          "createdAt": "2026-06-05T15:17:24.000Z",
+          "updatedAt": "2026-06-05T15:17:24.000Z",
+          "uid": "35240-157e648f-275a-4f7a-bca9-6bbf594b5586"
+        },
+        {
+          "name": "file",
+          "item": [
+            {
+              "name": "Servicenow Upload a File Attachment via Binary Stream",
+              "id": "f735f085-9524-4851-bf7e-85aeacef8353",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "*/*"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attachment/file?table_name=<string>&table_sys_id=<string>&file_name=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment",
+                    "file"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the table to which the file is attached.",
+                      "key": "table_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The sys_id of the record to which the file is attached.",
+                      "key": "table_sys_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The name of the file including its extension.",
+                      "key": "file_name",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Uploads a file as a binary stream and attaches it to the specified table record. The Content-Type header should match the actual file type being uploaded."
+              },
+              "response": [
+                {
+                  "id": "c1882245-a864-4ba4-a333-1a2e36c04312",
+                  "name": "File successfully uploaded and attached.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "*/*"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/file?table_name=<string>&table_sys_id=<string>&file_name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "file"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the file including its extension.",
+                          "key": "file_name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"file_name\": \"<string>\",\n    \"table_name\": \"<string>\",\n    \"table_sys_id\": \"<string>\",\n    \"content_type\": \"<string>\",\n    \"size_bytes\": \"<integer>\",\n    \"size_compressed\": \"<integer>\",\n    \"download_link\": \"<uri>\",\n    \"image_height\": \"<integer>\",\n    \"image_width\": \"<integer>\",\n    \"hash\": \"<string>\",\n    \"state\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-c1882245-a864-4ba4-a333-1a2e36c04312"
+                },
+                {
+                  "id": "ffeef999-28ed-4481-b423-5abb1df48af1",
+                  "name": "Bad request. Required parameters are missing.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "*/*"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/file?table_name=<string>&table_sys_id=<string>&file_name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "file"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the file including its extension.",
+                          "key": "file_name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-ffeef999-28ed-4481-b423-5abb1df48af1"
+                },
+                {
+                  "id": "5c013a72-d2e4-4ade-ae54-b68243182fc6",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "*/*"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/file?table_name=<string>&table_sys_id=<string>&file_name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "file"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the file including its extension.",
+                          "key": "file_name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-5c013a72-d2e4-4ade-ae54-b68243182fc6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-f735f085-9524-4851-bf7e-85aeacef8353"
+            }
+          ],
+          "id": "9ab49ce0-4b89-4d57-85f3-6358ec0a9da6",
+          "createdAt": "2026-06-05T15:17:24.000Z",
+          "updatedAt": "2026-06-05T15:17:24.000Z",
+          "uid": "35240-9ab49ce0-4b89-4d57-85f3-6358ec0a9da6"
+        },
+        {
+          "name": "upload",
+          "item": [
+            {
+              "name": "Servicenow Upload a File Attachment via Multipart Form Data",
+              "id": "7f27d0d0-2ea5-44a2-9fde-67b35c9626eb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) The name of the table to which the file is attached.",
+                      "key": "table_name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "(Required) The sys_id of the record to which the file is attached.",
+                      "key": "table_sys_id",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "(Required) The file to upload.",
+                      "key": "uploadFile",
+                      "type": "file",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attachment/upload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment",
+                    "upload"
+                  ]
+                },
+                "description": "Uploads a file using multipart form-data encoding and attaches it to the specified table record. This method is suitable for web browser and form-based uploads."
+              },
+              "response": [
+                {
+                  "id": "0d818c53-e867-4e96-9072-ed58e26cc16f",
+                  "name": "File successfully uploaded and attached.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The file to upload.",
+                          "key": "uploadFile",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "upload"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"sys_id\": \"<string>\",\n    \"file_name\": \"<string>\",\n    \"table_name\": \"<string>\",\n    \"table_sys_id\": \"<string>\",\n    \"content_type\": \"<string>\",\n    \"size_bytes\": \"<integer>\",\n    \"size_compressed\": \"<integer>\",\n    \"download_link\": \"<uri>\",\n    \"image_height\": \"<integer>\",\n    \"image_width\": \"<integer>\",\n    \"hash\": \"<string>\",\n    \"state\": \"<string>\",\n    \"sys_created_on\": \"<dateTime>\",\n    \"sys_created_by\": \"<string>\",\n    \"sys_updated_on\": \"<dateTime>\",\n    \"sys_updated_by\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-0d818c53-e867-4e96-9072-ed58e26cc16f"
+                },
+                {
+                  "id": "696ca69a-afe3-4704-9f85-8b201f829d5d",
+                  "name": "Bad request. Required fields are missing from the form.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The file to upload.",
+                          "key": "uploadFile",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "upload"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-696ca69a-afe3-4704-9f85-8b201f829d5d"
+                },
+                {
+                  "id": "7bc45230-66b3-4825-a6ae-c47ec5736e1a",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The name of the table to which the file is attached.",
+                          "key": "table_name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The sys_id of the record to which the file is attached.",
+                          "key": "table_sys_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The file to upload.",
+                          "key": "uploadFile",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attachment/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attachment",
+                        "upload"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:24.000Z",
+                  "updatedAt": "2026-06-05T15:17:24.000Z",
+                  "uid": "35240-7bc45230-66b3-4825-a6ae-c47ec5736e1a"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-7f27d0d0-2ea5-44a2-9fde-67b35c9626eb"
+            }
+          ],
+          "id": "2d93c74f-1aed-4ad6-9dba-9a411a280a82",
+          "createdAt": "2026-06-05T15:17:24.000Z",
+          "updatedAt": "2026-06-05T15:17:24.000Z",
+          "uid": "35240-2d93c74f-1aed-4ad6-9dba-9a411a280a82"
+        },
+        {
+          "name": "Servicenow List Attachments",
+          "id": "bf5af725-f8c3-4ee1-8fa8-16619d50b5e4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/attachment?sysparm_query=<string>&sysparm_limit=10000&sysparm_offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "attachment"
+              ],
+              "query": [
+                {
+                  "description": "Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name, and content_type.",
+                  "key": "sysparm_query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of attachment records to return.",
+                  "key": "sysparm_limit",
+                  "value": "10000"
+                },
+                {
+                  "description": "Starting record index for pagination.",
+                  "key": "sysparm_offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieves metadata for file attachments. Supports query filtering by table name, record sys_id, file name, and other attachment attributes."
+          },
+          "response": [
+            {
+              "id": "b26c231c-bfe0-4151-9e3b-92ce4b029751",
+              "name": "Successful response returning attachment metadata records.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment?sysparm_query=<string>&sysparm_limit=10000&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment"
+                  ],
+                  "query": [
+                    {
+                      "description": "Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name, and content_type.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of attachment records to return.",
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"<string>\",\n      \"file_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"table_sys_id\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"size_bytes\": \"<integer>\",\n      \"size_compressed\": \"<integer>\",\n      \"download_link\": \"<uri>\",\n      \"image_height\": \"<integer>\",\n      \"image_width\": \"<integer>\",\n      \"hash\": \"<string>\",\n      \"state\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\"\n    },\n    {\n      \"sys_id\": \"<string>\",\n      \"file_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"table_sys_id\": \"<string>\",\n      \"content_type\": \"<string>\",\n      \"size_bytes\": \"<integer>\",\n      \"size_compressed\": \"<integer>\",\n      \"download_link\": \"<uri>\",\n      \"image_height\": \"<integer>\",\n      \"image_width\": \"<integer>\",\n      \"hash\": \"<string>\",\n      \"state\": \"<string>\",\n      \"sys_created_on\": \"<dateTime>\",\n      \"sys_created_by\": \"<string>\",\n      \"sys_updated_on\": \"<dateTime>\",\n      \"sys_updated_by\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-b26c231c-bfe0-4151-9e3b-92ce4b029751"
+            },
+            {
+              "id": "620c38b3-daf0-4393-be56-89bcbacc4b30",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment?sysparm_query=<string>&sysparm_limit=10000&sysparm_offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attachment"
+                  ],
+                  "query": [
+                    {
+                      "description": "Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name, and content_type.",
+                      "key": "sysparm_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of attachment records to return.",
+                      "key": "sysparm_limit",
+                      "value": "10000"
+                    },
+                    {
+                      "description": "Starting record index for pagination.",
+                      "key": "sysparm_offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:24.000Z",
+              "updatedAt": "2026-06-05T15:17:24.000Z",
+              "uid": "35240-620c38b3-daf0-4393-be56-89bcbacc4b30"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:24.000Z",
+          "updatedAt": "2026-06-05T15:17:24.000Z",
+          "uid": "35240-bf5af725-f8c3-4ee1-8fa8-16619d50b5e4"
+        }
+      ],
+      "id": "dc3308e9-3bda-43af-8d60-2cc8f70638f3",
+      "createdAt": "2026-06-05T15:17:24.000Z",
+      "updatedAt": "2026-06-05T15:17:24.000Z",
+      "uid": "35240-dc3308e9-3bda-43af-8d60-2cc8f70638f3"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/now"
+    }
+  ]
+}

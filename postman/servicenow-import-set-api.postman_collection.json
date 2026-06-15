@@ -1,0 +1,612 @@
+{
+  "info": {
+    "_postman_id": "7523a488-ad46-45ec-b0a3-d5127e183aa4",
+    "name": "ServiceNow Import Set API",
+    "description": "The ServiceNow Import Set API allows external systems to push data into ServiceNow import set staging tables, which can then be synchronously or asynchronously transformed and loaded into target tables using transform maps. It is commonly used for integrating external data sources with ServiceNow for bulk data loading and ETL workflows.\n\nContact Support:\n Name: ServiceNow Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:25.000Z",
+    "updatedAt": "2026-06-05T15:17:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7523a488-ad46-45ec-b0a3-d5127e183aa4"
+  },
+  "item": [
+    {
+      "name": "import",
+      "item": [
+        {
+          "name": "{stagingTableName}",
+          "item": [
+            {
+              "name": "insertMultiple",
+              "item": [
+                {
+                  "name": "Servicenow Insert Multiple Records Into an Import Set Staging Table",
+                  "id": "73324705-0115-40c8-8f67-73b7187fafe4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"records\": [\n    {\n      \"incididunte\": \"<string>\",\n      \"cupidatat_21\": \"<string>\"\n    },\n    {\n      \"cillum9\": \"<string>\",\n      \"deserunt_3a8\": \"<string>\",\n      \"Excepteur_9\": \"<string>\",\n      \"reprehenderit_015\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/import/:stagingTableName/insertMultiple",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "import",
+                        ":stagingTableName",
+                        "insertMultiple"
+                      ],
+                      "variable": [
+                        {
+                          "id": "92a633fc-b70b-4783-8e75-03ef3c1ec942",
+                          "key": "stagingTableName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the import set staging table."
+                        }
+                      ]
+                    },
+                    "description": "Inserts multiple records into the specified import set staging table in a single request. Each record is individually transformed if an active transform map exists."
+                  },
+                  "response": [
+                    {
+                      "id": "db970107-6b71-41c5-8807-f011bbbc96a5",
+                      "name": "Records successfully inserted and transformed.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"records\": [\n    {\n      \"incididunte\": \"<string>\",\n      \"cupidatat_21\": \"<string>\"\n    },\n    {\n      \"cillum9\": \"<string>\",\n      \"deserunt_3a8\": \"<string>\",\n      \"Excepteur_9\": \"<string>\",\n      \"reprehenderit_015\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/import/:stagingTableName/insertMultiple",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "import",
+                            ":stagingTableName",
+                            "insertMultiple"
+                          ],
+                          "variable": [
+                            {
+                              "key": "stagingTableName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": [\n    {\n      \"transform_map\": \"<string>\",\n      \"table\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"display_value\": \"<string>\",\n      \"record_link\": \"<uri>\",\n      \"status\": \"inserted\",\n      \"status_message\": \"<string>\",\n      \"sys_id\": \"<string>\",\n      \"target_sys_id\": \"<string>\",\n      \"import_set\": \"<string>\"\n    },\n    {\n      \"transform_map\": \"<string>\",\n      \"table\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"display_value\": \"<string>\",\n      \"record_link\": \"<uri>\",\n      \"status\": \"inserted\",\n      \"status_message\": \"<string>\",\n      \"sys_id\": \"<string>\",\n      \"target_sys_id\": \"<string>\",\n      \"import_set\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:17:26.000Z",
+                      "updatedAt": "2026-06-05T15:17:26.000Z",
+                      "uid": "35240-db970107-6b71-41c5-8807-f011bbbc96a5"
+                    },
+                    {
+                      "id": "94263ab1-e06f-410e-9c35-596942722385",
+                      "name": "Bad request. The request body is malformed.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"records\": [\n    {\n      \"incididunte\": \"<string>\",\n      \"cupidatat_21\": \"<string>\"\n    },\n    {\n      \"cillum9\": \"<string>\",\n      \"deserunt_3a8\": \"<string>\",\n      \"Excepteur_9\": \"<string>\",\n      \"reprehenderit_015\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/import/:stagingTableName/insertMultiple",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "import",
+                            ":stagingTableName",
+                            "insertMultiple"
+                          ],
+                          "variable": [
+                            {
+                              "key": "stagingTableName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:26.000Z",
+                      "updatedAt": "2026-06-05T15:17:26.000Z",
+                      "uid": "35240-94263ab1-e06f-410e-9c35-596942722385"
+                    },
+                    {
+                      "id": "8fb5397b-0369-4b86-b7d2-8968d1aeebf2",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"records\": [\n    {\n      \"incididunte\": \"<string>\",\n      \"cupidatat_21\": \"<string>\"\n    },\n    {\n      \"cillum9\": \"<string>\",\n      \"deserunt_3a8\": \"<string>\",\n      \"Excepteur_9\": \"<string>\",\n      \"reprehenderit_015\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/import/:stagingTableName/insertMultiple",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "import",
+                            ":stagingTableName",
+                            "insertMultiple"
+                          ],
+                          "variable": [
+                            {
+                              "key": "stagingTableName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:26.000Z",
+                      "updatedAt": "2026-06-05T15:17:26.000Z",
+                      "uid": "35240-8fb5397b-0369-4b86-b7d2-8968d1aeebf2"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:26.000Z",
+                  "updatedAt": "2026-06-05T15:17:26.000Z",
+                  "uid": "35240-73324705-0115-40c8-8f67-73b7187fafe4"
+                }
+              ],
+              "id": "19318919-52be-4b8b-a584-465dd375119f",
+              "createdAt": "2026-06-05T15:17:26.000Z",
+              "updatedAt": "2026-06-05T15:17:26.000Z",
+              "uid": "35240-19318919-52be-4b8b-a584-465dd375119f"
+            },
+            {
+              "name": "Servicenow Insert a Record Into an Import Set Staging Table",
+              "id": "e2277682-e09d-40e2-9692-ea23403f7cd4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id_6\": \"<string>\",\n  \"sedb12\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/import/:stagingTableName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "import",
+                    ":stagingTableName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ae7ca593-e8bb-43ac-ac4d-253567c2c4b4",
+                      "key": "stagingTableName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the import set staging table. This table must extend sys_import_set_row and have an associated transform map configured."
+                    }
+                  ]
+                },
+                "description": "Inserts a single record into the specified import set staging table. If an active transform map exists for the staging table, the record is synchronously transformed and loaded into the target table. The response includes the transformation result indicating whether the record was inserted, updated, or encountered an error."
+              },
+              "response": [
+                {
+                  "id": "63d3c944-d667-4242-a48d-b839297a5c00",
+                  "name": "Record successfully inserted into the staging table and transformation completed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id_6\": \"<string>\",\n  \"sedb12\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/import/:stagingTableName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "import",
+                        ":stagingTableName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stagingTableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"transform_map\": \"<string>\",\n      \"table\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"display_value\": \"<string>\",\n      \"record_link\": \"<uri>\",\n      \"status\": \"inserted\",\n      \"status_message\": \"<string>\",\n      \"sys_id\": \"<string>\",\n      \"target_sys_id\": \"<string>\",\n      \"import_set\": \"<string>\"\n    },\n    {\n      \"transform_map\": \"<string>\",\n      \"table\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"display_value\": \"<string>\",\n      \"record_link\": \"<uri>\",\n      \"status\": \"inserted\",\n      \"status_message\": \"<string>\",\n      \"sys_id\": \"<string>\",\n      \"target_sys_id\": \"<string>\",\n      \"import_set\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:26.000Z",
+                  "updatedAt": "2026-06-05T15:17:26.000Z",
+                  "uid": "35240-63d3c944-d667-4242-a48d-b839297a5c00"
+                },
+                {
+                  "id": "9816bf12-79ea-4fe5-80db-b5103f41834b",
+                  "name": "Bad request. The staging table name is invalid or the request body contains malformed data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id_6\": \"<string>\",\n  \"sedb12\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/import/:stagingTableName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "import",
+                        ":stagingTableName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stagingTableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:26.000Z",
+                  "updatedAt": "2026-06-05T15:17:26.000Z",
+                  "uid": "35240-9816bf12-79ea-4fe5-80db-b5103f41834b"
+                },
+                {
+                  "id": "3d5b164f-b511-467d-a8f6-ba8973174631",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id_6\": \"<string>\",\n  \"sedb12\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/import/:stagingTableName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "import",
+                        ":stagingTableName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stagingTableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:26.000Z",
+                  "updatedAt": "2026-06-05T15:17:26.000Z",
+                  "uid": "35240-3d5b164f-b511-467d-a8f6-ba8973174631"
+                },
+                {
+                  "id": "4892fe20-d2bb-4571-b610-81fba5ec92a7",
+                  "name": "Forbidden. The user does not have the import_transformer role or ACL access to the staging table.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id_6\": \"<string>\",\n  \"sedb12\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/import/:stagingTableName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "import",
+                        ":stagingTableName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stagingTableName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:26.000Z",
+                  "updatedAt": "2026-06-05T15:17:26.000Z",
+                  "uid": "35240-4892fe20-d2bb-4571-b610-81fba5ec92a7"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:26.000Z",
+              "updatedAt": "2026-06-05T15:17:26.000Z",
+              "uid": "35240-e2277682-e09d-40e2-9692-ea23403f7cd4"
+            }
+          ],
+          "id": "6cd7beb1-804c-4393-8167-72e0372255ce",
+          "createdAt": "2026-06-05T15:17:26.000Z",
+          "updatedAt": "2026-06-05T15:17:26.000Z",
+          "uid": "35240-6cd7beb1-804c-4393-8167-72e0372255ce"
+        }
+      ],
+      "id": "cc1dc42d-522b-4f3b-97c7-0d2313b1ed9b",
+      "createdAt": "2026-06-05T15:17:26.000Z",
+      "updatedAt": "2026-06-05T15:17:26.000Z",
+      "uid": "35240-cc1dc42d-522b-4f3b-97c7-0d2313b1ed9b"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.service-now.com/api/now"
+    }
+  ]
+}

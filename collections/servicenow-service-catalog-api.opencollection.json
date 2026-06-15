@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Service Catalog API",
+    "version": "Yokohama"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Service Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/catalogs",
+            "params": [
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of catalogs to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all available service catalogs on the instance."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Specific Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/catalogs/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific service catalog including its categories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Catalog Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/categories/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific catalog category including its child categories and items."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/items",
+            "params": [
+              {
+                "name": "sysparm_catalog",
+                "value": "example_value",
+                "type": "query",
+                "description": "The sys_id of the catalog to filter items by."
+              },
+              {
+                "name": "sysparm_category",
+                "value": "example_value",
+                "type": "query",
+                "description": "The sys_id of the category to filter items by."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of catalog items. Supports filtering by catalog and category."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/items/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific catalog item including its variables and pricing information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Add a Catalog Item to the Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/items/:sys_id/add_to_cart",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the specified catalog item to the shopping cart with the given quantity and variable values."
+        },
+        {
+          "info": {
+            "name": "Servicenow Order a Catalog Item Immediately",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/items/:sys_id/order_now",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Orders the specified catalog item without going through the cart. Creates a request directly with the given quantity and variable values."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve the Current Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/cart"
+          },
+          "docs": "Retrieves the contents of the current user's shopping cart."
+        },
+        {
+          "info": {
+            "name": "Servicenow Empty the Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/cart"
+          },
+          "docs": "Removes all items from the current user's shopping cart."
+        },
+        {
+          "info": {
+            "name": "Servicenow Submit the Cart as an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.service-now.com/api/sn_sc/servicecatalog/cart/submit_order"
+          },
+          "docs": "Submits all items in the current user's shopping cart as a service catalog request. Returns the request number and details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

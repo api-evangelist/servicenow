@@ -1,0 +1,1104 @@
+{
+  "info": {
+    "_postman_id": "c83da011-1afc-48b8-b964-95d1220ff53b",
+    "name": "ServiceNow Trouble Ticket Open API",
+    "description": "The Trouble Ticket Open API provides endpoints to create, update, and retrieve data from the Case [sn_customerservice_case], \nIncident [incident], and Service Problem Case [sn_sprb_mgmt_case] tables.\n\nUse this API to manage ticket information between external ticketing systems and the ServiceNow AI Platform.\n\nThis API is a ServiceNow implementation of the TM Forum Trouble Ticket Management API REST specification, \nbased on TMF621 Trouble Ticket Management API User Guide v5.0.0, September 2024.\n\n**Authentication**: The calling user must have the `ticket_integrator` role.\n\n\nContact Support:\n Name: ServiceNow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:31.000Z",
+    "updatedAt": "2026-06-05T15:17:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c83da011-1afc-48b8-b964-95d1220ff53b"
+  },
+  "item": [
+    {
+      "name": "troubleTicket",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Servicenow Retrieve a Specific Trouble Ticket",
+              "id": "04c20cc8-d49f-42e4-b984-4ed4f50c84b4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket/:id?fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "List of fields to return in the response. Invalid fields are ignored.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a8214156-46cf-48e5-939e-1cacea105a19",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Sys_id of the case or incident record to retrieve"
+                    }
+                  ]
+                },
+                "description": "Retrieves a specified record from the Case, Incident, or Service Problem Case table."
+              },
+              "response": [
+                {
+                  "id": "d264917e-ec5c-4da2-b379-fbc4706fd686",
+                  "name": "Successful. The request was successfully processed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "List of fields to return in the response. Invalid fields are ignored.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"@type\": \"TroubleTicket\",\n  \"id\": \"<string>\",\n  \"href\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"lastUpdate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"status\": \"<string>\",\n  \"ticketType\": \"Service Problem Case\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    },\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"cmdb_ci\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"assignment_group\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-d264917e-ec5c-4da2-b379-fbc4706fd686"
+                },
+                {
+                  "id": "af0c6a78-0463-49ca-9932-232bdee107d1",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "List of fields to return in the response. Invalid fields are ignored.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-af0c6a78-0463-49ca-9932-232bdee107d1"
+                },
+                {
+                  "id": "92b0dca7-a61a-4254-a24a-eba84bbf26ff",
+                  "name": "Record not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "List of fields to return in the response. Invalid fields are ignored.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-92b0dca7-a61a-4254-a24a-eba84bbf26ff"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-04c20cc8-d49f-42e4-b984-4ed4f50c84b4"
+            },
+            {
+              "name": "Servicenow Update a Trouble Ticket",
+              "id": "26ca8b64-d1cb-4c35-bdb7-d88e77e7eff3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"1\",\n  \"status\": \"<string>\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"cmdb_ci_service\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ebb57536-91a3-47e8-929d-81eff0db3425",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Sys_id of the case or incident record to update"
+                    }
+                  ]
+                },
+                "description": "Updates a specified record in the Case, Incident, or Service Problem Case table."
+              },
+              "response": [
+                {
+                  "id": "9831edac-aae6-42dc-b0a1-82a5de367c03",
+                  "name": "Successful. The request was successfully processed.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"1\",\n  \"status\": \"<string>\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"cmdb_ci_service\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"@type\": \"TroubleTicket\",\n  \"id\": \"<string>\",\n  \"href\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"lastUpdate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"status\": \"<string>\",\n  \"ticketType\": \"Service Problem Case\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    },\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"cmdb_ci\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"assignment_group\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-9831edac-aae6-42dc-b0a1-82a5de367c03"
+                },
+                {
+                  "id": "2ac45b9b-a18d-48ee-84c8-e0bb42d34aea",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"1\",\n  \"status\": \"<string>\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"cmdb_ci_service\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-2ac45b9b-a18d-48ee-84c8-e0bb42d34aea"
+                },
+                {
+                  "id": "eb191f81-e8fa-47e9-afc7-c5bd8d4ccad6",
+                  "name": "Record not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"1\",\n  \"status\": \"<string>\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"cmdb_ci_service\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/troubleTicket/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "troubleTicket",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:17:31.000Z",
+                  "updatedAt": "2026-06-05T15:17:31.000Z",
+                  "uid": "35240-eb191f81-e8fa-47e9-afc7-c5bd8d4ccad6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-26ca8b64-d1cb-4c35-bdb7-d88e77e7eff3"
+            }
+          ],
+          "id": "1af2529f-52f9-425f-964e-ccfddbdec6c5",
+          "createdAt": "2026-06-05T15:17:31.000Z",
+          "updatedAt": "2026-06-05T15:17:31.000Z",
+          "uid": "35240-1af2529f-52f9-425f-964e-ccfddbdec6c5"
+        },
+        {
+          "name": "Servicenow Retrieve All Trouble Tickets",
+          "id": "5ca80df4-7276-4cba-b152-d17411bb2beb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/troubleTicket?fields=<string>&id=<string>&limit=25&offset=0&severity=<string>&status=<string>&ticketType=Incident",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "troubleTicket"
+              ],
+              "query": [
+                {
+                  "description": "List of fields to return in the response. Invalid fields are ignored.",
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter trouble tickets by sys_id",
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of records to return",
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "description": "Starting index at which to begin retrieving records",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter trouble tickets by severity",
+                  "key": "severity",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter trouble tickets by status",
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter trouble tickets by ticket type",
+                  "key": "ticketType",
+                  "value": "Incident"
+                }
+              ]
+            },
+            "description": "Retrieves a list of all trouble ticket records from the Case, Incident, and Service Problem Case tables."
+          },
+          "response": [
+            {
+              "id": "76e16499-302b-44d9-9e0d-8cb6a72acca0",
+              "name": "Request successfully processed. Full resource returned in response (no pagination).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket?fields=<string>&id=<string>&limit=25&offset=0&severity=<string>&status=<string>&ticketType=Incident",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "query": [
+                    {
+                      "description": "List of fields to return in the response. Invalid fields are ignored.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by sys_id",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Starting index at which to begin retrieving records",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter trouble tickets by severity",
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by status",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by ticket type",
+                      "key": "ticketType",
+                      "value": "Incident"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Total number of records available on the server",
+                    "type": "text/plain"
+                  },
+                  "key": "X-Total-Count",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"@type\": \"TroubleTicket\",\n    \"id\": \"<string>\",\n    \"href\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"lastUpdate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"severity\": \"<string>\",\n    \"status\": \"<string>\",\n    \"ticketType\": \"Incident\",\n    \"channel\": {\n      \"name\": \"<string>\"\n    },\n    \"note\": [\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      },\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      }\n    ],\n    \"relatedEntity\": [\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"product_inventory\"\n      },\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"cmdb_ci\"\n      }\n    ],\n    \"relatedParty\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      }\n    ]\n  },\n  {\n    \"@type\": \"TroubleTicket\",\n    \"id\": \"<string>\",\n    \"href\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"lastUpdate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"severity\": \"<string>\",\n    \"status\": \"<string>\",\n    \"ticketType\": \"Case\",\n    \"channel\": {\n      \"name\": \"<string>\"\n    },\n    \"note\": [\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      },\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      }\n    ],\n    \"relatedEntity\": [\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"product\"\n      },\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"asset\"\n      }\n    ],\n    \"relatedParty\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-76e16499-302b-44d9-9e0d-8cb6a72acca0"
+            },
+            {
+              "id": "8e55f6ae-c5d9-42bc-89d9-0a16ee531c4f",
+              "name": "Partial resource returned in response (with pagination).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket?fields=<string>&id=<string>&limit=25&offset=0&severity=<string>&status=<string>&ticketType=Incident",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "query": [
+                    {
+                      "description": "List of fields to return in the response. Invalid fields are ignored.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by sys_id",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Starting index at which to begin retrieving records",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter trouble tickets by severity",
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by status",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by ticket type",
+                      "key": "ticketType",
+                      "value": "Incident"
+                    }
+                  ]
+                }
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Range of content returned in a paginated call",
+                    "type": "text/plain"
+                  },
+                  "key": "Content-Range",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Links to navigate through query results (first, last, next, previous)",
+                    "type": "text/plain"
+                  },
+                  "key": "Link",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Total number of records available on the server",
+                    "type": "text/plain"
+                  },
+                  "key": "X-Total-Count",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"@type\": \"TroubleTicket\",\n    \"id\": \"<string>\",\n    \"href\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"lastUpdate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"severity\": \"<string>\",\n    \"status\": \"<string>\",\n    \"ticketType\": \"Incident\",\n    \"channel\": {\n      \"name\": \"<string>\"\n    },\n    \"note\": [\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      },\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      }\n    ],\n    \"relatedEntity\": [\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"product_inventory\"\n      },\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"cmdb_ci\"\n      }\n    ],\n    \"relatedParty\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      }\n    ]\n  },\n  {\n    \"@type\": \"TroubleTicket\",\n    \"id\": \"<string>\",\n    \"href\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"lastUpdate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"severity\": \"<string>\",\n    \"status\": \"<string>\",\n    \"ticketType\": \"Case\",\n    \"channel\": {\n      \"name\": \"<string>\"\n    },\n    \"note\": [\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      },\n      {\n        \"@type\": \"comments\",\n        \"text\": \"<string>\",\n        \"date\": \"<dateTime>\",\n        \"author\": \"<string>\"\n      }\n    ],\n    \"relatedEntity\": [\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"product\"\n      },\n      {\n        \"@type\": \"relatedEntity\",\n        \"id\": \"<string>\",\n        \"href\": \"<string>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"@referredType\": \"asset\"\n      }\n    ],\n    \"relatedParty\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"@referredType\": \"assigned_to\"\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-8e55f6ae-c5d9-42bc-89d9-0a16ee531c4f"
+            },
+            {
+              "id": "fa4ae652-8343-46e1-bb7e-c49752dba57d",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket?fields=<string>&id=<string>&limit=25&offset=0&severity=<string>&status=<string>&ticketType=Incident",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "query": [
+                    {
+                      "description": "List of fields to return in the response. Invalid fields are ignored.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by sys_id",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Starting index at which to begin retrieving records",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter trouble tickets by severity",
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by status",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by ticket type",
+                      "key": "ticketType",
+                      "value": "Incident"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-fa4ae652-8343-46e1-bb7e-c49752dba57d"
+            },
+            {
+              "id": "cf051048-7e8e-4d03-b3fa-962150d8089a",
+              "name": "Record not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket?fields=<string>&id=<string>&limit=25&offset=0&severity=<string>&status=<string>&ticketType=Incident",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "query": [
+                    {
+                      "description": "List of fields to return in the response. Invalid fields are ignored.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by sys_id",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Starting index at which to begin retrieving records",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter trouble tickets by severity",
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by status",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter trouble tickets by ticket type",
+                      "key": "ticketType",
+                      "value": "Incident"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-cf051048-7e8e-4d03-b3fa-962150d8089a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:31.000Z",
+          "updatedAt": "2026-06-05T15:17:31.000Z",
+          "uid": "35240-5ca80df4-7276-4cba-b152-d17411bb2beb"
+        },
+        {
+          "name": "Servicenow Create a Trouble Ticket",
+          "id": "2b15f17a-2ba8-4f12-9595-3ba556c5f934",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"severity\": \"3\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"ticketType\": \"Incident\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/troubleTicket",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "troubleTicket"
+              ]
+            },
+            "description": "Creates a record in the Case, Incident, or Service Problem Case table."
+          },
+          "response": [
+            {
+              "id": "2e50eede-c9b7-47c3-bcfc-e4589dbb5df6",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"severity\": \"3\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"ticketType\": \"Incident\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"@type\": \"TroubleTicket\",\n  \"id\": \"<string>\",\n  \"href\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"lastUpdate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"status\": \"<string>\",\n  \"ticketType\": \"Service Problem Case\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    },\n    {\n      \"@type\": \"comments\",\n      \"text\": \"<string>\",\n      \"date\": \"<dateTime>\",\n      \"author\": \"<string>\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"@type\": \"relatedEntity\",\n      \"id\": \"<string>\",\n      \"href\": \"<string>\",\n      \"name\": \"<string>\",\n      \"role\": \"<string>\",\n      \"@referredType\": \"cmdb_ci\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"@referredType\": \"assignment_group\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-2e50eede-c9b7-47c3-bcfc-e4589dbb5df6"
+            },
+            {
+              "id": "0ea13c3e-2dbd-43e1-8633-57a78d3d758a",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"severity\": \"3\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"ticketType\": \"Incident\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"work_notes\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"product_inventory\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"customer_contact\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/troubleTicket",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "troubleTicket"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"detail\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:17:31.000Z",
+              "updatedAt": "2026-06-05T15:17:31.000Z",
+              "uid": "35240-0ea13c3e-2dbd-43e1-8633-57a78d3d758a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:17:31.000Z",
+          "updatedAt": "2026-06-05T15:17:31.000Z",
+          "uid": "35240-2b15f17a-2ba8-4f12-9595-3ba556c5f934"
+        }
+      ],
+      "id": "ca7dbd37-f769-43d5-98b2-90b600e96b18",
+      "createdAt": "2026-06-05T15:17:31.000Z",
+      "updatedAt": "2026-06-05T15:17:31.000Z",
+      "uid": "35240-ca7dbd37-f769-43d5-98b2-90b600e96b18"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "instance",
+      "value": "instance"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{instance}}.servicenow.com/api/sn_ind_tsm_sdwan/ticket"
+    }
+  ]
+}
