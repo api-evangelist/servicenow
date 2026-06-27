@@ -1127,81 +1127,78 @@ access: 3rd-Party
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/servicenow/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/servicenow-add-incident-worknote-workflow.yml
-    name: ServiceNow Add Incident Work Note
-    summary: Find an incident by number, read it, then append a work note and reassign it.
-  - url: arazzo/servicenow-assign-open-tasks-workflow.yml
-    name: ServiceNow Assign Open Task
-    summary: Find the oldest unassigned task on a table, claim it, then mark it work in progress.
-  - url: arazzo/servicenow-bulk-import-records-workflow.yml
-    name: ServiceNow Bulk Import Records
-    summary: Insert multiple records into an import set staging table, then verify the first transformed row.
-  - url: arazzo/servicenow-cart-checkout-workflow.yml
-    name: ServiceNow Cart Checkout
-    summary: Add a catalog item to the cart, review the cart contents, then submit the order.
-  - url: arazzo/servicenow-change-add-task-workflow.yml
-    name: ServiceNow Add Task to Change Request
-    summary: Create a change task on a change, list the change's tasks, then update the task.
-  - url: arazzo/servicenow-close-problem-workflow.yml
-    name: ServiceNow Close Problem
-    summary: Find a problem by number, read it, then close it with a resolution code and notes.
-  - url: arazzo/servicenow-create-change-request-then-approve-workflow.yml
-    name: ServiceNow Create and Approve Normal Change
-    summary: Create a normal change request, read it back, then move it through approval.
-  - url: arazzo/servicenow-create-emergency-change-workflow.yml
-    name: ServiceNow Create Emergency Change With Task
-    summary: Create an emergency change request, read it back, then attach an implementation task.
-  - url: arazzo/servicenow-create-incident-then-update-workflow.yml
-    name: ServiceNow Create Incident Then Triage
-    summary: Create an incident via the Table API, read it back, then update its state and assignment.
-  - url: arazzo/servicenow-create-problem-from-incident-workflow.yml
-    name: ServiceNow Create Problem From Incident
-    summary: Read a source incident, open a problem record from it, then link the incident to the problem.
-  - url: arazzo/servicenow-create-trouble-ticket-then-update-workflow.yml
-    name: ServiceNow Create Trouble Ticket Then Update
-    summary: Create a trouble ticket, read it back by id, then update its status and severity.
-  - url: arazzo/servicenow-escalate-trouble-ticket-workflow.yml
-    name: ServiceNow Escalate Trouble Ticket
-    summary: Find an open trouble ticket by type, read it, then raise its severity to escalate.
-  - url: arazzo/servicenow-import-set-load-workflow.yml
-    name: ServiceNow Import Set Load and Verify
-    summary: Insert a record into an import set staging table, then read the transformed target record.
-  - url: arazzo/servicenow-incident-backlog-report-workflow.yml
-    name: ServiceNow Incident Backlog Report
-    summary: Count open incidents grouped by priority, then list the matching backlog records.
-  - url: arazzo/servicenow-incident-with-attachment-workflow.yml
-    name: ServiceNow Incident With Attachment
-    summary: Create an incident, attach a file to it via multipart upload, then confirm the attachment.
-  - url: arazzo/servicenow-link-ci-to-incident-workflow.yml
-    name: ServiceNow Link Configuration Item to Incident
-    summary: Find a CI by name in a CMDB class, fetch its full record, then attach it to an incident.
-  - url: arazzo/servicenow-onboard-contact-workflow.yml
-    name: ServiceNow Onboard Contact
-    summary: Create a CSM contact, fetch it by its new sys_id, then open a welcome incident for it.
-  - url: arazzo/servicenow-order-catalog-item-workflow.yml
-    name: ServiceNow Order Catalog Item
-    summary: Look up a catalog item, read its details, then order it immediately.
-  - url: arazzo/servicenow-publish-knowledge-article-workflow.yml
-    name: ServiceNow Publish Knowledge Article
-    summary: Create a knowledge article draft on the kb_knowledge table, read it, then publish it.
-  - url: arazzo/servicenow-resolve-incident-workflow.yml
-    name: ServiceNow Resolve Incident
-    summary: Find an open incident by number, read it, then resolve it with a close code and notes.
-  - url: arazzo/servicenow-standard-change-from-template-workflow.yml
-    name: ServiceNow Standard Change From Template
-    summary: List standard change models, create a change from a template, then read it back.
-  - url: arazzo/servicenow-table-record-crud-workflow.yml
-    name: ServiceNow Table Record Lifecycle
-    summary: Exercise the full Table API CRUD lifecycle — create, read, update, then delete a record.
-  - url: arazzo/servicenow-update-ci-attributes-workflow.yml
-    name: ServiceNow Update Configuration Item Attributes
-    summary: List CIs in a class, fetch one's full record, then update its attributes via the Table API.
-  - url: arazzo/servicenow-upsert-contact-workflow.yml
-    name: ServiceNow Upsert Contact
-    summary: Find a CSM contact by email and update it if it exists, otherwise create it.
+- type: Arazzo
+  url: arazzo/servicenow-add-incident-worknote-workflow.yml
+  name: ServiceNow Add Incident Work Note
+- type: Arazzo
+  url: arazzo/servicenow-assign-open-tasks-workflow.yml
+  name: ServiceNow Assign Open Task
+- type: Arazzo
+  url: arazzo/servicenow-bulk-import-records-workflow.yml
+  name: ServiceNow Bulk Import Records
+- type: Arazzo
+  url: arazzo/servicenow-cart-checkout-workflow.yml
+  name: ServiceNow Cart Checkout
+- type: Arazzo
+  url: arazzo/servicenow-change-add-task-workflow.yml
+  name: ServiceNow Add Task to Change Request
+- type: Arazzo
+  url: arazzo/servicenow-close-problem-workflow.yml
+  name: ServiceNow Close Problem
+- type: Arazzo
+  url: arazzo/servicenow-create-change-request-then-approve-workflow.yml
+  name: ServiceNow Create and Approve Normal Change
+- type: Arazzo
+  url: arazzo/servicenow-create-emergency-change-workflow.yml
+  name: ServiceNow Create Emergency Change With Task
+- type: Arazzo
+  url: arazzo/servicenow-create-incident-then-update-workflow.yml
+  name: ServiceNow Create Incident Then Triage
+- type: Arazzo
+  url: arazzo/servicenow-create-problem-from-incident-workflow.yml
+  name: ServiceNow Create Problem From Incident
+- type: Arazzo
+  url: arazzo/servicenow-create-trouble-ticket-then-update-workflow.yml
+  name: ServiceNow Create Trouble Ticket Then Update
+- type: Arazzo
+  url: arazzo/servicenow-escalate-trouble-ticket-workflow.yml
+  name: ServiceNow Escalate Trouble Ticket
+- type: Arazzo
+  url: arazzo/servicenow-import-set-load-workflow.yml
+  name: ServiceNow Import Set Load and Verify
+- type: Arazzo
+  url: arazzo/servicenow-incident-backlog-report-workflow.yml
+  name: ServiceNow Incident Backlog Report
+- type: Arazzo
+  url: arazzo/servicenow-incident-with-attachment-workflow.yml
+  name: ServiceNow Incident With Attachment
+- type: Arazzo
+  url: arazzo/servicenow-link-ci-to-incident-workflow.yml
+  name: ServiceNow Link Configuration Item to Incident
+- type: Arazzo
+  url: arazzo/servicenow-onboard-contact-workflow.yml
+  name: ServiceNow Onboard Contact
+- type: Arazzo
+  url: arazzo/servicenow-order-catalog-item-workflow.yml
+  name: ServiceNow Order Catalog Item
+- type: Arazzo
+  url: arazzo/servicenow-publish-knowledge-article-workflow.yml
+  name: ServiceNow Publish Knowledge Article
+- type: Arazzo
+  url: arazzo/servicenow-resolve-incident-workflow.yml
+  name: ServiceNow Resolve Incident
+- type: Arazzo
+  url: arazzo/servicenow-standard-change-from-template-workflow.yml
+  name: ServiceNow Standard Change From Template
+- type: Arazzo
+  url: arazzo/servicenow-table-record-crud-workflow.yml
+  name: ServiceNow Table Record Lifecycle
+- type: Arazzo
+  url: arazzo/servicenow-update-ci-attributes-workflow.yml
+  name: ServiceNow Update Configuration Item Attributes
+- type: Arazzo
+  url: arazzo/servicenow-upsert-contact-workflow.yml
+  name: ServiceNow Upsert Contact
 - url: json-ld/servicenow-context.jsonld
   name: ServiceNow JSON-LD Context
   type: JSONLD
@@ -1291,7 +1288,7 @@ common:
   type: GitHubRepository
 - url: https://www.npmjs.com/package/@servicenow/sdk
   name: ServiceNow SDK on npm
-  type: SDK
+  type: SDKs
 - url: >-
     https://www.servicenow.com/docs/bundle/yokohama-application-development/page/build/servicenow-sdk/concept/servicenow-sdk-landing.html
   name: ServiceNow SDK Documentation
@@ -1301,7 +1298,7 @@ common:
   type: StackOverflow
 - url: https://developer.servicenow.com/dev.do
   name: Developer Portal Sign Up
-  type: SignUp
+  type: Signup
 - url: https://developer.servicenow.com/dev.do
   name: Developer Portal Login
   type: Login
@@ -1325,7 +1322,7 @@ common:
   type: GitHubRepository
 - url: https://pypi.org/project/pysnc/
   name: PySNC on PyPI
-  type: SDK
+  type: SDKs
 - url: https://servicenow.github.io/PySNC/
   name: PySNC Documentation
   type: Documentation
@@ -1438,7 +1435,7 @@ common:
     description: Cloud resource discovery and CMDB synchronization for AWS infrastructure management.
 - name: Agent Skills
   url: https://github.com/ServiceNow/saai-skill-feedback
-  type: AgentSkill
+  type: AgentSkills
 created: '2025-01-08'
 modified: '2026-05-19'
 position: Consuming

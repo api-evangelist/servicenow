@@ -5,7 +5,7 @@
       "source": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
       "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
       "title": "",
-      "saved": 3,
+      "saved": 4,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 38,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 44,
+  "fetched": "2026-06-27T12:03:07Z"
 }
