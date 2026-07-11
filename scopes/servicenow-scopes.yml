@@ -1,0 +1,59 @@
+generated: '2026-07-11'
+method: derived
+docs: https://www.servicenow.com/docs/r/platform-security/authentication/rest-api-auth-scope.html
+note: ServiceNow does not publish a catalog of OAuth scopes — tokens use the default
+  useraccount scope with access governed by the user's roles and ACLs, and any granular
+  REST API Auth Scopes are custom-defined per instance by administrators
+  (https://www.servicenow.com/docs/r/platform-security/authentication/rest-api-auth-scope.html).
+source: openapi/servicenow-aggregate-api-openapi.yml, openapi/servicenow-attachment-api-openapi.yml,
+  openapi/servicenow-change-management-api-openapi.yml, openapi/servicenow-cmdb-instance-api-openapi.yml,
+  openapi/servicenow-import-set-api-openapi.yml, openapi/servicenow-service-catalog-api-openapi.yml,
+  openapi/servicenow-table-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/servicenow-aggregate-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-attachment-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-change-management-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-cmdb-instance-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-import-set-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-service-catalog-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+- name: oauth2
+  source: openapi/servicenow-table-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{instance}.service-now.com/oauth_auth.do
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider. Requires a registered
+    OAuth application on the instance.
+scopes: []
