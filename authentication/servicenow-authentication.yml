@@ -1,0 +1,57 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/contact-api-openapi.yaml, openapi/servicenow-aggregate-api-openapi.yml, openapi/servicenow-attachment-api-openapi.yml,
+  openapi/servicenow-change-management-api-openapi.yml, openapi/servicenow-cmdb-instance-api-openapi.yml,
+  openapi/servicenow-import-set-api-openapi.yml, openapi/servicenow-service-catalog-api-openapi.yml,
+  openapi/servicenow-table-api-openapi.yml, openapi/trouble-ticket-openapi.yaml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - password
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration
+    role.
+  sources:
+  - openapi/contact-api-openapi.yaml
+  - openapi/servicenow-aggregate-api-openapi.yml
+  - openapi/servicenow-attachment-api-openapi.yml
+  - openapi/servicenow-change-management-api-openapi.yml
+  - openapi/servicenow-cmdb-instance-api-openapi.yml
+  - openapi/servicenow-import-set-api-openapi.yml
+  - openapi/servicenow-service-catalog-api-openapi.yml
+  - openapi/servicenow-table-api-openapi.yml
+  - openapi/trouble-ticket-openapi.yaml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+    scopes: 0
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+  sources:
+  - openapi/servicenow-aggregate-api-openapi.yml
+  - openapi/servicenow-attachment-api-openapi.yml
+  - openapi/servicenow-change-management-api-openapi.yml
+  - openapi/servicenow-cmdb-instance-api-openapi.yml
+  - openapi/servicenow-import-set-api-openapi.yml
+  - openapi/servicenow-service-catalog-api-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{instance}.service-now.com/oauth_auth.do
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+    scopes: 0
+  - flow: password
+    tokenUrl: https://{instance}.service-now.com/oauth_token.do
+    scopes: 0
+  description: OAuth 2.0 authentication using ServiceNow's OAuth provider. Requires a registered
+    OAuth application on the instance.
+  sources:
+  - openapi/servicenow-table-api-openapi.yml
