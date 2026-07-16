@@ -1,0 +1,32 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  ServiceNow family release notes, docs versioning bundles, and status page
+  referenced in apis.yml.
+versioning:
+  scheme: named-family-release
+  cadence: biannual
+  description: >-
+    ServiceNow ships two named platform family releases per year (alphabetical
+    city names). API reference documentation is bundled per release
+    (e.g. yokohama-api-reference, xanadu-api-reference). Individual REST APIs
+    also carry a path version where applicable (Batch v1, Change sn_chg_rest/v1,
+    TM Forum Open APIs v4).
+  recent_families: [Xanadu, Yokohama, Zurich]
+  current: Zurich
+  docs: https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html
+deprecation:
+  policy: >-
+    Deprecations are communicated through per-family release notes and product
+    documentation. ServiceNow does not publish RFC 8594 Sunset/Deprecation
+    response headers on inbound REST APIs.
+  sunset_header: false
+  deprecation_header: false
+  release_notes: https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html
+support:
+  status_page: https://status.servicenow.com
+  support: https://support.servicenow.com
+  sla: >-
+    Uptime/availability commitments are governed by the customer's ServiceNow
+    subscription agreement rather than a public SLA page.
+deprecated_operations: []

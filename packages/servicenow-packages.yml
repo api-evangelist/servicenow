@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  npm (@servicenow/sdk), PyPI (pysnc), plus GitHub ServiceNow/sdk and
+  ServiceNow/PySNC repositories referenced in apis.yml
+note: >-
+  ServiceNow's REST APIs are consumed over plain HTTP against a customer
+  instance (https://{instance}.service-now.com), so there is no per-API generated
+  client. The first-party packages below are the platform SDK (application
+  authoring / Fluent) and the community-facing Python GlideRecord client, both
+  published by ServiceNow.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@servicenow/sdk"
+    url: https://www.npmjs.com/package/@servicenow/sdk
+    install: npm install @servicenow/sdk
+    version: 4.8.1
+    official: true
+    description: >-
+      Official ServiceNow SDK. Core libraries and the now-sdk CLI for authoring
+      Now Platform applications with metadata-as-code using the ServiceNow
+      Fluent language. From v4.6.0 the package also ships ServiceNow AI agent
+      skills.
+    repo: https://github.com/ServiceNow/sdk
+    docs: https://servicenow.github.io/sdk/
+  - language: python
+    registry: pypi
+    name: pysnc
+    url: https://pypi.org/project/pysnc/
+    install: pip install pysnc
+    official: true
+    description: >-
+      PySNC — an official ServiceNow Python library that provides a GlideRecord
+      API for querying, creating, updating, and deleting records in a
+      ServiceNow instance over the Table API.
+    repo: https://github.com/ServiceNow/PySNC
+    docs: https://servicenow.github.io/PySNC/

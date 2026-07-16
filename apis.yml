@@ -1133,6 +1133,57 @@ common:
   url: authentication/servicenow-authentication.yml
 - type: OAuthScopes
   url: scopes/servicenow-scopes.yml
+- type: Packages
+  url: packages/servicenow-packages.yml
+- type: CLI
+  url: cli/servicenow-cli.yml
+- type: MCPServer
+  url: mcp/servicenow-mcp.yml
+- type: LLMsTxt
+  url: llms/servicenow-llms.txt
+- type: Conformance
+  url: conformance/servicenow-conformance.yml
+- type: ErrorCatalog
+  url: errors/servicenow-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/servicenow-lifecycle.yml
+- type: Conventions
+  url: conventions/servicenow-conventions.yml
+- type: ChangeLog
+  url: changelog/servicenow-changelog.yml
+- type: DataModel
+  url: data-model/servicenow-data-model.yml
+- type: Sandbox
+  url: sandbox/servicenow-sandbox.yml
+- type: TrustCenter
+  url: security/servicenow-trust-center.yml
+- type: Overlay
+  url: overlays/servicenow-table-api-overlay.yaml
+  name: ServiceNow Table API Overlay
+- type: Overlay
+  url: overlays/servicenow-aggregate-api-overlay.yaml
+  name: ServiceNow Aggregate API Overlay
+- type: Overlay
+  url: overlays/servicenow-attachment-api-overlay.yaml
+  name: ServiceNow Attachment API Overlay
+- type: Overlay
+  url: overlays/servicenow-change-management-api-overlay.yaml
+  name: ServiceNow Change Management API Overlay
+- type: Overlay
+  url: overlays/servicenow-cmdb-instance-api-overlay.yaml
+  name: ServiceNow CMDB Instance API Overlay
+- type: Overlay
+  url: overlays/servicenow-import-set-api-overlay.yaml
+  name: ServiceNow Import Set API Overlay
+- type: Overlay
+  url: overlays/servicenow-service-catalog-api-overlay.yaml
+  name: ServiceNow Service Catalog API Overlay
+- type: Overlay
+  url: overlays/servicenow-contact-api-overlay.yaml
+  name: ServiceNow Contact API Overlay
+- type: Overlay
+  url: overlays/servicenow-trouble-ticket-overlay.yaml
+  name: ServiceNow Trouble Ticket API Overlay
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/servicenow/overview
 - type: Arazzo
@@ -1445,7 +1496,7 @@ common:
   url: https://github.com/ServiceNow/saai-skill-feedback
   type: AgentSkills
 created: '2025-01-08'
-modified: '2026-05-19'
+modified: '2026-06-20'
 position: Consuming
 segments:
 - Workflows

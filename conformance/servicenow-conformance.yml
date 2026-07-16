@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/ securitySchemes and tags, and searched against
+  ServiceNow docs for TM Forum Open API and OAuth compliance claims.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: openapi securitySchemes declare type oauth2 (password/authorizationCode flows) across specs
+  - id: oidc
+    conforms: false
+    evidence: no openIdConnect scheme; ServiceNow acts as OIDC/SAML relying party, not an OIDC provider for these REST APIs
+  - id: http-basic
+    conforms: true
+    evidence: basicAuth http/basic scheme declared across specs
+  - id: rest
+    conforms: true
+    evidence: resource-oriented JSON over HTTP with standard verbs
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a ServiceNow envelope {"error":{"message","detail"},"status"}, not application/problem+json
+  - id: pagination-offset
+    conforms: true
+    evidence: sysparm_limit / sysparm_offset parameters plus Link header (see conventions/servicenow-conventions.yml)
+  - id: odata
+    conforms: false
+  - id: json-api
+    conforms: false
+  - id: scim2
+    conforms: false
+    evidence: user/role provisioning is via the platform, not a SCIM 2.0 endpoint in these specs
+  - id: tmforum-open-api
+    conforms: true
+    evidence: >-
+      Multiple APIs implement TM Forum Open API specifications — Trouble Ticket (TMF621),
+      Product Catalog (TMF620), Service Catalog (TMF633), Product Ordering (TMF622),
+      Service Ordering (TMF641), Resource Inventory (TMF639), Product Inventory (TMF637)
+  - id: graphql
+    conforms: true
+    evidence: ServiceNow GraphQL API framework (graphql/servicenow-graphql.md)
+  - id: asyncapi
+    conforms: true
+    evidence: Event Management topic messaging modeled as asyncapi/servicenow-events-asyncapi.yml
+  - id: idempotency-keys
+    conforms: false
+    evidence: no Idempotency-Key header; PUT/PATCH by sys_id provide natural idempotency for updates

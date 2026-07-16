@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+probe: false
+source: >-
+  ServiceNow Trust & Compliance Center and TrustShare portal (verified via web
+  search of servicenow.com trust/compliance pages; direct fetch is bot-blocked).
+url: https://www.servicenow.com/company/trust.html
+trustshare: https://trust.servicenow.com/
+certifications_page: https://trust.servicenow.com/certifications
+compliance_page: https://www.servicenow.com/company/trust/compliance.html
+certifications:
+  - SOC 2 Type II
+  - ISO 27001:2022
+  - ISO 27017
+  - ISO 27018
+  - FedRAMP (High P-ATO, first achieved 2019)
+  - IRAP
+notes: >-
+  ServiceNow has been ISO/IEC 27001 certified since 2012. A separate SOC 2 Type 2
+  attestation covers the ServiceNow AI services environment (GenAI and
+  conventional ML stacks). The TrustShare portal provides access to compliance
+  reports, security advisories, ServiceNow CVEs, and instance security best
+  practices.
+evidence:
+  - source: https://trust.servicenow.com/
+    kind: trust-portal
+    keywords: [trustshare, certifications, soc 2, iso 27001, fedramp]
+  - source: https://www.servicenow.com/company/trust/compliance.html
+    kind: compliance-page

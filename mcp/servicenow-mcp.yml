@@ -1,0 +1,64 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: >-
+  https://www.servicenow.com/docs/r/intelligent-experiences/mcp-client.html and
+  ServiceNow MCP Server Console launch (GenAI Innovation Lab / Zurich release)
+note: >-
+  ServiceNow provides native Model Context Protocol support as a first-party
+  platform capability introduced with the Zurich release. The Now Platform acts
+  as both an MCP consumer (the MCP Client, connecting to external tools) and an
+  MCP provider (the MCP Server Console, exposing ServiceNow capabilities to
+  external AI agents). MCP servers are hosted per customer instance rather than
+  at a single global URL, so no fixed public endpoint is published. The first
+  set of exposed tools are Now Assist Skills, which are governed for AI use.
+  The tools[] list below is a DERIVED candidate mapping from the REST operations
+  captured in this repo's OpenAPI, useful as a scripted-REST/Table-API MCP
+  surface; it is not the authoritative ServiceNow-published tool set.
+server:
+  name: servicenow
+  vendor: ServiceNow
+  transport: http
+  hosting: per-instance
+  url: null
+  console_docs: >-
+    https://www.servicenow.com/community/product-launch-blogs/bring-the-servicenow-ai-platform-to-any-employee-experience-with/ba-p/3397470
+  client_docs: https://www.servicenow.com/docs/r/intelligent-experiences/mcp-client.html
+tools_method: derived
+tools:
+  - name: list_table_records
+    description: List records from a ServiceNow table.
+    source_operation: openapi/servicenow-table-api-openapi.yml#listRecords
+  - name: create_table_record
+    description: Create a record in a ServiceNow table.
+    source_operation: openapi/servicenow-table-api-openapi.yml#createRecord
+  - name: get_table_record
+    description: Retrieve a single record by sys_id.
+    source_operation: openapi/servicenow-table-api-openapi.yml#getRecord
+  - name: update_table_record
+    description: Update a record by sys_id.
+    source_operation: openapi/servicenow-table-api-openapi.yml#updateRecord
+  - name: delete_table_record
+    description: Delete a record by sys_id.
+    source_operation: openapi/servicenow-table-api-openapi.yml#deleteRecord
+  - name: get_aggregate_stats
+    description: Compute aggregate statistics against a table.
+    source_operation: openapi/servicenow-aggregate-api-openapi.yml#getAggregateStats
+  - name: create_normal_change
+    description: Create a normal change request.
+    source_operation: openapi/servicenow-change-management-api-openapi.yml#createNormalChange
+  - name: list_normal_changes
+    description: List normal change requests.
+    source_operation: openapi/servicenow-change-management-api-openapi.yml#listNormalChanges
+  - name: get_cmdb_instance
+    description: Retrieve a configuration item from the CMDB.
+    source_operation: openapi/servicenow-cmdb-instance-api-openapi.yml#getCmdbInstance
+  - name: create_trouble_ticket
+    description: Create a TM Forum trouble ticket (case/incident).
+    source_operation: openapi/trouble-ticket-openapi.yaml#createTroubleTicket
+  - name: order_catalog_item
+    description: Order a service catalog item.
+    source_operation: openapi/servicenow-service-catalog-api-openapi.yml#orderItemNow
+  - name: create_contact
+    description: Create a CSM contact.
+    source_operation: openapi/contact-api-openapi.yaml#createContact

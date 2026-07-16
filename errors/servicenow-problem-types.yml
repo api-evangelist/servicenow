@@ -1,0 +1,56 @@
+generated: '2026-06-20'
+method: derived
+format: servicenow-error-envelope
+source: >-
+  Derived from HTTP 4xx/5xx responses across openapi/ specs; envelope confirmed
+  against ServiceNow inbound REST API error documentation.
+note: >-
+  ServiceNow inbound REST APIs do not use RFC 9457 application/problem+json.
+  Errors are returned in a ServiceNow envelope. The Table API and most platform
+  APIs also support partial success on bulk/pagination via 206 Partial Content.
+envelope:
+  media_type: application/json
+  shape: |
+    {
+      "error": {
+        "message": "Human-readable summary of the error.",
+        "detail": "Detailed information about the error (may be null)."
+      },
+      "status": "failure"
+    }
+  fields:
+    - path: error.message
+      description: Human-readable error message.
+    - path: error.detail
+      description: Detailed information about the error.
+    - path: status
+      description: Overall request status, "failure" on error.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Malformed request — invalid encoded query, bad field name, or invalid body/JSON.
+    remediation: Validate sysparm_query syntax, field names, and the JSON payload.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid authentication (Basic credentials or OAuth token).
+    remediation: Provide valid Basic auth or a non-expired OAuth 2.0 bearer token.
+  - status: 403
+    title: Forbidden
+    meaning: Authenticated user lacks the required role or ACL for the table/record/operation.
+    remediation: Grant the required role (e.g. itil, csm_ws_integration, app_service_admin) or adjust ACLs.
+  - status: 404
+    title: Not Found
+    meaning: The requested record (sys_id), table, or endpoint does not exist or is not accessible.
+    remediation: Verify the table name, sys_id, and that the relevant plugin is activated.
+  - status: 406
+    title: Not Acceptable
+    meaning: Requested response format not supported by the endpoint.
+    remediation: Request application/json (or the documented content type).
+  - status: 500
+    title: Internal Server Error
+    meaning: Unexpected server-side error on the instance.
+    remediation: Retry; if persistent, review instance logs / open a ServiceNow support case.
+partial_success:
+  - status: 206
+    title: Partial Content
+    meaning: Used for paginated Table API list responses; use the Link header to page.

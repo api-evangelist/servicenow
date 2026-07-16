@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ServiceNow Trouble Ticket Open API
+  version: 1.0.0
+# Provenance
+generated: '2026-06-20'
+method: generated
+source: openapi/trouble-ticket-openapi.yaml
+extends: openapi/trouble-ticket-openapi.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 4
+      x-apievangelist-curated: true
+      x-apievangelist-provider: servicenow
+      x-apievangelist-catalog: https://apis.io/provider/servicenow
+  - target: $.info
+    description: Record that this API is part of the curated API Evangelist ServiceNow catalog.
+    update:
+      x-artifacts:
+        authentication: authentication/servicenow-authentication.yml
+        errors: errors/servicenow-problem-types.yml
+        conventions: conventions/servicenow-conventions.yml
+        lifecycle: lifecycle/servicenow-lifecycle.yml
+        data_model: data-model/servicenow-data-model.yml

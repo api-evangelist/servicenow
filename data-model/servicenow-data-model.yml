@@ -1,0 +1,111 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/ component schemas, reference (sys_id) fields, and path
+  structure across the ServiceNow catalog; entity/table names confirmed against
+  ServiceNow docs.
+render: subway/servicenow-subway-map.svg
+note: >-
+  ServiceNow is table-driven: every record is a row in a table keyed by a 32-char
+  hexadecimal sys_id, and reference fields hold the sys_id of a related record.
+  Relationships below are the salient cross-entity links implied by the specs.
+id_convention:
+  key: sys_id
+  format: 32-character hexadecimal GUID
+  reference_fields: >-
+    A field whose value is another record's sys_id (optionally dot-walked and,
+    with sysparm_display_value, returned with a display value + link).
+entities:
+  - name: record
+    table: any
+    api: openapi/servicenow-table-api-openapi.yml
+    description: Generic row in any ServiceNow table (incident, problem, etc.).
+    relationships:
+      - has_many: attachment
+        via: table_sys_id
+  - name: attachment
+    table: sys_attachment
+    api: openapi/servicenow-attachment-api-openapi.yml
+    relationships:
+      - belongs_to: record
+        via: table_sys_id + table_name
+  - name: change_request
+    table: change_request
+    api: openapi/servicenow-change-management-api-openapi.yml
+    relationships:
+      - has_many: change_task
+        via: change_request
+  - name: change_task
+    table: change_task
+    api: openapi/servicenow-change-management-api-openapi.yml
+    relationships:
+      - belongs_to: change_request
+        via: change_request
+  - name: cmdb_ci
+    table: cmdb_ci
+    api: openapi/servicenow-cmdb-instance-api-openapi.yml
+    relationships:
+      - has_many: cmdb_ci
+        via: relationship (parent/child CI relationships)
+  - name: contact
+    table: customer_contact
+    api: openapi/contact-api-openapi.yaml
+    relationships:
+      - belongs_to: account
+        via: account
+  - name: trouble_ticket
+    table: sn_customerservice_case / incident
+    api: openapi/trouble-ticket-openapi.yaml
+    relationships:
+      - has_many: note
+        via: note
+      - has_many: related_party
+        via: relatedParty
+      - has_many: related_entity
+        via: relatedEntity
+      - has_many: channel
+        via: channel
+  - name: catalog
+    table: sc_catalog
+    api: openapi/servicenow-service-catalog-api-openapi.yml
+    relationships:
+      - has_many: category
+        via: catalog
+  - name: category
+    table: sc_category
+    relationships:
+      - belongs_to: catalog
+        via: catalog
+      - has_many: catalog_item
+        via: category
+  - name: catalog_item
+    table: sc_cat_item
+    relationships:
+      - belongs_to: category
+        via: category
+      - has_many: catalog_variable
+        via: item
+  - name: cart
+    table: sc_cart
+    relationships:
+      - has_many: cart_item
+        via: cart
+  - name: cart_item
+    table: sc_cart_item
+    relationships:
+      - belongs_to: cart
+        via: cart
+      - belongs_to: catalog_item
+        via: item
+  - name: order
+    table: sc_request
+    description: Result of submitting a cart or ordering an item now.
+    relationships:
+      - has_many: cart_item
+        via: request
+  - name: import_set
+    table: sys_import_set_row
+    api: openapi/servicenow-import-set-api-openapi.yml
+    relationships:
+      - belongs_to: record
+        via: transform map target (sys_target_sys_id)

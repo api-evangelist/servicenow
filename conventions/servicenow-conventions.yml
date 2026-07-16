@@ -1,0 +1,69 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  ServiceNow inbound REST API documentation, and derived from openapi/ parameters
+  and response schemas in this repo.
+base_url: https://{instance}.service-now.com
+authentication:
+  styles: [http-basic, oauth2]
+  detail: authentication/servicenow-authentication.yml
+  notes: >-
+    Basic auth (instance user + password) or OAuth 2.0 bearer tokens
+    (password / authorization_code flows against {instance}/oauth_token.do).
+    Access is governed by the user's roles and ACLs; scopes are role-driven,
+    not a published scope catalog (see scopes/servicenow-scopes.yml).
+response_envelope:
+  success_shape: '{ "result": <object|array> }'
+  detail: >-
+    Successful responses wrap the payload in a top-level "result" key.
+    Aggregate responses nest stats under result.stats.
+error_envelope:
+  shape: '{ "error": { "message": ..., "detail": ... }, "status": "failure" }'
+  detail: errors/servicenow-problem-types.yml
+pagination:
+  style: offset
+  params:
+    limit: sysparm_limit
+    offset: sysparm_offset
+  response_signals:
+    - Link header (rel="first"/"prev"/"next"/"last")
+    - X-Total-Count header (when sysparm_no_count is not set)
+    - 206 Partial Content for paged list responses
+  suppress: sysparm_suppress_pagination_header
+query_filtering:
+  encoded_query: sysparm_query
+  description: >-
+    Records are filtered with a ServiceNow encoded query string
+    (e.g. active=true^priority=1^ORDERBYDESCsys_created_on).
+field_selection:
+  param: sysparm_fields
+  description: Comma-separated list of fields to return.
+display_values:
+  param: sysparm_display_value
+  values: [true, false, all]
+  description: >-
+    Controls whether reference/choice fields are returned as raw values,
+    display values, or both.
+reference_links:
+  param: sysparm_exclude_reference_link
+  description: Omit dot-walked reference link objects when true.
+view:
+  param: sysparm_view
+  description: Return the field set defined by a named form/list view.
+idempotency:
+  header: null
+  detail: >-
+    No Idempotency-Key header. Updates target a specific record by sys_id
+    (PUT/PATCH), which is naturally idempotent; POST creates are not.
+request_tracing:
+  header: null
+  detail: >-
+    No standard client request-id echo header; correlation is via the created
+    record's sys_id and instance transaction logs.
+versioning:
+  detail: lifecycle/servicenow-lifecycle.yml
+rate_limiting:
+  detail: rate-limits/servicenow-rate-limits.yml
+  notes: >-
+    Inbound REST API rate limiting is configured per instance by administrators
+    (rules by user/role/endpoint); limit responses return HTTP 429.

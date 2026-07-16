@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://www.servicenow.com/docs/r/application-development/servicenow-sdk/install-servicenow-sdk.html
+  and https://github.com/ServiceNow/sdk
+name: now-sdk
+description: >-
+  The ServiceNow SDK ships a command-line interface, now-sdk, that handles
+  authentication, initialization / conversion of applications, metadata
+  transformation, building, installation, and direct instance queries. The
+  binary is distributed inside the @servicenow/sdk npm package (see
+  packages/servicenow-packages.yml).
+binary_package: "@servicenow/sdk"
+install:
+  - method: npm
+    command: npm install @servicenow/sdk
+  - method: npx
+    command: npx now-sdk <command>
+docs: https://servicenow.github.io/sdk/
+commands:
+  - name: now-sdk auth
+    group: authentication
+    description: Authenticate the SDK against a ServiceNow instance.
+  - name: now-sdk init
+    group: project
+    description: Initialize a new SDK application project (Fluent metadata-as-code).
+  - name: now-sdk convert
+    group: project
+    description: Convert an existing scoped application into an SDK project.
+  - name: now-sdk transform
+    group: build
+    description: Transform application metadata for build.
+  - name: now-sdk build
+    group: build
+    description: Transpile the SDK project and write output artifacts.
+  - name: now-sdk install
+    group: deploy
+    description: Deploy the most recent build output to the target instance.
+  - name: now-sdk query
+    group: data
+    description: Query the connected ServiceNow instance directly from the terminal.
+  - name: now-sdk upgrade
+    group: maintenance
+    description: Upgrade the SDK / project dependencies.
+key_flows:
+  - name: Author and deploy an app
+    steps: [now-sdk auth, now-sdk init, now-sdk build, now-sdk install]
+  - name: Query instance data from the terminal
+    steps: [now-sdk auth, now-sdk query]

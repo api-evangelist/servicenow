@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  ServiceNow family release notes
+  (https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html)
+scheme: named-family-release
+cadence: biannual
+current: Zurich
+docs: https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html
+note: >-
+  ServiceNow versions the whole Now Platform by named city releases (two per
+  year), not per-API semver. Exact GA dates are not asserted here to avoid
+  fabrication; the release-notes bundle is the source of truth. Only the recent
+  family window is captured.
+entries:
+  - version: Zurich
+    type: platform-family-release
+    highlights:
+      - Native Model Context Protocol (MCP) support — instance as MCP client and provider (MCP Server Console)
+      - Now Assist Skills exposed as governed MCP tools
+    reference: openapi/contact-api-openapi.yaml, openapi/trouble-ticket-openapi.yaml (info.version Zurich)
+  - version: Yokohama
+    type: platform-family-release
+    highlights:
+      - Current bundled API reference (yokohama-api-reference) used across most specs in this catalog
+    reference: apis.yml Documentation links
+  - version: Xanadu
+    type: platform-family-release
+    highlights:
+      - Prior API reference bundle (xanadu-api-reference) referenced in several APIReference links
+    reference: apis.yml APIReference links

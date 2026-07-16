@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.servicenow.com (Personal Developer Instance program) and
+  ServiceNow developer program documentation.
+note: >-
+  ServiceNow is not a payments provider, so there are no test cards or magic
+  test values. Its testing surface is the Personal Developer Instance (PDI): a
+  free, full, isolated ServiceNow instance provisioned per developer account
+  from the Developer Portal. There is no separate test-vs-live key prefix —
+  every instance (dev or production) is reached at
+  https://{instance}.service-now.com and authenticated the same way.
+personal_developer_instance:
+  name: Personal Developer Instance (PDI)
+  url: https://developer.servicenow.com
+  signup: https://developer.servicenow.com/dev.do
+  description: >-
+    Request a free personal developer instance to build and test integrations
+    against a real ServiceNow platform release.
+  characteristics:
+    - Full isolated instance at https://{instance}.service-now.com
+    - Default admin credentials set at provisioning; instance name is assigned
+    - Reclaimed after ~10 days of inactivity (must be kept active by activity or reservation)
+    - Can be reset/rebuilt from the Developer Portal
+    - Backup/restore of a PDI is supported (see blogs/2026-07-10-how-to-backup-your-personal-developer-instance-pdi.md)
+  test_data:
+    - PDIs ship with ServiceNow demo/sample data sets that can be loaded for testing
+  auth_note: >-
+    Use Basic auth or configure an OAuth 2.0 application registry inside the PDI
+    (System OAuth > Application Registry) exactly as in production.
