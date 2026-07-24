@@ -1,55 +1,51 @@
 openapi: 3.1.0
 info:
-  title: ServiceNow Attachment API
-  description: >-
-    The ServiceNow Attachment API enables uploading, retrieving, and deleting
-    file attachments associated with records in ServiceNow tables. It supports
-    uploading files via multipart form-data or binary streams and allows file
-    sizes up to 1024 MB by default. Attachments can be queried by table name,
-    record sys_id, or file metadata.
-  version: 'Yokohama'
+  title: ServiceNow Contact Aggregate Statistics Attachments API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
+
+
+    In addition, you can generate new social media profile records when creating a contact.
+
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
+  version: Zurich
   contact:
-    name: ServiceNow Support
-    url: https://support.servicenow.com
-  termsOfService: https://www.servicenow.com/terms-of-use.html
-externalDocs:
-  description: ServiceNow Attachment API Documentation
-  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_AttachmentAPI.html
+    name: ServiceNow
+    url: https://docs.servicenow.com
+  x-namespace: now
 servers:
-- url: https://{instance}.service-now.com/api/now
-  description: ServiceNow Instance
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
   variables:
     instance:
       default: instance
       description: Your ServiceNow instance name
-tags:
-- name: Attachments
-  description: >-
-    Operations for uploading, retrieving, listing, and deleting file
-    attachments on ServiceNow records.
 security:
 - basicAuth: []
-- oauth2: []
+tags:
+- name: Attachments
+  description: Operations for uploading, retrieving, listing, and deleting file attachments on ServiceNow records.
 paths:
   /attachment:
     get:
       operationId: listAttachments
       summary: Servicenow List Attachments
-      description: >-
-        Retrieves metadata for file attachments. Supports query filtering by
-        table name, record sys_id, file name, and other attachment attributes.
+      description: Retrieves metadata for file attachments. Supports query filtering by table name, record sys_id, file name, and other attachment attributes.
       tags:
       - Attachments
       parameters:
       - name: sysparm_query
         in: query
         required: false
-        description: >-
-          Encoded query string to filter attachments. Common fields include
-          table_name, table_sys_id, file_name, and content_type.
+        description: Encoded query string to filter attachments. Common fields include table_name, table_sys_id, file_name, and content_type.
         schema:
           type: string
-        example: 'table_name=incident^table_sys_id=abc123def456'
+        example: table_name=incident^table_sys_id=abc123def456
       - name: sysparm_limit
         in: query
         required: false
@@ -70,8 +66,7 @@ paths:
         example: 10
       responses:
         '200':
-          description: >-
-            Successful response returning attachment metadata records.
+          description: Successful response returning attachment metadata records.
           content:
             application/json:
               schema:
@@ -124,9 +119,7 @@ paths:
     get:
       operationId: getAttachment
       summary: Servicenow Retrieve Attachment Metadata
-      description: >-
-        Retrieves metadata for a single attachment by its sys_id. Does not
-        return the binary file content; use the file download endpoint instead.
+      description: Retrieves metadata for a single attachment by its sys_id. Does not return the binary file content; use the file download endpoint instead.
       tags:
       - Attachments
       parameters:
@@ -197,9 +190,7 @@ paths:
     delete:
       operationId: deleteAttachment
       summary: Servicenow Delete an Attachment
-      description: >-
-        Deletes an attachment and its associated file content from the
-        ServiceNow instance.
+      description: Deletes an attachment and its associated file content from the ServiceNow instance.
       tags:
       - Attachments
       parameters:
@@ -242,9 +233,7 @@ paths:
     get:
       operationId: downloadAttachmentFile
       summary: Servicenow Download Attachment File Content
-      description: >-
-        Downloads the binary file content of an attachment. The response
-        Content-Type header reflects the original file type.
+      description: Downloads the binary file content of an attachment. The response Content-Type header reflects the original file type.
       tags:
       - Attachments
       parameters:
@@ -297,18 +286,14 @@ paths:
     post:
       operationId: uploadAttachmentBinary
       summary: Servicenow Upload a File Attachment via Binary Stream
-      description: >-
-        Uploads a file as a binary stream and attaches it to the specified
-        table record. The Content-Type header should match the actual file
-        type being uploaded.
+      description: Uploads a file as a binary stream and attaches it to the specified table record. The Content-Type header should match the actual file type being uploaded.
       tags:
       - Attachments
       parameters:
       - name: table_name
         in: query
         required: true
-        description: >-
-          The name of the table to which the file is attached.
+        description: The name of the table to which the file is attached.
         schema:
           type: string
         example: incident
@@ -405,10 +390,7 @@ paths:
     post:
       operationId: uploadAttachmentMultipart
       summary: Servicenow Upload a File Attachment via Multipart Form Data
-      description: >-
-        Uploads a file using multipart form-data encoding and attaches it to
-        the specified table record. This method is suitable for web browser
-        and form-based uploads.
+      description: Uploads a file using multipart form-data encoding and attaches it to the specified table record. This method is suitable for web browser and form-based uploads.
       tags:
       - Attachments
       requestBody:
@@ -427,8 +409,7 @@ paths:
                   description: The name of the table to which the file is attached.
                 table_sys_id:
                   type: string
-                  description: >-
-                    The sys_id of the record to which the file is attached.
+                  description: The sys_id of the record to which the file is attached.
                 uploadFile:
                   type: string
                   format: binary
@@ -505,29 +486,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: >-
-        Basic authentication with ServiceNow credentials. The user must have
-        appropriate attachment permissions.
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
-      flows:
-        password:
-          tokenUrl: https://{instance}.service-now.com/oauth_token.do
-          scopes: {}
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the attachment record.
-      schema:
-        type: string
-        pattern: '^[a-f0-9]{32}$'
   schemas:
     Attachment:
       type: object
@@ -613,3 +571,17 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the attachment record.
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{32}$
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.

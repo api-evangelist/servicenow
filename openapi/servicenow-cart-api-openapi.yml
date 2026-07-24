@@ -1,0 +1,369 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Contact Aggregate Statistics Cart API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
+
+
+    In addition, you can generate new social media profile records when creating a contact.
+
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
+  version: Zurich
+  contact:
+    name: ServiceNow
+    url: https://docs.servicenow.com
+  x-namespace: now
+servers:
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
+security:
+- basicAuth: []
+tags:
+- name: Cart
+  description: Operations for managing the shopping cart and submitting orders.
+paths:
+  /servicecatalog/items/{sys_id}/add_to_cart:
+    post:
+      operationId: addItemToCart
+      summary: Servicenow Add a Catalog Item to the Cart
+      description: Adds the specified catalog item to the shopping cart with the given quantity and variable values.
+      tags:
+      - Cart
+      parameters:
+      - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+            examples:
+              AdditemtocartRequestExample:
+                summary: Default addItemToCart request
+                x-microcks-default: true
+                value:
+                  sysparm_quantity: 10
+                  variables: example_value
+      responses:
+        '200':
+          description: Item successfully added to the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/CartItem'
+              examples:
+                Additemtocart200Example:
+                  summary: Default addItemToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      cart_item_id: '500123'
+                      catalog_item_id: '500123'
+                      quantity: 10
+                      subtotal: 42
+        '400':
+          description: Bad request. Required variables are missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Additemtocart400Example:
+                  summary: Default addItemToCart 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicecatalog/items/{sys_id}/order_now:
+    post:
+      operationId: orderItemNow
+      summary: Servicenow Order a Catalog Item Immediately
+      description: Orders the specified catalog item without going through the cart. Creates a request directly with the given quantity and variable values.
+      tags:
+      - Cart
+      parameters:
+      - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+            examples:
+              OrderitemnowRequestExample:
+                summary: Default orderItemNow request
+                x-microcks-default: true
+                value:
+                  sysparm_quantity: 10
+                  variables: example_value
+      responses:
+        '200':
+          description: Order successfully submitted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/OrderResult'
+              examples:
+                Orderitemnow200Example:
+                  summary: Default orderItemNow 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      request_number: example_value
+                      request_id: '500123'
+                      table: example_value
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Orderitemnow400Example:
+                  summary: Default orderItemNow 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicecatalog/cart:
+    get:
+      operationId: getCart
+      summary: Servicenow Retrieve the Current Cart
+      description: Retrieves the contents of the current user's shopping cart.
+      tags:
+      - Cart
+      responses:
+        '200':
+          description: Successful response returning cart contents.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Cart'
+              examples:
+                Getcart200Example:
+                  summary: Default getCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      items:
+                      - {}
+                      subtotal: 42
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getcart401Example:
+                  summary: Default getCart 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: emptyCart
+      summary: Servicenow Empty the Cart
+      description: Removes all items from the current user's shopping cart.
+      tags:
+      - Cart
+      responses:
+        '200':
+          description: Cart successfully emptied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+              examples:
+                Emptycart200Example:
+                  summary: Default emptyCart 200 response
+                  x-microcks-default: true
+                  value:
+                    result: example_value
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Emptycart401Example:
+                  summary: Default emptyCart 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicecatalog/cart/submit_order:
+    post:
+      operationId: submitCartOrder
+      summary: Servicenow Submit the Cart as an Order
+      description: Submits all items in the current user's shopping cart as a service catalog request. Returns the request number and details.
+      tags:
+      - Cart
+      responses:
+        '200':
+          description: Order successfully submitted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/OrderResult'
+              examples:
+                Submitcartorder200Example:
+                  summary: Default submitCartOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      request_number: example_value
+                      request_id: '500123'
+                      table: example_value
+        '400':
+          description: Cart is empty or contains invalid items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Submitcartorder400Example:
+                  summary: Default submitCartOrder 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CartItem:
+      type: object
+      description: An item in the shopping cart.
+      properties:
+        cart_item_id:
+          type: string
+          description: Unique identifier for the cart item.
+          example: '500123'
+        catalog_item_id:
+          type: string
+          description: The sys_id of the catalog item.
+          example: '500123'
+        quantity:
+          type: integer
+          description: The quantity ordered.
+          example: 10
+        subtotal:
+          type: string
+          description: The subtotal for this cart item.
+          example: 42
+    Cart:
+      type: object
+      description: The shopping cart contents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+          example: []
+        subtotal:
+          type: string
+          description: The cart subtotal.
+          example: 42
+    OrderResult:
+      type: object
+      description: The result of a submitted catalog order.
+      properties:
+        request_number:
+          type: string
+          description: The generated request number.
+          example: example_value
+        request_id:
+          type: string
+          description: The sys_id of the request record.
+          example: '500123'
+        table:
+          type: string
+          description: The table name where the request is stored.
+          example: example_value
+    CartItemInput:
+      type: object
+      description: Input for adding a catalog item to the cart or ordering directly.
+      required:
+      - sysparm_quantity
+      properties:
+        sysparm_quantity:
+          type: integer
+          minimum: 1
+          description: The quantity of items to order.
+          example: 10
+        variables:
+          type: object
+          description: Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries.
+          additionalProperties:
+            type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.

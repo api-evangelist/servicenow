@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Contact Aggregate Statistics Change Tasks API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
+
+
+    In addition, you can generate new social media profile records when creating a contact.
+
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
+  version: Zurich
+  contact:
+    name: ServiceNow
+    url: https://docs.servicenow.com
+  x-namespace: now
+servers:
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
+security:
+- basicAuth: []
+tags:
+- name: Change Tasks
+  description: Operations for managing tasks associated with change requests.
+paths:
+  /change/{sys_id}/task:
+    get:
+      operationId: listChangeTasks
+      summary: Servicenow List Tasks for a Change Request
+      description: Retrieves all tasks associated with the specified change request.
+      tags:
+      - Change Tasks
+      parameters:
+      - $ref: '#/components/parameters/sysId'
+      - $ref: '#/components/parameters/sysparmFields'
+      - $ref: '#/components/parameters/sysparmLimit'
+      - $ref: '#/components/parameters/sysparmOffset'
+      responses:
+        '200':
+          description: Successful response returning change tasks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeTask'
+              examples:
+                Listchangetasks200Example:
+                  summary: Default listChangeTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      state: example_value
+                      assigned_to: example_value
+                      change_request: example_value
+                      planned_start_date: '2026-01-15T10:30:00Z'
+                      planned_end_date: '2026-01-15T10:30:00Z'
+        '404':
+          description: Change request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Listchangetasks404Example:
+                  summary: Default listChangeTasks 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createChangeTask
+      summary: Servicenow Create a Task for a Change Request
+      description: Creates a new task associated with the specified change request.
+      tags:
+      - Change Tasks
+      parameters:
+      - $ref: '#/components/parameters/sysId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeTaskInput'
+            examples:
+              CreatechangetaskRequestExample:
+                summary: Default createChangeTask request
+                x-microcks-default: true
+                value:
+                  short_description: example_value
+                  description: A sample description.
+                  assigned_to: example_value
+                  assignment_group: example_value
+                  planned_start_date: '2026-01-15T10:30:00Z'
+                  planned_end_date: '2026-01-15T10:30:00Z'
+      responses:
+        '201':
+          description: Change task successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/ChangeTask'
+              examples:
+                Createchangetask201Example:
+                  summary: Default createChangeTask 201 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      number: example_value
+                      short_description: example_value
+                      state: example_value
+                      assigned_to: example_value
+                      change_request: example_value
+                      planned_start_date: '2026-01-15T10:30:00Z'
+                      planned_end_date: '2026-01-15T10:30:00Z'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Createchangetask400Example:
+                  summary: Default createChangeTask 400 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+    ChangeTask:
+      type: object
+      description: A task associated with a change request.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the change task.
+          example: '500123'
+        number:
+          type: string
+          description: The human-readable task number.
+          example: example_value
+        short_description:
+          type: string
+          description: A brief summary of the task.
+          example: example_value
+        state:
+          type: string
+          description: The current state of the task.
+          example: example_value
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+          example: example_value
+        change_request:
+          type: string
+          description: The sys_id of the parent change request.
+          example: example_value
+        planned_start_date:
+          type: string
+          format: date-time
+          description: The planned start date for the task.
+          example: '2026-01-15T10:30:00Z'
+        planned_end_date:
+          type: string
+          format: date-time
+          description: The planned end date for the task.
+          example: '2026-01-15T10:30:00Z'
+    ChangeTaskInput:
+      type: object
+      description: Fields for creating a change task.
+      properties:
+        short_description:
+          type: string
+          description: A brief summary of the task.
+          example: example_value
+        description:
+          type: string
+          description: A detailed description of the task.
+          example: A sample description.
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+          example: example_value
+        assignment_group:
+          type: string
+          description: The sys_id of the assignment group.
+          example: example_value
+        planned_start_date:
+          type: string
+          format: date-time
+          description: The planned start date.
+          example: '2026-01-15T10:30:00Z'
+        planned_end_date:
+          type: string
+          format: date-time
+          description: The planned end date.
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.

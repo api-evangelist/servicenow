@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: ServiceNow Contact Aggregate Statistics Catalogs API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
+
+
+    In addition, you can generate new social media profile records when creating a contact.
+
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
+  version: Zurich
+  contact:
+    name: ServiceNow
+    url: https://docs.servicenow.com
+  x-namespace: now
+servers:
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
+  variables:
+    instance:
+      default: instance
+      description: Your ServiceNow instance name
+security:
+- basicAuth: []
+tags:
+- name: Catalogs
+  description: Operations for browsing and retrieving service catalogs.
+paths:
+  /servicecatalog/catalogs:
+    get:
+      operationId: listCatalogs
+      summary: Servicenow List Service Catalogs
+      description: Retrieves a list of all available service catalogs on the instance.
+      tags:
+      - Catalogs
+      parameters:
+      - name: sysparm_limit
+        in: query
+        required: false
+        description: Maximum number of catalogs to return.
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: sysparm_offset
+        in: query
+        required: false
+        description: Starting index for pagination.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        example: 10
+      responses:
+        '200':
+          description: Successful response returning available catalogs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Catalog'
+              examples:
+                Listcatalogs200Example:
+                  summary: Default listCatalogs 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                    - sys_id: '500123'
+                      title: Example Title
+                      description: A sample description.
+                      has_categories: true
+                      has_items: true
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Listcatalogs401Example:
+                  summary: Default listCatalogs 401 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicecatalog/catalogs/{sys_id}:
+    get:
+      operationId: getCatalog
+      summary: Servicenow Retrieve a Specific Catalog
+      description: Retrieves details for a specific service catalog including its categories.
+      tags:
+      - Catalogs
+      parameters:
+      - $ref: '#/components/parameters/sysId'
+      responses:
+        '200':
+          description: Successful response returning the catalog details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Catalog'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    result:
+                      sys_id: '500123'
+                      title: Example Title
+                      description: A sample description.
+                      has_categories: true
+                      has_items: true
+        '404':
+          description: Catalog not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getcatalog404Example:
+                  summary: Default getCatalog 404 response
+                  x-microcks-default: true
+                  value:
+                    error:
+                      message: example_value
+                      detail: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+    Catalog:
+      type: object
+      description: A ServiceNow service catalog.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog.
+          example: '500123'
+        title:
+          type: string
+          description: The display title of the catalog.
+          example: Example Title
+        description:
+          type: string
+          description: A description of the catalog.
+          example: A sample description.
+        has_categories:
+          type: boolean
+          description: Whether the catalog has categories.
+          example: true
+        has_items:
+          type: boolean
+          description: Whether the catalog has items.
+          example: true
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.

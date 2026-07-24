@@ -1,60 +1,55 @@
 openapi: 3.1.0
 info:
-  title: ServiceNow CMDB Instance API
-  description: >-
-    The ServiceNow CMDB Instance API provides REST endpoints for retrieving
-    configuration item (CI) records from the Configuration Management Database
-    by class name and sys_id. It is used to query and access infrastructure
-    and application CI data stored in the ServiceNow CMDB for integration
-    with discovery tools and reporting systems.
-  version: 'Yokohama'
+  title: ServiceNow Contact Aggregate Statistics CMDB Instances API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
+
+
+    In addition, you can generate new social media profile records when creating a contact.
+
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
+  version: Zurich
   contact:
-    name: ServiceNow Support
-    url: https://support.servicenow.com
-  termsOfService: https://www.servicenow.com/terms-of-use.html
-externalDocs:
-  description: ServiceNow CMDB Instance API Documentation
-  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/cmdb-instance-api.html
+    name: ServiceNow
+    url: https://docs.servicenow.com
+  x-namespace: now
 servers:
-- url: https://{instance}.service-now.com/api/now/cmdb
-  description: ServiceNow Instance
+- url: https://{instance}.servicenow.com/api/now
+  description: ServiceNow instance
   variables:
     instance:
       default: instance
       description: Your ServiceNow instance name
-tags:
-- name: CMDB Instances
-  description: >-
-    Operations for retrieving configuration item instances from the CMDB
-    by class name.
 security:
 - basicAuth: []
-- oauth2: []
+tags:
+- name: CMDB Instances
+  description: Operations for retrieving configuration item instances from the CMDB by class name.
 paths:
   /instance/{className}:
     get:
       operationId: listCmdbInstances
       summary: Servicenow List Configuration Items by Class
-      description: >-
-        Retrieves a list of configuration item instances for the specified
-        CMDB class. Returns sys_id and name for each CI by default.
+      description: Retrieves a list of configuration item instances for the specified CMDB class. Returns sys_id and name for each CI by default.
       tags:
       - CMDB Instances
       parameters:
       - name: className
         in: path
         required: true
-        description: >-
-          The CMDB class name to query, such as cmdb_ci_server,
-          cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server.
+        description: The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server.
         schema:
           type: string
         example: cmdb_ci_linux_server
       - name: sysparm_query
         in: query
         required: false
-        description: >-
-          An encoded query string to filter CI records.
+        description: An encoded query string to filter CI records.
         schema:
           type: string
         example: example_value
@@ -78,8 +73,7 @@ paths:
         example: 10
       responses:
         '200':
-          description: >-
-            Successful response returning a list of CI instances.
+          description: Successful response returning a list of CI instances.
           content:
             application/json:
               schema:
@@ -132,9 +126,7 @@ paths:
     get:
       operationId: getCmdbInstance
       summary: Servicenow Retrieve a Specific Configuration Item
-      description: >-
-        Retrieves the full details of a specific configuration item by its
-        class name and sys_id. Returns all attributes of the CI record.
+      description: Retrieves the full details of a specific configuration item by its class name and sys_id. Returns all attributes of the CI record.
       tags:
       - CMDB Instances
       parameters:
@@ -226,40 +218,10 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: >-
-        Basic authentication with ServiceNow credentials. Requires CMDB
-        read access.
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
-      flows:
-        password:
-          tokenUrl: https://{instance}.service-now.com/oauth_token.do
-          scopes: {}
   schemas:
-    CmdbInstanceSummary:
-      type: object
-      description: >-
-        A summary of a CMDB configuration item containing its identifier
-        and display name.
-      properties:
-        sys_id:
-          type: string
-          description: Unique identifier for the configuration item.
-          example: '500123'
-        name:
-          type: string
-          description: The display name of the configuration item.
-          example: Example Title
     CmdbInstance:
       type: object
-      description: >-
-        A full CMDB configuration item record. Fields vary by CI class but
-        common attributes are included below.
+      description: A full CMDB configuration item record. Fields vary by CI class but common attributes are included below.
       properties:
         sys_id:
           type: string
@@ -283,8 +245,7 @@ components:
           example: example_value
         operational_status:
           type: string
-          description: >-
-            The operational status of the CI.
+          description: The operational status of the CI.
           enum:
           - '1'
           - '2'
@@ -389,3 +350,20 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
+    CmdbInstanceSummary:
+      type: object
+      description: A summary of a CMDB configuration item containing its identifier and display name.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the configuration item.
+          example: '500123'
+        name:
+          type: string
+          description: The display name of the configuration item.
+          example: Example Title
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.

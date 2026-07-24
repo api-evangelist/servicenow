@@ -1,37 +1,35 @@
 openapi: 3.1.0
 info:
-  title: ServiceNow Trouble Ticket Open API
-  description: |
-    The Trouble Ticket Open API provides endpoints to create, update, and retrieve data from the Case [sn_customerservice_case], 
-    Incident [incident], and Service Problem Case [sn_sprb_mgmt_case] tables.
+  title: ServiceNow Contact Aggregate Statistics Trouble Ticket API
+  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
 
-    Use this API to manage ticket information between external ticketing systems and the ServiceNow AI Platform.
 
-    This API is a ServiceNow implementation of the TM Forum Trouble Ticket Management API REST specification, 
-    based on TMF621 Trouble Ticket Management API User Guide v5.0.0, September 2024.
+    In addition, you can generate new social media profile records when creating a contact.
 
-    **Authentication**: The calling user must have the `ticket_integrator` role.
+
+    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
+
+
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.
+
+    '
   version: Zurich
   contact:
     name: ServiceNow
     url: https://docs.servicenow.com
-  x-namespace: sn_ind_tsm_sdwan
-
+  x-namespace: now
 servers:
-- url: https://{instance}.servicenow.com/api/sn_ind_tsm_sdwan/ticket
+- url: https://{instance}.servicenow.com/api/now
   description: ServiceNow instance
   variables:
     instance:
       default: instance
       description: Your ServiceNow instance name
-
 security:
 - basicAuth: []
-
 tags:
 - name: Trouble Ticket
   description: Operations for managing trouble tickets (Cases, Incidents, and Service Problem Cases)
-
 paths:
   /troubleTicket:
     get:
@@ -47,7 +45,7 @@ paths:
         required: false
         schema:
           type: string
-        example: "id,name,description,status,severity,ticketType"
+        example: id,name,description,status,severity,ticketType
       - name: id
         in: query
         description: Filter trouble tickets by sys_id
@@ -147,7 +145,7 @@ paths:
               description: Range of content returned in a paginated call
               schema:
                 type: string
-              example: "items 3-5"
+              example: items 3-5
             Content-Type:
               schema:
                 type: string
@@ -209,7 +207,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
               examples:
                 Gettroubletickets404Example:
                   summary: Default getTroubleTickets 404 response
@@ -240,7 +237,7 @@ paths:
                 value:
                   name: Example Title
                   description: A sample description.
-                  severity: "1"
+                  severity: '1'
                   status: example_value
                   ticketType: Case
                   channel:
@@ -300,7 +297,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
               examples:
                 Createtroubleticket400Example:
                   summary: Default createTroubleTicket 400 response
@@ -394,7 +390,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
               examples:
                 Gettroubleticketbyid404Example:
                   summary: Default getTroubleTicketById 404 response
@@ -433,7 +428,7 @@ paths:
                 value:
                   name: Example Title
                   description: A sample description.
-                  severity: "1"
+                  severity: '1'
                   status: example_value
                   channel:
                     name: Example Title
@@ -506,7 +501,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
               examples:
                 Updatetroubleticket404Example:
                   summary: Default updateTroubleTicket 404 response
@@ -519,13 +513,266 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: Basic authentication with ServiceNow credentials. User must have the ticket_integrator role.
-
   schemas:
+    Note:
+      type: object
+      properties:
+        '@type':
+          type: string
+          default: comments
+          description: The type of note (always 'comments' in responses)
+          example: example_value
+        text:
+          type: string
+          description: The comment text
+          example: example_value
+        date:
+          type: string
+          format: date-time
+          description: The date the comment was created
+          example: '2026-01-15T10:30:00Z'
+        author:
+          type: string
+          description: The name of the user who wrote the comment
+          example: example_value
+    RelatedPartyInput:
+      type: object
+      required:
+      - id
+      - '@referredType'
+      properties:
+        id:
+          type: string
+          description: Sys_id of the related party
+          example: abc123
+        '@referredType':
+          type: string
+          enum:
+          - customer
+          - customer_contact
+          description: 'Type of related party:
+
+            - customer: Company or account for the ticket
+
+            - customer_contact: Caller or contact for the ticket
+
+            '
+          example: customer
+    NoteInput:
+      type: object
+      required:
+      - text
+      - '@type'
+      properties:
+        text:
+          type: string
+          description: Note text
+          example: example_value
+        '@type':
+          type: string
+          enum:
+          - comments
+          - work_notes
+          description: Type of note (determines whether recorded in Work notes or Additional comments field)
+          example: comments
+    RelatedParty:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Sys_id of the related party
+          example: abc123
+        name:
+          type: string
+          description: Name of the related party
+          example: Example Title
+        '@referredType':
+          type: string
+          enum:
+          - assigned_to
+          - assignment_group
+          - customer
+          - customer_contact
+          description: 'Type of related party:
+
+            - assigned_to: User assigned to work on the ticket
+
+            - assignment_group: Group assigned to work on the ticket
+
+            - customer: Company or account for the ticket
+
+            - customer_contact: Caller or contact for the ticket
+
+            '
+          example: assigned_to
+    TroubleTicketCreate:
+      type: object
+      required:
+      - description
+      - severity
+      - status
+      properties:
+        name:
+          type: string
+          description: Name of the trouble ticket, typically a short description of the issue
+          example: Example Title
+        description:
+          type: string
+          description: A description of the issue
+          example: A sample description.
+        severity:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          description: 'The severity of the issue (must provide choice value only):
+
+            - 1: Critical
+
+            - 2: High
+
+            - 3: Moderate
+
+            - 4: Low
+
+            - 5: Planning (Incident only)
+
+            '
+          example: '1'
+        status:
+          type: string
+          description: The current status of the trouble ticket (can provide choice label or value)
+          example: example_value
+        ticketType:
+          type: string
+          enum:
+          - Case
+          - Incident
+          - Service Problem Case
+          default: Incident
+          description: The type of ticket to create
+          example: Case
+        channel:
+          $ref: '#/components/schemas/ChannelInput'
+        note:
+          type: array
+          description: List of work notes and comments to add to the ticket
+          items:
+            $ref: '#/components/schemas/NoteInput'
+          example: []
+        relatedEntity:
+          type: array
+          description: List of impacted assets, products, sold products, configuration items, or services
+          items:
+            $ref: '#/components/schemas/RelatedEntityInput'
+          example: []
+        relatedParty:
+          type: array
+          description: Details about contacts for the ticket
+          items:
+            $ref: '#/components/schemas/RelatedPartyInput'
+          example: []
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')
+          example: Example Title
+    TroubleTicketUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the trouble ticket, typically a short description of the issue
+          example: Example Title
+        description:
+          type: string
+          description: Description of the issue
+          example: A sample description.
+        severity:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          description: 'The severity of the issue (must provide choice value only):
+
+            - 1: Critical
+
+            - 2: High
+
+            - 3: Moderate
+
+            - 4: Low
+
+            - 5: Planning (Incident only)
+
+            '
+          example: '1'
+        status:
+          type: string
+          description: The current status of the trouble ticket (can provide choice label or value)
+          example: example_value
+        channel:
+          $ref: '#/components/schemas/ChannelInput'
+        note:
+          type: array
+          description: List of work notes and comments to add to the ticket
+          items:
+            $ref: '#/components/schemas/NoteInput'
+          example: []
+        relatedEntity:
+          type: array
+          description: List of impacted assets, products, sold products, configuration items, or services
+          items:
+            $ref: '#/components/schemas/RelatedEntityInput'
+          example: []
+        relatedParty:
+          type: array
+          description: Details about contacts for the ticket
+          items:
+            $ref: '#/components/schemas/RelatedPartyInput'
+          example: []
+    RelatedEntity:
+      type: object
+      properties:
+        '@type':
+          type: string
+          default: relatedEntity
+          description: This value is always relatedEntity
+          example: example_value
+        id:
+          type: string
+          description: Sys_id of the impacted item or service
+          example: abc123
+        href:
+          type: string
+          description: Returns an empty string
+          example: example_value
+        name:
+          type: string
+          description: Name of the impacted item or service
+          example: Example Title
+        role:
+          type: string
+          description: Description of the impacted item or service
+          example: example_value
+        '@referredType':
+          type: string
+          enum:
+          - asset
+          - product
+          - product_inventory
+          - cmdb_ci
+          - cmdb_ci_service
+          description: Type of item or service
+          example: asset
     TroubleTicket:
       type: object
       properties:
@@ -563,7 +810,7 @@ components:
         severity:
           type: string
           description: The severity of the issue described by the trouble ticket
-          example: "2 - High"
+          example: 2 - High
         status:
           type: string
           description: The current status of the trouble ticket
@@ -595,216 +842,27 @@ components:
           description: Details about contacts for the ticket
           items:
             $ref: '#/components/schemas/RelatedParty'
-
           example: []
-    TroubleTicketCreate:
-      type: object
-      required:
-      - description
-      - severity
-      - status
-      properties:
-        name:
-          type: string
-          description: Name of the trouble ticket, typically a short description of the issue
-          example: Example Title
-        description:
-          type: string
-          description: A description of the issue
-          example: A sample description.
-        severity:
-          type: string
-          enum:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "5"
-          description: |
-            The severity of the issue (must provide choice value only):
-            - 1: Critical
-            - 2: High
-            - 3: Moderate
-            - 4: Low
-            - 5: Planning (Incident only)
-          example: "1"
-        status:
-          type: string
-          description: The current status of the trouble ticket (can provide choice label or value)
-          example: example_value
-        ticketType:
-          type: string
-          enum:
-          - Case
-          - Incident
-          - Service Problem Case
-          default: Incident
-          description: The type of ticket to create
-          example: Case
-        channel:
-          $ref: '#/components/schemas/ChannelInput'
-        note:
-          type: array
-          description: List of work notes and comments to add to the ticket
-          items:
-            $ref: '#/components/schemas/NoteInput'
-          example: []
-        relatedEntity:
-          type: array
-          description: List of impacted assets, products, sold products, configuration items, or services
-          items:
-            $ref: '#/components/schemas/RelatedEntityInput'
-          example: []
-        relatedParty:
-          type: array
-          description: Details about contacts for the ticket
-          items:
-            $ref: '#/components/schemas/RelatedPartyInput'
-
-          example: []
-    TroubleTicketUpdate:
+    Error:
       type: object
       properties:
-        name:
-          type: string
-          description: Name of the trouble ticket, typically a short description of the issue
-          example: Example Title
-        description:
-          type: string
-          description: Description of the issue
-          example: A sample description.
-        severity:
-          type: string
-          enum:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "5"
-          description: |
-            The severity of the issue (must provide choice value only):
-            - 1: Critical
-            - 2: High
-            - 3: Moderate
-            - 4: Low
-            - 5: Planning (Incident only)
-          example: "1"
-        status:
-          type: string
-          description: The current status of the trouble ticket (can provide choice label or value)
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message
+            detail:
+              type: string
+              description: Detailed error information
           example: example_value
-        channel:
-          $ref: '#/components/schemas/ChannelInput'
-        note:
-          type: array
-          description: List of work notes and comments to add to the ticket
-          items:
-            $ref: '#/components/schemas/NoteInput'
-          example: []
-        relatedEntity:
-          type: array
-          description: List of impacted assets, products, sold products, configuration items, or services
-          items:
-            $ref: '#/components/schemas/RelatedEntityInput'
-          example: []
-        relatedParty:
-          type: array
-          description: Details about contacts for the ticket
-          items:
-            $ref: '#/components/schemas/RelatedPartyInput'
-
-          example: []
     Channel:
       type: object
       properties:
         name:
           type: string
           description: The name of the contact method
-
           example: Example Title
-    ChannelInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')
-
-          example: Example Title
-    Note:
-      type: object
-      properties:
-        '@type':
-          type: string
-          default: comments
-          description: The type of note (always 'comments' in responses)
-          example: example_value
-        text:
-          type: string
-          description: The comment text
-          example: example_value
-        date:
-          type: string
-          format: date-time
-          description: The date the comment was created
-          example: '2026-01-15T10:30:00Z'
-        author:
-          type: string
-          description: The name of the user who wrote the comment
-
-          example: example_value
-    NoteInput:
-      type: object
-      required:
-      - text
-      - '@type'
-      properties:
-        text:
-          type: string
-          description: Note text
-          example: example_value
-        '@type':
-          type: string
-          enum:
-          - comments
-          - work_notes
-          description: Type of note (determines whether recorded in Work notes or Additional comments field)
-
-          example: comments
-    RelatedEntity:
-      type: object
-      properties:
-        '@type':
-          type: string
-          default: relatedEntity
-          description: This value is always relatedEntity
-          example: example_value
-        id:
-          type: string
-          description: Sys_id of the impacted item or service
-          example: abc123
-        href:
-          type: string
-          description: Returns an empty string
-          example: example_value
-        name:
-          type: string
-          description: Name of the impacted item or service
-          example: Example Title
-        role:
-          type: string
-          description: Description of the impacted item or service
-          example: example_value
-        '@referredType':
-          type: string
-          enum:
-          - asset
-          - product
-          - product_inventory
-          - cmdb_ci
-          - cmdb_ci_service
-          description: Type of item or service
-
-          example: asset
     RelatedEntityInput:
       type: object
       required:
@@ -824,65 +882,9 @@ components:
           - cmdb_ci
           - cmdb_ci_service
           description: Type of item or service
-
           example: asset
-    RelatedParty:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Sys_id of the related party
-          example: abc123
-        name:
-          type: string
-          description: Name of the related party
-          example: Example Title
-        '@referredType':
-          type: string
-          enum:
-          - assigned_to
-          - assignment_group
-          - customer
-          - customer_contact
-          description: |
-            Type of related party:
-            - assigned_to: User assigned to work on the ticket
-            - assignment_group: Group assigned to work on the ticket
-            - customer: Company or account for the ticket
-            - customer_contact: Caller or contact for the ticket
-
-          example: assigned_to
-    RelatedPartyInput:
-      type: object
-      required:
-      - id
-      - '@referredType'
-      properties:
-        id:
-          type: string
-          description: Sys_id of the related party
-          example: abc123
-        '@referredType':
-          type: string
-          enum:
-          - customer
-          - customer_contact
-          description: |
-            Type of related party:
-            - customer: Company or account for the ticket
-            - customer_contact: Caller or contact for the ticket
-
-          example: customer
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Error message
-            detail:
-              type: string
-              description: Detailed error information
-          example: example_value
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.
