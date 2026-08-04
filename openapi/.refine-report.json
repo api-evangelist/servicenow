@@ -1,0 +1,42 @@
+{
+  "provider": "servicenow",
+  "sources": [
+    "servicenow-aggregate-statistics-api-openapi.yml",
+    "servicenow-attachments-api-openapi.yml",
+    "servicenow-cart-api-openapi.yml",
+    "servicenow-catalog-items-api-openapi.yml",
+    "servicenow-catalogs-api-openapi.yml",
+    "servicenow-categories-api-openapi.yml",
+    "servicenow-change-tasks-api-openapi.yml",
+    "servicenow-cmdb-instances-api-openapi.yml",
+    "servicenow-contact-api-openapi.yml",
+    "servicenow-emergency-changes-api-openapi.yml",
+    "servicenow-import-sets-api-openapi.yml",
+    "servicenow-normal-changes-api-openapi.yml",
+    "servicenow-standard-changes-api-openapi.yml",
+    "servicenow-table-records-api-openapi.yml",
+    "servicenow-trouble-ticket-api-openapi.yml"
+  ],
+  "outputs": [
+    "servicenow-aggregate-statistics-api-openapi.yml",
+    "servicenow-attachments-api-openapi.yml",
+    "servicenow-cart-api-openapi.yml",
+    "servicenow-catalog-items-api-openapi.yml",
+    "servicenow-catalogs-api-openapi.yml",
+    "servicenow-categories-api-openapi.yml",
+    "servicenow-change-tasks-api-openapi.yml",
+    "servicenow-cmdb-instances-api-openapi.yml",
+    "servicenow-contact-api-openapi.yml",
+    "servicenow-emergency-changes-api-openapi.yml",
+    "servicenow-import-sets-api-openapi.yml",
+    "servicenow-normal-changes-api-openapi.yml",
+    "servicenow-standard-changes-api-openapi.yml",
+    "servicenow-table-records-api-openapi.yml",
+    "servicenow-trouble-ticket-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
