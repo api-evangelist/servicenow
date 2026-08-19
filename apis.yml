@@ -2128,4 +2128,4 @@ description: ServiceNow provides cloud-based platform services that automate ent
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-specificationVersion: '0.19'
+specificationVersion: '0.23'
