@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ServiceNow Contact Aggregate Statistics Cart API
+  title: ServiceNow Cart API
   description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
 
 
@@ -274,7 +274,61 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   schemas:
+    Cart:
+      type: object
+      description: The shopping cart contents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+          example: []
+        subtotal:
+          type: string
+          description: The cart subtotal.
+          example: 42
+    CartItemInput:
+      type: object
+      description: Input for adding a catalog item to the cart or ordering directly.
+      required:
+      - sysparm_quantity
+      properties:
+        sysparm_quantity:
+          type: integer
+          minimum: 1
+          description: The quantity of items to order.
+          example: 10
+        variables:
+          type: object
+          description: Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries.
+          additionalProperties:
+            type: string
+          example: example_value
+    OrderResult:
+      type: object
+      description: The result of a submitted catalog order.
+      properties:
+        request_number:
+          type: string
+          description: The generated request number.
+          example: example_value
+        request_id:
+          type: string
+          description: The sys_id of the request record.
+          example: '500123'
+        table:
+          type: string
+          description: The table name where the request is stored.
+          example: example_value
     CartItem:
       type: object
       description: An item in the shopping cart.
@@ -295,52 +349,6 @@ components:
           type: string
           description: The subtotal for this cart item.
           example: 42
-    Cart:
-      type: object
-      description: The shopping cart contents.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CartItem'
-          example: []
-        subtotal:
-          type: string
-          description: The cart subtotal.
-          example: 42
-    OrderResult:
-      type: object
-      description: The result of a submitted catalog order.
-      properties:
-        request_number:
-          type: string
-          description: The generated request number.
-          example: example_value
-        request_id:
-          type: string
-          description: The sys_id of the request record.
-          example: '500123'
-        table:
-          type: string
-          description: The table name where the request is stored.
-          example: example_value
-    CartItemInput:
-      type: object
-      description: Input for adding a catalog item to the cart or ordering directly.
-      required:
-      - sysparm_quantity
-      properties:
-        sysparm_quantity:
-          type: integer
-          minimum: 1
-          description: The quantity of items to order.
-          example: 10
-        variables:
-          type: object
-          description: Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries.
-          additionalProperties:
-            type: string
-          example: example_value
     Error:
       type: object
       properties:
@@ -354,14 +362,6 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

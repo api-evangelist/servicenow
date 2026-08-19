@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ServiceNow Contact Aggregate Statistics Attachments API
+  title: ServiceNow Attachments API
   description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
 
 
@@ -486,7 +486,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the attachment record.
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{32}$
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
     Attachment:
       type: object
       description: Metadata about a file attachment stored in ServiceNow.
@@ -558,28 +580,6 @@ components:
           type: string
           description: The user who last modified the attachment record.
           example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the attachment record.
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{32}$
   securitySchemes:
     basicAuth:
       type: http

@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Contact API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Retrieve Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/contact",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "caller_id=javascript:gs.getUserID()^active=true",
+                "type": "query",
+                "description": "Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting record index for pagination (do not pass negative numbers)"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified set of Customer Service Management (CSM) contacts."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.servicenow.com/api/now/contact",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Customer Service Management (CSM) contact.\n\nYou can also create a social media profile for the contact by specifying:\n- social_channel\n- social_handle\n- social_handle_url\n\n**Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.\n"
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Specific Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/contact/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "Sys_id of the contact to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves the specified Customer Service Management (CSM) contact."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

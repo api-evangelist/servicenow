@@ -1,0 +1,810 @@
+{
+  "item": [
+    {
+      "id": "36117ede-381c-4433-bae1-8f9e60530794",
+      "name": "Contact",
+      "description": {
+        "content": "Operations for managing Customer Service Management contacts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "043166e0-51cd-4749-ac3a-3edf41687010",
+          "name": "Servicenow Retrieve Contacts",
+          "request": {
+            "name": "Servicenow Retrieve Contacts",
+            "description": {
+              "content": "Retrieves a specified set of Customer Service Management (CSM) contacts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "Encoded query used to filter the result set. Supports order by using ORDERBY and ORDERBYDESC clauses."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "10",
+                  "description": "Maximum number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination (do not pass negative numbers)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "969c7282-dd5c-4356-b2ac-fc31115e8f3d",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "caller_id=javascript:gs.getUserID()^active=true"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"name\": \"Example Title\",\n      \"first_name\": \"example_value\",\n      \"middle_name\": \"example_value\",\n      \"last_name\": \"example_value\",\n      \"user_name\": \"example_value\",\n      \"email\": \"user@example.com\",\n      \"phone\": \"example_value\",\n      \"mobile_phone\": \"example_value\",\n      \"home_phone\": \"example_value\",\n      \"title\": \"Example Title\",\n      \"employee_number\": \"example_value\",\n      \"company\": \"example_value\",\n      \"account\": 42,\n      \"department\": \"example_value\",\n      \"manager\": \"example_value\",\n      \"location\": \"example_value\",\n      \"building\": \"example_value\",\n      \"street\": \"example_value\",\n      \"city\": \"example_value\",\n      \"state\": \"example_value\",\n      \"zip\": \"example_value\",\n      \"country\": 42,\n      \"active\": true,\n      \"vip\": true,\n      \"locked_out\": true,\n      \"web_service_access_only\": true,\n      \"internal_integration_user\": true,\n      \"enable_multifactor_authn\": true,\n      \"geolocation_tracked\": true,\n      \"notification\": 1,\n      \"calendar_integration\": 10,\n      \"failed_attempts\": 10,\n      \"latitude\": 42.5,\n      \"longitude\": 42.5,\n      \"time_zone\": \"example_value\",\n      \"date_format\": \"dd/mm/yyyy\",\n      \"time_format\": \"hh.mm.ss a\",\n      \"preferred_language\": \"example_value\",\n      \"gender\": \"example_value\",\n      \"photo\": \"example_value\",\n      \"introduction\": \"example_value\",\n      \"source\": \"example_value\",\n      \"roles\": \"example_value\",\n      \"cost_center\": \"example_value\",\n      \"schedule\": \"example_value\",\n      \"time_sheet_policy\": \"example_value\",\n      \"default_perspective\": \"example_value\",\n      \"ldap_server\": \"example_value\",\n      \"agent_status\": \"Off work\",\n      \"on_schedule\": \"Ahead\",\n      \"edu_status\": \"example_value\",\n      \"last_login\": \"2026-01-15\",\n      \"last_login_time\": \"2026-01-15T10:30:00Z\",\n      \"last_login_device\": \"example_value\",\n      \"last_position_update\": \"2026-01-15T10:30:00Z\",\n      \"sys_class_name\": \"example_value\",\n      \"sys_created_by\": \"example_value\",\n      \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_updated_by\": \"example_value\",\n      \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n      \"sys_mod_count\": 42,\n      \"sys_domain\": \"example_value\",\n      \"sys_domain_path\": \"example_value\",\n      \"sys_tags\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fff0100-c181-4caa-9612-2201a227b1e2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "caller_id=javascript:gs.getUserID()^active=true"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f63606-f221-4ef8-af3b-c41ca5fb6186",
+          "name": "Servicenow Create a Contact",
+          "request": {
+            "name": "Servicenow Create a Contact",
+            "description": {
+              "content": "Creates a new Customer Service Management (CSM) contact.\n\nYou can also create a social media profile for the contact by specifying:\n- social_channel\n- social_handle\n- social_handle_url\n\n**Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobile_phone\": \"<string>\",\n  \"home_phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"employee_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"account\": \"<string>\",\n  \"department\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"location\": \"<string>\",\n  \"building\": \"<string>\",\n  \"street\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"active\": true,\n  \"vip\": false,\n  \"locked_out\": false,\n  \"web_service_access_only\": false,\n  \"internal_integration_user\": false,\n  \"enable_multifactor_authn\": false,\n  \"geolocation_tracked\": false,\n  \"notification\": 2,\n  \"calendar_integration\": 1,\n  \"failed_attempts\": \"<integer>\",\n  \"latitude\": \"<float>\",\n  \"longitude\": \"<float>\",\n  \"time_zone\": \"<string>\",\n  \"date_format\": \"<string>\",\n  \"time_format\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"photo\": \"<string>\",\n  \"introduction\": \"<string>\",\n  \"source\": \"<string>\",\n  \"roles\": \"<string>\",\n  \"cost_center\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"time_sheet_policy\": \"<string>\",\n  \"default_perspective\": \"<string>\",\n  \"ldap_server\": \"<string>\",\n  \"agent_status\": \"<string>\",\n  \"on_schedule\": \"<string>\",\n  \"edu_status\": \"faculty\",\n  \"last_login_time\": \"<dateTime>\",\n  \"last_login_device\": \"<string>\",\n  \"social_channel\": \"<string>\",\n  \"social_handle\": \"<string>\",\n  \"social_handle_url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14db385b-5911-4416-aa23-c06b53ef1bbe",
+              "name": "New contact record was successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"first_name\": \"example_value\",\n  \"middle_name\": \"example_value\",\n  \"last_name\": \"example_value\",\n  \"user_name\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"phone\": \"example_value\",\n  \"mobile_phone\": \"example_value\",\n  \"home_phone\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"employee_number\": \"example_value\",\n  \"company\": \"example_value\",\n  \"account\": 42,\n  \"department\": \"example_value\",\n  \"manager\": \"example_value\",\n  \"location\": \"example_value\",\n  \"building\": \"example_value\",\n  \"street\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"zip\": \"example_value\",\n  \"country\": 42,\n  \"active\": true,\n  \"vip\": true,\n  \"locked_out\": true,\n  \"web_service_access_only\": true,\n  \"internal_integration_user\": true,\n  \"enable_multifactor_authn\": true,\n  \"geolocation_tracked\": true,\n  \"notification\": 1,\n  \"calendar_integration\": 10,\n  \"failed_attempts\": 10,\n  \"latitude\": 42.5,\n  \"longitude\": 42.5,\n  \"time_zone\": \"example_value\",\n  \"date_format\": \"dd/mm/yyyy\",\n  \"time_format\": \"hh.mm.ss a\",\n  \"preferred_language\": \"example_value\",\n  \"gender\": \"example_value\",\n  \"photo\": \"example_value\",\n  \"introduction\": \"example_value\",\n  \"source\": \"example_value\",\n  \"roles\": \"example_value\",\n  \"cost_center\": \"example_value\",\n  \"schedule\": \"example_value\",\n  \"time_sheet_policy\": \"example_value\",\n  \"default_perspective\": \"example_value\",\n  \"ldap_server\": \"example_value\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"Ahead\",\n  \"edu_status\": \"example_value\",\n  \"last_login_time\": \"2026-01-15T10:30:00Z\",\n  \"last_login_device\": \"example_value\",\n  \"social_channel\": \"example_value\",\n  \"social_handle\": \"example_value\",\n  \"social_handle_url\": \"https://www.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8ad6c58-dc36-4395-bfd9-7da998c3b3ac",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"first_name\": \"example_value\",\n  \"middle_name\": \"example_value\",\n  \"last_name\": \"example_value\",\n  \"user_name\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"phone\": \"example_value\",\n  \"mobile_phone\": \"example_value\",\n  \"home_phone\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"employee_number\": \"example_value\",\n  \"company\": \"example_value\",\n  \"account\": 42,\n  \"department\": \"example_value\",\n  \"manager\": \"example_value\",\n  \"location\": \"example_value\",\n  \"building\": \"example_value\",\n  \"street\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"zip\": \"example_value\",\n  \"country\": 42,\n  \"active\": true,\n  \"vip\": true,\n  \"locked_out\": true,\n  \"web_service_access_only\": true,\n  \"internal_integration_user\": true,\n  \"enable_multifactor_authn\": true,\n  \"geolocation_tracked\": true,\n  \"notification\": 1,\n  \"calendar_integration\": 10,\n  \"failed_attempts\": 10,\n  \"latitude\": 42.5,\n  \"longitude\": 42.5,\n  \"time_zone\": \"example_value\",\n  \"date_format\": \"dd/mm/yyyy\",\n  \"time_format\": \"hh.mm.ss a\",\n  \"preferred_language\": \"example_value\",\n  \"gender\": \"example_value\",\n  \"photo\": \"example_value\",\n  \"introduction\": \"example_value\",\n  \"source\": \"example_value\",\n  \"roles\": \"example_value\",\n  \"cost_center\": \"example_value\",\n  \"schedule\": \"example_value\",\n  \"time_sheet_policy\": \"example_value\",\n  \"default_perspective\": \"example_value\",\n  \"ldap_server\": \"example_value\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"Ahead\",\n  \"edu_status\": \"example_value\",\n  \"last_login_time\": \"2026-01-15T10:30:00Z\",\n  \"last_login_device\": \"example_value\",\n  \"social_channel\": \"example_value\",\n  \"social_handle\": \"example_value\",\n  \"social_handle_url\": \"https://www.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b1cacbd-4548-4d73-8766-2e731c7ae98a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"first_name\": \"example_value\",\n  \"middle_name\": \"example_value\",\n  \"last_name\": \"example_value\",\n  \"user_name\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"phone\": \"example_value\",\n  \"mobile_phone\": \"example_value\",\n  \"home_phone\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"employee_number\": \"example_value\",\n  \"company\": \"example_value\",\n  \"account\": 42,\n  \"department\": \"example_value\",\n  \"manager\": \"example_value\",\n  \"location\": \"example_value\",\n  \"building\": \"example_value\",\n  \"street\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"zip\": \"example_value\",\n  \"country\": 42,\n  \"active\": true,\n  \"vip\": true,\n  \"locked_out\": true,\n  \"web_service_access_only\": true,\n  \"internal_integration_user\": true,\n  \"enable_multifactor_authn\": true,\n  \"geolocation_tracked\": true,\n  \"notification\": 1,\n  \"calendar_integration\": 10,\n  \"failed_attempts\": 10,\n  \"latitude\": 42.5,\n  \"longitude\": 42.5,\n  \"time_zone\": \"example_value\",\n  \"date_format\": \"dd/mm/yyyy\",\n  \"time_format\": \"hh.mm.ss a\",\n  \"preferred_language\": \"example_value\",\n  \"gender\": \"example_value\",\n  \"photo\": \"example_value\",\n  \"introduction\": \"example_value\",\n  \"source\": \"example_value\",\n  \"roles\": \"example_value\",\n  \"cost_center\": \"example_value\",\n  \"schedule\": \"example_value\",\n  \"time_sheet_policy\": \"example_value\",\n  \"default_perspective\": \"example_value\",\n  \"ldap_server\": \"example_value\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"Ahead\",\n  \"edu_status\": \"example_value\",\n  \"last_login_time\": \"2026-01-15T10:30:00Z\",\n  \"last_login_device\": \"example_value\",\n  \"social_channel\": \"example_value\",\n  \"social_handle\": \"example_value\",\n  \"social_handle_url\": \"https://www.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24740c7-41d3-4f03-945f-ea90e972ad24",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"first_name\": \"example_value\",\n  \"middle_name\": \"example_value\",\n  \"last_name\": \"example_value\",\n  \"user_name\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"phone\": \"example_value\",\n  \"mobile_phone\": \"example_value\",\n  \"home_phone\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"employee_number\": \"example_value\",\n  \"company\": \"example_value\",\n  \"account\": 42,\n  \"department\": \"example_value\",\n  \"manager\": \"example_value\",\n  \"location\": \"example_value\",\n  \"building\": \"example_value\",\n  \"street\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"zip\": \"example_value\",\n  \"country\": 42,\n  \"active\": true,\n  \"vip\": true,\n  \"locked_out\": true,\n  \"web_service_access_only\": true,\n  \"internal_integration_user\": true,\n  \"enable_multifactor_authn\": true,\n  \"geolocation_tracked\": true,\n  \"notification\": 1,\n  \"calendar_integration\": 10,\n  \"failed_attempts\": 10,\n  \"latitude\": 42.5,\n  \"longitude\": 42.5,\n  \"time_zone\": \"example_value\",\n  \"date_format\": \"dd/mm/yyyy\",\n  \"time_format\": \"hh.mm.ss a\",\n  \"preferred_language\": \"example_value\",\n  \"gender\": \"example_value\",\n  \"photo\": \"example_value\",\n  \"introduction\": \"example_value\",\n  \"source\": \"example_value\",\n  \"roles\": \"example_value\",\n  \"cost_center\": \"example_value\",\n  \"schedule\": \"example_value\",\n  \"time_sheet_policy\": \"example_value\",\n  \"default_perspective\": \"example_value\",\n  \"ldap_server\": \"example_value\",\n  \"agent_status\": \"Off work\",\n  \"on_schedule\": \"Ahead\",\n  \"edu_status\": \"example_value\",\n  \"last_login_time\": \"2026-01-15T10:30:00Z\",\n  \"last_login_device\": \"example_value\",\n  \"social_channel\": \"example_value\",\n  \"social_handle\": \"example_value\",\n  \"social_handle_url\": \"https://www.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47c332db-3e11-48bb-9c2d-e49433e12b47",
+          "name": "Servicenow Retrieve a Specific Contact",
+          "request": {
+            "name": "Servicenow Retrieve a Specific Contact",
+            "description": {
+              "content": "Retrieves the specified Customer Service Management (CSM) contact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sys_id of the contact to retrieve"
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aff4b44f-18df-4d16-b441-c1368325df9b",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the contact to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"name\": \"Example Title\",\n    \"first_name\": \"example_value\",\n    \"middle_name\": \"example_value\",\n    \"last_name\": \"example_value\",\n    \"user_name\": \"example_value\",\n    \"email\": \"user@example.com\",\n    \"phone\": \"example_value\",\n    \"mobile_phone\": \"example_value\",\n    \"home_phone\": \"example_value\",\n    \"title\": \"Example Title\",\n    \"employee_number\": \"example_value\",\n    \"company\": \"example_value\",\n    \"account\": 42,\n    \"department\": \"example_value\",\n    \"manager\": \"example_value\",\n    \"location\": \"example_value\",\n    \"building\": \"example_value\",\n    \"street\": \"example_value\",\n    \"city\": \"example_value\",\n    \"state\": \"example_value\",\n    \"zip\": \"example_value\",\n    \"country\": 42,\n    \"active\": true,\n    \"vip\": true,\n    \"locked_out\": true,\n    \"web_service_access_only\": true,\n    \"internal_integration_user\": true,\n    \"enable_multifactor_authn\": true,\n    \"geolocation_tracked\": true,\n    \"notification\": 1,\n    \"calendar_integration\": 10,\n    \"failed_attempts\": 10,\n    \"latitude\": 42.5,\n    \"longitude\": 42.5,\n    \"time_zone\": \"example_value\",\n    \"date_format\": \"dd/mm/yyyy\",\n    \"time_format\": \"hh.mm.ss a\",\n    \"preferred_language\": \"example_value\",\n    \"gender\": \"example_value\",\n    \"photo\": \"example_value\",\n    \"introduction\": \"example_value\",\n    \"source\": \"example_value\",\n    \"roles\": \"example_value\",\n    \"cost_center\": \"example_value\",\n    \"schedule\": \"example_value\",\n    \"time_sheet_policy\": \"example_value\",\n    \"default_perspective\": \"example_value\",\n    \"ldap_server\": \"example_value\",\n    \"agent_status\": \"Off work\",\n    \"on_schedule\": \"Ahead\",\n    \"edu_status\": \"example_value\",\n    \"last_login\": \"2026-01-15\",\n    \"last_login_time\": \"2026-01-15T10:30:00Z\",\n    \"last_login_device\": \"example_value\",\n    \"last_position_update\": \"2026-01-15T10:30:00Z\",\n    \"sys_class_name\": \"example_value\",\n    \"sys_created_by\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_by\": \"example_value\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_mod_count\": 42,\n    \"sys_domain\": \"example_value\",\n    \"sys_domain_path\": \"example_value\",\n    \"sys_tags\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5288838-7567-4f5b-a87d-7841795d34e8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the contact to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a57174b8-55a6-4c1e-9371-74751e3ceb13",
+              "name": "Not found. Could be due to:\n- Requested contact doesn't exist\n- User doesn't have access to the contact\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the contact to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b54f6a3-c566-4d13-899e-baa8f7b814ad",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the contact to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.servicenow.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aa99e7f3-fccb-40b5-9f2d-e6d3c7b569cd",
+    "name": "ServiceNow Contact API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+      "type": "text/plain"
+    }
+  }
+}

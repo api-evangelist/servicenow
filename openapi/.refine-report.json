@@ -37,6 +37,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "servicenow-aggregate-statistics-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-attachments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-cart-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-catalog-items-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-catalogs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-categories-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-change-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-cmdb-instances-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-contact-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-emergency-changes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-import-sets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-normal-changes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-standard-changes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-table-records-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "servicenow-trouble-ticket-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

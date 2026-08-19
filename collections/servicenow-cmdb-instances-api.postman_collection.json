@@ -1,0 +1,592 @@
+{
+  "item": [
+    {
+      "id": "455eb932-9d33-4f55-9271-2cd751155541",
+      "name": "CMDB Instances",
+      "description": {
+        "content": "Operations for retrieving configuration item instances from the CMDB by class name.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d609a59c-8b0f-405a-a630-d54034594ffa",
+          "name": "Servicenow List Configuration Items by Class",
+          "request": {
+            "name": "Servicenow List Configuration Items by Class",
+            "description": {
+              "content": "Retrieves a list of configuration item instances for the specified CMDB class. Returns sys_id and name for each CI by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instance",
+                ":className"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string to filter CI records."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "1000",
+                  "description": "Maximum number of records to return. Default is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting record index for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "className",
+                  "description": "(Required) The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f149431e-fd73-4989-8894-30c10c7444cb",
+              "name": "Successful response returning a list of CI instances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"name\": \"Example Title\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94715fbe-e359-48dd-b50b-0da8aaa43f65",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a2a91d-c6e6-4621-a05f-c351b156d7ff",
+              "name": "The specified CMDB class does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name to query, such as cmdb_ci_server, cmdb_ci_linux_server, cmdb_ci_appl, or cmdb_ci_apache_web_server."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c88f54e-1a86-4181-964b-09f054d130d1",
+          "name": "Servicenow Retrieve a Specific Configuration Item",
+          "request": {
+            "name": "Servicenow Retrieve a Specific Configuration Item",
+            "description": {
+              "content": "Retrieves the full details of a specific configuration item by its class name and sys_id. Returns all attributes of the CI record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instance",
+                ":className",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "className",
+                  "description": "(Required) The CMDB class name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique sys_id of the configuration item."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ad81b5c-1b43-4c48-ac9d-23ce7d0cefe1",
+              "name": "Successful response returning the CI details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique sys_id of the configuration item."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"name\": \"Example Title\",\n    \"sys_class_name\": \"example_value\",\n    \"category\": \"example_value\",\n    \"subcategory\": \"example_value\",\n    \"operational_status\": \"1\",\n    \"install_status\": \"example_value\",\n    \"serial_number\": \"example_value\",\n    \"asset_tag\": \"example_value\",\n    \"ip_address\": \"example_value\",\n    \"mac_address\": \"example_value\",\n    \"dns_domain\": \"example_value\",\n    \"fqdn\": \"example_value\",\n    \"os\": \"example_value\",\n    \"os_version\": \"example_value\",\n    \"manufacturer\": \"example_value\",\n    \"model_id\": \"500123\",\n    \"location\": \"example_value\",\n    \"department\": \"example_value\",\n    \"company\": \"example_value\",\n    \"assigned_to\": \"example_value\",\n    \"managed_by\": \"example_value\",\n    \"owned_by\": \"example_value\",\n    \"support_group\": \"example_value\",\n    \"sys_created_on\": \"2026-01-15T10:30:00Z\",\n    \"sys_updated_on\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a263006-eeba-4720-b995-dc395da4e982",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique sys_id of the configuration item."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15aeab10-7a9e-42a4-9dc4-d189bdab4606",
+              "name": "Configuration item not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instance",
+                    ":className",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "className",
+                      "description": "(Required) The CMDB class name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique sys_id of the configuration item."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.servicenow.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "699d0293-5f89-4c8e-ba03-95e438558e9e",
+    "name": "ServiceNow CMDB Instances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+      "type": "text/plain"
+    }
+  }
+}

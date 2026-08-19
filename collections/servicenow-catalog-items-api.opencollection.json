@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Catalog Items API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/servicecatalog/items",
+            "params": [
+              {
+                "name": "sysparm_catalog",
+                "value": "example_value",
+                "type": "query",
+                "description": "The sys_id of the catalog to filter items by."
+              },
+              {
+                "name": "sysparm_category",
+                "value": "example_value",
+                "type": "query",
+                "description": "The sys_id of the category to filter items by."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of catalog items. Supports filtering by catalog and category."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/servicecatalog/items/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific catalog item including its variables and pricing information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

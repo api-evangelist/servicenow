@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Normal Changes API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Normal Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Normal Change Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/change/normal",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "",
+                "type": "query",
+                "description": "An encoded query string to filter results."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of normal change requests. Supports query filtering, field selection, and pagination."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.servicenow.com/api/now/change/normal",
+            "params": [
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new normal change request. Normal changes require full assessment and approval before implementation."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/change/normal/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific normal change request by its sys_id."
+        },
+        {
+          "info": {
+            "name": "Servicenow Update a Normal Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.servicenow.com/api/now/change/normal/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fields on an existing normal change request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

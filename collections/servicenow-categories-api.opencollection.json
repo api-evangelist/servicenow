@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Categories API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Catalog Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/servicecatalog/categories/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific catalog category including its child categories and items."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

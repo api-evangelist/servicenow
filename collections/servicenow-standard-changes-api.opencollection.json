@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Standard Changes API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standard Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Standard Change Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/change/standard",
+            "params": [
+              {
+                "name": "sysparm_query",
+                "value": "",
+                "type": "query",
+                "description": "An encoded query string to filter results."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              },
+              {
+                "name": "sysparm_display_value",
+                "value": "",
+                "type": "query",
+                "description": "Controls the format of field values in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of standard change requests. Standard changes are created from pre-approved templates."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Standard Change From a Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.servicenow.com/api/now/change/standard/:standard_change_template_id",
+            "params": [
+              {
+                "name": "standard_change_template_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The sys_id of the standard change template to use for creating the change request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new standard change request based on a pre-approved standard change template. The template sys_id determines the default values and pre-configured approvals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

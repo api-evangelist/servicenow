@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ServiceNow Contact Aggregate Statistics Standard Changes API
+  title: ServiceNow Standard Changes API
   description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
 
 
@@ -198,6 +198,13 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string to filter results.
+      schema:
+        type: string
     sysparmFields:
       name: sysparm_fields
       in: query
@@ -205,15 +212,6 @@ components:
       description: A comma-separated list of field names to include in the response.
       schema:
         type: string
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
     sysparmDisplayValue:
       name: sysparm_display_value
       in: query
@@ -226,13 +224,15 @@ components:
         - 'false'
         - all
         default: 'false'
-    sysparmQuery:
-      name: sysparm_query
+    sysparmOffset:
+      name: sysparm_offset
       in: query
       required: false
-      description: An encoded query string to filter results.
+      description: Starting record index for pagination.
       schema:
-        type: string
+        type: integer
+        minimum: 0
+        default: 0
     sysparmLimit:
       name: sysparm_limit
       in: query
@@ -242,81 +242,6 @@ components:
         type: integer
         minimum: 1
   schemas:
-    ChangeRequestInput:
-      type: object
-      description: Fields for creating or updating a change request.
-      properties:
-        short_description:
-          type: string
-          description: A brief summary of the change.
-          example: example_value
-        description:
-          type: string
-          description: A detailed description of the change.
-          example: A sample description.
-        priority:
-          type: string
-          description: The priority level.
-          enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          example: '1'
-        risk:
-          type: string
-          description: The risk level.
-          example: example_value
-        impact:
-          type: string
-          description: The impact level.
-          example: example_value
-        category:
-          type: string
-          description: The category of the change.
-          example: example_value
-        assigned_to:
-          type: string
-          description: The sys_id of the assigned user.
-          example: example_value
-        assignment_group:
-          type: string
-          description: The sys_id of the assignment group.
-          example: example_value
-        requested_by:
-          type: string
-          description: The sys_id of the requesting user.
-          example: example_value
-        start_date:
-          type: string
-          format: date-time
-          description: The planned start date and time.
-          example: '2026-01-15T10:30:00Z'
-        end_date:
-          type: string
-          format: date-time
-          description: The planned end date and time.
-          example: '2026-01-15T10:30:00Z'
-        cmdb_ci:
-          type: string
-          description: The sys_id of the affected configuration item.
-          example: example_value
-        justification:
-          type: string
-          description: The business justification for the change.
-          example: example_value
-        implementation_plan:
-          type: string
-          description: The plan for implementing the change.
-          example: example_value
-        backout_plan:
-          type: string
-          description: The plan for reverting the change if needed.
-          example: example_value
-        test_plan:
-          type: string
-          description: The plan for testing the change.
-          example: example_value
     ChangeRequest:
       type: object
       description: A ServiceNow change request record.
@@ -418,6 +343,81 @@ components:
           format: date-time
           description: The date and time the change request was last updated.
           example: '2026-01-15T10:30:00Z'
+    ChangeRequestInput:
+      type: object
+      description: Fields for creating or updating a change request.
+      properties:
+        short_description:
+          type: string
+          description: A brief summary of the change.
+          example: example_value
+        description:
+          type: string
+          description: A detailed description of the change.
+          example: A sample description.
+        priority:
+          type: string
+          description: The priority level.
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: '1'
+        risk:
+          type: string
+          description: The risk level.
+          example: example_value
+        impact:
+          type: string
+          description: The impact level.
+          example: example_value
+        category:
+          type: string
+          description: The category of the change.
+          example: example_value
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+          example: example_value
+        assignment_group:
+          type: string
+          description: The sys_id of the assignment group.
+          example: example_value
+        requested_by:
+          type: string
+          description: The sys_id of the requesting user.
+          example: example_value
+        start_date:
+          type: string
+          format: date-time
+          description: The planned start date and time.
+          example: '2026-01-15T10:30:00Z'
+        end_date:
+          type: string
+          format: date-time
+          description: The planned end date and time.
+          example: '2026-01-15T10:30:00Z'
+        cmdb_ci:
+          type: string
+          description: The sys_id of the affected configuration item.
+          example: example_value
+        justification:
+          type: string
+          description: The business justification for the change.
+          example: example_value
+        implementation_plan:
+          type: string
+          description: The plan for implementing the change.
+          example: example_value
+        backout_plan:
+          type: string
+          description: The plan for reverting the change if needed.
+          example: example_value
+        test_plan:
+          type: string
+          description: The plan for testing the change.
+          example: example_value
     Error:
       type: object
       properties:

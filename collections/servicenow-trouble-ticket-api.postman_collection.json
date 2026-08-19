@@ -1,0 +1,1157 @@
+{
+  "item": [
+    {
+      "id": "df2c63e8-52a1-4a6f-b0c9-3dc73708d8b9",
+      "name": "Trouble Ticket",
+      "description": {
+        "content": "Operations for managing trouble tickets (Cases, Incidents, and Service Problem Cases)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b642344-0fd6-46b3-bf48-850b8c1245fe",
+          "name": "Servicenow Retrieve All Trouble Tickets",
+          "request": {
+            "name": "Servicenow Retrieve All Trouble Tickets",
+            "description": {
+              "content": "Retrieves a list of all trouble ticket records from the Case, Incident, and Service Problem Case tables.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleTicket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "List of fields to return in the response. Invalid fields are ignored."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Filter trouble tickets by sys_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Starting index at which to begin retrieving records"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filter trouble tickets by severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter trouble tickets by status"
+                },
+                {
+                  "disabled": false,
+                  "key": "ticketType",
+                  "value": "<string>",
+                  "description": "Filter trouble tickets by ticket type"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a94f7e78-8bf5-4ab9-a4cf-a7a1578a2e79",
+              "name": "Request successfully processed. Full resource returned in response (no pagination).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "id,name,description,status,severity,ticketType"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "status",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "ticketType",
+                      "value": "Case"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of records available on the server",
+                  "key": "X-Total-Count",
+                  "value": "1497"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"@type\": \"example_value\",\n    \"id\": \"abc123\",\n    \"href\": \"example_value\",\n    \"creationDate\": \"2026-01-15T10:30:00Z\",\n    \"lastUpdate\": \"2026-01-15T10:30:00Z\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"severity\": \"example_value\",\n    \"status\": \"example_value\",\n    \"ticketType\": \"Case\",\n    \"channel\": {\n      \"name\": \"Example Title\"\n    },\n    \"note\": [\n      {}\n    ],\n    \"relatedEntity\": [\n      {}\n    ],\n    \"relatedParty\": [\n      {}\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "209ec359-7e3b-40d4-8e72-cf3982d681f5",
+              "name": "Partial resource returned in response (with pagination).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "id,name,description,status,severity,ticketType"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "status",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "ticketType",
+                      "value": "Case"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Range of content returned in a paginated call",
+                  "key": "Content-Range",
+                  "value": "items 3-5"
+                },
+                {
+                  "disabled": false,
+                  "description": "Links to navigate through query results (first, last, next, previous)",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Total number of records available on the server",
+                  "key": "X-Total-Count",
+                  "value": "1497"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"@type\": \"example_value\",\n    \"id\": \"abc123\",\n    \"href\": \"example_value\",\n    \"creationDate\": \"2026-01-15T10:30:00Z\",\n    \"lastUpdate\": \"2026-01-15T10:30:00Z\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"severity\": \"example_value\",\n    \"status\": \"example_value\",\n    \"ticketType\": \"Case\",\n    \"channel\": {\n      \"name\": \"Example Title\"\n    },\n    \"note\": [\n      {}\n    ],\n    \"relatedEntity\": [\n      {}\n    ],\n    \"relatedParty\": [\n      {}\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "467c33b8-d262-45cd-ab7e-de92e7175725",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "id,name,description,status,severity,ticketType"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "status",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "ticketType",
+                      "value": "Case"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593a508c-0eb4-4e83-87ce-605d5711c766",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "id,name,description,status,severity,ticketType"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "status",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "ticketType",
+                      "value": "Case"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60cd93bd-e0b9-4ae7-a263-4218a0dfa959",
+          "name": "Servicenow Create a Trouble Ticket",
+          "request": {
+            "name": "Servicenow Create a Trouble Ticket",
+            "description": {
+              "content": "Creates a record in the Case, Incident, or Service Problem Case table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleTicket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"ticketType\": \"Incident\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"<string>\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"<string>\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef9d19c7-fe9a-4773-a46c-bea4f8283b5e",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"1\",\n  \"status\": \"example_value\",\n  \"ticketType\": \"Case\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"text\": \"example_value\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"customer\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@type\": \"example_value\",\n  \"id\": \"abc123\",\n  \"href\": \"example_value\",\n  \"creationDate\": \"2026-01-15T10:30:00Z\",\n  \"lastUpdate\": \"2026-01-15T10:30:00Z\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"example_value\",\n  \"status\": \"example_value\",\n  \"ticketType\": \"Case\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"example_value\",\n      \"text\": \"example_value\",\n      \"date\": \"2026-01-15T10:30:00Z\",\n      \"author\": \"example_value\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"example_value\",\n      \"id\": \"abc123\",\n      \"href\": \"example_value\",\n      \"name\": \"Example Title\",\n      \"role\": \"example_value\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"@referredType\": \"assigned_to\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "803e34d0-bef9-41d5-baf1-68af0d7c05cb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"1\",\n  \"status\": \"example_value\",\n  \"ticketType\": \"Case\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"text\": \"example_value\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"customer\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4762ffdd-3163-4e43-81ce-d709b461362f",
+          "name": "Servicenow Retrieve a Specific Trouble Ticket",
+          "request": {
+            "name": "Servicenow Retrieve a Specific Trouble Ticket",
+            "description": {
+              "content": "Retrieves a specified record from the Case, Incident, or Service Problem Case table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleTicket",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "List of fields to return in the response. Invalid fields are ignored."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sys_id of the case or incident record to retrieve"
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26a1f6c8-f93c-4273-91cc-d7accf5dae90",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@type\": \"example_value\",\n  \"id\": \"abc123\",\n  \"href\": \"example_value\",\n  \"creationDate\": \"2026-01-15T10:30:00Z\",\n  \"lastUpdate\": \"2026-01-15T10:30:00Z\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"example_value\",\n  \"status\": \"example_value\",\n  \"ticketType\": \"Case\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"example_value\",\n      \"text\": \"example_value\",\n      \"date\": \"2026-01-15T10:30:00Z\",\n      \"author\": \"example_value\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"example_value\",\n      \"id\": \"abc123\",\n      \"href\": \"example_value\",\n      \"name\": \"Example Title\",\n      \"role\": \"example_value\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"@referredType\": \"assigned_to\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07f575a0-9310-4d5f-ac47-3705dcf3535a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5007d74a-abf0-41a1-8910-d8738b92c403",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to retrieve"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e68952a-48d6-45fd-b693-60b9d1e218ef",
+          "name": "Servicenow Update a Trouble Ticket",
+          "request": {
+            "name": "Servicenow Update a Trouble Ticket",
+            "description": {
+              "content": "Updates a specified record in the Case, Incident, or Service Problem Case table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleTicket",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sys_id of the case or incident record to update"
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"status\": \"<string>\",\n  \"channel\": {\n    \"name\": \"<string>\"\n  },\n  \"note\": [\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"<string>\"\n    },\n    {\n      \"text\": \"<string>\",\n      \"@type\": \"<string>\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"@referredType\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f939432a-8347-4ccf-8dfb-93867ee804ed",
+              "name": "Successful. The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to update"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"1\",\n  \"status\": \"example_value\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"text\": \"example_value\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"customer\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@type\": \"example_value\",\n  \"id\": \"abc123\",\n  \"href\": \"example_value\",\n  \"creationDate\": \"2026-01-15T10:30:00Z\",\n  \"lastUpdate\": \"2026-01-15T10:30:00Z\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"example_value\",\n  \"status\": \"example_value\",\n  \"ticketType\": \"Case\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"@type\": \"example_value\",\n      \"text\": \"example_value\",\n      \"date\": \"2026-01-15T10:30:00Z\",\n      \"author\": \"example_value\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"@type\": \"example_value\",\n      \"id\": \"abc123\",\n      \"href\": \"example_value\",\n      \"name\": \"Example Title\",\n      \"role\": \"example_value\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"@referredType\": \"assigned_to\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e08afb2a-549f-4230-8f99-72bf9fc0831e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to update"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"1\",\n  \"status\": \"example_value\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"text\": \"example_value\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"customer\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "935cea82-97ec-4a74-863b-d8aa7c55b51f",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleTicket",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sys_id of the case or incident record to update"
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"severity\": \"1\",\n  \"status\": \"example_value\",\n  \"channel\": {\n    \"name\": \"Example Title\"\n  },\n  \"note\": [\n    {\n      \"text\": \"example_value\",\n      \"@type\": \"comments\"\n    }\n  ],\n  \"relatedEntity\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"asset\"\n    }\n  ],\n  \"relatedParty\": [\n    {\n      \"id\": \"abc123\",\n      \"@referredType\": \"customer\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.servicenow.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e668b7a-f2b9-40f0-8aed-22f862cb955c",
+    "name": "ServiceNow Trouble Ticket API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+      "type": "text/plain"
+    }
+  }
+}

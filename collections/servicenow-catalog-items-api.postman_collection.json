@@ -1,0 +1,427 @@
+{
+  "item": [
+    {
+      "id": "98bbd3f0-2209-4987-88be-559172728708",
+      "name": "Catalog Items",
+      "description": {
+        "content": "Operations for retrieving catalog item details and variables.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a42e3b3a-49f5-4f44-9067-7cc9447c0f6e",
+          "name": "Servicenow List Catalog Items",
+          "request": {
+            "name": "Servicenow List Catalog Items",
+            "description": {
+              "content": "Retrieves a list of catalog items. Supports filtering by catalog and category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicecatalog",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_catalog",
+                  "value": "<string>",
+                  "description": "The sys_id of the catalog to filter items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_category",
+                  "value": "<string>",
+                  "description": "The sys_id of the category to filter items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_offset",
+                  "value": "0",
+                  "description": "Starting index for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ef0cf3b-9a5a-44e3-91ee-c41406869243",
+              "name": "Successful response returning catalog items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicecatalog",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_catalog",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_category",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"sys_id\": \"500123\",\n      \"name\": \"Example Title\",\n      \"short_description\": \"example_value\",\n      \"category\": \"example_value\",\n      \"price\": \"example_value\",\n      \"picture\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9c50ec9-2639-46d2-9a15-50f6a5c3d851",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicecatalog",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_catalog",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_category",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sysparm_offset",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ada63a1e-95e3-4e9b-8dd7-d2ace5c49d08",
+          "name": "Servicenow Retrieve a Catalog Item",
+          "request": {
+            "name": "Servicenow Retrieve a Catalog Item",
+            "description": {
+              "content": "Retrieves details for a specific catalog item including its variables and pricing information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicecatalog",
+                "items",
+                ":sys_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sys_id",
+                  "description": "(Required) The unique system identifier."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b961e92-369a-41cb-b1d0-53f7bb15184d",
+              "name": "Successful response returning item details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicecatalog",
+                    "items",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"sys_id\": \"500123\",\n    \"name\": \"Example Title\",\n    \"short_description\": \"example_value\",\n    \"description\": \"A sample description.\",\n    \"category\": \"example_value\",\n    \"price\": \"example_value\",\n    \"picture\": \"example_value\",\n    \"mandatory_attachment\": true,\n    \"request_method\": \"example_value\",\n    \"variables\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dc666f7-9ab8-4e6d-b207-18723eeda331",
+              "name": "Catalog item not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicecatalog",
+                    "items",
+                    ":sys_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sys_id",
+                      "description": "(Required) The unique system identifier."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.servicenow.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "89002be3-b086-4a0b-8a3e-34c5e5f3832a",
+    "name": "ServiceNow Catalog Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Trouble Ticket API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trouble Ticket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow Retrieve All Trouble Tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/troubleTicket",
+            "params": [
+              {
+                "name": "fields",
+                "value": "id,name,description,status,severity,ticketType",
+                "type": "query",
+                "description": "List of fields to return in the response. Invalid fields are ignored."
+              },
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "query",
+                "description": "Filter trouble tickets by sys_id"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting index at which to begin retrieving records"
+              },
+              {
+                "name": "severity",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter trouble tickets by severity"
+              },
+              {
+                "name": "status",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter trouble tickets by status"
+              },
+              {
+                "name": "ticketType",
+                "value": "Case",
+                "type": "query",
+                "description": "Filter trouble tickets by ticket type"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all trouble ticket records from the Case, Incident, and Service Problem Case tables."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Trouble Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.servicenow.com/api/now/troubleTicket",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a record in the Case, Incident, or Service Problem Case table."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Specific Trouble Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/troubleTicket/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "Sys_id of the case or incident record to retrieve"
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "List of fields to return in the response. Invalid fields are ignored."
+              }
+            ]
+          },
+          "docs": "Retrieves a specified record from the Case, Incident, or Service Problem Case table."
+        },
+        {
+          "info": {
+            "name": "Servicenow Update a Trouble Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.servicenow.com/api/now/troubleTicket/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "Sys_id of the case or incident record to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specified record in the Case, Incident, or Service Problem Case table."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

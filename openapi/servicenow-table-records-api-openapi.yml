@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ServiceNow Contact Aggregate Statistics Table Records API
+  title: ServiceNow Table Records API
   description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
 
 
@@ -489,22 +489,14 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique 32-character system identifier for a record in ServiceNow.
       schema:
         type: string
-      example: sys_id,number,short_description,state,priority
-    sysparmQueryNoDomain:
-      name: sysparm_query_no_domain
-      in: query
-      required: false
-      description: When set to true, the query ignores domain separation and returns records from all domains.
-      schema:
-        type: boolean
-        default: false
+        pattern: ^[a-f0-9]{32}$
     sysparmSuppressPaginationHeader:
       name: sysparm_suppress_pagination_header
       in: query
@@ -513,6 +505,65 @@ components:
       schema:
         type: boolean
         default: false
+    sysparmQueryCategory:
+      name: sysparm_query_category
+      in: query
+      required: false
+      description: The name of the query category used to filter the query.
+      schema:
+        type: string
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
+      schema:
+        type: string
+      example: active=true^priority=1^ORDERBYDESCsys_created_on
+    sysparmNoCount:
+      name: sysparm_no_count
+      in: query
+      required: false
+      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
+      schema:
+        type: boolean
+        default: false
+    sysparmInputDisplayValue:
+      name: sysparm_input_display_value
+      in: query
+      required: false
+      description: When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.
+      schema:
+        type: boolean
+        default: false
+    sysparmExcludeReferenceLink:
+      name: sysparm_exclude_reference_link
+      in: query
+      required: false
+      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
+      schema:
+        type: boolean
+        default: false
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.
+      schema:
+        type: string
+      example: sys_id,number,short_description,state,priority
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        - all
+        default: 'false'
     sysparmOffset:
       name: sysparm_offset
       in: query
@@ -537,49 +588,6 @@ components:
       schema:
         type: string
       example: incident
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
-      schema:
-        type: string
-      example: active=true^priority=1^ORDERBYDESCsys_created_on
-    sysparmInputDisplayValue:
-      name: sysparm_input_display_value
-      in: query
-      required: false
-      description: When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.
-      schema:
-        type: boolean
-        default: false
-    sysparmDisplayValue:
-      name: sysparm_display_value
-      in: query
-      required: false
-      description: Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        - all
-        default: 'false'
-    sysparmExcludeReferenceLink:
-      name: sysparm_exclude_reference_link
-      in: query
-      required: false
-      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
-      schema:
-        type: boolean
-        default: false
-    sysparmQueryCategory:
-      name: sysparm_query_category
-      in: query
-      required: false
-      description: The name of the query category used to filter the query.
-      schema:
-        type: string
     sysparmLimit:
       name: sysparm_limit
       in: query
@@ -589,19 +597,11 @@ components:
         type: integer
         minimum: 1
         default: 10000
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique 32-character system identifier for a record in ServiceNow.
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{32}$
-    sysparmNoCount:
-      name: sysparm_no_count
+    sysparmQueryNoDomain:
+      name: sysparm_query_no_domain
       in: query
       required: false
-      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
+      description: When set to true, the query ignores domain separation and returns records from all domains.
       schema:
         type: boolean
         default: false

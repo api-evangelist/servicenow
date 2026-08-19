@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Change Tasks API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Change Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Tasks for a Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/change/:sys_id/task",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              },
+              {
+                "name": "sysparm_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of field names to include in the response."
+              },
+              {
+                "name": "sysparm_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting record index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all tasks associated with the specified change request."
+        },
+        {
+          "info": {
+            "name": "Servicenow Create a Task for a Change Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.servicenow.com/api/now/change/:sys_id/task",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier for the change request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new task associated with the specified change request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

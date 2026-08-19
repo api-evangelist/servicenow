@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ServiceNow Catalogs API",
+    "version": "Zurich"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Servicenow List Service Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/servicecatalog/catalogs",
+            "params": [
+              {
+                "name": "sysparm_limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of catalogs to return."
+              },
+              {
+                "name": "sysparm_offset",
+                "value": "10",
+                "type": "query",
+                "description": "Starting index for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all available service catalogs on the instance."
+        },
+        {
+          "info": {
+            "name": "Servicenow Retrieve a Specific Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.servicenow.com/api/now/servicecatalog/catalogs/:sys_id",
+            "params": [
+              {
+                "name": "sys_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique system identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific service catalog including its categories."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,462 @@
+{
+  "item": [
+    {
+      "id": "a0009200-3d0a-4d93-aff1-1f32f4bf955e",
+      "name": "Aggregate Statistics",
+      "description": {
+        "content": "Operations for computing aggregate statistics on ServiceNow table records including count, sum, average, minimum, and maximum values.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36c5c0e9-17e2-4f4c-adb4-ecee2fbafc38",
+          "name": "Servicenow Retrieve Aggregate Statistics for a Table",
+          "request": {
+            "name": "Servicenow Retrieve Aggregate Statistics for a Table",
+            "description": {
+              "content": "Computes aggregate statistics for records in the specified table. Supports count, sum, average, minimum, and maximum calculations with optional query filtering and group-by fields. Multiple aggregate types can be requested in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                ":tableName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sysparm_query",
+                  "value": "<string>",
+                  "description": "An encoded query string to filter records before aggregation. Uses the same syntax as the Table API sysparm_query parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_count",
+                  "value": "false",
+                  "description": "When set to true, returns the count of records matching the query."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_sum_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of numeric fields for which to calculate the sum."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_avg_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of numeric fields for which to calculate the average."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_min_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of fields for which to find the minimum value."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_max_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of fields for which to find the maximum value."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_group_by",
+                  "value": "<string>",
+                  "description": "A comma-separated list of fields by which to group the aggregated results. Each unique combination of group-by field values produces a separate result entry."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_order_by",
+                  "value": "<string>",
+                  "description": "The field by which to order the grouped results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_having",
+                  "value": "<string>",
+                  "description": "An additional filter applied after aggregation to restrict which groups are returned based on aggregate values."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysparm_display_value",
+                  "value": "false",
+                  "description": "Controls whether display values or actual values are returned for group-by fields."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableName",
+                  "description": "(Required) The name of the ServiceNow table on which to compute aggregate statistics."
+                },
+                {
+                  "description": "Your ServiceNow instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a135a73-10b0-49bb-ad19-41c389ab9c28",
+              "name": "Successful response containing the computed aggregate statistics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1"
+                    },
+                    {
+                      "key": "sysparm_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_sum_fields",
+                      "value": "reassignment_count,reopen_count"
+                    },
+                    {
+                      "key": "sysparm_avg_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_min_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_max_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_group_by",
+                      "value": "priority,state"
+                    },
+                    {
+                      "key": "sysparm_order_by",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_having",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table on which to compute aggregate statistics."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"stats\": {\n      \"count\": 42\n    },\n    \"group_by\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7003d822-e3b3-40f6-ae37-6af46ec96cb6",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1"
+                    },
+                    {
+                      "key": "sysparm_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_sum_fields",
+                      "value": "reassignment_count,reopen_count"
+                    },
+                    {
+                      "key": "sysparm_avg_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_min_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_max_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_group_by",
+                      "value": "priority,state"
+                    },
+                    {
+                      "key": "sysparm_order_by",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_having",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table on which to compute aggregate statistics."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ce56f3e-bcb3-4cd8-890b-e7bf84a12972",
+              "name": "Not found. The specified table does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    ":tableName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sysparm_query",
+                      "value": "active=true^priority=1"
+                    },
+                    {
+                      "key": "sysparm_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sysparm_sum_fields",
+                      "value": "reassignment_count,reopen_count"
+                    },
+                    {
+                      "key": "sysparm_avg_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_min_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_max_fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_group_by",
+                      "value": "priority,state"
+                    },
+                    {
+                      "key": "sysparm_order_by",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_having",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "sysparm_display_value",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableName",
+                      "description": "(Required) The name of the ServiceNow table on which to compute aggregate statistics."
+                    },
+                    {
+                      "description": "Your ServiceNow instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"example_value\",\n    \"detail\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your ServiceNow instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "instance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.servicenow.com/api/now",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b554648-de7d-4797-a6a8-60033654cbd8",
+    "name": "ServiceNow Aggregate Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.\n\nIn addition, you can generate new social media profile records when creating a contact.\n\nThe Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.\n\n**Authentication**: Users need the `csm_ws_integration` role for full API access.\n\n\nContact Support:\n Name: ServiceNow",
+      "type": "text/plain"
+    }
+  }
+}
