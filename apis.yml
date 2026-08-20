@@ -26,6 +26,11 @@ apis:
   tags:
   - Articles
   - Knowledge Base
+  - Knowledge-Management
+  - Self-Service
+  tags_raw:
+  - Articles
+  - Knowledge Base
   - Knowledge Management
   - Self-Service
   image: >-
@@ -178,6 +183,11 @@ apis:
 - aid: servicenow:servicenow-account-api
   name: ServiceNow Account API
   tags:
+  - Account
+  - CSM
+  - Customer Service
+  - Records
+  tags_raw:
   - Accounts
   - CSM
   - Customer Service
@@ -221,6 +231,11 @@ apis:
   - Attachments
   - CSM
   - Customer Service
+  - File
+  tags_raw:
+  - Attachments
+  - CSM
+  - Customer Service
   - Files
   image: >-
     https://www.servicenow.com/content/dam/servicenow-assets/images/meganav/servicenow-logo.svg
@@ -238,6 +253,11 @@ apis:
 - aid: servicenow:servicenow-email-api
   name: ServiceNow Email API
   tags:
+  - Email
+  - Messaging
+  - Notification
+  - Platform
+  tags_raw:
   - Email
   - Messaging
   - Notifications
@@ -442,6 +462,11 @@ apis:
   - Access Control
   - Roles
   - Security
+  - User
+  tags_raw:
+  - Access Control
+  - Roles
+  - Security
   - Users
   image: >-
     https://www.servicenow.com/content/dam/servicenow-assets/images/meganav/servicenow-logo.svg
@@ -501,6 +526,11 @@ apis:
 - aid: servicenow:servicenow-predictive-intelligence-api
   name: ServiceNow Predictive Intelligence API
   tags:
+  - Artificial Intelligence
+  - Classification
+  - Machine-Learning
+  - Predictions
+  tags_raw:
   - AI
   - Classification
   - Machine Learning
@@ -562,6 +592,11 @@ apis:
 - aid: servicenow:servicenow-virtual-agent-bot-integration-api
   name: ServiceNow Virtual Agent Bot Integration API
   tags:
+  - Chatbots
+  - Conversational AI
+  - Self-Service
+  - Virtual Agent
+  tags_raw:
   - Chatbot
   - Conversational AI
   - Self-Service
@@ -603,6 +638,11 @@ apis:
 - aid: servicenow:servicenow-ai-assets-api
   name: ServiceNow AI Assets API
   tags:
+  - AI Governance
+  - Artificial Intelligence
+  - Machine-Learning
+  - Platform
+  tags_raw:
   - AI Governance
   - Artificial Intelligence
   - Machine Learning
@@ -743,6 +783,11 @@ apis:
 - aid: servicenow:servicenow-csm-order-api
   name: ServiceNow CSM Order API
   tags:
+  - Commerce
+  - CSM
+  - Customer Service
+  - Order
+  tags_raw:
   - Commerce
   - CSM
   - Customer Service
@@ -923,6 +968,11 @@ apis:
 - aid: servicenow:servicenow-product-inventory-open-api
   name: ServiceNow Product Inventory Open API
   tags:
+  - Inventory
+  - Product
+  - Telecommunications
+  - TMF
+  tags_raw:
   - Inventory
   - Products
   - Telecommunications
@@ -1137,6 +1187,8 @@ apis:
     https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
   baseURL: https://{instance}.service-now.com/api/now/table
   tags:
+  - CatalogItems
+  tags_raw:
   - Catalog Items
   properties:
   - type: OpenAPI
@@ -1722,6 +1774,16 @@ apis:
       https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
 name: ServiceNow
 tags:
+- Automation
+- Cloud Services
+- Digital Workflows
+- Enterprise Platform
+- ITSM
+- Processes
+- T1
+- Workflow-Automation
+- Workflows
+tags_raw:
 - Automation
 - Cloud Services
 - Digital Workflows
