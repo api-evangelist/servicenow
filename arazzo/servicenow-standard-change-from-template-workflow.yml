@@ -11,8 +11,11 @@ info:
     wrapping the change under a result object and lists under a result array.
   version: 1.0.0
 sourceDescriptions:
-- name: changeApi
-  url: ../openapi/servicenow-change-management-api-openapi.yml
+- name: normalChangesApi
+  url: ../openapi/servicenow-normal-changes-api-openapi.yml
+  type: openapi
+- name: standardChangesApi
+  url: ../openapi/servicenow-standard-changes-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: standard-change-from-template

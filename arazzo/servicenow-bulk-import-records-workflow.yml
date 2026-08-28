@@ -13,11 +13,11 @@ info:
     written inline.
   version: 1.0.0
 sourceDescriptions:
-- name: importSetApi
-  url: ../openapi/servicenow-import-set-api-openapi.yml
+- name: importSetsApi
+  url: ../openapi/servicenow-import-sets-api-openapi.yml
   type: openapi
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bulk-import-records

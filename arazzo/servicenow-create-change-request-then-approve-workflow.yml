@@ -13,8 +13,8 @@ info:
     result object.
   version: 1.0.0
 sourceDescriptions:
-- name: changeApi
-  url: ../openapi/servicenow-change-management-api-openapi.yml
+- name: normalChangesApi
+  url: ../openapi/servicenow-normal-changes-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-change-then-approve

@@ -12,8 +12,8 @@ info:
     with the Table API returning lists under a result array.
   version: 1.0.0
 sourceDescriptions:
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: assign-open-task

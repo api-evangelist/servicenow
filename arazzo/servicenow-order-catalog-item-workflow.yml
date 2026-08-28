@@ -11,8 +11,11 @@ info:
     object. Every request is written inline.
   version: 1.0.0
 sourceDescriptions:
-- name: serviceCatalogApi
-  url: ../openapi/servicenow-service-catalog-api-openapi.yml
+- name: cartApi
+  url: ../openapi/servicenow-cart-api-openapi.yml
+  type: openapi
+- name: catalogItemsApi
+  url: ../openapi/servicenow-catalog-items-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: order-catalog-item

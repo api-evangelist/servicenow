@@ -11,11 +11,11 @@ info:
     under a result object/array. Every request is written inline.
   version: 1.0.0
 sourceDescriptions:
-- name: cmdbApi
-  url: ../openapi/servicenow-cmdb-instance-api-openapi.yml
+- name: cmdbInstancesApi
+  url: ../openapi/servicenow-cmdb-instances-api-openapi.yml
   type: openapi
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: link-ci-to-incident

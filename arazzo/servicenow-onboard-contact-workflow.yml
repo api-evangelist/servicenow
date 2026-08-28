@@ -13,10 +13,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: contactApi
-  url: ../openapi/contact-api-openapi.yaml
+  url: ../openapi/servicenow-contact-api-openapi.yml
   type: openapi
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-contact

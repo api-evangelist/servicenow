@@ -13,7 +13,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: troubleTicketApi
-  url: ../openapi/trouble-ticket-openapi.yaml
+  url: ../openapi/servicenow-trouble-ticket-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-trouble-ticket-then-update

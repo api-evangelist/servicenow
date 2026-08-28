@@ -11,8 +11,8 @@ info:
     create, read, and update.
   version: 1.0.0
 sourceDescriptions:
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: table-record-lifecycle

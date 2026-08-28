@@ -12,11 +12,11 @@ info:
     under a result array. Every request is written inline.
   version: 1.0.0
 sourceDescriptions:
-- name: aggregateApi
-  url: ../openapi/servicenow-aggregate-api-openapi.yml
+- name: aggregateStatisticsApi
+  url: ../openapi/servicenow-aggregate-statistics-api-openapi.yml
   type: openapi
-- name: tableApi
-  url: ../openapi/servicenow-table-api-openapi.yml
+- name: tableRecordsApi
+  url: ../openapi/servicenow-table-records-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: incident-backlog-report
