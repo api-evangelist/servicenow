@@ -1,0 +1,96 @@
+slug: servicenow
+provider: ServiceNow
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: Emergency Changes
+  spec_file: servicenow-emergency-changes-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.92
+  evidence: GET /change/emergency "List Emergency Change Requests"; schema ChangeRequest
+  reason: ITSM change request lifecycle (emergency change type) is squarely IT Service Management change
+    process; vendor is an IT operations platform.
+- tag: Normal Changes
+  spec_file: servicenow-normal-changes-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.92
+  evidence: '"Create a Normal Change Request", "Update a Normal Change Request"; schema ChangeRequestInput'
+  reason: Standard ITIL change request management operations on an IT operations platform.
+- tag: Standard Changes
+  spec_file: servicenow-standard-changes-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.9
+  evidence: '"Create a Standard Change From a Template"; GET /change/standard "List Standard Change Requests"'
+  reason: Pre-approved standard change requests are part of the ITSM change management process.
+- tag: Change Tasks
+  spec_file: servicenow-change-tasks-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.85
+  evidence: POST /change/{sys_id}/task  createChangeTask  Servicenow Create a Task for a Change Request
+  reason: Tasks under ITIL change requests — change management within IT Service Management.
+- tag: Catalog Items
+  spec_file: servicenow-catalog-items-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.82
+  evidence: 'GET /servicecatalog/items  listCatalogItems; schemas: CatalogItem, CatalogVariable'
+  reason: Service catalog item retrieval in ServiceNow ITSM — service catalogue is explicitly part of
+    IT Service Management.
+- tag: Catalogs
+  spec_file: servicenow-catalogs-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.82
+  evidence: GET /servicecatalog/catalogs  listCatalogs  Servicenow List Service Catalogs
+  reason: Service catalogue listing — ITSM service catalogue capability.
+- tag: CMDB Instances
+  spec_file: servicenow-cmdb-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: GET /instance/{className} listCmdbInstances 'List Configuration Items by Class'; schemas CmdbInstance,
+    CmdbInstanceSummary
+  reason: CMDB configuration item retrieval is core IT asset/infrastructure inventory management. Ambiguity
+    between IT Service Management (CMDB as ITSM artefact) and IT Infrastructure Management keeps confidence
+    at 0.8.
+- tag: Cart
+  spec_file: servicenow-cart-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.8
+  evidence: POST /servicecatalog/items/{sys_id}/add_to_cart; POST /servicecatalog/cart/submit_order submitCartOrder
+  reason: Service catalogue ordering cart — employees request catalogue items which become service requests;
+    this is IT Service Management (service catalogue/request fulfilment), not retail commerce. Some chance
+    it should sit under procurement requisitioning.
+- tag: Categories
+  spec_file: servicenow-categories-api-openapi.yml
+  capability_id: BC-600.30
+  capability_id_l1: BC-600
+  capability_name: IT Service Management
+  confidence: 0.7
+  evidence: GET /servicecatalog/categories/{sys_id}  getCategory  Servicenow Retrieve a Catalog Category
+  reason: Service catalogue category retrieval, part of the ITSM service catalogue surface; thin (single
+    read op) so moderate confidence.
