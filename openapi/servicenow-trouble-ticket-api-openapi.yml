@@ -1,25 +1,14 @@
 openapi: 3.2.0
 info:
-  title: ServiceNow Trouble Ticket API
-  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
-
-
-    In addition, you can generate new social media profile records when creating a contact.
-
-
-    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
-
-
-    **Authentication**: Users need the `csm_ws_integration` role for full API access.
-
-    '
+  title: ServiceNow Open Trouble Ticket API
+  description: "The Trouble Ticket Open API provides endpoints to create, update, and retrieve data from the Case [sn_customerservice_case], \nIncident [incident], and Service Problem Case [sn_sprb_mgmt_case] tables.\n\nUse this API to manage ticket information between external ticketing systems and the ServiceNow AI Platform.\n\nThis API is a ServiceNow implementation of the TM Forum Trouble Ticket Management API REST specification, \nbased on TMF621 Trouble Ticket Management API User Guide v5.0.0, September 2024.\n\n**Authentication**: The calling user must have the `ticket_integrator` role.\n"
   version: Zurich
   contact:
     name: ServiceNow
     url: https://docs.servicenow.com
-  x-namespace: now
+  x-namespace: sn_ind_tsm_sdwan
 servers:
-- url: https://{instance}.servicenow.com/api/now
+- url: https://{instance}.servicenow.com/api/sn_ind_tsm_sdwan/ticket
   description: ServiceNow instance
   variables:
     instance:
@@ -514,6 +503,90 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RelatedParty:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Sys_id of the related party
+          example: abc123
+        name:
+          type: string
+          description: Name of the related party
+          example: Example Title
+        '@referredType':
+          type: string
+          enum:
+          - assigned_to
+          - assignment_group
+          - customer
+          - customer_contact
+          description: 'Type of related party:
+
+            - assigned_to: User assigned to work on the ticket
+
+            - assignment_group: Group assigned to work on the ticket
+
+            - customer: Company or account for the ticket
+
+            - customer_contact: Caller or contact for the ticket
+
+            '
+          example: assigned_to
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message
+            detail:
+              type: string
+              description: Detailed error information
+          example: example_value
+    RelatedEntity:
+      type: object
+      properties:
+        '@type':
+          type: string
+          default: relatedEntity
+          description: This value is always relatedEntity
+          example: example_value
+        id:
+          type: string
+          description: Sys_id of the impacted item or service
+          example: abc123
+        href:
+          type: string
+          description: Returns an empty string
+          example: example_value
+        name:
+          type: string
+          description: Name of the impacted item or service
+          example: Example Title
+        role:
+          type: string
+          description: Description of the impacted item or service
+          example: example_value
+        '@referredType':
+          type: string
+          enum:
+          - asset
+          - product
+          - product_inventory
+          - cmdb_ci
+          - cmdb_ci_service
+          description: Type of item or service
+          example: asset
+    Channel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the contact method
+          example: Example Title
     TroubleTicketUpdate:
       type: object
       properties:
@@ -571,34 +644,6 @@ components:
           items:
             $ref: '#/components/schemas/RelatedPartyInput'
           example: []
-    Channel:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the contact method
-          example: Example Title
-    Note:
-      type: object
-      properties:
-        '@type':
-          type: string
-          default: comments
-          description: The type of note (always 'comments' in responses)
-          example: example_value
-        text:
-          type: string
-          description: The comment text
-          example: example_value
-        date:
-          type: string
-          format: date-time
-          description: The date the comment was created
-          example: '2026-01-15T10:30:00Z'
-        author:
-          type: string
-          description: The name of the user who wrote the comment
-          example: example_value
     TroubleTicket:
       type: object
       properties:
@@ -669,106 +714,27 @@ components:
           items:
             $ref: '#/components/schemas/RelatedParty'
           example: []
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Error message
-            detail:
-              type: string
-              description: Detailed error information
-          example: example_value
-    RelatedEntity:
+    Note:
       type: object
       properties:
         '@type':
           type: string
-          default: relatedEntity
-          description: This value is always relatedEntity
+          default: comments
+          description: The type of note (always 'comments' in responses)
           example: example_value
-        id:
+        text:
           type: string
-          description: Sys_id of the impacted item or service
-          example: abc123
-        href:
-          type: string
-          description: Returns an empty string
+          description: The comment text
           example: example_value
-        name:
+        date:
           type: string
-          description: Name of the impacted item or service
-          example: Example Title
-        role:
+          format: date-time
+          description: The date the comment was created
+          example: '2026-01-15T10:30:00Z'
+        author:
           type: string
-          description: Description of the impacted item or service
+          description: The name of the user who wrote the comment
           example: example_value
-        '@referredType':
-          type: string
-          enum:
-          - asset
-          - product
-          - product_inventory
-          - cmdb_ci
-          - cmdb_ci_service
-          description: Type of item or service
-          example: asset
-    RelatedParty:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Sys_id of the related party
-          example: abc123
-        name:
-          type: string
-          description: Name of the related party
-          example: Example Title
-        '@referredType':
-          type: string
-          enum:
-          - assigned_to
-          - assignment_group
-          - customer
-          - customer_contact
-          description: 'Type of related party:
-
-            - assigned_to: User assigned to work on the ticket
-
-            - assignment_group: Group assigned to work on the ticket
-
-            - customer: Company or account for the ticket
-
-            - customer_contact: Caller or contact for the ticket
-
-            '
-          example: assigned_to
-    RelatedPartyInput:
-      type: object
-      required:
-      - id
-      - '@referredType'
-      properties:
-        id:
-          type: string
-          description: Sys_id of the related party
-          example: abc123
-        '@referredType':
-          type: string
-          enum:
-          - customer
-          - customer_contact
-          description: 'Type of related party:
-
-            - customer: Company or account for the ticket
-
-            - customer_contact: Caller or contact for the ticket
-
-            '
-          example: customer
     RelatedEntityInput:
       type: object
       required:
@@ -789,13 +755,6 @@ components:
           - cmdb_ci_service
           description: Type of item or service
           example: asset
-    ChannelInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')
-          example: Example Title
     TroubleTicketCreate:
       type: object
       required:
@@ -866,6 +825,36 @@ components:
           items:
             $ref: '#/components/schemas/RelatedPartyInput'
           example: []
+    RelatedPartyInput:
+      type: object
+      required:
+      - id
+      - '@referredType'
+      properties:
+        id:
+          type: string
+          description: Sys_id of the related party
+          example: abc123
+        '@referredType':
+          type: string
+          enum:
+          - customer
+          - customer_contact
+          description: 'Type of related party:
+
+            - customer: Company or account for the ticket
+
+            - customer_contact: Caller or contact for the ticket
+
+            '
+          example: customer
+    ChannelInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')
+          example: Example Title
     NoteInput:
       type: object
       required:
@@ -887,4 +876,4 @@ components:
     basicAuth:
       type: http
       scheme: basic
-      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.
+      description: Basic authentication with ServiceNow credentials. User must have the ticket_integrator role.

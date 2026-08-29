@@ -1,32 +1,22 @@
 openapi: 3.2.0
 info:
-  title: ServiceNow Categories API
-  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
-
-
-    In addition, you can generate new social media profile records when creating a contact.
-
-
-    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
-
-
-    **Authentication**: Users need the `csm_ws_integration` role for full API access.
-
-    '
-  version: Zurich
+  title: ServiceNow Service Catalog Categories API
+  description: The ServiceNow Service Catalog API provides REST endpoints for browsing catalog categories and items, retrieving catalog item details and variables, and submitting catalog requests. It enables external applications and portals to integrate with ServiceNow's self-service request capabilities including catalog browsing, cart management, and order submission.
+  version: Yokohama
   contact:
-    name: ServiceNow
-    url: https://docs.servicenow.com
-  x-namespace: now
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
 servers:
-- url: https://{instance}.servicenow.com/api/now
-  description: ServiceNow instance
+- url: https://{instance}.service-now.com/api/sn_sc
+  description: ServiceNow Instance
   variables:
     instance:
       default: instance
       description: Your ServiceNow instance name
 security:
 - basicAuth: []
+- oauth2: []
 tags:
 - name: Categories
   description: Operations for browsing catalog categories.
@@ -81,14 +71,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -134,8 +116,26 @@ components:
               title:
                 type: string
           example: []
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.
+      description: Basic authentication with ServiceNow credentials.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+externalDocs:
+  description: ServiceNow Service Catalog API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_ServiceCatalogAPI.html

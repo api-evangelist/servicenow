@@ -1,32 +1,22 @@
 openapi: 3.2.0
 info:
-  title: ServiceNow Normal Changes API
-  description: 'The Contact API provides endpoints that enable you to retrieve and update Customer Service Management (CSM) contact records.
-
-
-    In addition, you can generate new social media profile records when creating a contact.
-
-
-    The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
-
-
-    **Authentication**: Users need the `csm_ws_integration` role for full API access.
-
-    '
-  version: Zurich
+  title: ServiceNow Change Management Normal Changes API
+  description: The ServiceNow Change Management API provides REST endpoints for creating, retrieving, updating, and managing change requests and their associated tasks and approvals. It supports the full change lifecycle including normal, standard, and emergency change types within the ITSM Change Management application.
+  version: Yokohama
   contact:
-    name: ServiceNow
-    url: https://docs.servicenow.com
-  x-namespace: now
+    name: ServiceNow Support
+    url: https://support.servicenow.com
+  termsOfService: https://www.servicenow.com/terms-of-use.html
 servers:
-- url: https://{instance}.servicenow.com/api/now
-  description: ServiceNow instance
+- url: https://{instance}.service-now.com/api/sn_chg_rest/v1
+  description: ServiceNow Instance
   variables:
     instance:
       default: instance
       description: Your ServiceNow instance name
 security:
 - basicAuth: []
+- oauth2: []
 tags:
 - name: Normal Changes
   description: Operations for managing normal change requests that require full review and approval before implementation.
@@ -375,58 +365,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the change request.
-      schema:
-        type: string
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string to filter results.
-      schema:
-        type: string
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response.
-      schema:
-        type: string
-    sysparmDisplayValue:
-      name: sysparm_display_value
-      in: query
-      required: false
-      description: Controls the format of field values in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        - all
-        default: 'false'
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: Maximum number of records to return.
-      schema:
-        type: integer
-        minimum: 1
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
     ChangeRequest:
       type: object
       description: A ServiceNow change request record.
@@ -603,21 +555,69 @@ components:
           type: string
           description: The plan for testing the change.
           example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
+  parameters:
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: Controls the format of field values in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        - all
+        default: 'false'
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string to filter results.
+      schema:
+        type: string
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-      description: Basic authentication with ServiceNow credentials. User must have the csm_ws_integration role.
+      description: Basic authentication with ServiceNow credentials. The user must have the change_manager, change_admin, or itil role.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using ServiceNow's OAuth provider.
+      flows:
+        password:
+          tokenUrl: https://{instance}.service-now.com/oauth_token.do
+          scopes: {}
+externalDocs:
+  description: ServiceNow Change Management API Documentation
+  url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/change-management-api.html
