@@ -10,6 +10,17 @@ info:
     The Service Catalog API wraps each item and the order result under a result
     object. Every request is written inline.
   version: 1.0.0
+  x-realizes-capability-ids:
+  - BC-600.30
+  x-capability-derivation:
+    method: 'deterministic join: sourceDescriptions -> per-tag OpenAPI -> tag/capability edge. No classification at this step.'
+    min_confidence: 0.7
+    sources:
+    - capability_id: BC-600.30
+      capability_name: IT Service Management
+      spec: servicenow-catalog-items-api-openapi.yml
+      confidence: 0.82
+    model: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities, CC BY 4.0
 sourceDescriptions:
 - name: cartApi
   url: ../openapi/servicenow-cart-api-openapi.yml
