@@ -592,7 +592,7 @@ apis:
 - aid: servicenow:servicenow-virtual-agent-bot-integration-api
   name: ServiceNow Virtual Agent Bot Integration API
   tags:
-  - Chatbots
+  - Chatbot
   - Conversational AI
   - Self-Service
   - Virtual Agent
@@ -1778,6 +1778,7 @@ tags:
 - Cloud Services
 - Digital Workflows
 - Enterprise Platform
+- IT Service Management
 - ITSM
 - Processes
 - T1
