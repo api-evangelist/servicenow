@@ -1776,6 +1776,7 @@ apis:
       https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
 name: ServiceNow
 tags:
+- ServiceNow
 - Automation
 - Cloud Services
 - Digital Workflows
