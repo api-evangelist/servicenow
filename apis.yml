@@ -595,7 +595,7 @@ apis:
   - Chatbots
   - Conversational AI
   - Self-Service
-  - Virtual Agent
+  - Virtual Agents
   tags_raw:
   - Chatbot
   - Conversational AI
@@ -1238,6 +1238,8 @@ apis:
     https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_TableAPI.html
   baseURL: https://{instance}.service-now.com/api/now/table
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -1783,8 +1785,8 @@ tags:
 - T1
 - Workflow-Automation
 - Workflows
-- ServiceNow
 tags_raw:
+- ServiceNow
 - Automation
 - Cloud Services
 - Digital Workflows
