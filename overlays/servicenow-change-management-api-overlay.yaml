@@ -3,9 +3,9 @@ info:
   title: API Evangelist enhancements for ServiceNow Change Management API
   version: 1.0.0
 # Provenance
-generated: '2026-06-20'
-method: generated
-source: openapi/servicenow-change-management-api-openapi.yml
+x-generated: '2026-06-20'
+x-method: generated
+x-source: openapi/servicenow-change-management-api-openapi.yml
 extends: openapi/servicenow-change-management-api-openapi.yml
 actions:
   - target: $.info

@@ -143,6 +143,38 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
   schemas:
     Error:
       type: object
@@ -225,38 +257,6 @@ components:
           format: date-time
           description: The planned end date.
           example: '2026-01-15T10:30:00Z'
-  parameters:
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response.
-      schema:
-        type: string
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the change request.
-      schema:
-        type: string
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: Maximum number of records to return.
-      schema:
-        type: integer
-        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

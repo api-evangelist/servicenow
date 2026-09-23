@@ -41,7 +41,8 @@
     "servicenow-import-set-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "servicenow-service-catalog-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "servicenow-table-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "trouble-ticket-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "trouble-ticket-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "servicenow-aggregate-statistics-api-openapi.yml: previously refined output, superseded by openapi/_original/",

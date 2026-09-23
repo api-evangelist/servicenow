@@ -478,6 +478,123 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysparmInputDisplayValue:
+      name: sysparm_input_display_value
+      in: query
+      required: false
+      description: When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.
+      schema:
+        type: boolean
+        default: false
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.
+      schema:
+        type: integer
+        minimum: 1
+        default: 10000
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.
+      schema:
+        type: string
+      example: sys_id,number,short_description,state,priority
+    sysparmQueryCategory:
+      name: sysparm_query_category
+      in: query
+      required: false
+      description: The name of the query category used to filter the query.
+      schema:
+        type: string
+    sysparmExcludeReferenceLink:
+      name: sysparm_exclude_reference_link
+      in: query
+      required: false
+      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
+      schema:
+        type: boolean
+        default: false
+    tableName:
+      name: tableName
+      in: path
+      required: true
+      description: The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table.
+      schema:
+        type: string
+      example: incident
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique 32-character system identifier for a record in ServiceNow.
+      schema:
+        type: string
+        pattern: ^[a-f0-9]{32}$
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
+      schema:
+        type: string
+      example: active=true^priority=1^ORDERBYDESCsys_created_on
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: The starting record index for pagination. Use with sysparm_limit to page through large result sets.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmView:
+      name: sysparm_view
+      in: query
+      required: false
+      description: The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.
+      schema:
+        type: string
+    sysparmQueryNoDomain:
+      name: sysparm_query_no_domain
+      in: query
+      required: false
+      description: When set to true, the query ignores domain separation and returns records from all domains.
+      schema:
+        type: boolean
+        default: false
+    sysparmNoCount:
+      name: sysparm_no_count
+      in: query
+      required: false
+      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
+      schema:
+        type: boolean
+        default: false
+    sysparmSuppressPaginationHeader:
+      name: sysparm_suppress_pagination_header
+      in: query
+      required: false
+      description: When set to true, the Link header for pagination is not included in the response.
+      schema:
+        type: boolean
+        default: false
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        - all
+        default: 'false'
   schemas:
     Error:
       type: object
@@ -492,10 +609,6 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
-    RecordInput:
-      type: object
-      description: A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.
-      additionalProperties: true
     Record:
       type: object
       description: A generic ServiceNow record. The actual fields depend on the table being queried. Common system fields are included in every record.
@@ -535,123 +648,10 @@ components:
           description: The table class name for the record.
           example: example_value
       additionalProperties: true
-  parameters:
-    sysparmQueryNoDomain:
-      name: sysparm_query_no_domain
-      in: query
-      required: false
-      description: When set to true, the query ignores domain separation and returns records from all domains.
-      schema:
-        type: boolean
-        default: false
-    sysparmDisplayValue:
-      name: sysparm_display_value
-      in: query
-      required: false
-      description: Controls the format of field values in the response. Set to true to return display values, false to return actual values, or all to return both in a display_value and value object.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        - all
-        default: 'false'
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response. When specified, only these fields are returned, improving response performance.
-      schema:
-        type: string
-      example: sys_id,number,short_description,state,priority
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique 32-character system identifier for a record in ServiceNow.
-      schema:
-        type: string
-        pattern: ^[a-f0-9]{32}$
-    tableName:
-      name: tableName
-      in: path
-      required: true
-      description: The name of the ServiceNow table to operate on, such as incident, change_request, cmdb_ci, or any custom table.
-      schema:
-        type: string
-      example: incident
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: The starting record index for pagination. Use with sysparm_limit to page through large result sets.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysparmView:
-      name: sysparm_view
-      in: query
-      required: false
-      description: The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.
-      schema:
-        type: string
-    sysparmNoCount:
-      name: sysparm_no_count
-      in: query
-      required: false
-      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
-      schema:
-        type: boolean
-        default: false
-    sysparmExcludeReferenceLink:
-      name: sysparm_exclude_reference_link
-      in: query
-      required: false
-      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
-      schema:
-        type: boolean
-        default: false
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.
-      schema:
-        type: integer
-        minimum: 1
-        default: 10000
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
-      schema:
-        type: string
-      example: active=true^priority=1^ORDERBYDESCsys_created_on
-    sysparmInputDisplayValue:
-      name: sysparm_input_display_value
-      in: query
-      required: false
-      description: When set to true, input values are treated as display values rather than actual values. This allows setting fields using their display labels instead of internal values.
-      schema:
-        type: boolean
-        default: false
-    sysparmSuppressPaginationHeader:
-      name: sysparm_suppress_pagination_header
-      in: query
-      required: false
-      description: When set to true, the Link header for pagination is not included in the response.
-      schema:
-        type: boolean
-        default: false
-    sysparmQueryCategory:
-      name: sysparm_query_category
-      in: query
-      required: false
-      description: The name of the query category used to filter the query.
-      schema:
-        type: string
+    RecordInput:
+      type: object
+      description: A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.
+      additionalProperties: true
   securitySchemes:
     basicAuth:
       type: http

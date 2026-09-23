@@ -10,9 +10,7 @@ info:
     The Contact API requires the Customer Service plugin (com.sn_customerservice) and is provided within the now namespace.
 
 
-    **Authentication**: Users need the `csm_ws_integration` role for full API access.
-
-    '
+    **Authentication**: Users need the `csm_ws_integration` role for full API access.'
   version: Zurich
   contact:
     name: ServiceNow
@@ -259,9 +257,7 @@ paths:
         - social_handle_url
 
 
-        **Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.
-
-        '
+        **Warning**: This endpoint does not perform parameter validation. Misspelled or invalid parameters are ignored without warning.'
       operationId: createContact
       requestBody:
         required: true
@@ -618,6 +614,298 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ContactCreate:
+      type: object
+      description: Contact creation request
+      properties:
+        name:
+          type: string
+          maxLength: 151
+          description: Contact full name
+          example: Example Title
+        first_name:
+          type: string
+          maxLength: 50
+          description: Contact first name
+          example: example_value
+        middle_name:
+          type: string
+          maxLength: 50
+          description: Contact middle name
+          example: example_value
+        last_name:
+          type: string
+          maxLength: 50
+          description: Contact last name
+          example: example_value
+        user_name:
+          type: string
+          maxLength: 40
+          description: Contact user ID
+          example: example_value
+        email:
+          type: string
+          description: Contact email address
+          example: user@example.com
+        phone:
+          type: string
+          maxLength: 40
+          description: Contact business phone number
+          example: example_value
+        mobile_phone:
+          type: string
+          maxLength: 40
+          description: Contact mobile phone number
+          example: example_value
+        home_phone:
+          type: string
+          maxLength: 40
+          description: Contact home phone number
+          example: example_value
+        title:
+          type: string
+          maxLength: 60
+          description: Contact business title
+          example: Example Title
+        employee_number:
+          type: string
+          description: Contact employee number
+          example: example_value
+        company:
+          type: string
+          description: Sys_id of the company record
+          example: example_value
+        account:
+          type: string
+          description: Sys_id of the account record
+          example: 42
+        department:
+          type: string
+          description: Sys_id of the department
+          example: example_value
+        manager:
+          type: string
+          description: Sys_id of the direct supervisor
+          example: example_value
+        location:
+          type: string
+          description: Sys_id of the location
+          example: example_value
+        building:
+          type: string
+          description: Sys_id of the building
+          example: example_value
+        street:
+          type: string
+          maxLength: 255
+          description: Contact street address
+          example: example_value
+        city:
+          type: string
+          maxLength: 40
+          description: City in which the contact resides
+          example: example_value
+        state:
+          type: string
+          maxLength: 40
+          description: State in which the contact resides
+          example: example_value
+        zip:
+          type: string
+          maxLength: 40
+          description: Contact zip code
+          example: example_value
+        country:
+          type: string
+          maxLength: 3
+          description: Country code
+          example: 42
+        active:
+          type: boolean
+          default: true
+          description: Flag indicating whether the contact is active
+          example: true
+        vip:
+          type: boolean
+          default: false
+          description: Flag indicating whether the contact has VIP status
+          example: true
+        locked_out:
+          type: boolean
+          default: false
+          description: Flag indicating if the contact is locked-out
+          example: true
+        web_service_access_only:
+          type: boolean
+          default: false
+          description: Flag indicating whether the contact can only access services through the web
+          example: true
+        internal_integration_user:
+          type: boolean
+          default: false
+          description: Flag indicating whether the contact is an internal integration user
+          example: true
+        enable_multifactor_authn:
+          type: boolean
+          default: false
+          description: Flag indicating whether multifactor authorization is required
+          example: true
+        geolocation_tracked:
+          type: boolean
+          default: false
+          description: Flag indicating whether the contact location is obtained through geotracking
+          example: true
+        notification:
+          type: integer
+          default: 2
+          description: Indicates whether the contact should receive notifications (1=Disabled, 2=Enabled)
+          enum:
+          - 1
+          - 2
+          example: 1
+        calendar_integration:
+          type: integer
+          default: 1
+          description: Calendar application that the contact uses (1=Outlook)
+          example: 10
+        failed_attempts:
+          type: integer
+          description: Number of failed login attempts
+          example: 10
+        latitude:
+          type: number
+          format: float
+          description: Latitude coordinate of the contact
+          example: 42.5
+        longitude:
+          type: number
+          format: float
+          description: Longitude coordinate of the contact
+          example: 42.5
+        time_zone:
+          type: string
+          maxLength: 40
+          description: Time zone in which the contact resides
+          example: example_value
+        date_format:
+          type: string
+          maxLength: 40
+          description: Format in which to display dates
+          enum:
+          - dd/mm/yyyy
+          - dd-mm-yyyy
+          - dd.mm.yyyy
+          - mm-dd-yyyy
+          - yyyy-mm-dd
+          example: dd/mm/yyyy
+        time_format:
+          type: string
+          maxLength: 40
+          description: Format in which to display time
+          enum:
+          - hh.mm.ss a
+          - hh:mm:ss a
+          - HH.mm.ss
+          - HH:mm:ss
+          example: hh.mm.ss a
+        preferred_language:
+          type: string
+          maxLength: 3
+          description: Country code of the contact primary language
+          example: example_value
+        gender:
+          type: string
+          maxLength: 40
+          description: Contact gender
+          example: example_value
+        photo:
+          type: string
+          description: Photo image of the contact
+          example: example_value
+        introduction:
+          type: string
+          maxLength: 40
+          description: Introduction
+          example: example_value
+        source:
+          type: string
+          maxLength: 255
+          description: Source of the contact
+          example: example_value
+        roles:
+          type: string
+          maxLength: 40
+          description: List of user roles associated with the contact
+          example: example_value
+        cost_center:
+          type: string
+          description: Sys_id of the cost center
+          example: example_value
+        schedule:
+          type: string
+          description: Sys_id of the work schedule
+          example: example_value
+        time_sheet_policy:
+          type: string
+          description: Sys_id of the time sheet policy
+          example: example_value
+        default_perspective:
+          type: string
+          description: Sys_id of the default perspective
+          example: example_value
+        ldap_server:
+          type: string
+          description: Sys_id of the LDAP server
+          example: example_value
+        agent_status:
+          type: string
+          maxLength: 40
+          description: Status of the agent
+          enum:
+          - Off work
+          - On break
+          - On route
+          - On site
+          example: Off work
+        on_schedule:
+          type: string
+          maxLength: 40
+          description: Indicates the timeliness of dispatched service personnel
+          enum:
+          - Ahead
+          - behind_less30
+          - behind_30to60
+          - behind_more60
+          - on_time
+          example: Ahead
+        edu_status:
+          type: string
+          maxLength: 40
+          default: faculty
+          description: Education status of the contact
+          example: example_value
+        last_login_time:
+          type: string
+          format: date-time
+          description: Date and time the contact logged in to the system
+          example: '2026-01-15T10:30:00Z'
+        last_login_device:
+          type: string
+          maxLength: 40
+          description: Device the consumer used the last time they logged in
+          example: example_value
+        social_channel:
+          type: string
+          description: Social media channel (Twitter, Facebook, Instagram, etc.)
+          example: example_value
+        social_handle:
+          type: string
+          description: User handle on the social media channel
+          example: example_value
+        social_handle_url:
+          type: string
+          description: URL to the contact's social channel profile
+          example: https://www.example.com
     Contact:
       type: object
       description: Customer Service Management contact record
@@ -957,298 +1245,6 @@ components:
           type: string
           description: System tags
           example: example_value
-    ContactCreate:
-      type: object
-      description: Contact creation request
-      properties:
-        name:
-          type: string
-          maxLength: 151
-          description: Contact full name
-          example: Example Title
-        first_name:
-          type: string
-          maxLength: 50
-          description: Contact first name
-          example: example_value
-        middle_name:
-          type: string
-          maxLength: 50
-          description: Contact middle name
-          example: example_value
-        last_name:
-          type: string
-          maxLength: 50
-          description: Contact last name
-          example: example_value
-        user_name:
-          type: string
-          maxLength: 40
-          description: Contact user ID
-          example: example_value
-        email:
-          type: string
-          description: Contact email address
-          example: user@example.com
-        phone:
-          type: string
-          maxLength: 40
-          description: Contact business phone number
-          example: example_value
-        mobile_phone:
-          type: string
-          maxLength: 40
-          description: Contact mobile phone number
-          example: example_value
-        home_phone:
-          type: string
-          maxLength: 40
-          description: Contact home phone number
-          example: example_value
-        title:
-          type: string
-          maxLength: 60
-          description: Contact business title
-          example: Example Title
-        employee_number:
-          type: string
-          description: Contact employee number
-          example: example_value
-        company:
-          type: string
-          description: Sys_id of the company record
-          example: example_value
-        account:
-          type: string
-          description: Sys_id of the account record
-          example: 42
-        department:
-          type: string
-          description: Sys_id of the department
-          example: example_value
-        manager:
-          type: string
-          description: Sys_id of the direct supervisor
-          example: example_value
-        location:
-          type: string
-          description: Sys_id of the location
-          example: example_value
-        building:
-          type: string
-          description: Sys_id of the building
-          example: example_value
-        street:
-          type: string
-          maxLength: 255
-          description: Contact street address
-          example: example_value
-        city:
-          type: string
-          maxLength: 40
-          description: City in which the contact resides
-          example: example_value
-        state:
-          type: string
-          maxLength: 40
-          description: State in which the contact resides
-          example: example_value
-        zip:
-          type: string
-          maxLength: 40
-          description: Contact zip code
-          example: example_value
-        country:
-          type: string
-          maxLength: 3
-          description: Country code
-          example: 42
-        active:
-          type: boolean
-          default: true
-          description: Flag indicating whether the contact is active
-          example: true
-        vip:
-          type: boolean
-          default: false
-          description: Flag indicating whether the contact has VIP status
-          example: true
-        locked_out:
-          type: boolean
-          default: false
-          description: Flag indicating if the contact is locked-out
-          example: true
-        web_service_access_only:
-          type: boolean
-          default: false
-          description: Flag indicating whether the contact can only access services through the web
-          example: true
-        internal_integration_user:
-          type: boolean
-          default: false
-          description: Flag indicating whether the contact is an internal integration user
-          example: true
-        enable_multifactor_authn:
-          type: boolean
-          default: false
-          description: Flag indicating whether multifactor authorization is required
-          example: true
-        geolocation_tracked:
-          type: boolean
-          default: false
-          description: Flag indicating whether the contact location is obtained through geotracking
-          example: true
-        notification:
-          type: integer
-          default: 2
-          description: Indicates whether the contact should receive notifications (1=Disabled, 2=Enabled)
-          enum:
-          - 1
-          - 2
-          example: 1
-        calendar_integration:
-          type: integer
-          default: 1
-          description: Calendar application that the contact uses (1=Outlook)
-          example: 10
-        failed_attempts:
-          type: integer
-          description: Number of failed login attempts
-          example: 10
-        latitude:
-          type: number
-          format: float
-          description: Latitude coordinate of the contact
-          example: 42.5
-        longitude:
-          type: number
-          format: float
-          description: Longitude coordinate of the contact
-          example: 42.5
-        time_zone:
-          type: string
-          maxLength: 40
-          description: Time zone in which the contact resides
-          example: example_value
-        date_format:
-          type: string
-          maxLength: 40
-          description: Format in which to display dates
-          enum:
-          - dd/mm/yyyy
-          - dd-mm-yyyy
-          - dd.mm.yyyy
-          - mm-dd-yyyy
-          - yyyy-mm-dd
-          example: dd/mm/yyyy
-        time_format:
-          type: string
-          maxLength: 40
-          description: Format in which to display time
-          enum:
-          - hh.mm.ss a
-          - hh:mm:ss a
-          - HH.mm.ss
-          - HH:mm:ss
-          example: hh.mm.ss a
-        preferred_language:
-          type: string
-          maxLength: 3
-          description: Country code of the contact primary language
-          example: example_value
-        gender:
-          type: string
-          maxLength: 40
-          description: Contact gender
-          example: example_value
-        photo:
-          type: string
-          description: Photo image of the contact
-          example: example_value
-        introduction:
-          type: string
-          maxLength: 40
-          description: Introduction
-          example: example_value
-        source:
-          type: string
-          maxLength: 255
-          description: Source of the contact
-          example: example_value
-        roles:
-          type: string
-          maxLength: 40
-          description: List of user roles associated with the contact
-          example: example_value
-        cost_center:
-          type: string
-          description: Sys_id of the cost center
-          example: example_value
-        schedule:
-          type: string
-          description: Sys_id of the work schedule
-          example: example_value
-        time_sheet_policy:
-          type: string
-          description: Sys_id of the time sheet policy
-          example: example_value
-        default_perspective:
-          type: string
-          description: Sys_id of the default perspective
-          example: example_value
-        ldap_server:
-          type: string
-          description: Sys_id of the LDAP server
-          example: example_value
-        agent_status:
-          type: string
-          maxLength: 40
-          description: Status of the agent
-          enum:
-          - Off work
-          - On break
-          - On route
-          - On site
-          example: Off work
-        on_schedule:
-          type: string
-          maxLength: 40
-          description: Indicates the timeliness of dispatched service personnel
-          enum:
-          - Ahead
-          - behind_less30
-          - behind_30to60
-          - behind_more60
-          - on_time
-          example: Ahead
-        edu_status:
-          type: string
-          maxLength: 40
-          default: faculty
-          description: Education status of the contact
-          example: example_value
-        last_login_time:
-          type: string
-          format: date-time
-          description: Date and time the contact logged in to the system
-          example: '2026-01-15T10:30:00Z'
-        last_login_device:
-          type: string
-          maxLength: 40
-          description: Device the consumer used the last time they logged in
-          example: example_value
-        social_channel:
-          type: string
-          description: Social media channel (Twitter, Facebook, Instagram, etc.)
-          example: example_value
-        social_handle:
-          type: string
-          description: User handle on the social media channel
-          example: example_value
-        social_handle_url:
-          type: string
-          description: URL to the contact's social channel profile
-          example: https://www.example.com
     Error:
       type: object
       properties:

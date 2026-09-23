@@ -278,23 +278,6 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
-    CartItemInput:
-      type: object
-      description: Input for adding a catalog item to the cart or ordering directly.
-      required:
-      - sysparm_quantity
-      properties:
-        sysparm_quantity:
-          type: integer
-          minimum: 1
-          description: The quantity of items to order.
-          example: 10
-        variables:
-          type: object
-          description: Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries.
-          additionalProperties:
-            type: string
-          example: example_value
     Cart:
       type: object
       description: The shopping cart contents.
@@ -323,6 +306,23 @@ components:
         table:
           type: string
           description: The table name where the request is stored.
+          example: example_value
+    CartItemInput:
+      type: object
+      description: Input for adding a catalog item to the cart or ordering directly.
+      required:
+      - sysparm_quantity
+      properties:
+        sysparm_quantity:
+          type: integer
+          minimum: 1
+          description: The quantity of items to order.
+          example: 10
+        variables:
+          type: object
+          description: Name-value pairs for the catalog item variables. Keys are variable names and values are the user-provided entries.
+          additionalProperties:
+            type: string
           example: example_value
     CartItem:
       type: object

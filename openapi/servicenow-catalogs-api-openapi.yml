@@ -134,20 +134,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
     Catalog:
       type: object
       description: A ServiceNow service catalog.
@@ -172,14 +167,19 @@ components:
           type: boolean
           description: Whether the catalog has items.
           example: true
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
   securitySchemes:
     basicAuth:
       type: http

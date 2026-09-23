@@ -365,20 +365,58 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string to filter results.
+      schema:
+        type: string
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: Controls the format of field values in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        - all
+        default: 'false'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
     ChangeRequest:
       type: object
       description: A ServiceNow change request record.
@@ -480,6 +518,19 @@ components:
           format: date-time
           description: The date and time the change request was last updated.
           example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
     ChangeRequestInput:
       type: object
       description: Fields for creating or updating a change request.
@@ -555,57 +606,6 @@ components:
           type: string
           description: The plan for testing the change.
           example: example_value
-  parameters:
-    sysparmDisplayValue:
-      name: sysparm_display_value
-      in: query
-      required: false
-      description: Controls the format of field values in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        - all
-        default: 'false'
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response.
-      schema:
-        type: string
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the change request.
-      schema:
-        type: string
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string to filter results.
-      schema:
-        type: string
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: Maximum number of records to return.
-      schema:
-        type: integer
-        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

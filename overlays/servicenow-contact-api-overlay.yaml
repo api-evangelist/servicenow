@@ -3,9 +3,9 @@ info:
   title: API Evangelist enhancements for ServiceNow Contact API
   version: 1.0.0
 # Provenance
-generated: '2026-06-20'
-method: generated
-source: openapi/contact-api-openapi.yaml
+x-generated: '2026-06-20'
+x-method: generated
+x-source: openapi/contact-api-openapi.yaml
 extends: openapi/contact-api-openapi.yaml
 actions:
   - target: $.info

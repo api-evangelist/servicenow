@@ -3,9 +3,9 @@ info:
   title: API Evangelist enhancements for ServiceNow Trouble Ticket Open API
   version: 1.0.0
 # Provenance
-generated: '2026-06-20'
-method: generated
-source: openapi/trouble-ticket-openapi.yaml
+x-generated: '2026-06-20'
+x-method: generated
+x-source: openapi/trouble-ticket-openapi.yaml
 extends: openapi/trouble-ticket-openapi.yaml
 actions:
   - target: $.info

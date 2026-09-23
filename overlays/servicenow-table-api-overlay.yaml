@@ -3,9 +3,9 @@ info:
   title: API Evangelist enhancements for ServiceNow Table API
   version: 1.0.0
 # Provenance
-generated: '2026-06-20'
-method: generated
-source: openapi/servicenow-table-api-openapi.yml
+x-generated: '2026-06-20'
+x-method: generated
+x-source: openapi/servicenow-table-api-openapi.yml
 extends: openapi/servicenow-table-api-openapi.yml
 actions:
   - target: $.info

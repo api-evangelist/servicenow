@@ -159,19 +159,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
     AggregateResult:
       type: object
       description: The aggregate statistics result. Structure varies based on the requested aggregate types and group-by fields.
@@ -192,6 +179,19 @@ components:
             type: object
             additionalProperties: true
           example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
   parameters:
     tableName:
       name: tableName
