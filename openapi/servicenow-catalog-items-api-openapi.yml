@@ -156,6 +156,47 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+    CatalogItem:
+      type: object
+      description: A catalog item summary.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog item.
+          example: '500123'
+        name:
+          type: string
+          description: The display name of the item.
+          example: Example Title
+        short_description:
+          type: string
+          description: A brief description of the item.
+          example: example_value
+        category:
+          type: string
+          description: The category sys_id.
+          example: example_value
+        price:
+          type: string
+          description: The displayed price of the item.
+          example: example_value
+        picture:
+          type: string
+          description: URL to the item picture.
+          example: example_value
     CatalogVariable:
       type: object
       description: A variable on a catalog item form.
@@ -191,19 +232,6 @@ components:
               value:
                 type: string
           example: []
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
     CatalogItemDetail:
       type: object
       description: Full details of a catalog item including its variables.
@@ -250,34 +278,6 @@ components:
           items:
             $ref: '#/components/schemas/CatalogVariable'
           example: []
-    CatalogItem:
-      type: object
-      description: A catalog item summary.
-      properties:
-        sys_id:
-          type: string
-          description: Unique identifier for the catalog item.
-          example: '500123'
-        name:
-          type: string
-          description: The display name of the item.
-          example: Example Title
-        short_description:
-          type: string
-          description: A brief description of the item.
-          example: example_value
-        category:
-          type: string
-          description: The category sys_id.
-          example: example_value
-        price:
-          type: string
-          description: The displayed price of the item.
-          example: example_value
-        picture:
-          type: string
-          description: URL to the item picture.
-          example: example_value
   parameters:
     sysId:
       name: sys_id

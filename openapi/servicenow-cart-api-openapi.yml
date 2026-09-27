@@ -278,35 +278,6 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
-    Cart:
-      type: object
-      description: The shopping cart contents.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CartItem'
-          example: []
-        subtotal:
-          type: string
-          description: The cart subtotal.
-          example: 42
-    OrderResult:
-      type: object
-      description: The result of a submitted catalog order.
-      properties:
-        request_number:
-          type: string
-          description: The generated request number.
-          example: example_value
-        request_id:
-          type: string
-          description: The sys_id of the request record.
-          example: '500123'
-        table:
-          type: string
-          description: The table name where the request is stored.
-          example: example_value
     CartItemInput:
       type: object
       description: Input for adding a catalog item to the cart or ordering directly.
@@ -324,6 +295,19 @@ components:
           additionalProperties:
             type: string
           example: example_value
+    Cart:
+      type: object
+      description: The shopping cart contents.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+          example: []
+        subtotal:
+          type: string
+          description: The cart subtotal.
+          example: 42
     CartItem:
       type: object
       description: An item in the shopping cart.
@@ -344,6 +328,22 @@ components:
           type: string
           description: The subtotal for this cart item.
           example: 42
+    OrderResult:
+      type: object
+      description: The result of a submitted catalog order.
+      properties:
+        request_number:
+          type: string
+          description: The generated request number.
+          example: example_value
+        request_id:
+          type: string
+          description: The sys_id of the request record.
+          example: '500123'
+        table:
+          type: string
+          description: The table name where the request is stored.
+          example: example_value
   parameters:
     sysId:
       name: sys_id

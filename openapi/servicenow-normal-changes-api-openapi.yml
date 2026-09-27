@@ -365,58 +365,95 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: Maximum number of records to return.
-      schema:
-        type: integer
-        minimum: 1
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response.
-      schema:
-        type: string
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the change request.
-      schema:
-        type: string
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string to filter results.
-      schema:
-        type: string
-    sysparmDisplayValue:
-      name: sysparm_display_value
-      in: query
-      required: false
-      description: Controls the format of field values in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        - all
-        default: 'false'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+    ChangeRequestInput:
+      type: object
+      description: Fields for creating or updating a change request.
+      properties:
+        short_description:
+          type: string
+          description: A brief summary of the change.
+          example: example_value
+        description:
+          type: string
+          description: A detailed description of the change.
+          example: A sample description.
+        priority:
+          type: string
+          description: The priority level.
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: '1'
+        risk:
+          type: string
+          description: The risk level.
+          example: example_value
+        impact:
+          type: string
+          description: The impact level.
+          example: example_value
+        category:
+          type: string
+          description: The category of the change.
+          example: example_value
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+          example: example_value
+        assignment_group:
+          type: string
+          description: The sys_id of the assignment group.
+          example: example_value
+        requested_by:
+          type: string
+          description: The sys_id of the requesting user.
+          example: example_value
+        start_date:
+          type: string
+          format: date-time
+          description: The planned start date and time.
+          example: '2026-01-15T10:30:00Z'
+        end_date:
+          type: string
+          format: date-time
+          description: The planned end date and time.
+          example: '2026-01-15T10:30:00Z'
+        cmdb_ci:
+          type: string
+          description: The sys_id of the affected configuration item.
+          example: example_value
+        justification:
+          type: string
+          description: The business justification for the change.
+          example: example_value
+        implementation_plan:
+          type: string
+          description: The plan for implementing the change.
+          example: example_value
+        backout_plan:
+          type: string
+          description: The plan for reverting the change if needed.
+          example: example_value
+        test_plan:
+          type: string
+          description: The plan for testing the change.
+          example: example_value
     ChangeRequest:
       type: object
       description: A ServiceNow change request record.
@@ -518,94 +555,57 @@ components:
           format: date-time
           description: The date and time the change request was last updated.
           example: '2026-01-15T10:30:00Z'
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
-    ChangeRequestInput:
-      type: object
-      description: Fields for creating or updating a change request.
-      properties:
-        short_description:
-          type: string
-          description: A brief summary of the change.
-          example: example_value
-        description:
-          type: string
-          description: A detailed description of the change.
-          example: A sample description.
-        priority:
-          type: string
-          description: The priority level.
-          enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          example: '1'
-        risk:
-          type: string
-          description: The risk level.
-          example: example_value
-        impact:
-          type: string
-          description: The impact level.
-          example: example_value
-        category:
-          type: string
-          description: The category of the change.
-          example: example_value
-        assigned_to:
-          type: string
-          description: The sys_id of the assigned user.
-          example: example_value
-        assignment_group:
-          type: string
-          description: The sys_id of the assignment group.
-          example: example_value
-        requested_by:
-          type: string
-          description: The sys_id of the requesting user.
-          example: example_value
-        start_date:
-          type: string
-          format: date-time
-          description: The planned start date and time.
-          example: '2026-01-15T10:30:00Z'
-        end_date:
-          type: string
-          format: date-time
-          description: The planned end date and time.
-          example: '2026-01-15T10:30:00Z'
-        cmdb_ci:
-          type: string
-          description: The sys_id of the affected configuration item.
-          example: example_value
-        justification:
-          type: string
-          description: The business justification for the change.
-          example: example_value
-        implementation_plan:
-          type: string
-          description: The plan for implementing the change.
-          example: example_value
-        backout_plan:
-          type: string
-          description: The plan for reverting the change if needed.
-          example: example_value
-        test_plan:
-          type: string
-          description: The plan for testing the change.
-          example: example_value
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysparmQuery:
+      name: sysparm_query
+      in: query
+      required: false
+      description: An encoded query string to filter results.
+      schema:
+        type: string
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmDisplayValue:
+      name: sysparm_display_value
+      in: query
+      required: false
+      description: Controls the format of field values in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        - all
+        default: 'false'
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

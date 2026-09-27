@@ -614,6 +614,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Error message
+            detail:
+              type: string
+              description: Detailed error information
+          example: example_value
     ContactCreate:
       type: object
       description: Contact creation request
@@ -1244,19 +1257,6 @@ components:
         sys_tags:
           type: string
           description: System tags
-          example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: Error message
-            detail:
-              type: string
-              description: Detailed error information
           example: example_value
   securitySchemes:
     basicAuth:

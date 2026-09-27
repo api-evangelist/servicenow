@@ -26,13 +26,14 @@ apis:
   tags:
   - Articles
   - Knowledge Base
-  - Knowledge-Management
+  - Knowledge Management
   - Self-Service
   tags_raw:
   - Articles
   - Knowledge Base
   - Knowledge Management
   - Self-Service
+  - Knowledge-Management
   image: >-
     https://www.servicenow.com/content/dam/servicenow-assets/images/meganav/servicenow-logo.svg
   humanURL: >-
@@ -528,13 +529,14 @@ apis:
   tags:
   - Artificial Intelligence
   - Classification
-  - Machine-Learning
+  - Machine Learning
   - Predictions
   tags_raw:
   - AI
   - Classification
   - Machine Learning
   - Predictions
+  - Machine-Learning
   image: >-
     https://www.servicenow.com/content/dam/servicenow-assets/images/meganav/servicenow-logo.svg
   humanURL: >-
@@ -640,13 +642,14 @@ apis:
   tags:
   - AI Governance
   - Artificial Intelligence
-  - Machine-Learning
+  - Machine Learning
   - Platform
   tags_raw:
   - AI Governance
   - Artificial Intelligence
   - Machine Learning
   - Platform
+  - Machine-Learning
   image: >-
     https://www.servicenow.com/content/dam/servicenow-assets/images/meganav/servicenow-logo.svg
   humanURL: >-
@@ -1784,8 +1787,9 @@ tags:
 - ITSM
 - Processes
 - T1
-- Workflow-Automation
+- Workflow Automation
 - Workflows
+- A2A
 tags_raw:
 - ServiceNow
 - Automation
@@ -1798,19 +1802,25 @@ tags_raw:
 - T1
 - Workflow Automation
 - Workflows
+- Workflow-Automation
+- A2A
 kind: contract
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - servicenow/pysnc
+    - servicenow/sdk
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: enterprise
@@ -2201,6 +2211,8 @@ common:
 - name: Agent Skills
   url: https://github.com/ServiceNow/saai-skill-feedback
   type: AgentSkills
+- type: Blog
+  url: https://www.servicenow.com/blogs.html
 created: '2025-01-08'
 modified: '2026-06-20'
 position: Consuming
