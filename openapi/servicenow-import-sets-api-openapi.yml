@@ -237,6 +237,11 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
+    ImportSetInput:
+      type: object
+      description: The field name-value pairs corresponding to columns in the import set staging table.
+      additionalProperties:
+        type: string
     ImportSetResult:
       type: object
       description: The result of processing an import set record including the transformation outcome.
@@ -287,11 +292,6 @@ components:
           type: string
           description: The sys_id of the parent import set.
           example: example_value
-    ImportSetInput:
-      type: object
-      description: The field name-value pairs corresponding to columns in the import set staging table.
-      additionalProperties:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

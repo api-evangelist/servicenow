@@ -264,20 +264,28 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   schemas:
-    Error:
+    Cart:
       type: object
+      description: The shopping cart contents.
       properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+          example: []
+        subtotal:
+          type: string
+          description: The cart subtotal.
+          example: 42
     CartItemInput:
       type: object
       description: Input for adding a catalog item to the cart or ordering directly.
@@ -295,19 +303,35 @@ components:
           additionalProperties:
             type: string
           example: example_value
-    Cart:
+    OrderResult:
       type: object
-      description: The shopping cart contents.
+      description: The result of a submitted catalog order.
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CartItem'
-          example: []
-        subtotal:
+        request_number:
           type: string
-          description: The cart subtotal.
-          example: 42
+          description: The generated request number.
+          example: example_value
+        request_id:
+          type: string
+          description: The sys_id of the request record.
+          example: '500123'
+        table:
+          type: string
+          description: The table name where the request is stored.
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
     CartItem:
       type: object
       description: An item in the shopping cart.
@@ -328,30 +352,6 @@ components:
           type: string
           description: The subtotal for this cart item.
           example: 42
-    OrderResult:
-      type: object
-      description: The result of a submitted catalog order.
-      properties:
-        request_number:
-          type: string
-          description: The generated request number.
-          example: example_value
-        request_id:
-          type: string
-          description: The sys_id of the request record.
-          example: '500123'
-        table:
-          type: string
-          description: The table name where the request is stored.
-          example: example_value
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -155,7 +155,61 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   schemas:
+    CatalogItemDetail:
+      type: object
+      description: Full details of a catalog item including its variables.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the catalog item.
+          example: '500123'
+        name:
+          type: string
+          description: The display name of the item.
+          example: Example Title
+        short_description:
+          type: string
+          description: A brief description of the item.
+          example: example_value
+        description:
+          type: string
+          description: The full description of the item.
+          example: A sample description.
+        category:
+          type: string
+          description: The category sys_id.
+          example: example_value
+        price:
+          type: string
+          description: The displayed price.
+          example: example_value
+        picture:
+          type: string
+          description: URL to the item picture.
+          example: example_value
+        mandatory_attachment:
+          type: boolean
+          description: Whether a file attachment is required to order the item.
+          example: true
+        request_method:
+          type: string
+          description: The method used to fulfill the request.
+          example: example_value
+        variables:
+          type: array
+          description: The list of variables (form fields) that must be filled in when ordering the item.
+          items:
+            $ref: '#/components/schemas/CatalogVariable'
+          example: []
     Error:
       type: object
       properties:
@@ -232,60 +286,6 @@ components:
               value:
                 type: string
           example: []
-    CatalogItemDetail:
-      type: object
-      description: Full details of a catalog item including its variables.
-      properties:
-        sys_id:
-          type: string
-          description: Unique identifier for the catalog item.
-          example: '500123'
-        name:
-          type: string
-          description: The display name of the item.
-          example: Example Title
-        short_description:
-          type: string
-          description: A brief description of the item.
-          example: example_value
-        description:
-          type: string
-          description: The full description of the item.
-          example: A sample description.
-        category:
-          type: string
-          description: The category sys_id.
-          example: example_value
-        price:
-          type: string
-          description: The displayed price.
-          example: example_value
-        picture:
-          type: string
-          description: URL to the item picture.
-          example: example_value
-        mandatory_attachment:
-          type: boolean
-          description: Whether a file attachment is required to order the item.
-          example: true
-        request_method:
-          type: string
-          description: The method used to fulfill the request.
-          example: example_value
-        variables:
-          type: array
-          description: The list of variables (form fields) that must be filled in when ordering the item.
-          items:
-            $ref: '#/components/schemas/CatalogVariable'
-          example: []
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http
