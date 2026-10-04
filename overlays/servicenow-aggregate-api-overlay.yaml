@@ -6,7 +6,7 @@ info:
 x-generated: '2026-06-20'
 x-method: generated
 x-source: openapi/servicenow-aggregate-api-openapi.yml
-extends: openapi/servicenow-aggregate-api-openapi.yml
+extends: ../openapi/_original/servicenow-aggregate-api-openapi.yml
 actions:
   - target: $.info
     update:

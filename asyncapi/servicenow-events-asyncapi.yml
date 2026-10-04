@@ -16,7 +16,7 @@ info:
   license:
     name: ServiceNow Terms of Use
     url: https://www.servicenow.com/terms-of-use.html
-  externalDocs:
+  x-externalDocs:
     description: ServiceNow Business Rules Documentation
     url: https://www.servicenow.com/docs/bundle/yokohama-api-reference/page/integrate/inbound-rest/concept/c_RESTAPI.html
 servers:

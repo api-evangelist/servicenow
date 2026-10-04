@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-trouble-ticket-update-schema.json",
+  "title": "TroubleTicketUpdate",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/TroubleTicketUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the trouble ticket, typically a short description of the issue"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the issue"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "description": "The severity of the issue (must provide choice value only):\n- 1: Critical\n- 2: High\n- 3: Moderate\n- 4: Low\n- 5: Planning (Incident only)\n"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the trouble ticket (can provide choice label or value)"
+    },
+    "channel": {
+      "$ref": "#/$defs/ChannelInput"
+    },
+    "note": {
+      "type": "array",
+      "description": "List of work notes and comments to add to the ticket",
+      "items": {
+        "$ref": "#/$defs/NoteInput"
+      }
+    },
+    "relatedEntity": {
+      "type": "array",
+      "description": "List of impacted assets, products, sold products, configuration items, or services",
+      "items": {
+        "$ref": "#/$defs/RelatedEntityInput"
+      }
+    },
+    "relatedParty": {
+      "type": "array",
+      "description": "Details about contacts for the ticket",
+      "items": {
+        "$ref": "#/$defs/RelatedPartyInput"
+      }
+    }
+  },
+  "$defs": {
+    "ChannelInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contact method (can provide choice label or value, e.g., 'Virtual Agent' or 'virtual_agent')"
+        }
+      }
+    },
+    "NoteInput": {
+      "type": "object",
+      "required": [
+        "text",
+        "@type"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Note text"
+        },
+        "@type": {
+          "type": "string",
+          "enum": [
+            "comments",
+            "work_notes"
+          ],
+          "description": "Type of note (determines whether recorded in Work notes or Additional comments field)"
+        }
+      }
+    },
+    "RelatedEntityInput": {
+      "type": "object",
+      "required": [
+        "id",
+        "@referredType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Sys_id of the impacted item or service"
+        },
+        "@referredType": {
+          "type": "string",
+          "enum": [
+            "asset",
+            "product",
+            "product_inventory",
+            "cmdb_ci",
+            "cmdb_ci_service"
+          ],
+          "description": "Type of item or service"
+        }
+      }
+    },
+    "RelatedPartyInput": {
+      "type": "object",
+      "required": [
+        "id",
+        "@referredType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Sys_id of the related party"
+        },
+        "@referredType": {
+          "type": "string",
+          "enum": [
+            "customer",
+            "customer_contact"
+          ],
+          "description": "Type of related party:\n- customer: Company or account for the ticket\n- customer_contact: Caller or contact for the ticket\n"
+        }
+      }
+    }
+  }
+}

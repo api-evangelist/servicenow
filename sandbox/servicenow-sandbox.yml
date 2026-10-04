@@ -10,6 +10,11 @@ note: >-
   from the Developer Portal. There is no separate test-vs-live key prefix —
   every instance (dev or production) is reached at
   https://{instance}.service-now.com and authenticated the same way.
+description: >-
+  Sandbox information for ServiceNow personal developer instances.
+
+docs: >-
+  https://developer.servicenow.com
 personal_developer_instance:
   name: Personal Developer Instance (PDI)
   url: https://developer.servicenow.com

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-catalog-schema.json",
+  "title": "Catalog",
+  "description": "A ServiceNow service catalog.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-catalogs-api-openapi.yml#/components/schemas/Catalog",
+  "type": "object",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog."
+    },
+    "title": {
+      "type": "string",
+      "description": "The display title of the catalog."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the catalog."
+    },
+    "has_categories": {
+      "type": "boolean",
+      "description": "Whether the catalog has categories."
+    },
+    "has_items": {
+      "type": "boolean",
+      "description": "Whether the catalog has items."
+    }
+  }
+}

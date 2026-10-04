@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-record-input-schema.json",
+  "title": "RecordInput",
+  "description": "A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-table-records-api-openapi.yml#/components/schemas/RecordInput",
+  "type": "object",
+  "additionalProperties": true
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-import-set-input-schema.json",
+  "title": "ImportSetInput",
+  "description": "The field name-value pairs corresponding to columns in the import set staging table.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-import-sets-api-openapi.yml#/components/schemas/ImportSetInput",
+  "type": "object",
+  "additionalProperties": {
+    "type": "string"
+  }
+}

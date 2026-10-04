@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-change-task-input-schema.json",
+  "title": "ChangeTaskInput",
+  "description": "Fields for creating a change task.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-change-tasks-api-openapi.yml#/components/schemas/ChangeTaskInput",
+  "type": "object",
+  "properties": {
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the task."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "assignment_group": {
+      "type": "string",
+      "description": "The sys_id of the assignment group."
+    },
+    "planned_start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The planned start date."
+    },
+    "planned_end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The planned end date."
+    }
+  }
+}

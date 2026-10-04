@@ -51,6 +51,7 @@ view:
   param: sysparm_view
   description: Return the field set defined by a named form/list view.
 idempotency:
+  coverage: none
   header: null
   detail: >-
     No Idempotency-Key header. Updates target a specific record by sys_id

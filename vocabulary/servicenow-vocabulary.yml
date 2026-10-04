@@ -1,0 +1,258 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/servicenow-aggregate-statistics-api-openapi.yml
+- openapi/servicenow-attachments-api-openapi.yml
+- openapi/servicenow-cart-api-openapi.yml
+- openapi/servicenow-catalog-items-api-openapi.yml
+- openapi/servicenow-catalogs-api-openapi.yml
+vocabulary:
+  name: ServiceNow Domain Vocabulary
+  description: 'Terms declared by ServiceNow''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-03'
+  terms:
+  - term: Aggregate Statistics
+    definition: Operations for computing aggregate statistics on ServiceNow table records including count, sum, average, minimum, and maximum
+      values.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-aggregate-statistics-api-openapi.yml
+  - term: Attachments
+    definition: Operations for uploading, retrieving, listing, and deleting file attachments on ServiceNow records.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-attachments-api-openapi.yml
+  - term: Cart
+    definition: Operations for managing the shopping cart and submitting orders.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-cart-api-openapi.yml
+  - term: Catalog Items
+    definition: Operations for retrieving catalog item details and variables.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-catalog-items-api-openapi.yml
+  - term: Catalogs
+    definition: Operations for browsing and retrieving service catalogs.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-catalogs-api-openapi.yml
+  - term: Categories
+    definition: Operations for browsing catalog categories.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-categories-api-openapi.yml
+  - term: Change Tasks
+    definition: Operations for managing tasks associated with change requests.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-change-tasks-api-openapi.yml
+  - term: CMDB Instances
+    definition: Operations for retrieving configuration item instances from the CMDB by class name.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-cmdb-instances-api-openapi.yml
+  - term: Contact
+    definition: Operations for managing Customer Service Management contacts
+    tags:
+    - Resource Group
+    source: openapi/servicenow-contact-api-openapi.yml
+  - term: Emergency Changes
+    definition: Operations for managing emergency change requests that require expedited processing.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-emergency-changes-api-openapi.yml
+  - term: Import Sets
+    definition: Operations for inserting records into import set staging tables and triggering transform map processing.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-import-sets-api-openapi.yml
+  - term: Normal Changes
+    definition: Operations for managing normal change requests that require full review and approval before implementation.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-normal-changes-api-openapi.yml
+  - term: Standard Changes
+    definition: Operations for managing standard change requests based on pre-approved templates.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-standard-changes-api-openapi.yml
+  - term: Table Records
+    definition: Operations for creating, reading, updating, and deleting records in ServiceNow tables.
+    tags:
+    - Resource Group
+    source: openapi/servicenow-table-records-api-openapi.yml
+  - term: Trouble Ticket
+    definition: Operations for managing trouble tickets (Cases, Incidents, and Service Problem Cases)
+    tags:
+    - Resource Group
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml
+  - term: AggregateResult
+    definition: The aggregate statistics result. Structure varies based on the requested aggregate types and group-by fields.
+    tags:
+    - Object
+    source: openapi/servicenow-aggregate-statistics-api-openapi.yml#/components/schemas/AggregateResult
+  - term: Error
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/servicenow-aggregate-statistics-api-openapi.yml#/components/schemas/Error
+  - term: Attachment
+    definition: Metadata about a file attachment stored in ServiceNow.
+    tags:
+    - Object
+    source: openapi/servicenow-attachments-api-openapi.yml#/components/schemas/Attachment
+  - term: CartItemInput
+    definition: Input for adding a catalog item to the cart or ordering directly.
+    tags:
+    - Object
+    source: openapi/servicenow-cart-api-openapi.yml#/components/schemas/CartItemInput
+  - term: OrderResult
+    definition: The result of a submitted catalog order.
+    tags:
+    - Object
+    source: openapi/servicenow-cart-api-openapi.yml#/components/schemas/OrderResult
+  - term: CartItem
+    definition: An item in the shopping cart.
+    tags:
+    - Object
+    source: openapi/servicenow-cart-api-openapi.yml#/components/schemas/CartItem
+  - term: CatalogItemDetail
+    definition: Full details of a catalog item including its variables.
+    tags:
+    - Object
+    source: openapi/servicenow-catalog-items-api-openapi.yml#/components/schemas/CatalogItemDetail
+  - term: CatalogItem
+    definition: A catalog item summary.
+    tags:
+    - Object
+    source: openapi/servicenow-catalog-items-api-openapi.yml#/components/schemas/CatalogItem
+  - term: CatalogVariable
+    definition: A variable on a catalog item form.
+    tags:
+    - Object
+    source: openapi/servicenow-catalog-items-api-openapi.yml#/components/schemas/CatalogVariable
+  - term: Catalog
+    definition: A ServiceNow service catalog.
+    tags:
+    - Object
+    source: openapi/servicenow-catalogs-api-openapi.yml#/components/schemas/Catalog
+  - term: Category
+    definition: A catalog category.
+    tags:
+    - Object
+    source: openapi/servicenow-categories-api-openapi.yml#/components/schemas/Category
+  - term: ChangeTask
+    definition: A task associated with a change request.
+    tags:
+    - Object
+    source: openapi/servicenow-change-tasks-api-openapi.yml#/components/schemas/ChangeTask
+  - term: ChangeTaskInput
+    definition: Fields for creating a change task.
+    tags:
+    - Object
+    source: openapi/servicenow-change-tasks-api-openapi.yml#/components/schemas/ChangeTaskInput
+  - term: CmdbInstanceSummary
+    definition: A summary of a CMDB configuration item containing its identifier and display name.
+    tags:
+    - Object
+    source: openapi/servicenow-cmdb-instances-api-openapi.yml#/components/schemas/CmdbInstanceSummary
+  - term: CmdbInstance
+    definition: A full CMDB configuration item record. Fields vary by CI class but common attributes are included below.
+    tags:
+    - Object
+    source: openapi/servicenow-cmdb-instances-api-openapi.yml#/components/schemas/CmdbInstance
+  - term: ContactCreate
+    definition: Contact creation request
+    tags:
+    - Object
+    source: openapi/servicenow-contact-api-openapi.yml#/components/schemas/ContactCreate
+  - term: ChangeRequest
+    definition: A ServiceNow change request record.
+    tags:
+    - Object
+    source: openapi/servicenow-emergency-changes-api-openapi.yml#/components/schemas/ChangeRequest
+  - term: ChangeRequestInput
+    definition: Fields for creating or updating a change request.
+    tags:
+    - Object
+    source: openapi/servicenow-emergency-changes-api-openapi.yml#/components/schemas/ChangeRequestInput
+  - term: ImportSetInput
+    definition: The field name-value pairs corresponding to columns in the import set staging table.
+    tags:
+    - Object
+    source: openapi/servicenow-import-sets-api-openapi.yml#/components/schemas/ImportSetInput
+  - term: ImportSetResult
+    definition: The result of processing an import set record including the transformation outcome.
+    tags:
+    - Object
+    source: openapi/servicenow-import-sets-api-openapi.yml#/components/schemas/ImportSetResult
+  - term: RecordInput
+    definition: A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL
+      permissions.
+    tags:
+    - Object
+    source: openapi/servicenow-table-records-api-openapi.yml#/components/schemas/RecordInput
+  - term: Record
+    definition: A generic ServiceNow record. The actual fields depend on the table being queried. Common system fields are included in every record.
+    tags:
+    - Object
+    source: openapi/servicenow-table-records-api-openapi.yml#/components/schemas/Record
+  - term: TroubleTicketCreate
+    definition: 'Object declared by the contract with fields: name, description, severity, status, ticketType, channel, note, relatedEntity, relatedParty.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/TroubleTicketCreate
+  - term: Note
+    definition: 'Object declared by the contract with fields: @type, text, date, author.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/Note
+  - term: TroubleTicket
+    definition: 'Object declared by the contract with fields: @type, id, href, creationDate, lastUpdate, name, description, severity, status,
+      ticketType, channel, note. (2 more)'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/TroubleTicket
+  - term: RelatedPartyInput
+    definition: 'Object declared by the contract with fields: id, @referredType.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/RelatedPartyInput
+  - term: RelatedParty
+    definition: 'Object declared by the contract with fields: id, name, @referredType.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/RelatedParty
+  - term: TroubleTicketUpdate
+    definition: 'Object declared by the contract with fields: name, description, severity, status, channel, note, relatedEntity, relatedParty.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/TroubleTicketUpdate
+  - term: RelatedEntity
+    definition: 'Object declared by the contract with fields: @type, id, href, name, role, @referredType.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/RelatedEntity
+  - term: RelatedEntityInput
+    definition: 'Object declared by the contract with fields: id, @referredType.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/RelatedEntityInput
+  - term: Channel
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/Channel
+  - term: ChannelInput
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/ChannelInput
+  - term: NoteInput
+    definition: 'Object declared by the contract with fields: text, @type.'
+    tags:
+    - Object
+    source: openapi/servicenow-trouble-ticket-api-openapi.yml#/components/schemas/NoteInput

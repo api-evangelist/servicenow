@@ -1,0 +1,225 @@
+generated: '2026-10-03'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 17
+  own: 7
+  other_domain: 1
+  platform: 9
+  roles:
+  - api
+  - docs
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.servicenow.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: servicenow.com
+  role: api
+  relation: own
+- host: developer.servicenow.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Portal
+  - GettingStarted
+  - Signup
+  - Login
+  - APIReference
+  serves:
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: servicenow.com
+  role: docs
+  relation: own
+- host: developers.servicenow.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  - well-known
+  types: []
+  serves: []
+  title: ServiceNow Developers
+  status: 200
+  registrable_domain: servicenow.com
+  role: portal
+  relation: own
+- host: docs.servicenow.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - docs
+  registrable_domain: servicenow.com
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - GitHubRepository
+  - AgentSkills
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: pypi.org
+  found_by:
+  - pointer
+  types:
+  - SDKs
+  serves: []
+  registrable_domain: pypi.org
+  role: other
+  relation: platform
+- host: servicenow.github.io
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - Documentation
+  serves:
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: github.io
+  role: docs
+  relation: platform
+- host: stackoverflow.com
+  found_by:
+  - pointer
+  types:
+  - StackOverflow
+  serves: []
+  registrable_domain: stackoverflow.com
+  role: other
+  relation: platform
+- host: status.servicenow.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: servicenow.com
+  role: status
+  relation: own
+- host: support.servicenow.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Support
+  serves: []
+  platform: hi.service-now.com
+  registrable_domain: servicenow.com
+  role: support
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.npmjs.com
+  found_by:
+  - pointer
+  types:
+  - SDKs
+  serves: []
+  registrable_domain: npmjs.com
+  role: other
+  relation: platform
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - PostmanWorkspace
+  serves: []
+  registrable_domain: postman.com
+  role: other
+  relation: platform
+- host: www.servicenow.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Compliance
+  - Website
+  - Blog
+  - Events
+  - Forums
+  - Community
+  - Documentation
+  - APIReference
+  - Authentication
+  - RateLimits
+  - Pricing
+  - TermsOfService
+  - PrivacyPolicy
+  - ChangeLog
+  - GettingStarted
+  serves:
+  - docs
+  - cdn
+  vendor: akamai
+  registrable_domain: servicenow.com
+  role: website
+  relation: own
+- host: www.youtube.com
+  found_by:
+  - pointer
+  types:
+  - YouTube
+  serves: []
+  registrable_domain: youtube.com
+  role: other
+  relation: platform
+- host: x.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: x.com
+  role: other
+  relation: platform
+- host: '{instance}.service-now.com'
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: service-now.com
+  role: other
+  relation: other-domain

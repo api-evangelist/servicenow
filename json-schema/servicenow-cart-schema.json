@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-cart-schema.json",
+  "title": "Cart",
+  "description": "The shopping cart contents.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-cart-api-openapi.yml#/components/schemas/Cart",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CartItem"
+      }
+    },
+    "subtotal": {
+      "type": "string",
+      "description": "The cart subtotal."
+    }
+  },
+  "$defs": {
+    "CartItem": {
+      "type": "object",
+      "description": "An item in the shopping cart.",
+      "properties": {
+        "cart_item_id": {
+          "type": "string",
+          "description": "Unique identifier for the cart item."
+        },
+        "catalog_item_id": {
+          "type": "string",
+          "description": "The sys_id of the catalog item."
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "The quantity ordered."
+        },
+        "subtotal": {
+          "type": "string",
+          "description": "The subtotal for this cart item."
+        }
+      }
+    }
+  }
+}

@@ -479,6 +479,14 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    sysparmExcludeReferenceLink:
+      name: sysparm_exclude_reference_link
+      in: query
+      required: false
+      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
+      schema:
+        type: boolean
+        default: false
     sysparmFields:
       name: sysparm_fields
       in: query
@@ -487,6 +495,22 @@ components:
       schema:
         type: string
       example: sys_id,number,short_description,state,priority
+    sysparmView:
+      name: sysparm_view
+      in: query
+      required: false
+      description: The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: The starting record index for pagination. Use with sysparm_limit to page through large result sets.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     sysId:
       name: sys_id
       in: path
@@ -495,13 +519,14 @@ components:
       schema:
         type: string
         pattern: ^[a-f0-9]{32}$
-    sysparmView:
-      name: sysparm_view
+    sysparmQuery:
+      name: sysparm_query
       in: query
       required: false
-      description: The UI view to use for determining which fields to return. When specified, only fields visible in the named view are included.
+      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
       schema:
         type: string
+      example: active=true^priority=1^ORDERBYDESCsys_created_on
     tableName:
       name: tableName
       in: path
@@ -510,19 +535,18 @@ components:
       schema:
         type: string
       example: incident
-    sysparmQueryNoDomain:
-      name: sysparm_query_no_domain
+    sysparmQueryCategory:
+      name: sysparm_query_category
       in: query
       required: false
-      description: When set to true, the query ignores domain separation and returns records from all domains.
+      description: The name of the query category used to filter the query.
       schema:
-        type: boolean
-        default: false
-    sysparmSuppressPaginationHeader:
-      name: sysparm_suppress_pagination_header
+        type: string
+    sysparmNoCount:
+      name: sysparm_no_count
       in: query
       required: false
-      description: When set to true, the Link header for pagination is not included in the response.
+      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
       schema:
         type: boolean
         default: false
@@ -534,6 +558,31 @@ components:
       schema:
         type: boolean
         default: false
+    sysparmSuppressPaginationHeader:
+      name: sysparm_suppress_pagination_header
+      in: query
+      required: false
+      description: When set to true, the Link header for pagination is not included in the response.
+      schema:
+        type: boolean
+        default: false
+    sysparmQueryNoDomain:
+      name: sysparm_query_no_domain
+      in: query
+      required: false
+      description: When set to true, the query ignores domain separation and returns records from all domains.
+      schema:
+        type: boolean
+        default: false
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.
+      schema:
+        type: integer
+        minimum: 1
+        default: 10000
     sysparmDisplayValue:
       name: sysparm_display_value
       in: query
@@ -546,73 +595,7 @@ components:
         - 'false'
         - all
         default: 'false'
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: The maximum number of records to return in a single request. The default is determined by the instance configuration, typically 10000.
-      schema:
-        type: integer
-        minimum: 1
-        default: 10000
-    sysparmQuery:
-      name: sysparm_query
-      in: query
-      required: false
-      description: An encoded query string used to filter the result set. Supports operators like =, !=, LIKE, STARTSWITH, ENDSWITH, IN, and boolean operators ^, ^OR. Use ORDERBY and ORDERBYDESC for sorting.
-      schema:
-        type: string
-      example: active=true^priority=1^ORDERBYDESCsys_created_on
-    sysparmExcludeReferenceLink:
-      name: sysparm_exclude_reference_link
-      in: query
-      required: false
-      description: When set to true, reference fields do not include a link attribute in the response, reducing payload size.
-      schema:
-        type: boolean
-        default: false
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: The starting record index for pagination. Use with sysparm_limit to page through large result sets.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    sysparmNoCount:
-      name: sysparm_no_count
-      in: query
-      required: false
-      description: When set to true, the response does not include the X-Total-Count header, which can improve performance for large tables.
-      schema:
-        type: boolean
-        default: false
-    sysparmQueryCategory:
-      name: sysparm_query_category
-      in: query
-      required: false
-      description: The name of the query category used to filter the query.
-      schema:
-        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              description: A human-readable error message.
-            detail:
-              type: string
-              description: Detailed information about the error.
-          example: example_value
-    RecordInput:
-      type: object
-      description: A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.
-      additionalProperties: true
     Record:
       type: object
       description: A generic ServiceNow record. The actual fields depend on the table being queried. Common system fields are included in every record.
@@ -651,6 +634,23 @@ components:
           type: string
           description: The table class name for the record.
           example: example_value
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              description: A human-readable error message.
+            detail:
+              type: string
+              description: Detailed information about the error.
+          example: example_value
+    RecordInput:
+      type: object
+      description: A set of field name-value pairs to create or update a record. The accepted fields depend on the target table and the user's ACL permissions.
       additionalProperties: true
   securitySchemes:
     basicAuth:

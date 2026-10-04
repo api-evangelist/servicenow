@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-aggregate-result-schema.json",
+  "title": "AggregateResult",
+  "description": "The aggregate statistics result. Structure varies based on the requested aggregate types and group-by fields.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-aggregate-statistics-api-openapi.yml#/components/schemas/AggregateResult",
+  "type": "object",
+  "properties": {
+    "stats": {
+      "type": "object",
+      "description": "Contains the computed aggregate values organized by field name and aggregate type.",
+      "properties": {
+        "count": {
+          "type": "string",
+          "description": "The total count of records matching the query."
+        }
+      },
+      "additionalProperties": true
+    },
+    "group_by": {
+      "type": "array",
+      "description": "When group-by fields are specified, contains an entry for each unique group with its aggregate values.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  }
+}

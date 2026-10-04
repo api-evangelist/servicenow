@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-cmdb-instance-summary-schema.json",
+  "title": "CmdbInstanceSummary",
+  "description": "A summary of a CMDB configuration item containing its identifier and display name.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-cmdb-instances-api-openapi.yml#/components/schemas/CmdbInstanceSummary",
+  "type": "object",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the configuration item."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the configuration item."
+    }
+  }
+}

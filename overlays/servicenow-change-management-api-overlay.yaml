@@ -6,7 +6,7 @@ info:
 x-generated: '2026-06-20'
 x-method: generated
 x-source: openapi/servicenow-change-management-api-openapi.yml
-extends: openapi/servicenow-change-management-api-openapi.yml
+extends: ../openapi/_original/servicenow-change-management-api-openapi.yml
 actions:
   - target: $.info
     update:

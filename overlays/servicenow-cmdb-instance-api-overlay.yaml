@@ -6,7 +6,7 @@ info:
 x-generated: '2026-06-20'
 x-method: generated
 x-source: openapi/servicenow-cmdb-instance-api-openapi.yml
-extends: openapi/servicenow-cmdb-instance-api-openapi.yml
+extends: ../openapi/_original/servicenow-cmdb-instance-api-openapi.yml
 actions:
   - target: $.info
     update:

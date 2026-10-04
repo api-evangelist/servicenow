@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-change-task-schema.json",
+  "title": "ChangeTask",
+  "description": "A task associated with a change request.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-change-tasks-api-openapi.yml#/components/schemas/ChangeTask",
+  "type": "object",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the change task."
+    },
+    "number": {
+      "type": "string",
+      "description": "The human-readable task number."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief summary of the task."
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the task."
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "The sys_id of the assigned user."
+    },
+    "change_request": {
+      "type": "string",
+      "description": "The sys_id of the parent change request."
+    },
+    "planned_start_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The planned start date for the task."
+    },
+    "planned_end_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The planned end date for the task."
+    }
+  }
+}

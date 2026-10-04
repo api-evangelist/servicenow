@@ -158,15 +158,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    tableName:
-      name: tableName
-      in: path
-      required: true
-      description: The name of the ServiceNow table on which to compute aggregate statistics.
-      schema:
-        type: string
-      example: incident
   schemas:
     AggregateResult:
       type: object
@@ -201,6 +192,15 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
+  parameters:
+    tableName:
+      name: tableName
+      in: path
+      required: true
+      description: The name of the ServiceNow table on which to compute aggregate statistics.
+      schema:
+        type: string
+      example: incident
   securitySchemes:
     basicAuth:
       type: http

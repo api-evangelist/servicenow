@@ -143,77 +143,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sysparmFields:
-      name: sysparm_fields
-      in: query
-      required: false
-      description: A comma-separated list of field names to include in the response.
-      schema:
-        type: string
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier for the change request.
-      schema:
-        type: string
-    sysparmLimit:
-      name: sysparm_limit
-      in: query
-      required: false
-      description: Maximum number of records to return.
-      schema:
-        type: integer
-        minimum: 1
-    sysparmOffset:
-      name: sysparm_offset
-      in: query
-      required: false
-      description: Starting record index for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
   schemas:
-    ChangeTask:
-      type: object
-      description: A task associated with a change request.
-      properties:
-        sys_id:
-          type: string
-          description: Unique identifier for the change task.
-          example: '500123'
-        number:
-          type: string
-          description: The human-readable task number.
-          example: example_value
-        short_description:
-          type: string
-          description: A brief summary of the task.
-          example: example_value
-        state:
-          type: string
-          description: The current state of the task.
-          example: example_value
-        assigned_to:
-          type: string
-          description: The sys_id of the assigned user.
-          example: example_value
-        change_request:
-          type: string
-          description: The sys_id of the parent change request.
-          example: example_value
-        planned_start_date:
-          type: string
-          format: date-time
-          description: The planned start date for the task.
-          example: '2026-01-15T10:30:00Z'
-        planned_end_date:
-          type: string
-          format: date-time
-          description: The planned end date for the task.
-          example: '2026-01-15T10:30:00Z'
     Error:
       type: object
       properties:
@@ -257,6 +187,76 @@ components:
           format: date-time
           description: The planned end date.
           example: '2026-01-15T10:30:00Z'
+    ChangeTask:
+      type: object
+      description: A task associated with a change request.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the change task.
+          example: '500123'
+        number:
+          type: string
+          description: The human-readable task number.
+          example: example_value
+        short_description:
+          type: string
+          description: A brief summary of the task.
+          example: example_value
+        state:
+          type: string
+          description: The current state of the task.
+          example: example_value
+        assigned_to:
+          type: string
+          description: The sys_id of the assigned user.
+          example: example_value
+        change_request:
+          type: string
+          description: The sys_id of the parent change request.
+          example: example_value
+        planned_start_date:
+          type: string
+          format: date-time
+          description: The planned start date for the task.
+          example: '2026-01-15T10:30:00Z'
+        planned_end_date:
+          type: string
+          format: date-time
+          description: The planned end date for the task.
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    sysparmFields:
+      name: sysparm_fields
+      in: query
+      required: false
+      description: A comma-separated list of field names to include in the response.
+      schema:
+        type: string
+    sysparmOffset:
+      name: sysparm_offset
+      in: query
+      required: false
+      description: Starting record index for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier for the change request.
+      schema:
+        type: string
+    sysparmLimit:
+      name: sysparm_limit
+      in: query
+      required: false
+      description: Maximum number of records to return.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

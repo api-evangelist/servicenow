@@ -155,15 +155,42 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sysId:
-      name: sys_id
-      in: path
-      required: true
-      description: The unique system identifier.
-      schema:
-        type: string
   schemas:
+    CatalogVariable:
+      type: object
+      description: A variable on a catalog item form.
+      properties:
+        name:
+          type: string
+          description: The internal name of the variable.
+          example: Example Title
+        label:
+          type: string
+          description: The display label.
+          example: Example Title
+        type:
+          type: string
+          description: The variable type.
+          example: example_value
+        mandatory:
+          type: boolean
+          description: Whether the variable is required.
+          example: true
+        default_value:
+          type: string
+          description: The default value.
+          example: example_value
+        choices:
+          type: array
+          description: Available choices for select-type variables.
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              value:
+                type: string
+          example: []
     CatalogItemDetail:
       type: object
       description: Full details of a catalog item including its variables.
@@ -251,41 +278,14 @@ components:
           type: string
           description: URL to the item picture.
           example: example_value
-    CatalogVariable:
-      type: object
-      description: A variable on a catalog item form.
-      properties:
-        name:
-          type: string
-          description: The internal name of the variable.
-          example: Example Title
-        label:
-          type: string
-          description: The display label.
-          example: Example Title
-        type:
-          type: string
-          description: The variable type.
-          example: example_value
-        mandatory:
-          type: boolean
-          description: Whether the variable is required.
-          example: true
-        default_value:
-          type: string
-          description: The default value.
-          example: example_value
-        choices:
-          type: array
-          description: Available choices for select-type variables.
-          items:
-            type: object
-            properties:
-              label:
-                type: string
-              value:
-                type: string
-          example: []
+  parameters:
+    sysId:
+      name: sys_id
+      in: path
+      required: true
+      description: The unique system identifier.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

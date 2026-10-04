@@ -224,6 +224,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ImportSetInput:
+      type: object
+      description: The field name-value pairs corresponding to columns in the import set staging table.
+      additionalProperties:
+        type: string
     Error:
       type: object
       properties:
@@ -237,11 +242,6 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
-    ImportSetInput:
-      type: object
-      description: The field name-value pairs corresponding to columns in the import set staging table.
-      additionalProperties:
-        type: string
     ImportSetResult:
       type: object
       description: The result of processing an import set record including the transformation outcome.

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-catalog-item-schema.json",
+  "title": "CatalogItem",
+  "description": "A catalog item summary.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-catalog-items-api-openapi.yml#/components/schemas/CatalogItem",
+  "type": "object",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "Unique identifier for the catalog item."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the item."
+    },
+    "short_description": {
+      "type": "string",
+      "description": "A brief description of the item."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category sys_id."
+    },
+    "price": {
+      "type": "string",
+      "description": "The displayed price of the item."
+    },
+    "picture": {
+      "type": "string",
+      "description": "URL to the item picture."
+    }
+  }
+}

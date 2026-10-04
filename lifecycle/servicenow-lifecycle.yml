@@ -23,8 +23,8 @@ deprecation:
   sunset_header: false
   deprecation_header: false
   release_notes: https://www.servicenow.com/docs/bundle/yokohama-release-notes/page/release-notes/family-release-notes.html
+status_page: https://status.servicenow.com
 support:
-  status_page: https://status.servicenow.com
   support: https://support.servicenow.com
   sla: >-
     Uptime/availability commitments are governed by the customer's ServiceNow

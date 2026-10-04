@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-import-set-result-schema.json",
+  "title": "ImportSetResult",
+  "description": "The result of processing an import set record including the transformation outcome.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-import-sets-api-openapi.yml#/components/schemas/ImportSetResult",
+  "type": "object",
+  "properties": {
+    "transform_map": {
+      "type": "string",
+      "description": "The name of the transform map used to process the record."
+    },
+    "table": {
+      "type": "string",
+      "description": "The target table into which the record was transformed."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the transform map."
+    },
+    "display_value": {
+      "type": "string",
+      "description": "The display value of the target record created or updated."
+    },
+    "record_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "A link to the target record in ServiceNow."
+    },
+    "status": {
+      "type": "string",
+      "description": "The transformation status. Common values include inserted, updated, error, and ignored.",
+      "enum": [
+        "inserted",
+        "updated",
+        "error",
+        "ignored"
+      ]
+    },
+    "status_message": {
+      "type": "string",
+      "description": "A descriptive message about the transformation result, especially useful when the status is error."
+    },
+    "sys_id": {
+      "type": "string",
+      "description": "The sys_id of the import set row record in the staging table."
+    },
+    "target_sys_id": {
+      "type": "string",
+      "description": "The sys_id of the record created or updated in the target table."
+    },
+    "import_set": {
+      "type": "string",
+      "description": "The sys_id of the parent import set."
+    }
+  }
+}

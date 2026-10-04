@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/servicenow/main/json-schema/servicenow-record-schema.json",
+  "title": "Record",
+  "description": "A generic ServiceNow record. The actual fields depend on the table being queried. Common system fields are included in every record.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/servicenow-table-records-api-openapi.yml#/components/schemas/Record",
+  "type": "object",
+  "properties": {
+    "sys_id": {
+      "type": "string",
+      "description": "The unique 32-character system identifier for the record."
+    },
+    "sys_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the record was created."
+    },
+    "sys_created_by": {
+      "type": "string",
+      "description": "The user who created the record."
+    },
+    "sys_updated_on": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the record was last updated."
+    },
+    "sys_updated_by": {
+      "type": "string",
+      "description": "The user who last updated the record."
+    },
+    "sys_mod_count": {
+      "type": "integer",
+      "description": "The number of times the record has been modified."
+    },
+    "sys_tags": {
+      "type": "string",
+      "description": "System tags associated with the record."
+    },
+    "sys_class_name": {
+      "type": "string",
+      "description": "The table class name for the record."
+    }
+  },
+  "additionalProperties": true
+}

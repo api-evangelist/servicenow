@@ -6,7 +6,7 @@ info:
 x-generated: '2026-06-20'
 x-method: generated
 x-source: openapi/trouble-ticket-openapi.yaml
-extends: openapi/trouble-ticket-openapi.yaml
+extends: ../openapi/_original/trouble-ticket-openapi.yaml
 actions:
   - target: $.info
     update:

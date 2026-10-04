@@ -209,18 +209,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CmdbInstanceSummary:
-      type: object
-      description: A summary of a CMDB configuration item containing its identifier and display name.
-      properties:
-        sys_id:
-          type: string
-          description: Unique identifier for the configuration item.
-          example: '500123'
-        name:
-          type: string
-          description: The display name of the configuration item.
-          example: Example Title
     Error:
       type: object
       properties:
@@ -234,6 +222,18 @@ components:
               type: string
               description: Detailed information about the error.
           example: example_value
+    CmdbInstanceSummary:
+      type: object
+      description: A summary of a CMDB configuration item containing its identifier and display name.
+      properties:
+        sys_id:
+          type: string
+          description: Unique identifier for the configuration item.
+          example: '500123'
+        name:
+          type: string
+          description: The display name of the configuration item.
+          example: Example Title
     CmdbInstance:
       type: object
       description: A full CMDB configuration item record. Fields vary by CI class but common attributes are included below.
