@@ -9,6 +9,13 @@
       "method": "discovered"
     },
     {
+      "source": "https://github.com/ServiceNow/saai-skill-feedback",
+      "feed_url": "https://github.com/ServiceNow/saai-skill-feedback",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
       "feed_url": "https://www.servicenow.com/community/s/cgfwn76974/rss/board?board.id=developer-blog",
       "title": "",
@@ -16,8 +23,8 @@
       "method": "feed"
     }
   ],
-  "post_count": 72,
-  "fetched": "2026-09-19T20:17:39Z",
+  "post_count": 76,
+  "fetched": "2026-10-03T12:30:02Z",
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
