@@ -1,0 +1,784 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/servicenow/integrations
+- https://n8n.io/integrations/servicenow/
+- https://composio.dev/toolkits/servicenow
+checked:
+- https://composio.dev/toolkits/servicenow
+- https://monid.ai/tools/servicenow
+- https://n8n.io/integrations/servicenow/
+- https://zapier.com/apps/servicenow/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: servicenow
+  url: https://zapier.com/apps/servicenow/integrations
+  external_url: https://www.servicenow.com/
+  partner_tier: BRONZE
+  triggers:
+  - key: record
+    label: New Record
+  - key: updated_record
+    label: Updated Record
+  actions:
+  - key: attachment
+    label: Attach a File to a Record
+  - key: record
+    label: Create Record
+  - key: updateRecord
+    label: Update Record
+  - key: _zap_raw_request
+    label: API Request (Beta)
+  searches:
+  - key: find_file
+    label: Find File
+  - key: record
+    label: Find Record
+- marketplace: n8n
+  channel: open-source-node
+  app: servicenow
+  url: https://n8n.io/integrations/servicenow/
+  identity: title
+  pair_pages: 167
+  pairs:
+  - sharly-ai
+  - shiphero
+  - shipstation
+  - shopify
+  - shortio
+  - shuffler
+  - sierra-interactive
+  - sifter
+  - signaturit
+  - signl4
+  - signrequest
+  - simpleem
+  - simplehash
+  - simplekpi
+  - simplelocalize
+  - simplero
+  - simpletexting
+  - sitecreatorio
+  - sitespeakai
+  - slack
+  - smaily
+  - smartreach
+  - smartsuite
+  - sms-it
+  - sms-magic
+  - sms77
+  - snapdocs
+  - snatchbot
+  - snipcart
+  - snowflake
+  - solve-data
+  - specter
+  - splunk
+  - spondyr
+  - spontit
+  - sportsdata
+  - spotify
+  - spydra
+  - sslmate-cert-spotter-api
+  - stackby
+  - stammerai
+  - starton
+  - statuscake
+  - storyblok
+  - strapi
+  - strava
+  - stripe
+  - studio-by-ai21-labs
+  - suitedash
+  - supabase
+  - supernormal
+  - superpowered
+  - supportivekoala
+  - survicate
+  - swagup
+  - switchboard
+  - syncly
+  - syncromsp
+  - synthesia
+  - taiga
+  - talentlms
+  - talknotes
+  - tapfiliate
+  - td-ameritrade
+  - teachable
+  - team-up
+  - teamdeck
+  - teamgate
+  - teknoir
+  - telegram
+  - testmonitor
+  - textcortex-ai
+  - textgain
+  - textkit
+  - textmagic
+  - thankster
+  - the-customer-factor
+  - the-leap
+  - thehive
+  - thehive-5
+  - thoughtfulgpt
+  - thrivecart
+  - tidb-cloud
+  - tierion
+  - tilda
+  - timescaledb
+  - timetonic
+  - tinyurl
+  - tisane-labs
+  - todoist
+  - token-metrics
+  - toket
+  - totango
+  - trackvia
+  - transifex
+  - travisci
+  - trellix-epo
+  - trello
+  - trengo
+  - trevorio
+  - turbohire
+  - tuskr
+  - tuulio
+  - twake
+  - twilio
+  - twist
+  - twitter
+  - unbounce
+  - unisender
+  - unleashed-software
+  - upkeep
+  - uplead
+  - uproc
+  - uptimerobot
+  - uptimetoolbox
+  - urlscanio
+  - uservoice
+  - venafi-tls-protect-cloud
+  - venafi-tls-protect-datacenter
+  - venly
+  - verifalia
+  - vero
+  - vimeo
+  - virustotal
+  - vivifyscrum
+  - voicit
+  - vonage
+  - vowel
+  - watchsignals
+  - waveline-extract
+  - webex-by-cisco
+  - webflow
+  - webscraperio
+  - wekan
+  - whal3s
+  - whatconverts
+  - whatsapp-business-cloud
+  - wise
+  - wizychat
+  - wonderchat
+  - wondercraft
+  - woocommerce
+  - woodpeckerco
+  - wordpress
+  - workast
+  - workboard
+  - woxo
+  - writesonic
+  - wubook-ratechecker
+  - xero
+  - xtractly
+  - ybug
+  - ycode
+  - yodiz
+  - yourls
+  - youtube
+  - zabbix
+  - zammad
+  - zendesk
+  - zenrows
+  - zoho-books
+  - zoho-crm
+  - zoho-desk
+  - zonka-feedback
+  - zoom
+  - zscaler-zia
+  - zulip
+- marketplace: composio
+  channel: agent-gateway
+  app: servicenow
+  url: https://composio.dev/toolkits/servicenow
+  identity: action-prefix
+  actions:
+  - key: SERVICENOW_ATTACH_FILE_TO_RECORD
+  - key: SERVICENOW_CANCEL_CHANGE_CONFLICT_CHECK
+  - key: SERVICENOW_CREATE_ATTACHMENT_UPLOAD
+  - key: SERVICENOW_CREATE_A_RECORD
+  - key: SERVICENOW_CREATE_CILIFECYCLEMGMT_ACTION
+  - key: SERVICENOW_CREATE_CI_LIFECYCLE_MGMT_OPERATORS
+  - key: SERVICENOW_CREATE_CI_LIFECYCLE_MGMT_STATUSES
+  - key: SERVICENOW_CREATE_CMDB_APP_SERVICE
+  - key: SERVICENOW_CREATE_CMDB_CI_LINUX_SERVER
+  - key: SERVICENOW_CREATE_CMDB_INGEST
+  - key: SERVICENOW_CREATE_CMDB_INSTANCE
+  - key: SERVICENOW_CREATE_CMDB_INSTANCE_RELATION
+  - key: SERVICENOW_CREATE_DATA_CLASSIFICATION_CLASSIFY
+  - key: SERVICENOW_CREATE_DATA_CLASSIFICATION_CLEAR
+  - key: SERVICENOW_CREATE_IDENTIFYRECONCILE_ENHANCED
+  - key: SERVICENOW_CREATE_IDENTIFYRECONCILE_QUERY
+  - key: SERVICENOW_CREATE_IDENTIFYRECONCILE_QUERYENHANCED
+  - key: SERVICENOW_CREATE_IMPORT
+  - key: SERVICENOW_CREATE_INCIDENT
+  - key: SERVICENOW_CREATE_INCIDENT1
+  - key: SERVICENOW_CREATE_INTERACTION
+  - key: SERVICENOW_CREATE_INTERACTION_CLOSE
+  - key: SERVICENOW_CREATE_PUSH_INSTALLATION
+  - key: SERVICENOW_CREATE_PUSH_REMOVE_INSTALLATION
+  - key: SERVICENOW_CREATE_SERVICECATALOG_ITEMS_CHECKOUT_GUIDE
+  - key: SERVICENOW_CREATE_SERVICECATALOG_ITEMS_ORDER_NOW
+  - key: SERVICENOW_CREATE_SERVICENOW_IMPORT_INSERTMULTIPLE
+  - key: SERVICENOW_CREATE_SERVICE_CATALOG_CART_CHECKOUT
+  - key: SERVICENOW_CREATE_SERVICE_CATALOG_CART_SUBMIT_ORDER
+  - key: SERVICENOW_CREATE_SERVIC_CATALOG_ITEMS_ADD_TO_CART
+  - key: SERVICENOW_CREATE_SERVIC_CATALOG_ITEMS_SUBMIT_PRODUCER
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_CI
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_CONFLICT
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_EMERGENCY
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_NORMAL
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_STANDARD
+  - key: SERVICENOW_CREATE_SN_CHG_REST_CHANGE_TASK
+  - key: SERVICENOW_CREATE_SN_CICD_APP_BATCH_INSTALL
+  - key: SERVICENOW_CREATE_SN_CICD_APP_REPO_INSTALL
+  - key: SERVICENOW_CREATE_SN_CICD_INSTANCE_SCAN_FULL_SCAN
+  - key: SERVICENOW_CREATE_SN_CICD_INSTANCE_SCAN_SUITE_SCAN_COMBO
+  - key: SERVICENOW_CREATE_SN_CICD_PLUGIN_ACTIVATE
+  - key: SERVICENOW_CREATE_SN_CICD_TESTSUITE_RUN
+  - key: SERVICENOW_CREATE_SN_IND_TSM_SDWAN_TROUBLETICKET
+  - key: SERVICENOW_CREATE_SN_TMF_SERVICE_CATEGORY
+  - key: SERVICENOW_CREATE_TABLE
+  - key: SERVICENOW_CREATE_TABLE_INCIDENT
+  - key: SERVICENOW_CREATE_UPDATE_CMD_CI
+  - key: SERVICENOW_DELETE_ATTACHMENT_BY_ID
+  - key: SERVICENOW_DELETE_ATTACHMENT_BY_ID_V1
+  - key: SERVICENOW_DELETE_ATTACHMENT_CSM
+  - key: SERVICENOW_DELETE_A_RECORD
+  - key: SERVICENOW_DELETE_CHANGE_TASK
+  - key: SERVICENOW_DELETE_CI_LIFECYCLE_MGMT_ACTION
+  - key: SERVICENOW_DELETE_CI_LIFECYCLE_MGMT_OPERATORS
+  - key: SERVICENOW_DELETE_CMDB_INSTANCE_RELATION
+  - key: SERVICENOW_DELETE_EMERGENCY_CHANGE_REQUEST
+  - key: SERVICENOW_DELETE_INCIDENT_BY_ID
+  - key: SERVICENOW_DELETE_INCIDENT_BY_ID2
+  - key: SERVICENOW_DELETE_SERVICECATALOG_CART
+  - key: SERVICENOW_DELETE_SERVICE_CATALOG_CART_EMPTY
+  - key: SERVICENOW_DELETE_SN_CHG_REST_CHANGE
+  - key: SERVICENOW_DELETE_SN_CHG_REST_CHANGE_NORMAL
+  - key: SERVICENOW_DELETE_SN_CHG_REST_CHANGE_STANDARD
+  - key: SERVICENOW_DELETE_TABLE
+  - key: SERVICENOW_DELETE_TABLE_INCIDENT
+  - key: SERVICENOW_FIND_FILE
+  - key: SERVICENOW_GET_ACTSUB_ACTIVITIES
+  - key: SERVICENOW_GET_ACTSUB_FACETS
+  - key: SERVICENOW_GET_AGENT_INTELLIGENCE_SOLUTION_PREDICTION
+  - key: SERVICENOW_GET_AGENT_INTELLIGENCE_SOLUTION_PREDICTION_LIST
+  - key: SERVICENOW_GET_ALL_DATA_CLASSES
+  - key: SERVICENOW_GET_APP_SERVICE_CONTENT
+  - key: SERVICENOW_GET_ATTACHMENT_BY_ID
+  - key: SERVICENOW_GET_ATTACHMENT_BY_ID_V1
+  - key: SERVICENOW_GET_ATTACHMENT_FILE
+  - key: SERVICENOW_GET_ATTACHMENT_FILE_FILE
+  - key: SERVICENOW_GET_ATTACHMENT_LIST
+  - key: SERVICENOW_GET_CHANGE_CI_SCHEDULE
+  - key: SERVICENOW_GET_CHANGE_CONFLICT
+  - key: SERVICENOW_GET_CHANGE_NEXTSTATES
+  - key: SERVICENOW_GET_CHANGE_REQUEST_CI
+  - key: SERVICENOW_GET_CHANGE_SCHEDULE
+  - key: SERVICENOW_GET_CILIFECYCLEMGMT_ACTIONS
+  - key: SERVICENOW_GET_CILIFECYCLEMGMT_COMPAT_ACTIONS
+  - key: SERVICENOW_GET_CILIFECYCLEMGMT_REQUESTORS_VALID
+  - key: SERVICENOW_GET_CI_LIFECYCLE_MGMT_LEASES_EXPIRED
+  - key: SERVICENOW_GET_CI_LIFECYCLE_MGMT_NOT_ALLOWED_OPS_TRANSITION
+  - key: SERVICENOW_GET_CI_LIFECYCLE_MGMT_STATUSES
+  - key: SERVICENOW_GET_CMDB_CI_LINUX_SERVER
+  - key: SERVICENOW_GET_CMDB_CSDM_APP_SERVICE_FIND_SERVICE
+  - key: SERVICENOW_GET_CMDB_INSTANCE
+  - key: SERVICENOW_GET_CMDB_INSTANCE_BY_ID
+  - key: SERVICENOW_GET_CMDB_META
+  - key: SERVICENOW_GET_CMP_CATALOG_API_SERVICES
+  - key: SERVICENOW_GET_EMAIL
+  - key: SERVICENOW_GET_GLOBAL_USER_ROLE_INHERITANCE
+  - key: SERVICENOW_GET_IMPORT
+  - key: SERVICENOW_GET_INCIDENTS
+  - key: SERVICENOW_GET_INCIDENT_BY_ID
+  - key: SERVICENOW_GET_INCIDENT_BY_ID2
+  - key: SERVICENOW_GET_PA_SCORECARDS
+  - key: SERVICENOW_GET_RECORDS
+  - key: SERVICENOW_GET_RECORD_TYPES
+  - key: SERVICENOW_GET_ROWS
+  - key: SERVICENOW_GET_SERVICATALOG_ITEMS_BY_ID
+  - key: SERVICENOW_GET_SERVICE_CATALOG_CART
+  - key: SERVICENOW_GET_SERVICE_CATALOG_CART_DELIVERY_ADDRESS
+  - key: SERVICENOW_GET_SERVICE_CATALOG_CATALOG_BY_ID
+  - key: SERVICENOW_GET_SERVICE_CATALOG_CATALOG_CATEGORIES
+  - key: SERVICENOW_GET_SERVICE_CATALOG_CATEGORY_BY_ID
+  - key: SERVICENOW_GET_SERVICE_CATALOG_ITEMS_LIST
+  - key: SERVICENOW_GET_SERVICE_CATALOG_ITEM_DELEGATION
+  - key: SERVICENOW_GET_SERVICE_CATALOG_WISHLIST_LIST
+  - key: SERVICENOW_GET_SERVIC_CATALOG_ITEM_VARIABLES
+  - key: SERVICENOW_GET_SN_CDM_SHARED_LIBRARIES_UPLOAD_STATUS
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_EMERGENCY_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_EMERGENCY_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_MODEL_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_MODEL_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_NORMAL_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_NORMAL_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_STANDARD_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_STANDARD_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_STANDARD_TEMPLATE_BY_ID
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_STANDARD_TEMPLATE_LIST
+  - key: SERVICENOW_GET_SN_CHG_REST_CHANGE_TASK
+  - key: SERVICENOW_GET_SN_CICD_APP_BATCH_RESULTS
+  - key: SERVICENOW_GET_SN_CICD_INSTANCE_SCAN_RESULT
+  - key: SERVICENOW_GET_SN_CICD_PROGRESS
+  - key: SERVICENOW_GET_SN_CICD_TESTSUITE_RESULTS
+  - key: SERVICENOW_GET_STATS
+  - key: SERVICENOW_GET_TABLES
+  - key: SERVICENOW_GET_TABLE_BY_ID
+  - key: SERVICENOW_GET_TABLE_BY_ID2
+  - key: SERVICENOW_GET_TABLE_INCIDENT_BY_ID
+  - key: SERVICENOW_GET_TABLE_INCIDENT_LIST
+  - key: SERVICENOW_GET_USER
+  - key: SERVICENOW_GET_USERS
+  - key: SERVICENOW_LIST_ATTACHMENTS
+  - key: SERVICENOW_LIST_CMDBC_IS
+  - key: SERVICENOW_LIST_CMDB_CI_LINUX_SERVERS
+  - key: SERVICENOW_LIST_CMDB_REL_TYPES
+  - key: SERVICENOW_LIST_SERVICE_CATALOG_CATALOGS
+  - key: SERVICENOW_REFRESH_IMPACTED_SERVICES
+  - key: SERVICENOW_RETRIEVE_SN_CICD_UPDATE_SET
+  - key: SERVICENOW_SCHEDULE_CHANGE_FIRST_AVAILABLE
+  - key: SERVICENOW_UPDATE_CMDBCSDM_APP_SERVICE_SERVICE_DETAILS
+  - key: SERVICENOW_UPDATE_CMDB_CSDM_APP_SERVICE_POPULATE_SERVICE
+  - key: SERVICENOW_UPDATE_CMDB_INSTANCE_BY_ID
+  - key: SERVICENOW_UPDATE_CMDB_INSTANCE_BY_ID2
+  - key: SERVICENOW_UPDATE_CONVERSATION_MEMBER_DROP
+  - key: SERVICENOW_UPDATE_INCIDENT_BY_ID
+  - key: SERVICENOW_UPDATE_INCIDENT_BY_ID2
+  - key: SERVICENOW_UPDATE_OPENFRAME_VOICE_INTERACTION
+  - key: SERVICENOW_UPDATE_SERVICECATALOG_CART
+  - key: SERVICENOW_UPDATE_SERVICECATALOG_ITEMS_SUBMIT_GUIDE
+  - key: SERVICENOW_UPDATE_SN_CHG_REST_CHANGE
+  - key: SERVICENOW_UPDATE_SN_CHG_REST_CHANGE_EMERGENCY
+  - key: SERVICENOW_UPDATE_SN_CHG_REST_CHANGE_NORMAL
+  - key: SERVICENOW_UPDATE_SN_CHG_REST_CHANGE_STANDARD
+  - key: SERVICENOW_UPDATE_SN_CHG_REST_CHANGE_TASK
+  - key: SERVICENOW_UPDATE_SN_IND_TSM_SDWAN_TICKET_TROUBLETICKET
+  - key: SERVICENOW_UPDATE_SN_IND_TSM_SDWAN_TROUBLETICKET
+  - key: SERVICENOW_UPDATE_TABLE_BY_ID
+  - key: SERVICENOW_UPDATE_TABLE_BY_ID2
+  - key: SERVICENOW_UPDATE_TABLE_INCIDENT
+  - key: SERVICENOW_UPDATE_TABLE_RECORD
+  - key: SERVICENOW_UPLOAD_ATTACHMENT
+edges:
+- partner_name: airfocus
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/airfocus
+  direction: third-party
+  category: Product Management
+  partner_url: https://airfocus.io/
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/hubspot
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://www.hubspot.com/
+- partner_name: Jotform Enterprise
+  partner: jotform
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/jotform-enterprise
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: https://www.jotform.com/enterprise/
+- partner_name: Google Forms (Legacy)
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/google-forms-legacy
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
+- partner_name: Slack
+  partner: slack
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/slack
+  direction: third-party
+  category: Team Chat
+  partner_url: https://slack.com/
+- partner_name: Google Sheets
+  partner: google-sheets
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/google-sheets
+  direction: third-party
+  category: Google
+  partner_url: http://sheets.google.com/
+- partner_name: Shopify
+  partner: shopify
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/shopify
+  direction: third-party
+  category: eCommerce
+  partner_url: https://www.shopify.com/
+- partner_name: Jotform
+  partner: jotform
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/jotform
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://www.jotform.com/
+- partner_name: Confluence Cloud
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/confluence-cloud
+  direction: third-party
+  category: Team Collaboration
+  partner_url: https://www.atlassian.com/
+- partner_name: Asana
+  partner: asana
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/asana
+  direction: third-party
+  category: Project Management
+  partner_url: http://asana.com/
+- partner_name: Jira Software Cloud
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/jira-software-cloud
+  direction: third-party
+  category: Project Management
+  partner_url: https://www.atlassian.com/software/jira
+- partner_name: incident.io
+  partner: incident-io
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/incidentio
+  direction: third-party
+  category: Communication
+  partner_url: https://incident.io/
+- partner_name: Kizeo Forms
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/kizeo-forms
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: https://www.kizeo.com/
+- partner_name: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/microsoft-outlook
+  direction: third-party
+  category: Calendar
+  partner_url: https://outlook.live.com/
+- partner_name: monday.com
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/monday
+  direction: third-party
+  category: Project Management
+  partner_url: https://monday.com/
+- partner_name: ClickUp
+  partner: clickup
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/clickup
+  direction: third-party
+  category: Project Management
+  partner_url: https://clickup.com/zapier
+- partner_name: Microsoft Excel
+  partner: null
+  partner_match: null
+  partner_candidate: zapier
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/excel
+  direction: third-party
+  category: Microsoft
+  partner_url: https://zapier.com/office.com
+- partner_name: Quickbase
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/quickbase
+  direction: third-party
+  category: App Builder
+  partner_url: https://www.quickbase.com/
+- partner_name: Microsoft OneNote
+  partner: microsoft-onenote
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/microsoft-onenote
+  direction: third-party
+  category: Microsoft
+  partner_url: https://www.onenote.com/
+- partner_name: ChatBot.com
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/chatbotcom
+  direction: third-party
+  category: AI Chatbots
+  partner_url: https://www.chatbot.com/benefits/?utm_source=zapier.com
+- partner_name: Microsoft Teams
+  partner: microsoft-teams
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/microsoft-teams
+  direction: third-party
+  category: Microsoft
+  partner_url: https://products.office.com/en-us/microsoft-teams/group-chat-software
+- partner_name: SolarWinds Service Desk
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/samanage
+  direction: third-party
+  category: Customer Support
+  partner_url: http://www.samanage.com/
+- partner_name: Salesforce
+  partner: salesforce
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/salesforce
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: https://www.salesforce.com/
+- partner_name: Zendesk
+  partner: zendesk
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/zendesk
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.zendesk.com/
+- partner_name: Smartsheet
+  partner: smartsheet
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/smartsheet
+  direction: third-party
+  category: Spreadsheets
+  partner_url: https://www.smartsheet.com/
+- partner_name: Jira Service Management
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/jira-service-management
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.atlassian.com/software/jira/service-desk
+- partner_name: Atera
+  partner: atera
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/atera-1
+  direction: third-party
+  category: IT Operations
+  partner_url: https://www.atera.com/
+- partner_name: Ironclad
+  partner: ironclad
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/ironclad
+  direction: third-party
+  category: Documents
+  partner_url: https://ironcladapp.com/
+- partner_name: TOPdesk
+  partner: topdesk
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/topdesk
+  direction: third-party
+  category: IT Operations
+  partner_url: https://www.topdesk.com/en/
+- partner_name: Google Forms
+  partner: google-forms
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/servicenow/integrations/google-forms
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
+templates:
+- title: Send WhatsApp Notifications for new records in ServiceNow
+  url: https://zapier.com/apps/servicenow/integrations/whatsapp-notifications/255597401/send-whatsapp-notifications-for-new-records-in-servicenow
+  apps:
+  - servicenow
+  - whatsapp-notifications
+- title: Create records in ServiceNow for every new task in Asana projects
+  url: https://zapier.com/apps/asana/integrations/servicenow/1635742/create-records-in-servicenow-for-every-new-task-in-asana-projects
+  apps:
+  - asana
+  - servicenow
+- title: Post Slack channel messages for new high-priority ServiceNow incidents
+  url: https://zapier.com/apps/servicenow/integrations/slack/50677/post-slack-channel-messages-for-new-high-priority-servicenow-incidents
+  apps:
+  - servicenow
+  - filter
+  - slack
+- title: Create ServiceNow incidents from a Google Chrome extension
+  url: https://zapier.com/apps/servicenow/integrations/zapier-chrome-extension/50681/create-servicenow-incidents-from-a-google-chrome-extension
+  apps:
+  - zapier-chrome-extension
+  - servicenow
+- title: Forward emails to create ServiceNow incidents
+  url: https://zapier.com/apps/email/integrations/servicenow/50682/forward-emails-to-create-servicenow-incidents
+  apps:
+  - email
+  - servicenow
+- title: Add new records in ServiceNow with new issues in GitHub
+  url: https://zapier.com/apps/github/integrations/servicenow/51662/add-new-records-in-servicenow-with-new-issues-in-github
+  apps:
+  - github
+  - servicenow
+- title: Add new records in ServiceNow from new GitLab issue events
+  url: https://zapier.com/apps/gitlab/integrations/servicenow/51663/add-new-records-in-servicenow-from-new-gitlab-issue-events
+  apps:
+  - gitlab
+  - servicenow
+- title: Create new ServiceNow records from new Slack messages
+  url: https://zapier.com/apps/servicenow/integrations/slack/51665/create-new-servicenow-records-from-new-slack-messages
+  apps:
+  - slack
+  - servicenow
+- title: Post Slack messages when new ServiceNow records are added
+  url: https://zapier.com/apps/servicenow/integrations/slack/51666/post-slack-messages-when-new-servicenow-records-are-added
+  apps:
+  - servicenow
+  - slack
+- title: Make a new record in ServiceNow when new webhooks are received
+  url: https://zapier.com/apps/servicenow/integrations/webhook/51667/make-a-new-record-in-servicenow-when-new-webhooks-are-received
+  apps:
+  - webhook
+  - servicenow
+- title: Add records in ServiceNow from new rows in Google Sheets
+  url: https://zapier.com/apps/google-sheets/integrations/servicenow/51668/add-records-in-servicenow-from-new-rows-in-google-sheets
+  apps:
+  - google-sheets
+  - servicenow
+- title: Create new ServiceNow records by adding Slack reactions to messages
+  url: https://zapier.com/apps/servicenow/integrations/slack/51669/create-new-servicenow-records-by-adding-slack-reactions-to-messages
+  apps:
+  - slack
+  - servicenow
+template_total: 98
