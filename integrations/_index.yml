@@ -400,6 +400,18 @@
   source: edge
   status: pending-generation
   arazzo: null
+- slug: servicenow-github-marketplace-actions
+  label: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_name: GitHub Marketplace (actions)
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  evidence: https://github.com/marketplace/actions/servicenow-devops-change-automation
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: servicenow-hightouch
   label: Hightouch
   partner: hightouch
@@ -412,14 +424,40 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: servicenow-github-marketplace-actions
-  label: GitHub Marketplace (actions)
-  partner: github-actions
-  partner_name: GitHub Marketplace (actions)
+- slug: servicenow-crowdstrike-own
+  label: CrowdStrike (own)
+  partner: crowdstrike
+  partner_name: CrowdStrike (own)
   type: marketplace
-  marketplace: github-actions
+  marketplace: own
   channel: partner-built
-  evidence: https://github.com/marketplace/actions/servicenow-devops-change-automation
+  evidence: https://marketplace.crowdstrike.com/listings/servicenow-records-for-falcon-logscale/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: servicenow-docusign-partner-store
+  label: Docusign (partner-store)
+  partner: docusign
+  partner_name: Docusign (partner-store)
+  category: Integrations
+  type: marketplace
+  marketplace: partner-store
+  channel: partner-built
+  evidence: https://store.servicenow.com/store/app/bb3b6f2a1b246a50a85b16db234bcbab
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: servicenow-microsoft-sentinel-own
+  label: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_name: Microsoft Sentinel (own)
+  category: Security - Threat Intelligence
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/ServiceNow%20TISC
   source: edge
   relationship: platform-app
   status: not-a-workflow

@@ -5,12 +5,15 @@ source:
 - https://n8n.io/integrations/servicenow/
 - https://composio.dev/toolkits/servicenow
 checked:
+- crowdstrike/integrations/crowdstrike-integration-edges.yml
+- docusign/integrations/docusign-integration-edges.yml
 - https://composio.dev/toolkits/servicenow
 - https://github.com/marketplace?type=actions
 - https://hightouch.com/docs/destinations/servicenow
 - https://monid.ai/tools/servicenow
 - https://n8n.io/integrations/servicenow/
 - https://zapier.com/apps/servicenow/integrations
+- microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -721,6 +724,27 @@ edges:
   direction: third-party
   category: Forms & Surveys
   partner_url: http://google.com/
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/servicenow-devops-change-automation
+  listing_count: 17
+  apps:
+  - ServiceNow DevOps Change Automation
+  - ServiceNow CI/CD Instance Scan
+  - ServiceNow CI/CD Apply Changes
+  - ServiceNow CI/CD Run ATF Test Suite
+  - ServiceNow CI/CD Publish App
+  publisher_name: ServiceNow
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 - partner_name: Hightouch
   partner: hightouch
   partner_match: aggregator
@@ -744,27 +768,58 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: GitHub Marketplace (actions)
-  partner: github-actions
-  partner_match: aggregator
+- partner_name: CrowdStrike (own)
+  partner: crowdstrike
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
   type: marketplace
-  marketplace: github-actions
-  channel: partner-built
   relationship: platform-app
   direction: third-party
-  evidence: https://github.com/marketplace/actions/servicenow-devops-change-automation
-  listing_count: 17
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.crowdstrike.com/listings/servicenow-records-for-falcon-logscale/
+  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
   apps:
-  - ServiceNow DevOps Change Automation
-  - ServiceNow CI/CD Instance Scan
-  - ServiceNow CI/CD Apply Changes
-  - ServiceNow CI/CD Run ATF Test Suite
-  - ServiceNow CI/CD Publish App
-  publisher_name: ServiceNow
-  badges:
-  - Verified creator
-  detected_by: sweep-devtools.py
+  - ServiceNow Records for Falcon LogScale
+  listing_count: 1
   detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+- partner_name: Docusign (partner-store)
+  partner: docusign
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: partner-store
+  evidence: https://store.servicenow.com/store/app/bb3b6f2a1b246a50a85b16db234bcbab
+  mirror_of: docusign/integrations/docusign-integration-edges.yml
+  apps:
+  - eSignature for ServiceNow
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Integrations
+- partner_name: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/ServiceNow%20TISC
+  mirror_of: microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+  apps:
+  - ServiceNow TISC
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Security - Threat Intelligence
+  badges:
+  - support-tier:partner
 templates:
 - title: Send WhatsApp Notifications for new records in ServiceNow
   url: https://zapier.com/apps/servicenow/integrations/whatsapp-notifications/255597401/send-whatsapp-notifications-for-new-records-in-servicenow
