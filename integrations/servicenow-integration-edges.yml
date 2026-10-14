@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/servicenow
 checked:
 - https://composio.dev/toolkits/servicenow
+- https://hightouch.com/docs/destinations/servicenow
 - https://monid.ai/tools/servicenow
 - https://n8n.io/integrations/servicenow/
 - https://zapier.com/apps/servicenow/integrations
@@ -719,6 +720,29 @@ edges:
   direction: third-party
   category: Forms & Surveys
   partner_url: http://google.com/
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/servicenow
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - servicenow
+      status: released
+      sync_types:
+      - Standard Objects
+      sync_modes:
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates:
 - title: Send WhatsApp Notifications for new records in ServiceNow
   url: https://zapier.com/apps/servicenow/integrations/whatsapp-notifications/255597401/send-whatsapp-notifications-for-new-records-in-servicenow
