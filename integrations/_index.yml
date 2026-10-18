@@ -602,7 +602,7 @@
     - connectors/applications/servicenow
     vendor_link: https://www.servicenow.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: servicenow-microsoft-teams-own
   label: Microsoft Teams (own)
